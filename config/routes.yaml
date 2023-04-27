@@ -4,3 +4,12 @@ index:
 about:
   path: /about
   controller: App\Controller\AboutController::about
+contact:
+  path: /contact
+  controller: App\Controller\ContactController::contact
+actualite:
+  path: /actualite
+  controller: App\Controller\ActualiteController::actualite
+don:
+  path: /don
+  controller: App\Controller\DonController::don
