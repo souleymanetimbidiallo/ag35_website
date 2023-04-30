@@ -11,12 +11,15 @@ class ContactController extends AbstractController
     /**
      * @Route("/contact", name="contact")
      */
-    public function contact(): Response
+    public function index(): Response
     {
         return $this->render('contact.html.twig');
     }
 
-    public function sendMailContact(): Response
+    /**
+     * @Route("/send-contact", name="send-contact")
+     */
+    public function sendMessage(): Response
     {
         return $this->render('contact.html.twig');
     }

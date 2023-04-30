@@ -6,4 +6,4 @@ about:
   controller: App\Controller\AboutController::about
 contact:
   path: /contact
-  controller: App\Controller\ContactController::contact
+  controller: App\Controller\ContactController::index
