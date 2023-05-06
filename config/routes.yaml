@@ -9,4 +9,4 @@ contact:
   controller: App\Controller\ContactController::index
 actu:
   path: /actualites
-  controller: App\Controller\ActuController::index  
+  controller: App\Controller\ActuController::index

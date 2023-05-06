@@ -14,13 +14,10 @@ class Media
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column]
-    private ?int $idMedia = null;
-
-    #[ORM\Column(length: 30)]
+    #[ORM\Column(length: 50)]
     private ?string $titre = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $description = null;
 
     #[ORM\Column(length: 50)]
@@ -29,21 +26,12 @@ class Media
     #[ORM\Column(type: Types::BLOB)]
     private $file = null;
 
+    #[ORM\ManyToOne(inversedBy: 'medias')]
+    private ?Administrateur $administrateur = null;
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getIdMedia(): ?int
-    {
-        return $this->idMedia;
-    }
-
-    public function setIdMedia(int $idMedia): self
-    {
-        $this->idMedia = $idMedia;
-
-        return $this;
     }
 
     public function getTitre(): ?string
@@ -63,7 +51,7 @@ class Media
         return $this->description;
     }
 
-    public function setDescription(string $description): self
+    public function setDescription(?string $description): self
     {
         $this->description = $description;
 
@@ -90,6 +78,18 @@ class Media
     public function setFile($file): self
     {
         $this->file = $file;
+
+        return $this;
+    }
+
+    public function getAdministrateur(): ?Administrateur
+    {
+        return $this->administrateur;
+    }
+
+    public function setAdministrateur(?Administrateur $administrateur): self
+    {
+        $this->administrateur = $administrateur;
 
         return $this;
     }
