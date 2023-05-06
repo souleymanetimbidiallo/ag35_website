@@ -13,9 +13,6 @@ class Contact
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column]
-    private ?int $idContact = null;
-
     #[ORM\Column(length: 50)]
     private ?string $nom = null;
 
@@ -25,30 +22,18 @@ class Contact
     #[ORM\Column(length: 100)]
     private ?string $email = null;
 
-    #[ORM\Column(length: 30, nullable: true)]
+    #[ORM\Column(length: 20, nullable: true)]
     private ?string $telephone = null;
 
-    #[ORM\Column(length: 30)]
+    #[ORM\Column(length: 50)]
     private ?string $titre = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $description = null;
+    private ?string $message = null;
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getIdContact(): ?int
-    {
-        return $this->idContact;
-    }
-
-    public function setIdContact(int $idContact): self
-    {
-        $this->idContact = $idContact;
-
-        return $this;
     }
 
     public function getNom(): ?string
@@ -111,14 +96,14 @@ class Contact
         return $this;
     }
 
-    public function getDescription(): ?string
+    public function getMessage(): ?string
     {
-        return $this->description;
+        return $this->message;
     }
 
-    public function setDescription(string $description): self
+    public function setMessage(string $message): self
     {
-        $this->description = $description;
+        $this->message = $message;
 
         return $this;
     }

@@ -13,19 +13,16 @@ class Donation
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column]
-    private ?int $idDonation = null;
-
-    #[ORM\Column(length: 30)]
+    #[ORM\Column(length: 50)]
     private ?string $titre = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $description = null;
 
     #[ORM\Column]
     private ?float $montant = null;
 
-    #[ORM\Column(length: 50)]
+    #[ORM\Column(length: 80)]
     private ?string $nomDonateur = null;
 
     #[ORM\Column(length: 100)]
@@ -45,18 +42,6 @@ class Donation
         return $this->id;
     }
 
-    public function getIdDonation(): ?int
-    {
-        return $this->idDonation;
-    }
-
-    public function setIdDonation(int $idDonation): self
-    {
-        $this->idDonation = $idDonation;
-
-        return $this;
-    }
-
     public function getTitre(): ?string
     {
         return $this->titre;
@@ -74,7 +59,7 @@ class Donation
         return $this->description;
     }
 
-    public function setDescription(string $description): self
+    public function setDescription(?string $description): self
     {
         $this->description = $description;
 

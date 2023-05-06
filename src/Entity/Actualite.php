@@ -14,10 +14,7 @@ class Actualite
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column]
-    private ?int $idActualite = null;
-
-    #[ORM\Column(length: 50)]
+    #[ORM\Column(length: 100)]
     private ?string $titre = null;
 
     #[ORM\Column(length: 255)]
@@ -29,21 +26,12 @@ class Actualite
     #[ORM\Column(type: Types::BINARY, nullable: true)]
     private $photo = null;
 
+    #[ORM\ManyToOne(inversedBy: 'actualites')]
+    private ?Administrateur $administrateur = null;
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getIdActualite(): ?int
-    {
-        return $this->idActualite;
-    }
-
-    public function setIdActualite(int $idActualite): self
-    {
-        $this->idActualite = $idActualite;
-
-        return $this;
     }
 
     public function getTitre(): ?string
@@ -90,6 +78,18 @@ class Actualite
     public function setPhoto($photo): self
     {
         $this->photo = $photo;
+
+        return $this;
+    }
+
+    public function getAdministrateur(): ?Administrateur
+    {
+        return $this->administrateur;
+    }
+
+    public function setAdministrateur(?Administrateur $administrateur): self
+    {
+        $this->administrateur = $administrateur;
 
         return $this;
     }

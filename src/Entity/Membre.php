@@ -14,9 +14,6 @@ class Membre
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column]
-    private ?int $idMembre = null;
-
     #[ORM\Column(length: 50)]
     private ?string $nom = null;
 
@@ -29,36 +26,27 @@ class Membre
     #[ORM\Column(length: 30)]
     private ?string $telephone = null;
 
-    #[ORM\Column(length: 30)]
+    #[ORM\Column(length: 20)]
     private ?string $villeOrigine = null;
 
-    #[ORM\Column(length: 30)]
+    #[ORM\Column(length: 20)]
     private ?string $villeActuelle = null;
 
-    #[ORM\Column(length: 30)]
-    private ?string $paysResidence = null;
+    #[ORM\Column(length: 20)]
+    private ?string $paysActuel = null;
 
-    #[ORM\Column(length: 50)]
+    #[ORM\Column(length: 30)]
     private ?string $profession = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $dateAdhesion = null;
 
+    #[ORM\ManyToOne(inversedBy: 'membres')]
+    private ?Administrateur $administrateur = null;
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getIdMembre(): ?int
-    {
-        return $this->idMembre;
-    }
-
-    public function setIdMembre(int $idMembre): self
-    {
-        $this->idMembre = $idMembre;
-
-        return $this;
     }
 
     public function getNom(): ?string
@@ -133,14 +121,14 @@ class Membre
         return $this;
     }
 
-    public function getPaysResidence(): ?string
+    public function getPaysActuel(): ?string
     {
-        return $this->paysResidence;
+        return $this->paysActuel;
     }
 
-    public function setPaysResidence(string $paysResidence): self
+    public function setPaysActuel(string $paysActuel): self
     {
-        $this->paysResidence = $paysResidence;
+        $this->paysActuel = $paysActuel;
 
         return $this;
     }
@@ -165,6 +153,18 @@ class Membre
     public function setDateAdhesion(\DateTimeInterface $dateAdhesion): self
     {
         $this->dateAdhesion = $dateAdhesion;
+
+        return $this;
+    }
+
+    public function getAdministrateur(): ?Administrateur
+    {
+        return $this->administrateur;
+    }
+
+    public function setAdministrateur(?Administrateur $administrateur): self
+    {
+        $this->administrateur = $administrateur;
 
         return $this;
     }
