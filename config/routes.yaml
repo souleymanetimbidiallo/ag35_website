@@ -10,3 +10,6 @@ contact:
 actu:
   path: /actualites
   controller: App\Controller\ActuController::index
+login:
+  path: /login
+  controller: App\Controller\SecurityController::login
