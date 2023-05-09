@@ -9,4 +9,16 @@ contact:
   controller: App\Controller\ContactController::index
 actu:
   path: /actualites
+  controller: App\Controller\ActuController::index  
+don:
+  path: /don
+  controller: App\Controller\DonController::index
+adhesion:
+  path: /adhesion
+  controller: App\Controller\AdhesionController::index
+evenements:
+  path: /evenements
+  controller: App\Controller\EventController::index  
+  
+=======
   controller: App\Controller\ActuController::index
