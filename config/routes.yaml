@@ -9,6 +9,12 @@ contact:
   controller: App\Controller\ContactController::index
 actu:
   path: /actualites
+
+  controller: App\Controller\ActuController::index
+login:
+  path: /login
+  controller: App\Controller\SecurityController::login
+=======
   controller: App\Controller\ActuController::index  
 don:
   path: /don

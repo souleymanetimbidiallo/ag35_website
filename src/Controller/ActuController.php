@@ -13,6 +13,8 @@ class ActuController extends AbstractController
      */
     public function index(): Response
     {
-        return $this->render('actus.html.twig');
+        return $this->render('actus.html.twig', [
+            'current_menu' => 'actualites'
+        ]);
     }
 }
