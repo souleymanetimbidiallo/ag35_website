@@ -12,28 +12,28 @@
 
 			<div class="collapse navbar-collapse" id="navbarCollapse">
 				<div class="navbar-nav">
-					<a href="/" class="nav-item nav-link">Accueil</a>
+					<a class="nav-item nav-link {% if current_menu is defined and current_menu == 'accueil' %} active {% endif %}" href="{{ path('app_accueil') }}">Accueil</a>
 
-					<a href="/about" class="nav-item nav-link">A propos</a>
+					<a class="nav-item nav-link {% if current_menu is defined and current_menu == 'about' %} active {% endif %}" href="{{ path('app_about') }}">A propos</a>
 
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Activités</a>
-                        <div class="dropdown-menu bg-light rounded-0 rounded-bottom m-0">
-					        <a href="/evenements" class="dropdown-item">Evénements</a>
-					        <a href="/actualites" class="dropdown-item">Actualités</a>
-					        <a href="service.html" class="dropdown-item">Guides</a>
-                        </div>
-                    </div>
+					<div class="nav-item dropdown">
+						<a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Activités</a>
+						<div class="dropdown-menu bg-light rounded-0 rounded-bottom m-0">
+							<a class="dropdown-item {% if current_menu is defined and current_menu == 'evenements' %} active {% endif %}" href="{{ path('app_evenements') }}">Evénements</a>
+							<a class="dropdown-item {% if current_menu is defined and current_menu == 'actualites' %} active {% endif %}" href="{{ path('app_actualites') }}">Actualités</a>
+							<a href="service.html" class="dropdown-item">Guides</a>
+						</div>
+					</div>
 
 
 					<a href="project.html" class="nav-item nav-link">Multimedias</a>
 
-					<a href="/don" class="nav-item nav-link">Donation</a>
+					<a class="nav-item nav-link {% if current_menu is defined and current_menu == 'don' %} active {% endif %}" href="{{ path('app_don') }}">Donation</a>
 
-					<a href="project.html" class="nav-item nav-link">Adhésion</a>
+					<a class="nav-item nav-link {% if current_menu is defined and current_menu == 'adhesion' %} active {% endif %}" href="{{ path('app_adhesion') }}">Adhésion</a>
 
 
-					<a href="/contact" class="nav-item nav-link">Contact</a>
+					<a class="nav-item nav-link {% if current_menu is defined and current_menu == 'contact' %} active {% endif %}" href="{{ path('app_contact') }}">Contact</a>
 				</div>
 			</div>
 		</nav>

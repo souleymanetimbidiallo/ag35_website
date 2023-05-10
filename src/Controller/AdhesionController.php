@@ -9,10 +9,12 @@ use Symfony\Component\Routing\Annotation\Route;
 class AdhesionController extends AbstractController
 {
     /**
-     * @Route("/don", name="don") 
+     * @Route("/adhesion", name="app_adhesion") 
      */
     public function index(): Response
     {
-        return $this->render('adhesion.html.twig');
+        return $this->render('adhesion.html.twig', [
+            'current_menu' => 'adhesion'
+        ]);
     }
 }
