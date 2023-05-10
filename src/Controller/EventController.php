@@ -9,10 +9,12 @@ use Symfony\Component\Routing\Annotation\Route;
 class EventController extends AbstractController
 {
     /**
-     * @Route("/evenements", name="evenements")
+     * @Route("/evenements", name="app_evenements")
      */
     public function index(): Response
     {
-        return $this->render('event.html.twig');
+        return $this->render('event.html.twig', [
+            'current_menu' => 'evenements'
+        ]);
     }
 }
