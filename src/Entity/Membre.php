@@ -44,6 +44,12 @@ class Membre
     #[ORM\ManyToOne(inversedBy: 'membres')]
     private ?Administrateur $administrateur = null;
 
+    #[ORM\Column]
+    private ?bool $bureau = null;
+
+    #[ORM\Column(length: 30, nullable: true)]
+    private ?string $fonction = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -165,6 +171,30 @@ class Membre
     public function setAdministrateur(?Administrateur $administrateur): self
     {
         $this->administrateur = $administrateur;
+
+        return $this;
+    }
+
+    public function isBureau(): ?bool
+    {
+        return $this->bureau;
+    }
+
+    public function setBureau(bool $bureau): self
+    {
+        $this->bureau = $bureau;
+
+        return $this;
+    }
+
+    public function getFonction(): ?string
+    {
+        return $this->fonction;
+    }
+
+    public function setFonction(?string $fonction): self
+    {
+        $this->fonction = $fonction;
 
         return $this;
     }
