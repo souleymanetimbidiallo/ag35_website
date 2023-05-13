@@ -29,16 +29,16 @@
 					</p>
 					<ul class="list-unstyled mb-4">
 						<li>Créer, favoriser et consolider les liens de fraternité, de solidarité et d’entraide entre les
-																																																																																																																																																																																																																																							guinéen(ne)s ;</li>
+																																																																																																																																																																																																																																																																																	guinéen(ne)s ;</li>
 						<li>Porter, accompagner et soutenir le développement et l’intégraon socio-professionnels et
-																																																																																																																																																																																																																																							culturels des guinéen(ne)s en Ille-et-Vilaine ;</li>
+																																																																																																																																																																																																																																																																																	culturels des guinéen(ne)s en Ille-et-Vilaine ;</li>
 						<li>Promouvoir, encourager et communiquer sur les initiatives et les acvités de ses membres
-																																																																																																																																																																																																																																							et de ses partenaires et les aider dans la réalisaon de leurs projets ;</li>
+																																																																																																																																																																																																																																																																																	et de ses partenaires et les aider dans la réalisaon de leurs projets ;</li>
 						<li>Initier et accompagner tous projets de développement en faveur de la Guinée ;</li>
 						<li>Accueillir et accompagner les nouveaux étudiants ;</li>
 						<li>Créer des réseaux d'échange et de partenariats ;</li>
 						<li>Promouvoir la Guinée en Ille-et-Vilaine et réciproquement mieux faire connaître la
-																																																																																																																																																																																																																									Bretagne en Guinée.</li>
+																																																																																																																																																																																																																																																																			Bretagne en Guinée.</li>
 					</ul>
 
 				</div>
@@ -99,123 +99,126 @@
 			<div class="container">
 
 				<div class="row g-4">
-					<div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-						<div class="team-item rounded overflow-hidden pb-4">
-							<img class="img-fluid mb-4" src="img/team-1.jpg" alt="">
-							<h5>Jean David DRAMOU</h5>
-							<span class="text-primary">Président</span>
-							<ul class="team-social">
-								<li>
-									<a class="btn btn-square" href="">
-										<i class="fab fa-facebook-f"></i>
-									</a>
-								</li>
-								<li>
-									<a class="btn btn-square" href="">
-										<i class="fab fa-twitter"></i>
-									</a>
-								</li>
-								<li>
-									<a class="btn btn-square" href="">
-										<i class="fab fa-instagram"></i>
-									</a>
-								</li>
-								<li>
-									<a class="btn btn-square" href="">
-										<i class="fab fa-linkedin-in"></i>
-									</a>
-								</li>
-							</ul>
+					{% for mBureau in bureau %}
+						<div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+							<div class="team-item rounded overflow-hidden pb-4">
+								<img class="img-fluid mb-4" src="img/team-1.jpg" alt="">
+								<h5>{{mBureau.prenom}}
+									{{mBureau.nom}}</h5>
+								<span class="text-primary">{{mBureau.fonction}}</span>
+								<ul class="team-social">
+									<li>
+										<a class="btn btn-square" href="">
+											<i class="fab fa-facebook-f"></i>
+										</a>
+									</li>
+									<li>
+										<a class="btn btn-square" href="">
+											<i class="fab fa-twitter"></i>
+										</a>
+									</li>
+									<li>
+										<a class="btn btn-square" href="">
+											<i class="fab fa-instagram"></i>
+										</a>
+									</li>
+									<li>
+										<a class="btn btn-square" href="">
+											<i class="fab fa-linkedin-in"></i>
+										</a>
+									</li>
+								</ul>
+							</div>
 						</div>
-					</div>
-					<div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-						<div class="team-item rounded overflow-hidden pb-4">
-							<img class="img-fluid mb-4" src="img/team-2.jpg" alt="">
-							<h5>Adam Crew</h5>
-							<span class="text-primary">Secrétaire Général</span>
-							<ul class="team-social">
-								<li>
-									<a class="btn btn-square" href="">
-										<i class="fab fa-facebook-f"></i>
-									</a>
-								</li>
-								<li>
-									<a class="btn btn-square" href="">
-										<i class="fab fa-twitter"></i>
-									</a>
-								</li>
-								<li>
-									<a class="btn btn-square" href="">
-										<i class="fab fa-instagram"></i>
-									</a>
-								</li>
-								<li>
-									<a class="btn btn-square" href="">
-										<i class="fab fa-linkedin-in"></i>
-									</a>
-								</li>
-							</ul>
-						</div>
-					</div>
-					<div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-						<div class="team-item rounded overflow-hidden pb-4">
-							<img class="img-fluid mb-4" src="img/team-3.jpg" alt="">
-							<h5>Boris Johnson</h5>
-							<span class="text-primary">Trésorier</span>
-							<ul class="team-social">
-								<li>
-									<a class="btn btn-square" href="">
-										<i class="fab fa-facebook-f"></i>
-									</a>
-								</li>
-								<li>
-									<a class="btn btn-square" href="">
-										<i class="fab fa-twitter"></i>
-									</a>
-								</li>
-								<li>
-									<a class="btn btn-square" href="">
-										<i class="fab fa-instagram"></i>
-									</a>
-								</li>
-								<li>
-									<a class="btn btn-square" href="">
-										<i class="fab fa-linkedin-in"></i>
-									</a>
-								</li>
-							</ul>
-						</div>
-					</div>
-					<div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
-						<div class="team-item rounded overflow-hidden pb-4">
-							<img class="img-fluid mb-4" src="img/team-4.jpg" alt="">
-							<h5>Robert Jordan</h5>
-							<span class="text-primary">Responsable communication et projets multimédia
-							</span>
-							<ul class="team-social">
-								<li>
-									<a class="btn btn-square" href="">
-										<i class="fab fa-facebook-f"></i>
-									</a>
-								</li>
-								<li>
-									<a class="btn btn-square" href="">
-										<i class="fab fa-twitter"></i>
-									</a>
-								</li>
-								<li>
-									<a class="btn btn-square" href="">
-										<i class="fab fa-instagram"></i>
-									</a>
-								</li>
-								<li>
-									<a class="btn btn-square" href="">
-										<i class="fab fa-linkedin-in"></i>
-									</a>
-								</li>
-							</ul>
-						</div>
-					</div>
+					{% endfor %}
+					{#<div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+																																				<div class="team-item rounded overflow-hidden pb-4">
+																																					<img class="img-fluid mb-4" src="img/team-2.jpg" alt="">
+																																					<h5>Adam Crew</h5>
+																																					<span class="text-primary">Secrétaire Général</span>
+																																					<ul class="team-social">
+																																						<li>
+																																							<a class="btn btn-square" href="">
+																																								<i class="fab fa-facebook-f"></i>
+																																							</a>
+																																						</li>
+																																						<li>
+																																							<a class="btn btn-square" href="">
+																																								<i class="fab fa-twitter"></i>
+																																							</a>
+																																						</li>
+																																						<li>
+																																							<a class="btn btn-square" href="">
+																																								<i class="fab fa-instagram"></i>
+																																							</a>
+																																						</li>
+																																						<li>
+																																							<a class="btn btn-square" href="">
+																																								<i class="fab fa-linkedin-in"></i>
+																																							</a>
+																																						</li>
+																																					</ul>
+																																				</div>
+																																			</div>
+																																			<div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+																																				<div class="team-item rounded overflow-hidden pb-4">
+																																					<img class="img-fluid mb-4" src="img/team-3.jpg" alt="">
+																																					<h5>Boris Johnson</h5>
+																																					<span class="text-primary">Trésorier</span>
+																																					<ul class="team-social">
+																																						<li>
+																																							<a class="btn btn-square" href="">
+																																								<i class="fab fa-facebook-f"></i>
+																																							</a>
+																																						</li>
+																																						<li>
+																																							<a class="btn btn-square" href="">
+																																								<i class="fab fa-twitter"></i>
+																																							</a>
+																																						</li>
+																																						<li>
+																																							<a class="btn btn-square" href="">
+																																								<i class="fab fa-instagram"></i>
+																																							</a>
+																																						</li>
+																																						<li>
+																																							<a class="btn btn-square" href="">
+																																								<i class="fab fa-linkedin-in"></i>
+																																							</a>
+																																						</li>
+																																					</ul>
+																																				</div>
+																																			</div>
+																																			<div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
+																																				<div class="team-item rounded overflow-hidden pb-4">
+																																					<img class="img-fluid mb-4" src="img/team-4.jpg" alt="">
+																																					<h5>Robert Jordan</h5>
+																																					<span class="text-primary">Responsable communication et projets multimédia
+																																					</span>
+																																					<ul class="team-social">
+																																						<li>
+																																							<a class="btn btn-square" href="">
+																																								<i class="fab fa-facebook-f"></i>
+																																							</a>
+																																						</li>
+																																						<li>
+																																							<a class="btn btn-square" href="">
+																																								<i class="fab fa-twitter"></i>
+																																							</a>
+																																						</li>
+																																						<li>
+																																							<a class="btn btn-square" href="">
+																																								<i class="fab fa-instagram"></i>
+																																							</a>
+																																						</li>
+																																						<li>
+																																							<a class="btn btn-square" href="">
+																																								<i class="fab fa-linkedin-in"></i>
+																																							</a>
+																																						</li>
+																																					</ul>
+																																				</div>
+																																			</div>#}
 				</div>
 			</div>
 		</div>
@@ -275,14 +278,14 @@
 			</div>
 		</div>
 		<div class="partner-logos">{#<div class="partner-logo">
-							<img src="{{ path_to_image_1 }}" alt="logo-partner-1">
-						</div>
-						<div class="partner-logo">
-							<img src="{{ path_to_image_2 }}" alt="logo-partner-2">
-						</div>
-						<div class="partner-logo">
-							<img src="{{ path_to_image_3 }}" alt="logo-partner-3">
-						</div>#}
+																									<img src="{{ path_to_image_1 }}" alt="logo-partner-1">
+																								</div>
+																								<div class="partner-logo">
+																									<img src="{{ path_to_image_2 }}" alt="logo-partner-2">
+																								</div>
+																								<div class="partner-logo">
+																									<img src="{{ path_to_image_3 }}" alt="logo-partner-3">
+																								</div>#}
 			<!-- Ajouter autant de blocs de logos de partenaires que nécessaire -->
 		</div>
 	</div>
