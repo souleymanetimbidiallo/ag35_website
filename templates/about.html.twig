@@ -2,210 +2,292 @@
 
 {% block body %}
 	<!-- Page Header Start -->
-	<div class="container-fluid page-header py-5 mb-5 wow fadeIn" data-wow-delay="0.1s">
+	<div class="container-fluid page-header py-5 mb-5 wow fadeIn" data-wow-delay="0.1s" style="background-image: url('{{ asset('img/guinea.png') }}'); background-size: contain; background-repeat: no-repeat; background-position: center center; height: 100vh;">
 		<div class="container text-center py-5">
-			<h1 class="display-2 text-white mb-4 animated slideInDown">About Us</h1>
-			<nav aria-label="breadcrumb animated slideInDown">
-				<ol class="breadcrumb justify-content-center mb-0">
-					<li class="breadcrumb-item">
-						<a href="#">Home</a>
-					</li>
-					<li class="breadcrumb-item">
-						<a href="#">Pages</a>
-					</li>
-					<li class="breadcrumb-item text-primary" aria-current="page">About</li>
-				</ol>
-			</nav>
+			<h1 class="display-2 text-black mb-4 animated slideInDown">A propos de nous</h1>
 		</div>
 	</div>
+
 	<!-- Page Header End -->
 
 
 	<!-- About Start -->
-	<div class="container-xxl about mb-5" style="margin-top: 6rem;">
-		<div class="container">
-			<div class="row g-0">
-				<div class="col-lg-6">
-					<div class="h-100 d-flex align-items-center justify-content-center" style="min-height: 300px;">
-						<button type="button" class="btn-play" data-bs-toggle="modal" data-src="https://www.youtube.com/embed/DWRcNpR6Kdc" data-bs-target="#videoModal">
-							<span></span>
-						</button>
-					</div>
+
+	<div class="container">
+		<div class="row g-0">
+			<div class="col-lg-6">
+				<div class="h-100 d-flex align-items-center justify-content-center" style="min-height: 300px;">
+					<img src="{{ asset('img/nimba.webp') }}" class="img-fluid" alt="About Image">
 				</div>
-				<div class="col-lg-6 pt-lg-5 wow fadeIn" data-wow-delay="0.5s">
-					<div class="bg-white rounded-top p-5 mt-lg-5">
-						<p class="fs-5 fw-medium text-primary">About Us</p>
-						<h1 class="display-6 mb-4">The Best Marketing Agency to Improve Your Business</h1>
-						<p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet
-							                            diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo</p>
-						<div class="row g-5 pt-2 mb-5">
-							<div class="col-sm-6">
-								<img class="img-fluid mb-4" src="img/icon/icon-5.png" alt="">
-								<h5 class="mb-3">Managed Services</h5>
-								<span>Clita erat ipsum et lorem et sit sed stet lorem</span>
-							</div>
-							<div class="col-sm-6">
-								<img class="img-fluid mb-4" src="img/icon/icon-2.png" alt="">
-								<h5 class="mb-3">Dedicated Experts</h5>
-								<span>Clita erat ipsum et lorem et sit sed stet lorem</span>
-							</div>
-						</div>
-						<a class="btn btn-primary rounded-pill py-3 px-5" href="">Explore More</a>
-					</div>
+			</div>
+			<div class="col-lg-6 pt-lg-5 wow fadeIn" data-wow-delay="0.5s">
+				<div class="bg-white rounded-top p-5 mt-lg-5">
+					<p class="fs-5 fw-medium text-primary">Nous sommes</p>
+					<h1 class="display-6 mb-4">Association des Guinéens de l'Ille et Vilaine (AG35)</h1>
+					<p class="mb-4">
+						Créée depuis 2007, l’AG35 a pour but de :
+					</p>
+					<ul class="list-unstyled mb-4">
+						<li>Créer, favoriser et consolider les liens de fraternité, de solidarité et d’entraide entre les
+																																																																																																																																																																																																																																																																																	guinéen(ne)s ;</li>
+						<li>Porter, accompagner et soutenir le développement et l’intégraon socio-professionnels et
+																																																																																																																																																																																																																																																																																	culturels des guinéen(ne)s en Ille-et-Vilaine ;</li>
+						<li>Promouvoir, encourager et communiquer sur les initiatives et les acvités de ses membres
+																																																																																																																																																																																																																																																																																	et de ses partenaires et les aider dans la réalisaon de leurs projets ;</li>
+						<li>Initier et accompagner tous projets de développement en faveur de la Guinée ;</li>
+						<li>Accueillir et accompagner les nouveaux étudiants ;</li>
+						<li>Créer des réseaux d'échange et de partenariats ;</li>
+						<li>Promouvoir la Guinée en Ille-et-Vilaine et réciproquement mieux faire connaître la
+																																																																																																																																																																																																																																																																			Bretagne en Guinée.</li>
+					</ul>
+
 				</div>
 			</div>
 		</div>
 	</div>
+
+
 	<!-- About End -->
 
-
-	<!-- Video Modal Start -->
-	<div class="modal modal-video fade" id="videoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content rounded-0">
-				<div class="modal-header">
-					<h3 class="modal-title" id="exampleModalLabel">Youtube Video</h3>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	<!-- Nos Valeurs -->
+	<div class="container bg-light my-5 py-5">
+		<div class="row">
+			<div class="col-12 text-center">
+				<h2 class="text-primary">Nos valeurs</h2>
+				<p>Nous croyons en ces valeurs et les portons dans toutes nos activités. Elles nous distinguent et nous définissent.</p>
+			</div>
+		</div>
+		<div class="row mt-5">
+			<div class="col-lg-4 col-md-6">
+				<div class="card mb-3">
+					<div class="card-body">
+						<h4 class="card-title text-primary">1. Solidarité</h4>
+						<p class="card-text">plus qu’une valeur, la solidarité est inscrite dans notre ADN. Elle met l’humain au cœur de nos démarches. C’est pour nous un leitmotiv qui nous positionne en tant qu’acteur faisant la promotion du partage, l’entraide et la co-construction. C’est une valeur humaine et humaniste que nous partageons avec l’ensemble de nos collaborateurs.</p>
+					</div>
 				</div>
-				<div
-					class="modal-body">
-					<!-- 16:9 aspect ratio -->
-					<div class="ratio ratio-16x9">
-						<iframe class="embed-responsive-item" src="" id="video" allowfullscreen allowscriptaccess="always" allow="autoplay"></iframe>
+			</div>
+			<div class="col-lg-4 col-md-6">
+				<div class="card mb-3">
+					<div class="card-body">
+						<h4 class="card-title text-primary">2. Engagement</h4>
+						<p class="card-text">pour la Guinée d’aujourd’hui et celle que nous ambitionnons, tous nos membres travaillent bénévolement et énergiquement à la promotion d’un idéal commun et d’une ambition qui transcendent les croyances. Les Jeunes engagés à nos côtés mettent à disposition leur compétence, leur talent et leur professionnalisme.</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-4 col-md-6">
+				<div class="card mb-3">
+					<div class="card-body">
+						<h4 class="card-title text-primary">3. Diversité et inclusion</h4>
+						<p class="card-text">par le respect de l’autre dans sa dignité, l’acceptation des opinions contraires, des différences et des appartenances, nous bâtissons des relations solides et des amitiés sincères, nous formons une communauté d’avenir, celle qui imagine et travaille à la Guinée de demain. L’AG35 infuse cette valeur à tous les Guinéens vivant en Ille et vilaine.</p>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<!-- Video Modal End -->
+	<!-- Nos Valeurs End -->
 
 
 	<!-- Team Start -->
-	<div class="container-xxl py-5">
-		<div class="container">
-			<div class="text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
-				<p class="fs-5 fw-medium text-primary">Our Team</p>
-				<h1 class="display-5 mb-5">Our Expert People Ready to Help You</h1>
+	<div class="container bg-light my-5 py-5">
+		<div class="row">
+			<div class="col-12 text-center">
+				<h2 class="text-primary">Gouvernance & Bureau</h2>
+				<p>L’association Guinéenne d'Ille et vilaine AG35 est composée d’une assemblée générale, d'un bureau exécutif, des membres actifs ou adhérents, des membres d'honneur, bienfaiteurs et sympathisants.</p>
 			</div>
-			<div class="row g-4">
-				<div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-					<div class="team-item rounded overflow-hidden pb-4">
-						<img class="img-fluid mb-4" src="img/team-1.jpg" alt="">
-						<h5>Alex Robin</h5>
-						<span class="text-primary">Founder & CEO</span>
-						<ul class="team-social">
-							<li>
-								<a class="btn btn-square" href="">
-									<i class="fab fa-facebook-f"></i>
-								</a>
-							</li>
-							<li>
-								<a class="btn btn-square" href="">
-									<i class="fab fa-twitter"></i>
-								</a>
-							</li>
-							<li>
-								<a class="btn btn-square" href="">
-									<i class="fab fa-instagram"></i>
-								</a>
-							</li>
-							<li>
-								<a class="btn btn-square" href="">
-									<i class="fab fa-linkedin-in"></i>
-								</a>
-							</li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-					<div class="team-item rounded overflow-hidden pb-4">
-						<img class="img-fluid mb-4" src="img/team-2.jpg" alt="">
-						<h5>Adam Crew</h5>
-						<span class="text-primary">Co Founder</span>
-						<ul class="team-social">
-							<li>
-								<a class="btn btn-square" href="">
-									<i class="fab fa-facebook-f"></i>
-								</a>
-							</li>
-							<li>
-								<a class="btn btn-square" href="">
-									<i class="fab fa-twitter"></i>
-								</a>
-							</li>
-							<li>
-								<a class="btn btn-square" href="">
-									<i class="fab fa-instagram"></i>
-								</a>
-							</li>
-							<li>
-								<a class="btn btn-square" href="">
-									<i class="fab fa-linkedin-in"></i>
-								</a>
-							</li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-					<div class="team-item rounded overflow-hidden pb-4">
-						<img class="img-fluid mb-4" src="img/team-3.jpg" alt="">
-						<h5>Boris Johnson</h5>
-						<span class="text-primary">Executive Manager</span>
-						<ul class="team-social">
-							<li>
-								<a class="btn btn-square" href="">
-									<i class="fab fa-facebook-f"></i>
-								</a>
-							</li>
-							<li>
-								<a class="btn btn-square" href="">
-									<i class="fab fa-twitter"></i>
-								</a>
-							</li>
-							<li>
-								<a class="btn btn-square" href="">
-									<i class="fab fa-instagram"></i>
-								</a>
-							</li>
-							<li>
-								<a class="btn btn-square" href="">
-									<i class="fab fa-linkedin-in"></i>
-								</a>
-							</li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
-					<div class="team-item rounded overflow-hidden pb-4">
-						<img class="img-fluid mb-4" src="img/team-4.jpg" alt="">
-						<h5>Robert Jordan</h5>
-						<span class="text-primary">Digital Marketer</span>
-						<ul class="team-social">
-							<li>
-								<a class="btn btn-square" href="">
-									<i class="fab fa-facebook-f"></i>
-								</a>
-							</li>
-							<li>
-								<a class="btn btn-square" href="">
-									<i class="fab fa-twitter"></i>
-								</a>
-							</li>
-							<li>
-								<a class="btn btn-square" href="">
-									<i class="fab fa-instagram"></i>
-								</a>
-							</li>
-							<li>
-								<a class="btn btn-square" href="">
-									<i class="fab fa-linkedin-in"></i>
-								</a>
-							</li>
-						</ul>
-					</div>
+		</div>
+		<div class="container-xxl py-5">
+			<div class="container">
+
+				<div class="row g-4">
+					{% for mBureau in bureau %}
+						<div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+							<div class="team-item rounded overflow-hidden pb-4">
+								<img class="img-fluid mb-4" src="img/team-1.jpg" alt="">
+								<h5>{{mBureau.prenom}}
+									{{mBureau.nom}}</h5>
+								<span class="text-primary">{{mBureau.fonction}}</span>
+								<ul class="team-social">
+									<li>
+										<a class="btn btn-square" href="">
+											<i class="fab fa-facebook-f"></i>
+										</a>
+									</li>
+									<li>
+										<a class="btn btn-square" href="">
+											<i class="fab fa-twitter"></i>
+										</a>
+									</li>
+									<li>
+										<a class="btn btn-square" href="">
+											<i class="fab fa-instagram"></i>
+										</a>
+									</li>
+									<li>
+										<a class="btn btn-square" href="">
+											<i class="fab fa-linkedin-in"></i>
+										</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					{% endfor %}
+					{#<div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+																																				<div class="team-item rounded overflow-hidden pb-4">
+																																					<img class="img-fluid mb-4" src="img/team-2.jpg" alt="">
+																																					<h5>Adam Crew</h5>
+																																					<span class="text-primary">Secrétaire Général</span>
+																																					<ul class="team-social">
+																																						<li>
+																																							<a class="btn btn-square" href="">
+																																								<i class="fab fa-facebook-f"></i>
+																																							</a>
+																																						</li>
+																																						<li>
+																																							<a class="btn btn-square" href="">
+																																								<i class="fab fa-twitter"></i>
+																																							</a>
+																																						</li>
+																																						<li>
+																																							<a class="btn btn-square" href="">
+																																								<i class="fab fa-instagram"></i>
+																																							</a>
+																																						</li>
+																																						<li>
+																																							<a class="btn btn-square" href="">
+																																								<i class="fab fa-linkedin-in"></i>
+																																							</a>
+																																						</li>
+																																					</ul>
+																																				</div>
+																																			</div>
+																																			<div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+																																				<div class="team-item rounded overflow-hidden pb-4">
+																																					<img class="img-fluid mb-4" src="img/team-3.jpg" alt="">
+																																					<h5>Boris Johnson</h5>
+																																					<span class="text-primary">Trésorier</span>
+																																					<ul class="team-social">
+																																						<li>
+																																							<a class="btn btn-square" href="">
+																																								<i class="fab fa-facebook-f"></i>
+																																							</a>
+																																						</li>
+																																						<li>
+																																							<a class="btn btn-square" href="">
+																																								<i class="fab fa-twitter"></i>
+																																							</a>
+																																						</li>
+																																						<li>
+																																							<a class="btn btn-square" href="">
+																																								<i class="fab fa-instagram"></i>
+																																							</a>
+																																						</li>
+																																						<li>
+																																							<a class="btn btn-square" href="">
+																																								<i class="fab fa-linkedin-in"></i>
+																																							</a>
+																																						</li>
+																																					</ul>
+																																				</div>
+																																			</div>
+																																			<div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
+																																				<div class="team-item rounded overflow-hidden pb-4">
+																																					<img class="img-fluid mb-4" src="img/team-4.jpg" alt="">
+																																					<h5>Robert Jordan</h5>
+																																					<span class="text-primary">Responsable communication et projets multimédia
+																																					</span>
+																																					<ul class="team-social">
+																																						<li>
+																																							<a class="btn btn-square" href="">
+																																								<i class="fab fa-facebook-f"></i>
+																																							</a>
+																																						</li>
+																																						<li>
+																																							<a class="btn btn-square" href="">
+																																								<i class="fab fa-twitter"></i>
+																																							</a>
+																																						</li>
+																																						<li>
+																																							<a class="btn btn-square" href="">
+																																								<i class="fab fa-instagram"></i>
+																																							</a>
+																																						</li>
+																																						<li>
+																																							<a class="btn btn-square" href="">
+																																								<i class="fab fa-linkedin-in"></i>
+																																							</a>
+																																						</li>
+																																					</ul>
+																																				</div>
+																																			</div>#}
 				</div>
 			</div>
 		</div>
 	</div>
 	<!-- Team End -->
+
+	<!-- Projets et réalisations Start -->
+	<div class="container-fluid bg-white py-5">
+		<div class="container">
+			<div class="row">
+				<div class="col-12 text-center">
+					<h2 class="text-primary mb-5">Projets et réalisations</h2>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-4 mb-4">
+					<div class="card shadow">
+						<img class="card-img-top" src="{{ asset('img/project1.jpg') }}" alt="Card image cap">
+						<div class="card-body">
+							<h5 class="card-title">Projet 1</h5>
+							<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+							<a href="#" class="btn btn-primary">En savoir plus</a>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4 mb-4">
+					<div class="card shadow">
+						<img class="card-img-top" src="{{ asset('img/project2.jpg') }}" alt="Card image cap">
+						<div class="card-body">
+							<h5 class="card-title">Projet 2</h5>
+							<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+							<a href="#" class="btn btn-primary">En savoir plus</a>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4 mb-4">
+					<div class="card shadow">
+						<img class="card-img-top" src="{{ asset('img/project3.jpg') }}" alt="Card image cap">
+						<div class="card-body">
+							<h5 class="card-title">Projet 3</h5>
+							<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+							<a href="#" class="btn btn-primary">En savoir plus</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Projets et réalisations End -->
+
+	<!-- Partenaires et Sponsors -->
+	<div class="container bg-light my-5 py-5">
+		<div class="row">
+			<div class="col-12 text-center">
+				<h2 class="text-primary">Partenaires et Sponsors</h2>
+				<p>Nous travaillons avec différents acteurs institutionnels, associatifs et des startups qui nous accompagnent dans nos différentes activités.</p>
+			</div>
+		</div>
+		<div class="partner-logos">{#<div class="partner-logo">
+																									<img src="{{ path_to_image_1 }}" alt="logo-partner-1">
+																								</div>
+																								<div class="partner-logo">
+																									<img src="{{ path_to_image_2 }}" alt="logo-partner-2">
+																								</div>
+																								<div class="partner-logo">
+																									<img src="{{ path_to_image_3 }}" alt="logo-partner-3">
+																								</div>#}
+			<!-- Ajouter autant de blocs de logos de partenaires que nécessaire -->
+		</div>
+	</div>
+	<!-- Partenaires et Sponsors End -->
 {% endblock %}
