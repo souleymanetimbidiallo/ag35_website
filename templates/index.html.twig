@@ -1,98 +1,136 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-	<!-- Carousel Start -->
-	<div class="container-fluid px-0 mb-5">
-		<div id="header-carousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
-			<div class="carousel-inner">
-				<div class="carousel-item active">
-					<img class="w-100" src="img/carousel-1.jpg" alt="Image">
-					<div class="carousel-caption">
-						<div class="container">
-							<div class="row justify-content-start">
-								<div class="col-lg-7 text-start">
-									<p class="fs-4 text-white animated slideInRight">
-										<strong>AG35</strong>
-									</p>
-									<h1 class="display-1 text-white mb-4 animated slideInRight">Association Guinéen.nes d'Ille-et-Vilaine
-									</h1>
-
-								</div>
+<!-- Carousel Start -->
+<div class="container-fluid px-0 mb-5">
+	<div class="carousel" id="carousel" data-bs-ride="carousel">
+		<div class="carousel-inner">
+			<div class="carousel-item active " data-bs-interval="2000">
+				<img class="w-100" src="img/carousel-1.jpg" alt="Image">
+				<div class="carousel-caption">
+					<div class="container">
+						<div class="row justify-content-start">
+							<div class="col-lg-7 text-start">
+								<p class="fs-4 text-white animated slideInRight">
+									<strong>AG35</strong>
+								</p>
+								<h1 class="display-1 text-white mb-4 animated slideInRight">Association des Guinéen.nes
+									d'Ille-et-Vilaine
+								</h1>
 							</div>
 						</div>
 					</div>
 				</div>
-
 			</div>
-
-		</div>
-	</div>
-	<!-- Carousel End -->
-
-
-	<!-- Features Start -->
-	<div class="container-xxl py-5">
-		<div class="container">
-			<div class="row g-0 feature-row">
-				<div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.1s">
-					<div class="feature-item border h-100 p-5">
-						<div class="btn-square bg-light rounded-circle mb-4" style="width: 64px; height: 64px;">
-							<img class="img-fluid" src="img/icon/icon-1.png" alt="Icon">
-						</div>
-						<h5 class="mb-3">Award Winning</h5>
-						<p class="mb-0">Stet stet justo dolor sed duo. Ut clita sea sit ipsum diam</p>
-					</div>
-				</div>
-				<div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.3s">
-					<div class="feature-item border h-100 p-5">
-						<div class="btn-square bg-light rounded-circle mb-4" style="width: 64px; height: 64px;">
-							<img class="img-fluid" src="img/icon/icon-2.png" alt="Icon">
-						</div>
-						<h5 class="mb-3">Professional Staff</h5>
-						<p class="mb-0">Stet stet justo dolor sed duo. Ut clita sea sit ipsum diam</p>
-					</div>
-				</div>
-				<div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.5s">
-					<div class="feature-item border h-100 p-5">
-						<div class="btn-square bg-light rounded-circle mb-4" style="width: 64px; height: 64px;">
-							<img class="img-fluid" src="img/icon/icon-3.png" alt="Icon">
-						</div>
-						<h5 class="mb-3">Fair Prices</h5>
-						<p class="mb-0">Stet stet justo dolor sed duo. Ut clita sea sit ipsum diam</p>
-					</div>
-				</div>
-				<div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.7s">
-					<div class="feature-item border h-100 p-5">
-						<div class="btn-square bg-light rounded-circle mb-4" style="width: 64px; height: 64px;">
-							<img class="img-fluid" src="img/icon/icon-4.png" alt="Icon">
-						</div>
-						<h5 class="mb-3">24/7 Support</h5>
-						<p class="mb-0">Stet stet justo dolor sed duo. Ut clita sea sit ipsum diam</p>
-					</div>
-				</div>
+			<div class="carousel-item" data-bs-interval="2000">
+				<img class="w-100" src="img/carousel-2.jpg" alt="Image 1">
+			</div>
+			<div class="carousel-item" data-bs-interval="2000">
+				<img class="w-100" src="img/project-1.jpg" alt="Image">
 			</div>
 		</div>
+		  <button class="carousel-control-prev" type="button" data-bs-target="#carousel" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carousel" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
 	</div>
-	<!-- Features End -->
+</div>
+
+<script type="text/javascript" src="slick/slick.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function () {
+		$('.carousel').slick({
+			slidesToShow: 3,
+			slidesToScroll: 1,
+			autoplay: true,
+			autoplaySpeed: 6000,
+			dots: true,
+			arrows: false
+		});
+	});
+</script>
+
+<!-- Carousel End -->
 
 
-	<!-- About Start -->
-	<div class="container-xxl about my-5">
-		<div class="container">
-			<div class="row g-0">
-				<div class="col-lg-6">
-					<div class="h-100 d-flex align-items-center justify-content-center" style="min-height: 300px;">
-						<button type="button" class="btn-play" data-bs-toggle="modal" data-src="https://www.youtube.com/embed/DWRcNpR6Kdc" data-bs-target="#videoModal">
-							<span></span>
-						</button>
+<!-- Features Start -->
+<div class="container-xxl py-5">
+	<div class="container">
+		<div class="row g-0 feature-row">
+			<div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.1s">
+				<div class="feature-item border h-100 p-5">
+					<div class="btn-square bg-light rounded-circle mb-4" style="width: 64px; height: 64px;">
+						<img class="img-fluid" src="img/icon/icon-1.png" alt="Icon">
 					</div>
+					<h5 class="mb-3">Projets et Activités</h5>
+					<p class="mb-0">Organiser, harmoniser, communiquer et synchroniser les acvités et les projets
+						sociaux, culturels et
+						sporfs de ses membres et de ses partenaires.</p>
 				</div>
+			</div>
+			<div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.3s">
+				<div class="feature-item border h-100 p-5">
+					<div class="btn-square bg-light rounded-circle mb-4" style="width: 64px; height: 64px;">
+						<img class="img-fluid" src="img/icon/icon-2.png" alt="Icon">
+					</div>
+					<h5 class="mb-3">Integration des nouveaux étudiants à Rennes et alentours</h5>
+					<p class="mb-0">Accueillir et accompagner les nouveaux guinéen(ne)s dans leur procédure d’intégraon
+						et
+						d’épanouissement socio-professionnel et culturel par l’informaon, la formation, l’emploi et la
+						créaon d’entreprises.</p>
+				</div>
+			</div>
+			<div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.5s">
+				<div class="feature-item border h-100 p-5">
+					<div class="btn-square bg-light rounded-circle mb-4" style="width: 64px; height: 64px;">
+						<img class="img-fluid" src="img/icon/icon-3.png" alt="Icon">
+					</div>
+					<h5 class="mb-3">Assistance</h5>
+					<p class="mb-0">Aider ses membres et ses partenaires dans le montage, le financement et la réalisaon
+						de leurs
+						projets.</p>
+				</div>
+			</div>
+			<div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.7s">
+				<div class="feature-item border h-100 p-5">
+					<div class="btn-square bg-light rounded-circle mb-4" style="width: 64px; height: 64px;">
+						<img class="img-fluid" src="img/icon/icon-4.png" alt="Icon">
+					</div>
+					<h5 class="mb-3">Débats et Conférences</h5>
+					<p class="mb-0">Organiser et animer des conférences – débats sur tous les sujets d’intérêt naonal et
+						internaonal.</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Features End -->
+
+
+<!-- About Start -->
+<div class="container-xxl about my-5">
+	<div class="container">
+		<div class="row g-0">
+			<div class="col-lg-6">
+				<div class="h-100 d-flex align-items-center justify-content-center" style="min-height: 300px;">
+					<button type="button" class="btn-play" data-bs-toggle="modal"
+						data-src="https://www.youtube.com/embed/DWRcNpR6Kdc" data-bs-target="#videoModal">
+						<span></span>
+					</button>
+				</div>
+			</div>
+			<h1 class="display-6 mb-4">Cliquer ci-dessus pour regarder la présentation de l'AG35</h1>
+			<!--
 				<div class="col-lg-6 pt-lg-5 wow fadeIn" data-wow-delay="0.5s">
-					<div class="bg-white rounded-top p-5 mt-lg-5">
-						<p class="fs-5 fw-medium text-primary">About Us</p>
-						<h1 class="display-6 mb-4">The Best Marketing Agency to Improve Your Business</h1>
-						<p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet
-																																																																																																		                            diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo</p>
+					<div
+						class="bg-white rounded-top p-5 mt-lg-5">
+						
+						<h1 class="display-6 mb-4">Présentation de l'AG35</h1>
+						
 						<div class="row g-5 pt-2 mb-5">
 							<div class="col-sm-6">
 								<img class="img-fluid mb-4" src="img/icon/icon-5.png" alt="">
@@ -108,34 +146,37 @@
 						<a class="btn btn-primary rounded-pill py-3 px-5" href="">Explore More</a>
 					</div>
 				</div>
+			-->
+
+		</div>
+	</div>
+</div>
+<!-- About End -->
+
+
+<!-- Video Modal Start -->
+<div class="modal modal-video fade" id="videoModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content rounded-0">
+			<div class="modal-header">
+				<h3 class="modal-title" id="exampleModalLabel">Youtube Video</h3>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<!-- 16:9 aspect ratio -->
+				<div class="ratio ratio-16x9">
+					<iframe class="embed-responsive-item" src="https://www.youtube.com/watch?v=31U4GWsYUVw" id="video" allowfullscreen allowscriptaccess="always"
+						allow="autoplay"></iframe>
+				</div>
 			</div>
 		</div>
 	</div>
-	<!-- About End -->
+</div>
+<!-- Video Modal End -->
 
 
-	<!-- Video Modal Start -->
-	<div class="modal modal-video fade" id="videoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content rounded-0">
-				<div class="modal-header">
-					<h3 class="modal-title" id="exampleModalLabel">Youtube Video</h3>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-				</div>
-				<div
-					class="modal-body">
-					<!-- 16:9 aspect ratio -->
-					<div class="ratio ratio-16x9">
-						<iframe class="embed-responsive-item" src="" id="video" allowfullscreen allowscriptaccess="always" allow="autoplay"></iframe>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- Video Modal End -->
-
-
-	<!-- Service Start -->
+<!-- Service Start 
 	<div class="container-xxl py-5">
 		<div class="container">
 			<div class="text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
@@ -151,7 +192,7 @@
 							</div>
 							<h5 class="mb-3">Digital Marketing</h4>
 							<p class="mb-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam
-																																																																																																																                                    stet</p>
+																																																																																																																																																																																																																																																																																																	stet</p>
 						</div>
 						<div class="service-btn rounded-0 rounded-bottom">
 							<a class="text-primary fw-medium" href="">Read More<i class="bi bi-chevron-double-right ms-2"></i>
@@ -167,7 +208,7 @@
 							</div>
 							<h5 class="mb-3">Internet Marketing</h4>
 							<p class="mb-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam
-																																																																																																																                                    stet</p>
+																																																																																																																																																																																																																																																																																																	stet</p>
 						</div>
 						<div class="service-btn rounded-0 rounded-bottom">
 							<a class="text-primary fw-medium" href="">Read More<i class="bi bi-chevron-double-right ms-2"></i>
@@ -183,7 +224,7 @@
 							</div>
 							<h5 class="mb-3">Content Marketing</h4>
 							<p class="mb-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam
-																																																																																																																                                    stet</p>
+																																																																																																																																																																																																																																																																																																	stet</p>
 						</div>
 						<div class="service-btn rounded-0 rounded-bottom">
 							<a class="text-primary fw-medium" href="">Read More<i class="bi bi-chevron-double-right ms-2"></i>
@@ -199,7 +240,7 @@
 							</div>
 							<h5 class="mb-3">Social Marketing</h4>
 							<p class="mb-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam
-																																																																																																																                                    stet</p>
+																																																																																																																																																																																																																																																																																																	stet</p>
 						</div>
 						<div class="service-btn rounded-0 rounded-bottom">
 							<a class="text-primary fw-medium" href="">Read More<i class="bi bi-chevron-double-right ms-2"></i>
@@ -215,7 +256,7 @@
 							</div>
 							<h5 class="mb-3">B2B Marketing</h4>
 							<p class="mb-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam
-																																																																																																																                                    stet</p>
+																																																																																																																																																																																																																																																																																																	stet</p>
 						</div>
 						<div class="service-btn rounded-0 rounded-bottom">
 							<a class="text-primary fw-medium" href="">Read More<i class="bi bi-chevron-double-right ms-2"></i>
@@ -231,7 +272,7 @@
 							</div>
 							<h5 class="mb-3">E-mail Marketing</h4>
 							<p class="mb-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam
-																																																																																																																                                    stet</p>
+																																																																																																																																																																																																																																																																																																	stet</p>
 						</div>
 						<div class="service-btn rounded-0 rounded-bottom">
 							<a class="text-primary fw-medium" href="">Read More<i class="bi bi-chevron-double-right ms-2"></i>
@@ -242,326 +283,354 @@
 			</div>
 		</div>
 	</div>
-	<!-- Service End -->
+	Service End -->
 
 
-	<!-- Project Start -->
-	<div class="container-xxl pt-5">
-		<div class="container">
-			<div class="text-center text-md-start pb-5 pb-md-0 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
-				<p class="fs-5 fw-medium text-primary">Our Projects</p>
-				<h1 class="display-5 mb-5">We've Done Lot's of Awesome Projects</h1>
+<!-- Project Start -->
+<div class="container-xxl pt-5">
+	<div class="container">
+		<div class="text-center text-md-start pb-5 pb-md-0 wow fadeInUp" data-wow-delay="0.1s"
+			style="max-width: 500px;">
+
+			<h1 class="display-5 mb-5">Nos derniers evénements</h1>
+		</div>
+		<div class="owl-carousel project-carousel wow fadeInUp" data-wow-delay="0.1s">
+			<div class="project-item mb-5">
+				<div class="position-relative">
+					<img class="img-fluid" src="img/project-1.jpg" alt="">
+					<div class="project-overlay">
+						<a class="btn btn-lg-square btn-light rounded-circle m-1" href="img/project-1.jpg"
+							data-lightbox="project">
+							<i class="fa fa-eye"></i>
+						</a>
+						<a class="btn btn-lg-square btn-light rounded-circle m-1" href="">
+							<i class="fa fa-link"></i>
+						</a>
+					</div>
+				</div>
+				<div class="p-4">
+					<a class="d-block h5" href="">Data Analytics & Insights</a>
+					<span>Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem</span>
+				</div>
 			</div>
-			<div class="owl-carousel project-carousel wow fadeInUp" data-wow-delay="0.1s">
-				<div class="project-item mb-5">
-					<div class="position-relative">
-						<img class="img-fluid" src="img/project-1.jpg" alt="">
-						<div class="project-overlay">
-							<a class="btn btn-lg-square btn-light rounded-circle m-1" href="img/project-1.jpg" data-lightbox="project">
-								<i class="fa fa-eye"></i>
-							</a>
-							<a class="btn btn-lg-square btn-light rounded-circle m-1" href="">
-								<i class="fa fa-link"></i>
-							</a>
-						</div>
-					</div>
-					<div class="p-4">
-						<a class="d-block h5" href="">Data Analytics & Insights</a>
-						<span>Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem</span>
+			<div class="project-item mb-5">
+				<div class="position-relative">
+					<img class="img-fluid" src="img/project-2.jpg" alt="">
+					<div class="project-overlay">
+						<a class="btn btn-lg-square btn-light rounded-circle m-1" href="img/project-2.jpg"
+							data-lightbox="project">
+							<i class="fa fa-eye"></i>
+						</a>
+						<a class="btn btn-lg-square btn-light rounded-circle m-1" href="">
+							<i class="fa fa-link"></i>
+						</a>
 					</div>
 				</div>
-				<div class="project-item mb-5">
-					<div class="position-relative">
-						<img class="img-fluid" src="img/project-2.jpg" alt="">
-						<div class="project-overlay">
-							<a class="btn btn-lg-square btn-light rounded-circle m-1" href="img/project-2.jpg" data-lightbox="project">
-								<i class="fa fa-eye"></i>
-							</a>
-							<a class="btn btn-lg-square btn-light rounded-circle m-1" href="">
-								<i class="fa fa-link"></i>
-							</a>
-						</div>
-					</div>
-					<div class="p-4">
-						<a class="d-block h5" href="">Marketing Content Strategy</a>
-						<span>Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem</span>
+				<div class="p-4">
+					<a class="d-block h5" href="">Marketing Content Strategy</a>
+					<span>Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem</span>
+				</div>
+			</div>
+			<div class="project-item mb-5">
+				<div class="position-relative">
+					<img class="img-fluid" src="img/project-3.jpg" alt="">
+					<div class="project-overlay">
+						<a class="btn btn-lg-square btn-light rounded-circle m-1" href="img/project-3.jpg"
+							data-lightbox="project">
+							<i class="fa fa-eye"></i>
+						</a>
+						<a class="btn btn-lg-square btn-light rounded-circle m-1" href="">
+							<i class="fa fa-link"></i>
+						</a>
 					</div>
 				</div>
-				<div class="project-item mb-5">
-					<div class="position-relative">
-						<img class="img-fluid" src="img/project-3.jpg" alt="">
-						<div class="project-overlay">
-							<a class="btn btn-lg-square btn-light rounded-circle m-1" href="img/project-3.jpg" data-lightbox="project">
-								<i class="fa fa-eye"></i>
-							</a>
-							<a class="btn btn-lg-square btn-light rounded-circle m-1" href="">
-								<i class="fa fa-link"></i>
-							</a>
-						</div>
-					</div>
-					<div class="p-4">
-						<a class="d-block h5" href="">Business Target Market</a>
-						<span>Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem</span>
+				<div class="p-4">
+					<a class="d-block h5" href="">Business Target Market</a>
+					<span>Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem</span>
+				</div>
+			</div>
+			<div class="project-item mb-5">
+				<div class="position-relative">
+					<img class="img-fluid" src="img/project-4.jpg" alt="">
+					<div class="project-overlay">
+						<a class="btn btn-lg-square btn-light rounded-circle m-1" href="img/project-4.jpg"
+							data-lightbox="project">
+							<i class="fa fa-eye"></i>
+						</a>
+						<a class="btn btn-lg-square btn-light rounded-circle m-1" href="">
+							<i class="fa fa-link"></i>
+						</a>
 					</div>
 				</div>
-				<div class="project-item mb-5">
-					<div class="position-relative">
-						<img class="img-fluid" src="img/project-4.jpg" alt="">
-						<div class="project-overlay">
-							<a class="btn btn-lg-square btn-light rounded-circle m-1" href="img/project-4.jpg" data-lightbox="project">
-								<i class="fa fa-eye"></i>
-							</a>
-							<a class="btn btn-lg-square btn-light rounded-circle m-1" href="">
-								<i class="fa fa-link"></i>
-							</a>
-						</div>
-					</div>
-					<div class="p-4">
-						<a class="d-block h5" href="">Social Marketing Strategy</a>
-						<span>Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem</span>
-					</div>
+				<div class="p-4">
+					<a class="d-block h5" href="">Social Marketing Strategy</a>
+					<span>Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem</span>
 				</div>
 			</div>
 		</div>
+		<div class="d-flex justify-content-center align-items-center">
+			<a href="/evenements" class="btn btn-primary">Voir plus</a>
+		</div>
 	</div>
-	<!-- Project End -->
+</div>
+<!-- Project End -->
 
 
-	<!-- Quote Start -->
-	<div class="container-xxl py-5">
-		<div class="container">
-			<div class="row g-5">
-				<div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
-					<p class="fs-5 fw-medium text-primary">Get A Quote</p>
-					<h1 class="display-5 mb-4">Need Our Expert Help? We're Here!</h1>
-					<p>Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita
-																																																																																				                        erat ipsum et lorem et sit, sed stet lorem sit clita duo justo</p>
-					<p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et
-																																																																																				                        eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo</p>
-					<a class="d-inline-flex align-items-center rounded overflow-hidden border border-primary" href="">
-						<span class="btn-lg-square bg-primary" style="width: 55px; height: 55px;">
-							<i class="fa fa-phone-alt text-white"></i>
-						</span>
-						<span class="fs-5 fw-medium mx-4">+012 345 6789</span>
-					</a>
-				</div>
-				<div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
-					<h2 class="mb-4">Get A Free Quote</h2>
-					<div class="row g-3">
-						<div class="col-sm-6">
-							<div class="form-floating">
-								<input type="text" class="form-control" id="name" placeholder="Your Name">
-								<label for="name">Your Name</label>
-							</div>
-						</div>
-						<div class="col-sm-6">
-							<div class="form-floating">
-								<input type="email" class="form-control" id="mail" placeholder="Your Email">
-								<label for="mail">Your Email</label>
-							</div>
-						</div>
-						<div class="col-sm-6">
-							<div class="form-floating">
-								<input type="text" class="form-control" id="mobile" placeholder="Your Mobile">
-								<label for="mobile">Your Mobile</label>
-							</div>
-						</div>
-						<div class="col-sm-6">
-							<div class="form-floating">
-								<select class="form-select" id="service">
-									<option selected>Digital Marketing</option>
-									<option value="">Social Marketing</option>
-									<option value="">Content Marketing</option>
-									<option value="">E-mail Marketing</option>
-								</select>
-								<label for="service">Choose A Service</label>
-							</div>
-						</div>
-						<div class="col-12">
-							<div class="form-floating">
-								<textarea class="form-control" placeholder="Leave a message here" id="message" style="height: 130px"></textarea>
-								<label for="message">Message</label>
-							</div>
-						</div>
-						<div class="col-12 text-center">
-							<button class="btn btn-primary w-100 py-3" type="submit">Submit Now</button>
-						</div>
-					</div>
-				</div>
+<!-- Quote Start 
+																															<div class="container-xxl py-5">
+																																<div class="container">
+																																	<div class="row g-5">
+																																		<div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
+																																			<p class="fs-5 fw-medium text-primary">Get A Quote</p>
+																																			<h1 class="display-5 mb-4">Need Our Expert Help? We're Here!</h1>
+																																			<p>Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita
+																																																																																																																																																																																																																																										                        erat ipsum et lorem et sit, sed stet lorem sit clita duo justo</p>
+																																			<p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et
+																																																																																																																																																																																																																																										                        eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo</p>
+																																			<a class="d-inline-flex align-items-center rounded overflow-hidden border border-primary" href="">
+																																				<span class="btn-lg-square bg-primary" style="width: 55px; height: 55px;">
+																																					<i class="fa fa-phone-alt text-white"></i>
+																																				</span>
+																																				<span class="fs-5 fw-medium mx-4">+012 345 6789</span>
+																																			</a>
+																																		</div>
+																																		<div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
+																																			<h2 class="mb-4">Get A Free Quote</h2>
+																																			<div class="row g-3">
+																																				<div class="col-sm-6">
+																																					<div class="form-floating">
+																																						<input type="text" class="form-control" id="name" placeholder="Your Name">
+																																						<label for="name">Your Name</label>
+																																					</div>
+																																				</div>
+																																				<div class="col-sm-6">
+																																					<div class="form-floating">
+																																						<input type="email" class="form-control" id="mail" placeholder="Your Email">
+																																						<label for="mail">Your Email</label>
+																																					</div>
+																																				</div>
+																																				<div class="col-sm-6">
+																																					<div class="form-floating">
+																																						<input type="text" class="form-control" id="mobile" placeholder="Your Mobile">
+																																						<label for="mobile">Your Mobile</label>
+																																					</div>
+																																				</div>
+																																				<div class="col-sm-6">
+																																					<div class="form-floating">
+																																						<select class="form-select" id="service">
+																																							<option selected>Digital Marketing</option>
+																																							<option value="">Social Marketing</option>
+																																							<option value="">Content Marketing</option>
+																																							<option value="">E-mail Marketing</option>
+																																						</select>
+																																						<label for="service">Choose A Service</label>
+																																					</div>
+																																				</div>
+																																				<div class="col-12">
+																																					<div class="form-floating">
+																																						<textarea class="form-control" placeholder="Leave a message here" id="message" style="height: 130px"></textarea>
+																																						<label for="message">Message</label>
+																																					</div>
+																																				</div>
+																																				<div class="col-12 text-center">
+																																					<button class="btn btn-primary w-100 py-3" type="submit">Submit Now</button>
+																																				</div>
+																																			</div>
+																																		</div>
+																																	</div>
+																																</div>
+																															</div>
+																															<!-- Quote Start -->
+
+<!-- 
+																																
+																																<div class="container-xxl py-5">
+																																	<div class="container">
+																																		<div class="text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
+																																			<p class="fs-5 fw-medium text-primary">Le bureau</p>
+																																			<h1 class="display-5 mb-5">Les dirigeants de l'AG35</h1>
+																																		</div>
+																																		<div class="row g-4">
+																																			<div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+																																				<div class="team-item rounded overflow-hidden pb-4">
+																																					<img class="img-fluid mb-4" src="img/team-1.jpg" alt="">
+																																					<h5>Alex Robin</h5>
+																																					<span class="text-primary">Founder & CEO</span>
+																																					<ul class="team-social">
+																																						<li>
+																																							<a class="btn btn-square" href="">
+																																								<i class="fab fa-facebook-f"></i>
+																																							</a>
+																																						</li>
+																																						<li>
+																																							<a class="btn btn-square" href="">
+																																								<i class="fab fa-twitter"></i>
+																																							</a>
+																																						</li>
+																																						<li>
+																																							<a class="btn btn-square" href="">
+																																								<i class="fab fa-instagram"></i>
+																																							</a>
+																																						</li>
+																																						<li>
+																																							<a class="btn btn-square" href="">
+																																								<i class="fab fa-linkedin-in"></i>
+																																							</a>
+																																						</li>
+																																					</ul>
+																																				</div>
+																																			</div>
+																																			<div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+																																				<div class="team-item rounded overflow-hidden pb-4">
+																																					<img class="img-fluid mb-4" src="img/team-2.jpg" alt="">
+																																					<h5>Adam Crew</h5>
+																																					<span class="text-primary">Co Founder</span>
+																																					<ul class="team-social">
+																																						<li>
+																																							<a class="btn btn-square" href="">
+																																								<i class="fab fa-facebook-f"></i>
+																																							</a>
+																																						</li>
+																																						<li>
+																																							<a class="btn btn-square" href="">
+																																								<i class="fab fa-twitter"></i>
+																																							</a>
+																																						</li>
+																																						<li>
+																																							<a class="btn btn-square" href="">
+																																								<i class="fab fa-instagram"></i>
+																																							</a>
+																																						</li>
+																																						<li>
+																																							<a class="btn btn-square" href="">
+																																								<i class="fab fa-linkedin-in"></i>
+																																							</a>
+																																						</li>
+																																					</ul>
+																																				</div>
+																																			</div>
+																																			<div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+																																				<div class="team-item rounded overflow-hidden pb-4">
+																																					<img class="img-fluid mb-4" src="img/team-3.jpg" alt="">
+																																					<h5>Boris Johnson</h5>
+																																					<span class="text-primary">Executive Manager</span>
+																																					<ul class="team-social">
+																																						<li>
+																																							<a class="btn btn-square" href="">
+																																								<i class="fab fa-facebook-f"></i>
+																																							</a>
+																																						</li>
+																																						<li>
+																																							<a class="btn btn-square" href="">
+																																								<i class="fab fa-twitter"></i>
+																																							</a>
+																																						</li>
+																																						<li>
+																																							<a class="btn btn-square" href="">
+																																								<i class="fab fa-instagram"></i>
+																																							</a>
+																																						</li>
+																																						<li>
+																																							<a class="btn btn-square" href="">
+																																								<i class="fab fa-linkedin-in"></i>
+																																							</a>
+																																						</li>
+																																					</ul>
+																																				</div>
+																																			</div>
+																																			<div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
+																																				<div class="team-item rounded overflow-hidden pb-4">
+																																					<img class="img-fluid mb-4" src="img/team-4.jpg" alt="">
+																																					<h5>Robert Jordan</h5>
+																																					<span class="text-primary">Digital Marketer</span>
+																																					<ul class="team-social">
+																																						<li>
+																																							<a class="btn btn-square" href="">
+																																								<i class="fab fa-facebook-f"></i>
+																																							</a>
+																																						</li>
+																																						<li>
+																																							<a class="btn btn-square" href="">
+																																								<i class="fab fa-twitter"></i>
+																																							</a>
+																																						</li>
+																																						<li>
+																																							<a class="btn btn-square" href="">
+																																								<i class="fab fa-instagram"></i>
+																																							</a>
+																																						</li>
+																																						<li>
+																																							<a class="btn btn-square" href="">
+																																								<i class="fab fa-linkedin-in"></i>
+																																							</a>
+																																						</li>
+																																					</ul>
+																																				</div>
+																																			</div>
+																																		</div>
+																																	</div>
+																																</div>
+																																-->
+
+
+<!-- Testimonial Start -->
+<div class="container-xxl pt-5">
+	<div class="container">
+		<div class="text-center text-md-start pb-5 pb-md-0 wow fadeInUp" data-wow-delay="0.1s"
+			style="max-width: 500px;">
+			<!--	<p class="fs-5 fw-medium text-primary">Testimonial</p> -->
+			<h1 class="display-5 mb-5">Ce que les gens disent de nos services !</h1>
+		</div>
+		<div class="owl-carousel testimonial-carousel wow fadeInUp" data-wow-delay="0.1s">
+			<div class="testimonial-item rounded p-4 p-lg-5 mb-5">
+				<img class="mb-4" src="img/yaya_komara.jpg" alt="">
+				<p class="mb-4">"Je suis très fier d'être membre de cette association qui a pour objectif de promouvoir
+					la culture guinéenne et de renforcer les liens de fraternité entre ses membres. Grâce à elle, j'ai
+					eu l'opportunité de rencontrer d'autres Guinéens vivant en Ille-et-Vilaine et d'échanger sur nos
+					expériences. L'association offre également un soutien précieux aux nouveaux étudiants en les aidant
+					à s'adapter à leur nouvel environnement."
+				</p>
+				<h5>Yaya Komara</h5>
+				<span class="text-primary">Etudiant</span>
+			</div>
+			<div class="testimonial-item rounded p-4 p-lg-5 mb-5">
+				<img class="mb-4" src="img/djibril.jpg" alt="">
+				<p class="mb-4">"Je suis très heureux de faire partie de cette association qui a une vision ambitieuse
+					de contribuer au développement de la Guinée. Les projets que nous avons initiés ont un impact
+					positif sur les communautés locales en Guinée, et cela me rend fier d'en faire partie. En outre,
+					j'apprécie également les opportunités de réseautage et d'échanges avec les autres membres de
+					l'association, qui partagent tous une passion commune pour la Guinée."
+				</p>
+				<h5>Abdoulaye Djibril Barry</h5>
+				<span class="text-primary">Etudiant</span>
+			</div>
+			<div class="testimonial-item rounded p-4 p-lg-5 mb-5">
+				<img class="mb-4" src="img/souley.jpg" alt="">
+				<p class="mb-4">"Je suis membre de cette association depuis plusieurs années et je suis toujours
+					impressionné par l'engagement et le dévouement de ses membres envers la Guinée. Nous avons réussi à
+					concrétiser de nombreux projets de développement, notamment dans les domaines de l'éducation et de
+					la santé, grâce à notre collaboration avec les communautés locales en Guinée. En outre, les
+					événements culturels que nous organisons sont toujours très enrichissants et renforcent les liens de
+					fraternité entre les membres. Je suis fier de faire partie de cette association et de contribuer à
+					son succès."
+				</p>
+				<h5>Souleymane Diallo</h5>
+				<span class="text-primary">Ingénieur Logiciel</span>
+			</div>
+			<div class="testimonial-item rounded p-4 p-lg-5 mb-5">
+				<img class="mb-4" src="img/testimonial-3.jpg" alt="">
+				<p class="mb-4">"En tant que nouveau venu en Ille-et-Vilaine, j'ai été très bien accueilli par cette
+					association. Les membres sont chaleureux et bienveillants, et j'ai rapidement pu me faire de
+					nouveaux amis et élargir mon cercle social. J'apprécie également les événements culturels organisés
+					par l'association, qui me permettent de découvrir et de mieux comprendre la culture guinéenne. Je
+					recommande vivement cette association à tous ceux qui cherchent à s'intégrer dans la communauté
+					guinéenne en Ille-et-Vilaine."
+				</p>
+				<h5>Mamadou Yero Sall</h5>
+				<span class="text-primary">Etudiant</span>
 			</div>
 		</div>
 	</div>
-	<!-- Quote Start -->
-
-
-	<!-- Team Start -->
-	<div class="container-xxl py-5">
-		<div class="container">
-			<div class="text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
-				<p class="fs-5 fw-medium text-primary">Le bureau</p>
-				<h1 class="display-5 mb-5">Les dirigeants de l'AG35</h1>
-			</div>
-			<div class="row g-4">
-				<div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-					<div class="team-item rounded overflow-hidden pb-4">
-						<img class="img-fluid mb-4" src="img/team-1.jpg" alt="">
-						<h5>Alex Robin</h5>
-						<span class="text-primary">Founder & CEO</span>
-						<ul class="team-social">
-							<li>
-								<a class="btn btn-square" href="">
-									<i class="fab fa-facebook-f"></i>
-								</a>
-							</li>
-							<li>
-								<a class="btn btn-square" href="">
-									<i class="fab fa-twitter"></i>
-								</a>
-							</li>
-							<li>
-								<a class="btn btn-square" href="">
-									<i class="fab fa-instagram"></i>
-								</a>
-							</li>
-							<li>
-								<a class="btn btn-square" href="">
-									<i class="fab fa-linkedin-in"></i>
-								</a>
-							</li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-					<div class="team-item rounded overflow-hidden pb-4">
-						<img class="img-fluid mb-4" src="img/team-2.jpg" alt="">
-						<h5>Adam Crew</h5>
-						<span class="text-primary">Co Founder</span>
-						<ul class="team-social">
-							<li>
-								<a class="btn btn-square" href="">
-									<i class="fab fa-facebook-f"></i>
-								</a>
-							</li>
-							<li>
-								<a class="btn btn-square" href="">
-									<i class="fab fa-twitter"></i>
-								</a>
-							</li>
-							<li>
-								<a class="btn btn-square" href="">
-									<i class="fab fa-instagram"></i>
-								</a>
-							</li>
-							<li>
-								<a class="btn btn-square" href="">
-									<i class="fab fa-linkedin-in"></i>
-								</a>
-							</li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-					<div class="team-item rounded overflow-hidden pb-4">
-						<img class="img-fluid mb-4" src="img/team-3.jpg" alt="">
-						<h5>Boris Johnson</h5>
-						<span class="text-primary">Executive Manager</span>
-						<ul class="team-social">
-							<li>
-								<a class="btn btn-square" href="">
-									<i class="fab fa-facebook-f"></i>
-								</a>
-							</li>
-							<li>
-								<a class="btn btn-square" href="">
-									<i class="fab fa-twitter"></i>
-								</a>
-							</li>
-							<li>
-								<a class="btn btn-square" href="">
-									<i class="fab fa-instagram"></i>
-								</a>
-							</li>
-							<li>
-								<a class="btn btn-square" href="">
-									<i class="fab fa-linkedin-in"></i>
-								</a>
-							</li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
-					<div class="team-item rounded overflow-hidden pb-4">
-						<img class="img-fluid mb-4" src="img/team-4.jpg" alt="">
-						<h5>Robert Jordan</h5>
-						<span class="text-primary">Digital Marketer</span>
-						<ul class="team-social">
-							<li>
-								<a class="btn btn-square" href="">
-									<i class="fab fa-facebook-f"></i>
-								</a>
-							</li>
-							<li>
-								<a class="btn btn-square" href="">
-									<i class="fab fa-twitter"></i>
-								</a>
-							</li>
-							<li>
-								<a class="btn btn-square" href="">
-									<i class="fab fa-instagram"></i>
-								</a>
-							</li>
-							<li>
-								<a class="btn btn-square" href="">
-									<i class="fab fa-linkedin-in"></i>
-								</a>
-							</li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- Team End -->
-
-
-	<!-- Testimonial Start -->
-	<div class="container-xxl pt-5">
-		<div class="container">
-			<div class="text-center text-md-start pb-5 pb-md-0 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
-				<p class="fs-5 fw-medium text-primary">Testimonial</p>
-				<h1 class="display-5 mb-5">What Clients Say About Our Services!</h1>
-			</div>
-			<div class="owl-carousel testimonial-carousel wow fadeInUp" data-wow-delay="0.1s">
-				<div class="testimonial-item rounded p-4 p-lg-5 mb-5">
-					<img class="mb-4" src="img/testimonial-1.jpg" alt="">
-					<p class="mb-4">Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et
-																																																																																				                        sit, sed stet lorem sit clita duo justo</p>
-					<h5>Client Name</h5>
-					<span class="text-primary">Profession</span>
-				</div>
-				<div class="testimonial-item rounded p-4 p-lg-5 mb-5">
-					<img class="mb-4" src="img/testimonial-2.jpg" alt="">
-					<p class="mb-4">Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et
-																																																																																				                        sit, sed stet lorem sit clita duo justo</p>
-					<h5>Client Name</h5>
-					<span class="text-primary">Profession</span>
-				</div>
-				<div class="testimonial-item rounded p-4 p-lg-5 mb-5">
-					<img class="mb-4" src="img/testimonial-3.jpg" alt="">
-					<p class="mb-4">Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et
-																																																																																				                        sit, sed stet lorem sit clita duo justo</p>
-					<h5>Client Name</h5>
-					<span class="text-primary">Profession</span>
-				</div>
-				<div class="testimonial-item rounded p-4 p-lg-5 mb-5">
-					<img class="mb-4" src="img/testimonial-4.jpg" alt="">
-					<p class="mb-4">Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et
-																																																																																				                        sit, sed stet lorem sit clita duo justo</p>
-					<h5>Client Name</h5>
-					<span class="text-primary">Profession</span>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- Testimonial End -->
+</div>
+<!-- Testimonial End -->
 {% endblock %}
