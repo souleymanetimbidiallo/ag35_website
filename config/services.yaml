@@ -6,6 +6,7 @@
 # config/services.yaml
 
 parameters:
+     img_params: '%kernel.project_dir%/public/params/images'
 
 services:
     # default configuration for services in *this* file
@@ -24,3 +25,12 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    App\Twig\AppExtension:
+        arguments:
+            $appName: '%env(APP_NAME)%'
+        tags: ['twig.extension']
+
+    App\Service\ParameterService:
+        arguments:
+            $entityManager: '@doctrine.orm.default_entity_manager'
