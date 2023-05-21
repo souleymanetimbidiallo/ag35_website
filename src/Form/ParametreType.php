@@ -13,12 +13,19 @@ use Symfony\Component\Form\FormEvents;
 
 class ParametreType extends AbstractType
 {
+    private $imageDir;
+    public function __construct(string $directory)
+    {
+        $this->imageDir = $directory;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             // ...
 
-            //  ->add('nom')
+            // ->add('site_name')
+            ->add('site_adresse',)
             ->add('asso_img1', FileType::class, [
 
                 'label' => 'Image',
@@ -38,7 +45,7 @@ class ParametreType extends AbstractType
 
                 // Déplacer l'image vers le répertoire souhaité
                 $imageFile->move(
-                    // $this->getParameter('img_params'), // Chemin vers le répertoire d'images
+                    $this->imageDir, // Chemin vers le répertoire d'images
                     $imageName
                 );
 
@@ -52,6 +59,7 @@ class ParametreType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Parametre::class,
+            'image_directory' => null
         ]);
     }
 }
