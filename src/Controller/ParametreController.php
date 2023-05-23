@@ -55,7 +55,7 @@ class ParametreController extends AbstractController
 
         $parametreDTO = new ParametreDTO();
         $parametreDTO->setParametres($this->getDoctrine()->getRepository(Parametre::class)->findAll());
-        
+
 
         $form = $this->createForm(ParametreType::class, $parametreDTO);
         $form->handleRequest($request);
@@ -70,7 +70,6 @@ class ParametreController extends AbstractController
                 //dd($parametreModifie);
                 $entityManager->persist($parametreModifie);
                 $entityManager->flush();
-
             }
 
             return $this->redirectToRoute('parametre_edit');
