@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<h1>Modifier Paramètres</h1>
+
+{{ form_start(form) }}
+    {% for parametreField in form.parametres %}
+    {{ parametreField.vars.value.nom }}
+        {{ form_row(parametreField) }}
+    {% endfor %}
+    <button type="submit">Modifier</button>
+{{ form_end(form) }}
+{% endblock %}

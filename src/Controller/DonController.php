@@ -16,11 +16,17 @@ class DonController extends AbstractController
     public function index(ParameterService $parameterService): Response
     {
 
-        $site_name = "soul";
+        $site_name = "yaya";
         $parameterService->setSiteName($site_name);
 
         $parametres = [
-            'site_name' => $parameterService->getSiteName()
+            'site_name' => $parameterService->getSiteName(),
+            'address' => $parameterService->getSiteAdresse(),
+            'email' => $parameterService->getSiteEmail(),
+            'telephone' => $parameterService->getSiteTelephone(),
+            'lien_page_fb' => $parameterService->getLienPageFb(),
+            'lien_groupe_fb' => $parameterService->getLienGroupeFb(),
+            'lien_whatsApp' => $parameterService->getLienWhatsApp()
         ];
 
         return $this->render('don.html.twig', [

@@ -17,19 +17,37 @@ class MainController extends AbstractController
      */
     public function index(ParameterService $parameterService): Response
     {
-
+        $parameterService->setBodyText1("Organiser, harmoniser, communiquer et synchroniser les acvités et les projets sociaux, culturels et sportifs de ses membres et de ses partenaires.");
 
         $parametres = [
-            'site_name' => $parameterService->getSiteName(),
-            'address' => $parameterService->getSiteAdresse(),
+            'site_name' => $parameterService->getParametreByName("site_name"),
+            'address' => $parameterService->getParametreByName("site_adresse"),
             'email' => $parameterService->getSiteEmail(),
             'telephone' => $parameterService->getSiteTelephone(),
             'lien_page_fb' => $parameterService->getLienPageFb(),
             'lien_groupe_fb' => $parameterService->getLienGroupeFb(),
             'lien_whatsApp' => $parameterService->getLienWhatsApp(),
             'asso_img1' => $parameterService->getAssoImg1(),
-            //'asso_img2' => $parameterService->getAssoImg2(),
-            //'asso_img3' => $parameterService->getAssoImg3()
+            'asso_img2' => $parameterService->getAssoImg2(),
+            'asso_img3' => $parameterService->getAssoImg3(),
+            'body_text1' => $parameterService->getBodyText1(),
+            'body_text2' => $parameterService->getBodyText2(),
+            'body_text3' => $parameterService->getBodyText3(),
+            'body_text4' => $parameterService->getBodyText4(),
+            'nom_asso' => $parameterService->getNomAsso(),
+            'sigle_nom_asso' => $parameterService->getSigleNomAsso(),
+            'temoin1' => $parameterService->getTemoin1(),
+            'temoin2' => $parameterService->getTemoin2(),
+            'temoin3' => $parameterService->getTemoin3(),
+            'temoin4' => $parameterService->getTemoin4(),
+            'temoin1_nom' => $parameterService->getTemoin1Nom(),
+            'temoin2_nom' => $parameterService->getTemoin2Nom(),
+            'temoin3_nom' => $parameterService->getTemoin3Nom(),
+            'temoin4_nom' => $parameterService->getTemoin4Nom(),
+            'temoin1_prof' => $parameterService->getTemoin1Prof(),
+            'temoin2_prof' => $parameterService->getTemoin2Prof(),
+            'temoin3_prof' => $parameterService->getTemoin3Prof(),
+            'temoin4_prof' => $parameterService->getTemoin4Prof()
         ];
 
 
@@ -37,45 +55,6 @@ class MainController extends AbstractController
             'current_menu' => 'accueil',
             'parametres' => $parametres
 
-        ]);
-    }
-
-
-    /**
-     * @Route("/upload-image", name="upload_image")
-     */
-    public function uploadImage(Request $request, SluggerInterface $slugger)
-    {
-        $image = new Image();
-        $form = $this->createForm(ImageType::class, $image);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $fichier = $form->get('fichier')->getData();
-
-            // Génération d'un nom de fichier unique
-            $nomFichier = md5(uniqid()) . '.' . $fichier->guessExtension();
-
-            // Déplace le fichier vers le répertoire où vous souhaitez le stocker
-            $fichier->move(
-                $this->getParameter('dossier_images'), // Chemin vers le dossier de stockage des images
-                $nomFichier
-            );
-
-            // Met à jour le nom de l'image dans l'entité
-            $image->setNom($nomFichier);
-
-            // Enregistre l'image dans la base de données
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($image);
-            $entityManager->flush();
-
-            // Redirection vers une autre page ou effectuez une autre action
-            return $this->redirectToRoute('accueil');
-        }
-
-        return $this->render('image/upload.html.twig', [
-            'form' => $form->createView(),
         ]);
     }
 }
