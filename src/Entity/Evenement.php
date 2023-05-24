@@ -26,17 +26,15 @@ class Evenement
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $dateFin = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $lieu = null;
-
     #[ORM\Column(length: 100)]
     private ?string $adresse = null;
 
-    #[ORM\Column(type: Types::BINARY, nullable: true)]
-    private $photo = null;
+    #[ORM\Column(length: 100, nullable: true)]
+    private ?string $photo = null;
 
     #[ORM\ManyToOne(inversedBy: 'evenements')]
-    private ?Administrateur $administrateur = null;
+    private ?Admin $admin = null;
+
 
     public function getId(): ?int
     {
@@ -91,17 +89,6 @@ class Evenement
         return $this;
     }
 
-    public function getLieu(): ?string
-    {
-        return $this->lieu;
-    }
-
-    public function setLieu(string $lieu): self
-    {
-        $this->lieu = $lieu;
-
-        return $this;
-    }
 
     public function getAdresse(): ?string
     {
@@ -115,26 +102,26 @@ class Evenement
         return $this;
     }
 
-    public function getPhoto()
+    public function getPhoto(): ?string
     {
         return $this->photo;
     }
 
-    public function setPhoto($photo): self
+    public function setPhoto(?string $photo): self
     {
         $this->photo = $photo;
 
         return $this;
     }
 
-    public function getAdministrateur(): ?Administrateur
+    public function getAdmin(): ?Admin
     {
-        return $this->administrateur;
+        return $this->admin;
     }
 
-    public function setAdministrateur(?Administrateur $administrateur): self
+    public function setAdmin(?Admin $admin): self
     {
-        $this->administrateur = $administrateur;
+        $this->admin = $admin;
 
         return $this;
     }

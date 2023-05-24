@@ -23,11 +23,12 @@ class Media
     #[ORM\Column(length: 50)]
     private ?string $type = null;
 
-    #[ORM\Column(type: Types::BLOB)]
-    private $file = null;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $fichier = null;
 
     #[ORM\ManyToOne(inversedBy: 'medias')]
-    private ?Administrateur $administrateur = null;
+    private ?Admin $admin = null;
+
 
     public function getId(): ?int
     {
@@ -70,26 +71,26 @@ class Media
         return $this;
     }
 
-    public function getFile()
+    public function getFichier(): ?string
     {
-        return $this->file;
+        return $this->fichier;
     }
 
-    public function setFile($file): self
+    public function setFichier(?string $fichier): self
     {
-        $this->file = $file;
+        $this->fichier = $fichier;
 
         return $this;
     }
 
-    public function getAdministrateur(): ?Administrateur
+    public function getAdmin(): ?Admin
     {
-        return $this->administrateur;
+        return $this->admin;
     }
 
-    public function setAdministrateur(?Administrateur $administrateur): self
+    public function setAdmin(?Admin $admin): self
     {
-        $this->administrateur = $administrateur;
+        $this->admin = $admin;
 
         return $this;
     }
