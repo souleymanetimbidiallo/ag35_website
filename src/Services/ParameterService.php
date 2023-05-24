@@ -177,10 +177,28 @@ class ParameterService
     public function getAssoImg1()
     {
         $repository = $this->entityManager->getRepository(Parametre::class);
-        $parametre = $repository->findOneBy(['nom' => "logo"]);
+        $parametre = $repository->findOneBy(['nom' => "fond1"]);
 
         return $parametre->getValeur();
     }
+
+    public function getAssoImg2()
+    {
+        $repository = $this->entityManager->getRepository(Parametre::class);
+        $parametre = $repository->findOneBy(['nom' => "fond2"]);
+
+        return $parametre->getValeur();
+    }
+
+    public function getAssoImg3()
+    {
+        $repository = $this->entityManager->getRepository(Parametre::class);
+        $parametre = $repository->findOneBy(['nom' => "fond3"]);
+
+        return $parametre->getValeur();
+    }
+
+
 
 
     public function getBodyText1()

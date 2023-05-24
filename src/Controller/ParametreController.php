@@ -30,8 +30,8 @@ class ParametreController extends AbstractController
             'lien_groupe_fb' => $parameterService->getLienGroupeFb(),
             'lien_whatsApp' => $parameterService->getLienWhatsApp(),
             'asso_img1' => $parameterService->getAssoImg1(),
-            //'asso_img2' => $parameterService->getAssoImg2(),
-            //'asso_img3' => $parameterService->getAssoImg3()
+            'asso_img2' => $parameterService->getAssoImg2(),
+            'asso_img3' => $parameterService->getAssoImg3(),
             'body_text1' => $parameterService->getBodyText1(),
             'body_text2' => $parameterService->getBodyText2(),
             'body_text3' => $parameterService->getBodyText3(),
