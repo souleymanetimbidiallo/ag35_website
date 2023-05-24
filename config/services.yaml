@@ -6,6 +6,7 @@
 # config/services.yaml
 
 parameters:
+     img_params: '%kernel.project_dir%/public/params/images'
 
 services:
     # default configuration for services in *this* file
@@ -30,3 +31,12 @@ services:
         tags:
             - { name: doctrine.event_listener, event: prePersist }
             - { name: doctrine.event_listener, event: preUpdate }
+
+    App\Twig\AppExtension:
+        arguments:
+            $appName: '%env(APP_NAME)%'
+        tags: ['twig.extension']
+
+    App\Service\ParameterService:
+        arguments:
+            $entityManager: '@doctrine.orm.default_entity_manager'
