@@ -16,9 +16,6 @@ class DonController extends AbstractController
     public function index(ParameterService $parameterService): Response
     {
 
-        $site_name = "yaya";
-        $parameterService->setSiteName($site_name);
-
         $parametres = [
             'site_name' => $parameterService->getSiteName(),
             'address' => $parameterService->getSiteAdresse(),

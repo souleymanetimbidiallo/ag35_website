@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class MembreController extends AbstractController
 {
-    #[Route('/about', name: 'app_about')]
+    #[Route('/membre', name: 'app_membre')]
     public function index(MembreRepository $membreRepository): Response
     {
         $membresBureau = $membreRepository->findByCustomQuery();
