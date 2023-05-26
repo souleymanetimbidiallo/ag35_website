@@ -5,8 +5,11 @@ namespace App\Entity;
 use App\Repository\MembreRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: MembreRepository::class)]
+#[Vich\Uploadable]
 class Membre
 {
     #[ORM\Id]
@@ -20,35 +23,41 @@ class Membre
     #[ORM\Column(length: 50)]
     private ?string $prenom = null;
 
-    #[ORM\Column(length: 100)]
+    #[ORM\Column(length: 100, nullable: true)]
     private ?string $email = null;
 
     #[ORM\Column(length: 30)]
     private ?string $telephone = null;
 
-    #[ORM\Column(length: 20)]
+    #[ORM\Column(length: 20, nullable: true)]
     private ?string $villeOrigine = null;
 
-    #[ORM\Column(length: 20)]
-    private ?string $villeActuelle = null;
-
-    #[ORM\Column(length: 20)]
-    private ?string $paysActuel = null;
-
-    #[ORM\Column(length: 30)]
+    #[ORM\Column(length: 30, nullable: true)]
     private ?string $profession = null;
+
+    // NOTE: This is not a mapped field of entity metadata, just a simple property.
+    #[Vich\UploadableField(mapping: 'ag35_images', fileNameProperty: 'imageName')]
+    private ?File $imageFile = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?string $imageName = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $dateAdhesion = null;
 
-    #[ORM\ManyToOne(inversedBy: 'membres')]
-    private ?Administrateur $administrateur = null;
+
 
     #[ORM\Column]
     private ?bool $bureau = null;
 
     #[ORM\Column(length: 30, nullable: true)]
     private ?string $fonction = null;
+
+    //#[ORM\Column(length: 50, nullable: true)]
+    //private ?string $photo = null;
+
+    #[ORM\ManyToOne(inversedBy: 'membres')]
+    private ?Admin $admin = null;
 
     public function getId(): ?int
     {
@@ -115,30 +124,6 @@ class Membre
         return $this;
     }
 
-    public function getVilleActuelle(): ?string
-    {
-        return $this->villeActuelle;
-    }
-
-    public function setVilleActuelle(string $villeActuelle): self
-    {
-        $this->villeActuelle = $villeActuelle;
-
-        return $this;
-    }
-
-    public function getPaysActuel(): ?string
-    {
-        return $this->paysActuel;
-    }
-
-    public function setPaysActuel(string $paysActuel): self
-    {
-        $this->paysActuel = $paysActuel;
-
-        return $this;
-    }
-
     public function getProfession(): ?string
     {
         return $this->profession;
@@ -163,17 +148,6 @@ class Membre
         return $this;
     }
 
-    public function getAdministrateur(): ?Administrateur
-    {
-        return $this->administrateur;
-    }
-
-    public function setAdministrateur(?Administrateur $administrateur): self
-    {
-        $this->administrateur = $administrateur;
-
-        return $this;
-    }
 
     public function isBureau(): ?bool
     {
@@ -195,6 +169,57 @@ class Membre
     public function setFonction(?string $fonction): self
     {
         $this->fonction = $fonction;
+
+        return $this;
+    }
+
+    /*public function getPhoto(): ?string
+    {
+        return $this->photo;
+    }
+
+    public function setPhoto(?string $photo): self
+    {
+        $this->photo = $photo;
+
+        return $this;
+    }*/
+
+    public function setImageFile(?File $imageFile = null): void
+    {
+        $this->imageFile = $imageFile;
+
+        if (null !== $imageFile) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+    }
+
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    public function setImageName(?string $imageName): void
+    {
+        $this->imageName = $imageName;
+    }
+
+    public function getImageName(): ?string
+    {
+        return $this->imageName;
+    }
+
+
+    public function getAdmin(): ?Admin
+    {
+        return $this->admin;
+    }
+
+    public function setAdmin(?Admin $admin): self
+    {
+        $this->admin = $admin;
 
         return $this;
     }

@@ -1,0 +1,46 @@
+<?php
+
+namespace App\Controller\Admin;
+
+use App\Entity\Actualite;
+use App\Entity\Admin;
+use App\Entity\Contact;
+use App\Entity\Evenement;
+use App\Entity\Media;
+use App\Entity\Membre;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
+use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
+use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+
+class DashboardController extends AbstractDashboardController
+{
+    #[Route('/admin', name: 'admin')]
+    #[IsGranted('ROLE_ADMIN')]
+    public function index(): Response
+    {
+
+        return $this->render('admin/dashboard.html.twig');
+    }
+
+    public function configureDashboard(): Dashboard
+    {
+        return Dashboard::new()
+            //->setTitle('Administration du site AG35');
+            ->setTitle('<img src="img/logo_ag35.png"> Espace Admin de <span class="text-small">AG35</span>')
+            ->renderContentMaximized();
+    }
+
+    public function configureMenuItems(): iterable
+    {
+        yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
+        yield MenuItem::linkToCrud('Membres', 'fas fa-users', Membre::class);
+        yield MenuItem::linkToCrud('Contacts', 'fas fa-message', Contact::class);
+        yield MenuItem::linkToCrud('Actualites', 'fas fa-rss', Actualite::class);
+        yield MenuItem::linkToCrud('Evenements', 'fas fa-calendar', Evenement::class);
+        yield MenuItem::linkToCrud('Galerie', 'fas fa-eject', Media::class);
+        yield MenuItem::linkToCrud('Admin', 'fas fa-lock', Admin::class);
+    }
+}
