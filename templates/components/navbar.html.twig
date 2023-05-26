@@ -21,12 +21,12 @@
 						<div class="dropdown-menu bg-light rounded-0 rounded-bottom m-0">
 							<a class="dropdown-item {% if current_menu is defined and current_menu == 'evenements' %} active {% endif %}" href="{{ path('app_evenements') }}">Evénements</a>
 							<a class="dropdown-item {% if current_menu is defined and current_menu == 'actualites' %} active {% endif %}" href="{{ path('app_actualites') }}">Actualités</a>
-							<a href="service.html" class="dropdown-item">Guides</a>
+							<a class="dropdown-item {% if current_menu is defined and current_menu == 'guide' %} active {% endif %}" href="{{ path('app_guide') }}">Guides</a>
 						</div>
 					</div>
 
 
-					<a href="project.html" class="nav-item nav-link">Multimedias</a>
+					<a class="nav-item nav-link {% if current_menu is defined and current_menu == 'multimedia' %} active {% endif %}" href="{{ path('app_multimedia') }}">Multimédia</a>
 
 					<a class="nav-item nav-link {% if current_menu is defined and current_menu == 'don' %} active {% endif %}" href="{{ path('app_don') }}">Donation</a>
 
