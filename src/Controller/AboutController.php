@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Repository\MembreRepository;
+use App\Repository\ValeurRepository;
 use App\Service\ParameterService;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -14,11 +15,12 @@ class AboutController extends AbstractController
     /**
      * @Route("/about", name="app_about")
      */
-    public function index(ParameterService $parameterService, MembreRepository $membreRepository): Response
+    public function index(ParameterService $parameterService, MembreRepository $membreRepository, ValeurRepository $valeurRep): Response
     {
 
         $parametres = [
             'site_name' => $parameterService->getSiteName(),
+            'site_logo' => $parameterService->getSiteLogo(),
             'address' => $parameterService->getSiteAdresse(),
             'email' => $parameterService->getSiteEmail(),
             'telephone' => $parameterService->getSiteTelephone(),
@@ -29,11 +31,13 @@ class AboutController extends AbstractController
 
 
         $membresBureau = $membreRepository->findByCustomQuery();
+        $valeurs = $valeurRep->findAll();
 
         return $this->render('about.html.twig', [
             'current_menu' => 'about',
             'parametres' => $parametres,
-            'bureau' => $membresBureau
+            'bureau' => $membresBureau,
+            'valeurs' => $valeurs
         ]);
     }
 }

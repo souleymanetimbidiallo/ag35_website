@@ -2,22 +2,22 @@
 
 namespace App\Entity;
 
-use App\Repository\BlablaRepository;
+use App\Repository\MenuRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: BlablaRepository::class)]
-class Blabla
+#[ORM\Entity(repositoryClass: MenuRepository::class)]
+class Menu
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 50)]
     private ?string $nom = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $prenom = null;
+    #[ORM\Column(length: 50, nullable: true)]
+    private ?string $lien = null;
 
     public function getId(): ?int
     {
@@ -36,14 +36,14 @@ class Blabla
         return $this;
     }
 
-    public function getPrenom(): ?string
+    public function getLien(): ?string
     {
-        return $this->prenom;
+        return $this->lien;
     }
 
-    public function setPrenom(?string $prenom): self
+    public function setLien(?string $lien): self
     {
-        $this->prenom = $prenom;
+        $this->lien = $lien;
 
         return $this;
     }
