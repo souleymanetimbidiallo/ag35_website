@@ -8,6 +8,9 @@ use App\Entity\Contact;
 use App\Entity\Evenement;
 use App\Entity\Media;
 use App\Entity\Membre;
+use App\Entity\Service;
+use App\Entity\Temoin;
+use App\Entity\Valeur;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -41,6 +44,9 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Actualites', 'fas fa-rss', Actualite::class);
         yield MenuItem::linkToCrud('Evenements', 'fas fa-calendar', Evenement::class);
         yield MenuItem::linkToCrud('Galerie', 'fas fa-eject', Media::class);
+        yield MenuItem::linkToCrud('Service', 'fas fa-servicestack', Service::class);
+        yield MenuItem::linkToCrud('Temoin', 'fas fa-comments', Temoin::class);
+        yield MenuItem::linkToCrud('Valeur-Asso', 'fas fa-bullseye', Valeur::class);
         yield MenuItem::linkToCrud('Admin', 'fas fa-lock', Admin::class);
     }
 }

@@ -30,13 +30,13 @@
 					<ul class="list-unstyled mb-4">
 						<li>Créer, favoriser et consolider les liens de fraternité, de solidarité et d’entraide entre les																																																																																																																																																																																																																																																																																																																																																																																																																					guinéen(ne)s ;</li>
 						<li>Porter, accompagner et soutenir le développement et l’intégraon socio-professionnels et
-																																																																																																																																																																																																																																																																																																																																																																																																																													culturels des guinéen(ne)s en Ille-et-Vilaine ;</li>
+																																																																																																																																																																																																																																																																																																																																																																																																																																																		culturels des guinéen(ne)s en Ille-et-Vilaine ;</li>
 						<li>Promouvoir, encourager et communiquer sur les initiatives et les acvités de ses membres
-																																																																																																																																																																																																																																																																																																																																																																																																																													et de ses partenaires et les aider dans la réalisaon de leurs projets ;</li>
+																																																																																																																																																																																																																																																																																																																																																																																																																																																		et de ses partenaires et les aider dans la réalisaon de leurs projets ;</li>
 						<li>Initier et accompagner tous projets de développement en faveur de la Guinée ;</li>
 						<li>Accueillir et accompagner les nouveaux étudiants ;</li>
 						<li>Créer des réseaux d'échange et de partenariats ;</li>
-						<li>Promouvoir la Guinée en Ille-et-Vilaine et réciproquement mieux faire connaître la
+						<li>Promouvoir la Guinée en Ille-et-Vilaine et réciproquement mieux faire connaître la</li>
 					</ul>
 
 				</div>
@@ -56,30 +56,18 @@
 			</div>
 		</div>
 		<div class="row mt-5">
-			<div class="col-lg-4 col-md-6">
-				<div class="card mb-3">
-					<div class="card-body">
-						<h4 class="card-title text-primary">1. Solidarité</h4>
-						<p class="card-text">plus qu’une valeur, la solidarité est inscrite dans notre ADN. Elle met l’humain au cœur de nos démarches. C’est pour nous un leitmotiv qui nous positionne en tant qu’acteur faisant la promotion du partage, l’entraide et la co-construction. C’est une valeur humaine et humaniste que nous partageons avec l’ensemble de nos collaborateurs.</p>
+			{% for valeur in valeurs %}
+				<div class="col-lg-4 col-md-6">
+					<div class="card mb-3">
+						<div class="card-body">
+							<h4 class="card-title text-primary">{{ valeur.titre }}</h4>
+							<p class="card-text">{{ valeur.descriptif }}</p>
+						</div>
 					</div>
 				</div>
-			</div>
-			<div class="col-lg-4 col-md-6">
-				<div class="card mb-3">
-					<div class="card-body">
-						<h4 class="card-title text-primary">2. Engagement</h4>
-						<p class="card-text">pour la Guinée d’aujourd’hui et celle que nous ambitionnons, tous nos membres travaillent bénévolement et énergiquement à la promotion d’un idéal commun et d’une ambition qui transcendent les croyances. Les Jeunes engagés à nos côtés mettent à disposition leur compétence, leur talent et leur professionnalisme.</p>
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-4 col-md-6">
-				<div class="card mb-3">
-					<div class="card-body">
-						<h4 class="card-title text-primary">3. Diversité et inclusion</h4>
-						<p class="card-text">par le respect de l’autre dans sa dignité, l’acceptation des opinions contraires, des différences et des appartenances, nous bâtissons des relations solides et des amitiés sincères, nous formons une communauté d’avenir, celle qui imagine et travaille à la Guinée de demain. L’AG35 infuse cette valeur à tous les Guinéens vivant en Ille et vilaine.</p>
-					</div>
-				</div>
-			</div>
+
+			{% endfor %}
+
 		</div>
 	</div>
 	<!-- Nos Valeurs End -->
@@ -115,46 +103,46 @@
 
 	<!-- Projets et réalisations Start -->
 	{#<div class="container-fluid bg-white py-5">
-																						<div class="container">
-																							<div class="row">
-																								<div class="col-12 text-center">
-																									<h2 class="text-primary mb-5">Projets et réalisations</h2>
-																								</div>
-																							</div>
-																							<div class="row">
-																								<div class="col-md-4 mb-4">
-																									<div class="card shadow">
-																										<img class="card-img-top" src="{{ asset('img/project1.jpg') }}" alt="Card image cap">
-																										<div class="card-body">
-																											<h5 class="card-title">Projet 1</h5>
-																											<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-																											<a href="#" class="btn btn-primary">En savoir plus</a>
+																									<div class="container">
+																										<div class="row">
+																											<div class="col-12 text-center">
+																												<h2 class="text-primary mb-5">Projets et réalisations</h2>
+																											</div>
+																										</div>
+																										<div class="row">
+																											<div class="col-md-4 mb-4">
+																												<div class="card shadow">
+																													<img class="card-img-top" src="{{ asset('img/project1.jpg') }}" alt="Card image cap">
+																													<div class="card-body">
+																														<h5 class="card-title">Projet 1</h5>
+																														<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+																														<a href="#" class="btn btn-primary">En savoir plus</a>
+																													</div>
+																												</div>
+																											</div>
+																											<div class="col-md-4 mb-4">
+																												<div class="card shadow">
+																													<img class="card-img-top" src="{{ asset('img/project2.jpg') }}" alt="Card image cap">
+																													<div class="card-body">
+																														<h5 class="card-title">Projet 2</h5>
+																														<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+																														<a href="#" class="btn btn-primary">En savoir plus</a>
+																													</div>
+																												</div>
+																											</div>
+																											<div class="col-md-4 mb-4">
+																												<div class="card shadow">
+																													<img class="card-img-top" src="{{ asset('img/project3.jpg') }}" alt="Card image cap">
+																													<div class="card-body">
+																														<h5 class="card-title">Projet 3</h5>
+																														<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+																														<a href="#" class="btn btn-primary">En savoir plus</a>
+																													</div>
+																												</div>
+																											</div>
 																										</div>
 																									</div>
-																								</div>
-																								<div class="col-md-4 mb-4">
-																									<div class="card shadow">
-																										<img class="card-img-top" src="{{ asset('img/project2.jpg') }}" alt="Card image cap">
-																										<div class="card-body">
-																											<h5 class="card-title">Projet 2</h5>
-																											<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-																											<a href="#" class="btn btn-primary">En savoir plus</a>
-																										</div>
-																									</div>
-																								</div>
-																								<div class="col-md-4 mb-4">
-																									<div class="card shadow">
-																										<img class="card-img-top" src="{{ asset('img/project3.jpg') }}" alt="Card image cap">
-																										<div class="card-body">
-																											<h5 class="card-title">Projet 3</h5>
-																											<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-																											<a href="#" class="btn btn-primary">En savoir plus</a>
-																										</div>
-																									</div>
-																								</div>
-																							</div>
-																						</div>
-																					</div>#}
+																								</div>#}
 	<!-- Projets et réalisations End -->
 
 	<!-- Partenaires et Sponsors -->

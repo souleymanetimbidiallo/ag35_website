@@ -18,6 +18,7 @@ class DonController extends AbstractController
 
         $parametres = [
             'site_name' => $parameterService->getSiteName(),
+            'site_logo' => $parameterService->getSiteLogo(),
             'address' => $parameterService->getSiteAdresse(),
             'email' => $parameterService->getSiteEmail(),
             'telephone' => $parameterService->getSiteTelephone(),
