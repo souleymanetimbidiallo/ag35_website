@@ -32,9 +32,8 @@ class MainController extends AbstractController
             'asso_img1' => $parameterService->getAssoImg1(),
             'asso_img2' => $parameterService->getAssoImg2(),
             'asso_img3' => $parameterService->getAssoImg3(),
+            'nom_association' => $parameterService->getNomAsso(),
 
-            'nom_asso' => $parameterService->getNomAsso(),
-            'sigle_nom_asso' => $parameterService->getSigleNomAsso()
 
         ];
         $services = $serviceRepository->findAll();
