@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-recuperation_modifications
 use App\Entity\Contact;
 use App\Form\ContactType;
 use App\Service\MenuService;
@@ -28,7 +27,8 @@ class ContactController extends AbstractController
         Request $request,
         EntityManagerInterface $manager,
         MailerInterface $mailer,
-        ServiceRepository $serviceRepository
+        ServiceRepository $serviceRepository,
+        MenuService $menuService
     ): Response {
         $contact = new Contact();
         $form = $this->createForm(ContactType::class, null, [
@@ -56,8 +56,6 @@ class ContactController extends AbstractController
 
             return $this->redirectToRoute('app_contact');
         }
-    public function index(ParameterService $parameterService, MenuService $menuService): Response
-    {
 
         $parametres = [
             'site_name' => $parameterService->getSiteName(),
@@ -87,6 +85,8 @@ class ContactController extends AbstractController
             'texte_nos_partenaires' => $parameterService->getParametreByName("texte_nos_partenaires"),
             'nous_sommes' => $parameterService->getParametreByName("site_nous_sommes")
         ];
+
+
         $choices = $serviceRepository->findAllTitres();
         //dd($choices);
         return $this->render('contact.html.twig', [
