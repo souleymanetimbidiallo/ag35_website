@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\EvenementRepository;
 use App\Service\ParameterService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,7 +13,7 @@ class EventController extends AbstractController
     /**
      * @Route("/evenements", name="app_evenements")
      */
-    public function index(ParameterService $parameterService): Response
+    public function index(ParameterService $parameterService, EvenementRepository $evenementRepository): Response
     {
 
         $parametres = [
@@ -26,9 +27,12 @@ class EventController extends AbstractController
             'lien_whatsApp' => $parameterService->getLienWhatsApp()
         ];
 
+        $evenements = $evenementRepository->findAll();
+
         return $this->render('event.html.twig', [
             'current_menu' => 'evenements',
-            'parametres'   => $parametres
+            'parametres'   => $parametres,
+            'evenements' => $evenements
         ]);
     }
 }

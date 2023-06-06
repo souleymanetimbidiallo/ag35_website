@@ -35,6 +35,9 @@ class Evenement
     #[ORM\ManyToOne(inversedBy: 'evenements')]
     private ?Admin $admin = null;
 
+    #[ORM\Column]
+    private ?float $prix = null;
+
 
     public function getId(): ?int
     {
@@ -122,6 +125,18 @@ class Evenement
     public function setAdmin(?Admin $admin): self
     {
         $this->admin = $admin;
+
+        return $this;
+    }
+
+    public function getPrix(): ?float
+    {
+        return $this->prix;
+    }
+
+    public function setPrix(float $prix): self
+    {
+        $this->prix = $prix;
 
         return $this;
     }

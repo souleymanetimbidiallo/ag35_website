@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\EvenementRepository;
 use App\Repository\ServiceRepository;
 use App\Repository\TemoinRepository;
 use App\Service\ParameterService;
@@ -17,7 +18,7 @@ class MainController extends AbstractController
     /**
      * @Route("/", name="app_accueil")
      */
-    public function index(ParameterService $parameterService, ServiceRepository $serviceRepository, TemoinRepository $temoinRep): Response
+    public function index(ParameterService $parameterService, ServiceRepository $serviceRepository, TemoinRepository $temoinRep, EvenementRepository $evenementRepository): Response
     {
 
         $parametres = [
@@ -33,18 +34,18 @@ class MainController extends AbstractController
             'asso_img2' => $parameterService->getAssoImg2(),
             'asso_img3' => $parameterService->getAssoImg3(),
             'nom_association' => $parameterService->getNomAsso(),
-
-
         ];
         $services = $serviceRepository->findAll();
         $temoins = $temoinRep->findAll();
+        $evenements = $evenementRepository->findAll();
 
 
         return $this->render('index.html.twig', [
             'current_menu' => 'accueil',
             'parametres' => $parametres,
             'services' => $services,
-            'temoins' => $temoins
+            'temoins' => $temoins,
+            'evenements' => $evenements
 
         ]);
     }

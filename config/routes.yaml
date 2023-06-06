@@ -25,3 +25,6 @@ multimedia:
 guide:
   path: /guide
   controller: App\Controller\GuideController::index  
+details_event:
+  path: /details_event
+  controller: App\Controller\DetailsEventController::index  
