@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Repository\MembreRepository;
+use App\Repository\ParamImageRepository;
 use App\Repository\ValeurRepository;
 use App\Service\MenuService;
 use App\Service\ParameterService;
@@ -16,7 +17,8 @@ class AboutController extends AbstractController
     /**
      * @Route("/about", name="app_about")
      */
-    public function index(ParameterService $parameterService, MenuService $menuService, MembreRepository $membreRepository, ValeurRepository $valeurRep): Response
+
+    public function index(ParameterService $parameterService, MembreRepository $membreRepository, ValeurRepository $valeurRep, ParamImageRepository $paramImageRepository): Response
     {
 
         $parametres = [
@@ -51,12 +53,15 @@ class AboutController extends AbstractController
 
         $membresBureau = $membreRepository->findByCustomQuery();
         $valeurs = $valeurRep->findAll();
+        $partenaires = $paramImageRepository->findAll();
+
 
         return $this->render('about.html.twig', [
             'current_menu' => 'about',
             'parametres' => $parametres,
             'bureau' => $membresBureau,
-            'valeurs' => $valeurs
+            'valeurs' => $valeurs,
+            'partenaires' => $partenaires
         ]);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\EvenementRepository;
 use App\Repository\ServiceRepository;
 use App\Repository\TemoinRepository;
 use App\Service\MenuService;
@@ -18,7 +19,8 @@ class MainController extends AbstractController
     /**
      * @Route("/", name="app_accueil")
      */
-    public function index(ParameterService $parameterService, MenuService $menuService, ServiceRepository $serviceRepository, TemoinRepository $temoinRep): Response
+
+    public function index(ParameterService $parameterService, ServiceRepository $serviceRepository, TemoinRepository $temoinRep, EvenementRepository $evenementRepository): Response
     {
 
         $parametres = [
@@ -56,16 +58,19 @@ class MainController extends AbstractController
             'nous_sommes' => $parameterService->getParametreByName("site_nous_sommes")
 
 
+
         ];
         $services = $serviceRepository->findAll();
         $temoins = $temoinRep->findAll();
+        $evenements = $evenementRepository->findAll();
 
 
         return $this->render('index.html.twig', [
             'current_menu' => 'accueil',
             'parametres' => $parametres,
             'services' => $services,
-            'temoins' => $temoins
+            'temoins' => $temoins,
+            'evenements' => $evenements
 
         ]);
     }
