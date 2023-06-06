@@ -43,7 +43,6 @@ class ServiceCrudController extends AbstractCrudController
             ->setLabel('Photo') // Libellé du champ
             ->onlyOnForms(); // Afficher le champ uniquement sur les formulaires
         yield TextareaField::new('descriptif')
-            ->setFormType(CKEditorType::class)
             ->hideOnIndex();
     }
 }

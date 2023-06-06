@@ -1,4 +1,5 @@
 {% extends 'base.html.twig' %}
+{% form_theme form 'bootstrap_5_layout.html.twig' %}
 
 {% block body %}
 
@@ -32,37 +33,37 @@
 			</div>
 			<div class="row g-5">
 				<div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
-					<form>
-						<div class="row g-3">
-							<div class="col-md-6">
-								<div class="form-floating">
-									<input type="text" class="form-control" id="name" placeholder="Nom complet">
-									<label for="name">Nom complet</label>
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="form-floating">
-									<input type="email" class="form-control" id="email" placeholder="Email">
-									<label for="email">Email</label>
-								</div>
-							</div>
-							<div class="col-12">
-								<div class="form-floating">
-									<input type="text" class="form-control" id="subject" placeholder="Objet">
-									<label for="subject">Objet</label>
-								</div>
-							</div>
-							<div class="col-12">
-								<div class="form-floating">
-									<textarea class="form-control" placeholder="Leave a message here" id="message" style="height: 200px"></textarea>
-									<label for="message">Message</label>
-								</div>
-							</div>
-							<div class="col-12">
-								<button class="btn btn-primary rounded-pill py-3 px-5" type="submit">Envoyer</button>
-							</div>
+					{% for message in app.flashes('success') %}
+						<div class="alert alert-success mt-4">
+							{{ message }}
 						</div>
-					</form>
+					{% endfor %}
+
+					{{ form_start(form) }}
+					<div class="row g-3">
+						<div class="col-12">
+							{{ form_row(form.prenom, {'attr': {'class': 'form-control', 'placeholder': 'Entrez votre prénom'}}) }}
+						</div>
+						<div class="col-12">
+							{{ form_row(form.nom, {'attr': {'class': 'form-control', 'placeholder': 'Entrez votre nom'}}) }}
+						</div>
+						<div class="col-12">
+							{{ form_row(form.email, {'attr': {'class': 'form-control', 'placeholder': 'Email'}}) }}
+						</div>
+						<div class="col-12">
+							{{ form_row(form.telephone, {'attr': {'class': 'form-control', 'placeholder': 'Téléphone'}}) }}
+						</div>
+						<div class="col-12">
+							{{ form_row(form.titre, {'attr': {'class': 'form-control'}}) }}
+						</div>
+						<div class="col-12">
+							{{ form_row(form.message, {'attr': {'class': 'form-control', 'placeholder': 'Ecrire votre message ici', 'style': 'height: 200px'}}) }}
+						</div>
+						<div class="col-12">
+							{{ form_row(form.submit, {'attr': {'class': 'btn btn-primary rounded-pill py-3 px-5'}}) }}
+						</div>
+					</div>
+					{{ form_end(form) }}
 				</div>
 				<div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
 					<h3 class="mb-4">Details du contact</h3>
