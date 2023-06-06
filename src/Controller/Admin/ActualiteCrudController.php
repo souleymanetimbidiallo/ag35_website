@@ -34,17 +34,18 @@ class ActualiteCrudController extends AbstractCrudController
 
     public function configureFields(string $pageName): iterable
     {
-        return [
-            IdField::new('id')
-                ->hideOnForm(),
-            TextField::new('titre'),
-            DateTimeField::new('datePublication')
-                ->setFormat('dd/MM/yyyy'),
-            ImageField::new('photo')
-                ->setUploadDir('C:\Users\Djibril\ag35_website'),
-            TextareaField::new('description')
-                ->setFormType(CKEditorType::class)
-                ->hideOnIndex()
-        ];
+        yield IdField::new('id')
+            ->hideOnForm();
+
+        yield TextField::new('titre');
+        yield DateTimeField::new('datePublication')
+            ->setFormat('dd/MM/yyyy hh:mm');
+        yield ImageField::new('imageName')
+            ->setBasePath('/img') // Chemin de base pour afficher l'image
+            ->setUploadDir('public/img/ag35')
+            ->setLabel('Photo') // Libellé du champ
+            ->onlyOnForms(); // Afficher le champ uniquement sur les formulaires
+        yield TextareaField::new('description')
+            ->hideOnIndex();
     }
 }

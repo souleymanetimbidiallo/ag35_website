@@ -34,20 +34,21 @@ class EvenementCrudController extends AbstractCrudController
 
     public function configureFields(string $pageName): iterable
     {
-        return [
-            IdField::new('id')
-                ->hideOnForm(),
-            TextField::new('titre'),
-            DateTimeField::new('dateDebut')
-                ->setFormat('dd/MM/yyyy hh:mm'),
-            DateTimeField::new('dateFin')
-                ->setFormat('dd/MM/yyyy hh:mm'),
-            TextField::new('adresse'),
-            ImageField::new('photo')
-                ->setUploadDir('C:\Users\Djibril\ag35_website'),
-            TextareaField::new('commentaire')
-                ->setFormType(CKEditorType::class)
-                ->hideOnIndex()
-        ];
+        yield IdField::new('id')
+            ->hideOnForm();
+
+        yield TextField::new('titre');
+        yield DateTimeField::new('dateDebut')
+            ->setFormat('dd/MM/yyyy hh:mm');
+        yield DateTimeField::new('dateFin')
+            ->setFormat('dd/MM/yyyy hh:mm');
+        yield TextField::new('adresse');
+        yield ImageField::new('imageName')
+            ->setBasePath('/img') // Chemin de base pour afficher l'image
+            ->setUploadDir('public/img/ag35')
+            ->setLabel('Photo') // Libellé du champ
+            ->onlyOnForms(); // Afficher le champ uniquement sur les formulaires
+        yield TextareaField::new('commentaire')
+            ->hideOnIndex();
     }
 }

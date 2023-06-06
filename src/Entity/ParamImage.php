@@ -27,6 +27,7 @@ class ParamImage
 
 
 
+
     // NOTE: This is not a mapped field of entity metadata, just a simple property.
 
     #[Vich\UploadableField(mapping: 'ag35_images', fileNameProperty: 'imageName')]

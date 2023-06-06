@@ -40,7 +40,6 @@ class MediaCrudController extends AbstractCrudController
             TextField::new('type'),
             UrlField::new('fichier'),
             TextareaField::new('description')
-                ->setFormType(CKEditorType::class)
                 ->hideOnIndex()
 
         ];
