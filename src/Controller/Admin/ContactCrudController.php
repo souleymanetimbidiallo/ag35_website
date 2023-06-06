@@ -45,7 +45,6 @@ class ContactCrudController extends AbstractCrudController
             TelephoneField::new('telephone'),
             TextField::new('titre'),
             TextareaField::new('message')
-                ->setFormType(CKEditorType::class)
                 ->hideOnIndex()
         ];
     }

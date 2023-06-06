@@ -37,7 +37,6 @@ class ValeurCrudController extends AbstractCrudController
                 ->hideOnForm(),
             TextField::new('titre'),
             TextareaField::new('descriptif')
-                ->setFormType(CKEditorType::class)
                 ->hideOnIndex()
         ];
     }

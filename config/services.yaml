@@ -40,3 +40,4 @@ services:
     App\Service\ParameterService:
         arguments:
             $entityManager: '@doctrine.orm.default_entity_manager'
+

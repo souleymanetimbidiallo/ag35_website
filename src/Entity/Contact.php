@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\ContactRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ContactRepository::class)]
@@ -25,11 +26,19 @@ class Contact
     #[ORM\Column(length: 20, nullable: true)]
     private ?string $telephone = null;
 
-    #[ORM\Column(length: 50)]
+    #[ORM\Column(length: 50, nullable: true)]
     private ?string $titre = null;
 
     #[ORM\Column(length: 255)]
     private ?string $message = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $dateMessage = null;
+
+    public function __construct()
+    {
+        $this->dateMessage = new \DateTimeImmutable();
+    }
 
     public function getId(): ?int
     {
@@ -104,6 +113,18 @@ class Contact
     public function setMessage(string $message): self
     {
         $this->message = $message;
+
+        return $this;
+    }
+
+    public function getDateMessage(): ?\DateTimeInterface
+    {
+        return $this->dateMessage;
+    }
+
+    public function setDateMessage(?\DateTimeInterface $dateMessage): self
+    {
+        $this->dateMessage = $dateMessage;
 
         return $this;
     }
