@@ -41,3 +41,6 @@ services:
         arguments:
             $entityManager: '@doctrine.orm.default_entity_manager'
 
+    App\Service\MenuService:
+        arguments:
+            $entityManager: '@doctrine.orm.default_entity_manager'        

@@ -32,24 +32,8 @@ class ParametreController extends AbstractController
             'asso_img1' => $parameterService->getAssoImg1(),
             'asso_img2' => $parameterService->getAssoImg2(),
             'asso_img3' => $parameterService->getAssoImg3(),
-            'body_text1' => $parameterService->getBodyText1(),
-            'body_text2' => $parameterService->getBodyText2(),
-            'body_text3' => $parameterService->getBodyText3(),
-            'body_text4' => $parameterService->getBodyText4(),
-            'nom_asso' => $parameterService->getNomAsso(),
-            'sigle_nom_asso' => $parameterService->getSigleNomAsso(),
-            'temoin1' => $parameterService->getTemoin1(),
-            'temoin2' => $parameterService->getTemoin2(),
-            'temoin3' => $parameterService->getTemoin3(),
-            'temoin4' => $parameterService->getTemoin4(),
-            'temoin1_nom' => $parameterService->getTemoin1Nom(),
-            'temoin2_nom' => $parameterService->getTemoin2Nom(),
-            'temoin3_nom' => $parameterService->getTemoin3Nom(),
-            'temoin4_nom' => $parameterService->getTemoin4Nom(),
-            'temoin1_prof' => $parameterService->getTemoin1Prof(),
-            'temoin2_prof' => $parameterService->getTemoin2Prof(),
-            'temoin3_prof' => $parameterService->getTemoin3Prof(),
-            'temoin4_prof' => $parameterService->getTemoin4Prof()
+
+
         ];
 
 

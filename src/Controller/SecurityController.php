@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Service\MenuService;
 use App\Service\ParameterService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -11,7 +12,7 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class SecurityController extends AbstractController
 {
     #[Route(path: '/login', name: 'app_login')]
-    public function login(ParameterService $parameterService, AuthenticationUtils $authenticationUtils): Response
+    public function login(ParameterService $parameterService, AuthenticationUtils $authenticationUtils, MenuService $menuService): Response
     {
 
         $parametres = [
@@ -22,7 +23,18 @@ class SecurityController extends AbstractController
             'telephone' => $parameterService->getSiteTelephone(),
             'lien_page_fb' => $parameterService->getLienPageFb(),
             'lien_groupe_fb' => $parameterService->getLienGroupeFb(),
-            'lien_whatsApp' => $parameterService->getLienWhatsApp()
+            'lien_whatsApp' => $parameterService->getLienWhatsApp(),
+            'menu_accueil' => $menuService->getAccueil(),
+            'menu_apropos' => $menuService->getApropos(),
+            'menu_activite' => $menuService->getActivite(),
+            'menu_multimedia' => $menuService->getMultimedia(),
+            'menu_donation' => $menuService->getDonation(),
+            'menu_adhesion' => $menuService->getAdhesion(),
+            'menu_contact' => $menuService->getContact(),
+            'menu_evenement' => $menuService->getEvenement(),
+            'menu_actualite' => $menuService->getActualite(),
+            'menu_guide' => $menuService->getGuide(),
+            'nom_association' => $parameterService->getParametreByName("nom_association"),
         ];
 
         if ($this->getUser()) {

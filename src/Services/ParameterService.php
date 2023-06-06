@@ -18,6 +18,9 @@ class ParameterService
     {
         $repository = $this->entityManager->getRepository(Parametre::class);
         $parametre = $repository->findOneBy(['nom' => $nom]);
+        if ($parametre == null) {
+            return "";
+        }
 
         return $parametre->getValeur();
     }
@@ -53,9 +56,6 @@ class ParameterService
         $parametre->setValeur($siteLogo);
         $this->entityManager->flush();
     }
-
-
-
 
 
     public function getSiteAdresse()
@@ -176,28 +176,20 @@ class ParameterService
         $this->entityManager->flush();
     }
 
-    public function getSigleNomAsso()
-    {
-        $repository = $this->entityManager->getRepository(Parametre::class);
-        $parametre = $repository->findOneBy(['nom' => "sigle_nom_asso"]);
-
-        return $parametre->getValeur();
-    }
-
-    public function setSigleNomAsso($sigle_nom_asso)
-    {
-        $repository = $this->entityManager->getRepository(Parametre::class);
-        $parametre = $repository->findOneBy(['nom' => "sigle_nom_asso"]);
-        $parametre->setValeur($sigle_nom_asso);
-        $this->entityManager->flush();
-    }
-
     public function getAssoImg1()
     {
         $repository = $this->entityManager->getRepository(Parametre::class);
         $parametre = $repository->findOneBy(['nom' => "fond1"]);
 
         return $parametre->getValeur();
+    }
+
+    public function setAssoImg1($asso_img1)
+    {
+        $repository = $this->entityManager->getRepository(Parametre::class);
+        $parametre = $repository->findOneBy(['nom' => "fond1"]);
+        $parametre->setValeur($asso_img1);
+        $this->entityManager->flush();
     }
 
     public function getAssoImg2()
@@ -208,11 +200,75 @@ class ParameterService
         return $parametre->getValeur();
     }
 
+    public function setAssoImg2($asso_img2)
+    {
+        $repository = $this->entityManager->getRepository(Parametre::class);
+        $parametre = $repository->findOneBy(['nom' => "fond2"]);
+        $parametre->setValeur($asso_img2);
+        $this->entityManager->flush();
+    }
+
     public function getAssoImg3()
     {
         $repository = $this->entityManager->getRepository(Parametre::class);
         $parametre = $repository->findOneBy(['nom' => "fond3"]);
 
         return $parametre->getValeur();
+    }
+
+    public function setAssoImg3($asso_img3)
+    {
+        $repository = $this->entityManager->getRepository(Parametre::class);
+        $parametre = $repository->findOneBy(['nom' => "fond3"]);
+        $parametre->setValeur($asso_img3);
+        $this->entityManager->flush();
+    }
+
+    public function getTitre_accueil_video()
+    {
+        $repository = $this->entityManager->getRepository(Parametre::class);
+        $parametre = $repository->findOneBy(['nom' => "titre_accueil_video"]);
+
+        return $parametre->getValeur();
+    }
+
+    public function setTitre_accueil_video($titre_accueil_video)
+    {
+        $repository = $this->entityManager->getRepository(Parametre::class);
+        $parametre = $repository->findOneBy(['nom' => "titre_accueil_video"]);
+        $parametre->setValeur($titre_accueil_video);
+        $this->entityManager->flush();
+    }
+
+    public function getTitre_accueil_event()
+    {
+        $repository = $this->entityManager->getRepository(Parametre::class);
+        $parametre = $repository->findOneBy(['nom' => "titre_accueil_event"]);
+
+        return $parametre->getValeur();
+    }
+
+    public function setTitre_accueil_event($titre_accueil_event)
+    {
+        $repository = $this->entityManager->getRepository(Parametre::class);
+        $parametre = $repository->findOneBy(['nom' => "titre_accueil_event"]);
+        $parametre->setValeur($titre_accueil_event);
+        $this->entityManager->flush();
+    }
+
+    public function getTitre_accueil_temoin()
+    {
+        $repository = $this->entityManager->getRepository(Parametre::class);
+        $parametre = $repository->findOneBy(['nom' => "titre_accueil_temoin"]);
+
+        return $parametre->getValeur();
+    }
+
+    public function setTitre_accueil_temoin($titre_accueil_temoin)
+    {
+        $repository = $this->entityManager->getRepository(Parametre::class);
+        $parametre = $repository->findOneBy(['nom' => "titre_accueil_temoin"]);
+        $parametre->setValeur($titre_accueil_temoin);
+        $this->entityManager->flush();
     }
 }
