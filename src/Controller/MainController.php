@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\MesImageRepository;
 use App\Repository\ServiceRepository;
 use App\Repository\TemoinRepository;
 use App\Service\MenuService;
@@ -18,21 +19,21 @@ class MainController extends AbstractController
     /**
      * @Route("/", name="app_accueil")
      */
-    public function index(ParameterService $parameterService, MenuService $menuService, ServiceRepository $serviceRepository, TemoinRepository $temoinRep): Response
+    public function index(ParameterService $parameterService, MenuService $menuService, ServiceRepository $serviceRepository, TemoinRepository $temoinRep, MesImageRepository $mesImageRepository): Response
     {
 
         $parametres = [
             'site_name' => $parameterService->getParametreByName("site_name"),
-            'site_logo' => $parameterService->getSiteLogo(),
+            #'site_logo' => $parameterService->getSiteLogo(),
             'address' => $parameterService->getParametreByName("site_adresse"),
             'email' => $parameterService->getSiteEmail(),
             'telephone' => $parameterService->getSiteTelephone(),
             'lien_page_fb' => $parameterService->getLienPageFb(),
             'lien_groupe_fb' => $parameterService->getLienGroupeFb(),
             'lien_whatsApp' => $parameterService->getLienWhatsApp(),
-            'asso_img1' => $parameterService->getAssoImg1(),
-            'asso_img2' => $parameterService->getAssoImg2(),
-            'asso_img3' => $parameterService->getAssoImg3(),
+            #'asso_img1' => $parameterService->getAssoImg1(),
+            #'asso_img2' => $parameterService->getAssoImg2(),
+            #'asso_img3' => $parameterService->getAssoImg3(),
             'nom_association' => $parameterService->getParametreByName("nom_association"),
             'menu_accueil' => $menuService->getAccueil(),
             'menu_apropos' => $menuService->getApropos(),
@@ -59,13 +60,15 @@ class MainController extends AbstractController
         ];
         $services = $serviceRepository->findAll();
         $temoins = $temoinRep->findAll();
+        $images = $mesImageRepository->findAll();
 
 
         return $this->render('index.html.twig', [
             'current_menu' => 'accueil',
             'parametres' => $parametres,
             'services' => $services,
-            'temoins' => $temoins
+            'temoins' => $temoins,
+            'images' => $images,
 
         ]);
     }

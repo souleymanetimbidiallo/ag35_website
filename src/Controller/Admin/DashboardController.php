@@ -8,6 +8,7 @@ use App\Entity\Contact;
 use App\Entity\Evenement;
 use App\Entity\Media;
 use App\Entity\Membre;
+use App\Entity\MesImage;
 use App\Entity\ParamImage;
 use App\Entity\Service;
 use App\Entity\Temoin;
@@ -48,7 +49,8 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Service', 'fas fa-servicestack', Service::class);
         yield MenuItem::linkToCrud('Temoin', 'fas fa-comments', Temoin::class);
         yield MenuItem::linkToCrud('Valeur-Asso', 'fas fa-bullseye', Valeur::class);
-        yield MenuItem::linkToCrud('Partenaires-Sponsors', 'fas fa-images', ParamImage::class);
+        yield MenuItem::linkToCrud('Partenaires-Sponsors', 'fas fa-handshake', ParamImage::class);
+        yield MenuItem::linkToCrud('Images', 'fas fa-images', MesImage::class);
         yield MenuItem::linkToCrud('Admin', 'fas fa-lock', Admin::class);
     }
 }
