@@ -9,6 +9,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
 
@@ -42,6 +43,7 @@ class EvenementCrudController extends AbstractCrudController
             ->setFormat('dd/MM/yyyy hh:mm');
         yield DateTimeField::new('dateFin')
             ->setFormat('dd/MM/yyyy hh:mm');
+        yield TextField::new('prix');
         yield TextField::new('adresse');
         yield ImageField::new('imageName')
             ->setBasePath('/img') // Chemin de base pour afficher l'image

@@ -42,7 +42,7 @@ class Evenement
     private ?Admin $admin = null;
 
     #[ORM\Column]
-    private ?float $prix = null;
+    private ?string $prix = null;
 
 
 
@@ -150,12 +150,12 @@ class Evenement
         return $this;
     }
 
-    public function getPrix(): ?float
+    public function getPrix(): ?string
     {
         return $this->prix;
     }
 
-    public function setPrix(float $prix): self
+    public function setPrix(string $prix): self
     {
         $this->prix = $prix;
 
