@@ -18,7 +18,7 @@ class AboutController extends AbstractController
      * @Route("/about", name="app_about")
      */
 
-    public function index(ParameterService $parameterService, MembreRepository $membreRepository, ValeurRepository $valeurRep, ParamImageRepository $paramImageRepository): Response
+    public function index(ParameterService $parameterService, MembreRepository $membreRepository, ValeurRepository $valeurRep, ParamImageRepository $paramImageRepository, MenuService $menuService): Response
     {
 
         $parametres = [

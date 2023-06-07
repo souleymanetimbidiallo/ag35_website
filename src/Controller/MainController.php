@@ -20,7 +20,7 @@ class MainController extends AbstractController
      * @Route("/", name="app_accueil")
      */
 
-    public function index(ParameterService $parameterService, ServiceRepository $serviceRepository, TemoinRepository $temoinRep, EvenementRepository $evenementRepository): Response
+    public function index(ParameterService $parameterService, ServiceRepository $serviceRepository, TemoinRepository $temoinRep, EvenementRepository $evenementRepository, MenuService $menuService): Response
     {
 
         $parametres = [

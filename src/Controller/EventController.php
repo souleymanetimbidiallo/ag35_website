@@ -16,7 +16,7 @@ class EventController extends AbstractController
      * @Route("/evenements", name="app_evenements")
      */
 
-    public function index(ParameterService $parameterService, EvenementRepository $evenementRepository): Response
+    public function index(ParameterService $parameterService, EvenementRepository $evenementRepository, MenuService $menuService): Response
     {
 
         $parametres = [
