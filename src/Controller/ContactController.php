@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Contact;
 use App\Form\ContactType;
+use App\Repository\MesImageRepository;
 use App\Service\MenuService;
 use App\Service\ParameterService;
 use Doctrine\ORM\EntityManagerInterface;
@@ -28,7 +29,8 @@ class ContactController extends AbstractController
         EntityManagerInterface $manager,
         MailerInterface $mailer,
         ServiceRepository $serviceRepository,
-        MenuService $menuService
+        MenuService $menuService,
+        MesImageRepository $mesImageRepository
     ): Response {
         $contact = new Contact();
         $form = $this->createForm(ContactType::class, null, [
@@ -60,7 +62,7 @@ class ContactController extends AbstractController
         $parametres = [
             'site_name' => $parameterService->getSiteName(),
             'nom_association' => $parameterService->getParametreByName("nom_association"),
-            'site_logo' => $parameterService->getSiteLogo(),
+            #'site_logo' => $parameterService->getSiteLogo(),
             'address' => $parameterService->getSiteAdresse(),
             'email' => $parameterService->getSiteEmail(),
             'telephone' => $parameterService->getSiteTelephone(),
@@ -88,12 +90,14 @@ class ContactController extends AbstractController
 
 
         $choices = $serviceRepository->findAllTitres();
+        $images = $mesImageRepository->findAll();
         //dd($choices);
         return $this->render('contact.html.twig', [
             'current_menu' => 'contact',
             'parametres'   => $parametres,
             'form' => $form->createView(),
             'choices' => $choices,
+            'images' => $images,
         ]);
     }
 

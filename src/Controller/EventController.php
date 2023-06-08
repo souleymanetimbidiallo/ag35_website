@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\MesImageRepository;
 use App\Service\MenuService;
 use App\Service\ParameterService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -13,13 +14,13 @@ class EventController extends AbstractController
     /**
      * @Route("/evenements", name="app_evenements")
      */
-    public function index(ParameterService $parameterService, MenuService $menuService): Response
+    public function index(ParameterService $parameterService, MenuService $menuService, MesImageRepository $mesImageRepository): Response
     {
 
         $parametres = [
             'site_name' => $parameterService->getSiteName(),
             'nom_association' => $parameterService->getParametreByName("nom_association"),
-            'site_logo' => $parameterService->getSiteLogo(),
+            #'site_logo' => $parameterService->getSiteLogo(),
             'address' => $parameterService->getSiteAdresse(),
             'email' => $parameterService->getSiteEmail(),
             'telephone' => $parameterService->getSiteTelephone(),
@@ -45,9 +46,11 @@ class EventController extends AbstractController
             'nous_sommes' => $parameterService->getParametreByName("site_nous_sommes")
         ];
 
+        $images = $mesImageRepository->findAll();
         return $this->render('event.html.twig', [
             'current_menu' => 'evenements',
-            'parametres'   => $parametres
+            'parametres'   => $parametres,
+            'images' => $images
         ]);
     }
 }

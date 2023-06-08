@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Repository\MembreRepository;
+use App\Repository\MesImageRepository;
+use App\Repository\ParamImageRepository;
 use App\Repository\ValeurRepository;
 use App\Service\MenuService;
 use App\Service\ParameterService;
@@ -16,13 +18,14 @@ class AboutController extends AbstractController
     /**
      * @Route("/about", name="app_about")
      */
-    public function index(ParameterService $parameterService, MenuService $menuService, MembreRepository $membreRepository, ValeurRepository $valeurRep): Response
+
+    public function index(ParameterService $parameterService, MembreRepository $membreRepository, ValeurRepository $valeurRep, ParamImageRepository $paramImageRepository, MenuService $menuService, MesImageRepository $mesImageRepository): Response
     {
 
         $parametres = [
             'site_name' => $parameterService->getSiteName(),
             'nom_association' => $parameterService->getParametreByName("nom_association"),
-            'site_logo' => $parameterService->getSiteLogo(),
+            #'site_logo' => $parameterService->getSiteLogo(),
             'address' => $parameterService->getSiteAdresse(),
             'email' => $parameterService->getSiteEmail(),
             'telephone' => $parameterService->getSiteTelephone(),
@@ -51,12 +54,17 @@ class AboutController extends AbstractController
 
         $membresBureau = $membreRepository->findByCustomQuery();
         $valeurs = $valeurRep->findAll();
+        $partenaires = $paramImageRepository->findAll();
+        $images = $mesImageRepository->findAll();
+
 
         return $this->render('about.html.twig', [
             'current_menu' => 'about',
             'parametres' => $parametres,
             'bureau' => $membresBureau,
-            'valeurs' => $valeurs
+            'valeurs' => $valeurs,
+            'partenaires' => $partenaires,
+            'images' => $images,
         ]);
     }
 }

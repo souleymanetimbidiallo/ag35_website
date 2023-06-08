@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\MesImageRepository;
 use App\Service\MenuService;
 use App\Service\ParameterService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -12,12 +13,12 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class SecurityController extends AbstractController
 {
     #[Route(path: '/login', name: 'app_login')]
-    public function login(ParameterService $parameterService, AuthenticationUtils $authenticationUtils, MenuService $menuService): Response
+    public function login(ParameterService $parameterService, AuthenticationUtils $authenticationUtils, MenuService $menuService, MesImageRepository $mesImageRepository): Response
     {
 
         $parametres = [
             'site_name' => $parameterService->getSiteName(),
-            'site_logo' => $parameterService->getSiteLogo(),
+            #'site_logo' => $parameterService->getSiteLogo(),
             'address' => $parameterService->getSiteAdresse(),
             'email' => $parameterService->getSiteEmail(),
             'telephone' => $parameterService->getSiteTelephone(),
@@ -37,6 +38,7 @@ class SecurityController extends AbstractController
             'nom_association' => $parameterService->getParametreByName("nom_association"),
         ];
 
+        $images = $mesImageRepository->findAll();
         if ($this->getUser()) {
             return $this->redirectToRoute('accueil');
         }
@@ -48,7 +50,7 @@ class SecurityController extends AbstractController
 
         return $this->render(
             'security/login.html.twig',
-            ['last_username' => $lastUsername, 'error' => $error, 'parametres' => $parametres]
+            ['last_username' => $lastUsername, 'error' => $error, 'parametres' => $parametres, 'images' => $images],
         );
     }
 

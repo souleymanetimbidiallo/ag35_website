@@ -215,7 +215,7 @@ class MesImage
         return $this->imageFile6;
     }
 
-    public function setImageName(?string $imageName6): void
+    public function setImageName6(?string $imageName6): void
     {
         $this->imageName6 = $imageName6;
     }
