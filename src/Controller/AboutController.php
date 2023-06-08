@@ -58,13 +58,15 @@ class AboutController extends AbstractController
         $images = $mesImageRepository->findAll();
 
 
+
         return $this->render('about.html.twig', [
             'current_menu' => 'about',
             'parametres' => $parametres,
             'bureau' => $membresBureau,
             'valeurs' => $valeurs,
-            'partenaires' => $partenaires,
             'images' => $images,
+            'partenaires' => $partenaires
+
         ]);
     }
 }

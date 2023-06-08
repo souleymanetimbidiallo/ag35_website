@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+
 use App\Repository\MesImageRepository;
+use App\Repository\EvenementRepository;
 use App\Repository\ServiceRepository;
 use App\Repository\TemoinRepository;
 use App\Service\MenuService;
@@ -19,12 +21,16 @@ class MainController extends AbstractController
     /**
      * @Route("/", name="app_accueil")
      */
-    public function index(ParameterService $parameterService, MenuService $menuService, ServiceRepository $serviceRepository, TemoinRepository $temoinRep, MesImageRepository $mesImageRepository): Response
+
+    public function index(ParameterService $parameterService, MenuService $menuService, ServiceRepository $serviceRepository, TemoinRepository $temoinRep, MesImageRepository $mesImageRepository, EvenementRepository $evenementRepository): Response
+
     {
 
         $parametres = [
             'site_name' => $parameterService->getParametreByName("site_name"),
             #'site_logo' => $parameterService->getSiteLogo(),
+            'lien_presentation_youtube' => $parameterService->getParametreByName("lien_presentation_youtube"),
+            'site_logo' => $parameterService->getSiteLogo(),
             'address' => $parameterService->getParametreByName("site_adresse"),
             'email' => $parameterService->getSiteEmail(),
             'telephone' => $parameterService->getSiteTelephone(),
@@ -57,10 +63,13 @@ class MainController extends AbstractController
             'nous_sommes' => $parameterService->getParametreByName("site_nous_sommes")
 
 
+
         ];
         $services = $serviceRepository->findAll();
         $temoins = $temoinRep->findAll();
         $images = $mesImageRepository->findAll();
+        $evenements = $evenementRepository->findAll();
+
 
 
         return $this->render('index.html.twig', [
@@ -69,6 +78,8 @@ class MainController extends AbstractController
             'services' => $services,
             'temoins' => $temoins,
             'images' => $images,
+            'evenements' => $evenements
+
 
         ]);
     }

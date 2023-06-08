@@ -163,7 +163,7 @@ class ParameterService
     public function getNomAsso()
     {
         $repository = $this->entityManager->getRepository(Parametre::class);
-        $parametre = $repository->findOneBy(['nom' => "nom_asso"]);
+        $parametre = $repository->findOneBy(['nom' => "nom_association"]);
 
         return $parametre->getValeur();
     }

@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<!-- Page Header Start -->
+	<div class="container-fluid page-header py-5 mb-5 wow fadeIn" data-wow-delay="0.1s">
+		<div class="container text-center py-5">
+			<h1 class="display-2 text-white mb-4 animated slideInDown"></h1>
+			<nav aria-label="breadcrumb animated slideInDown"></nav>
+		</div>
+	</div>
+	<!-- Page Header End -->
+
+	<!-- Project Start -->
+	<div class="container-xxl pt-5">
+		<div class="container">
+			<div class="text-center text-md-start pb-5 pb-md-0 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
+				<p class="fs-5 fw-medium text-primary">Voici les détails de cet événement</p>
+				<div class="project-item mb-5">
+					{% if app.request.query.has('image') %}
+						{% set imagePath = '/img/ag35/' ~ app.request.query.get('image') %}
+						<img class="img-fluid" src="{{ asset(imagePath) }}" alt="Image">
+					{% endif %}
+					<div class="p-4">
+						<a class="d-block h5" href="">{{ app.request.query.get('titre') }}</a>
+						<span>
+							Prix:
+							{{ app.request.query.get('prix') }}</span>
+						<br/>
+						<span>Adresse:
+							{{ app.request.query.get('adresse') }}</span>
+						<br/>
+						<span>Description:
+							{{ app.request.query.get('commentaire') }}</span>
+						<br/>
+						<a class="btn btn-primary" href="{{ parametres.lien_billeterie }}">Acheter le billet</a>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Project End -->
+{% endblock %}
