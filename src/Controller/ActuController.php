@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\MesImageRepository;
 use App\Service\MenuService;
 use App\Service\ParameterService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -13,12 +14,12 @@ class ActuController extends AbstractController
     /**
      * @Route("/actualites", name="app_actualites")
      */
-    public function index(ParameterService $parameterService, MenuService $menuService): Response
+    public function index(ParameterService $parameterService, MenuService $menuService, MesImageRepository $mesImageRepository): Response
     {
         $parametres = [
             'site_name' => $parameterService->getSiteName(),
             'nom_association' => $parameterService->getParametreByName("nom_association"),
-            'site_logo' => $parameterService->getSiteLogo(),
+            #'site_logo' => $parameterService->getSiteLogo(),
             'address' => $parameterService->getSiteAdresse(),
             'email' => $parameterService->getSiteEmail(),
             'telephone' => $parameterService->getSiteTelephone(),
@@ -43,10 +44,12 @@ class ActuController extends AbstractController
             'texte_nos_partenaires' => $parameterService->getParametreByName("texte_nos_partenaires"),
             'nous_sommes' => $parameterService->getParametreByName("site_nous_sommes")
         ];
+        $images = $mesImageRepository->findAll();
 
         return $this->render('actus.html.twig', [
             'current_menu' => 'actualites',
-            'parametres'   => $parametres
+            'parametres'   => $parametres,
+            'images' => $images
         ]);
     }
 }

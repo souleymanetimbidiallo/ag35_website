@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+
+use App\Repository\MesImageRepository;
 use App\Repository\EvenementRepository;
 use App\Repository\ServiceRepository;
 use App\Repository\TemoinRepository;
@@ -20,11 +22,13 @@ class MainController extends AbstractController
      * @Route("/", name="app_accueil")
      */
 
-    public function index(ParameterService $parameterService, ServiceRepository $serviceRepository, TemoinRepository $temoinRep, EvenementRepository $evenementRepository, MenuService $menuService): Response
+    public function index(ParameterService $parameterService, MenuService $menuService, ServiceRepository $serviceRepository, TemoinRepository $temoinRep, MesImageRepository $mesImageRepository, EvenementRepository $evenementRepository): Response
+
     {
 
         $parametres = [
             'site_name' => $parameterService->getParametreByName("site_name"),
+            #'site_logo' => $parameterService->getSiteLogo(),
             'lien_presentation_youtube' => $parameterService->getParametreByName("lien_presentation_youtube"),
             'site_logo' => $parameterService->getSiteLogo(),
             'address' => $parameterService->getParametreByName("site_adresse"),
@@ -33,9 +37,9 @@ class MainController extends AbstractController
             'lien_page_fb' => $parameterService->getLienPageFb(),
             'lien_groupe_fb' => $parameterService->getLienGroupeFb(),
             'lien_whatsApp' => $parameterService->getLienWhatsApp(),
-            'asso_img1' => $parameterService->getAssoImg1(),
-            'asso_img2' => $parameterService->getAssoImg2(),
-            'asso_img3' => $parameterService->getAssoImg3(),
+            #'asso_img1' => $parameterService->getAssoImg1(),
+            #'asso_img2' => $parameterService->getAssoImg2(),
+            #'asso_img3' => $parameterService->getAssoImg3(),
             'nom_association' => $parameterService->getParametreByName("nom_association"),
             'menu_accueil' => $menuService->getAccueil(),
             'menu_apropos' => $menuService->getApropos(),
@@ -63,7 +67,9 @@ class MainController extends AbstractController
         ];
         $services = $serviceRepository->findAll();
         $temoins = $temoinRep->findAll();
+        $images = $mesImageRepository->findAll();
         $evenements = $evenementRepository->findAll();
+
 
 
         return $this->render('index.html.twig', [
@@ -71,7 +77,9 @@ class MainController extends AbstractController
             'parametres' => $parametres,
             'services' => $services,
             'temoins' => $temoins,
+            'images' => $images,
             'evenements' => $evenements
+
 
         ]);
     }
