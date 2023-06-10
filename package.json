@@ -1,0 +1,18 @@
+{
+  "name": "ag35_website",
+  "version": "1.0.0",
+  "description": "Lorem ipsum dolor",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "engines": {
+    "node": "v18.16.*",
+    "npm": "9.5.*"
+  },
+  "author": "",
+  "license": "ISC"
+}
