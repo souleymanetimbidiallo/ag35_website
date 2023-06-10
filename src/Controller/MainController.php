@@ -5,6 +5,7 @@ namespace App\Controller;
 
 use App\Repository\MesImageRepository;
 use App\Repository\EvenementRepository;
+use App\Repository\MenuRepository;
 use App\Repository\ServiceRepository;
 use App\Repository\TemoinRepository;
 use App\Service\MenuService;
@@ -21,9 +22,7 @@ class MainController extends AbstractController
     /**
      * @Route("/", name="app_accueil")
      */
-
     public function index(ParameterService $parameterService, MenuService $menuService, ServiceRepository $serviceRepository, TemoinRepository $temoinRep, MesImageRepository $mesImageRepository, EvenementRepository $evenementRepository): Response
-
     {
 
         $parametres = [
@@ -69,6 +68,7 @@ class MainController extends AbstractController
         $temoins = $temoinRep->findAll();
         $images = $mesImageRepository->findAll();
         $evenements = $evenementRepository->findAll();
+        $menus = $menuRepository->findAll();
 
 
 
@@ -79,8 +79,6 @@ class MainController extends AbstractController
             'temoins' => $temoins,
             'images' => $images,
             'evenements' => $evenements
-
-
         ]);
     }
 }
