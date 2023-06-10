@@ -39,6 +39,7 @@ class TemoinCrudController extends AbstractCrudController
 
         yield TextField::new('nom');
         yield TextField::new('fonction');
+        yield TextField::new('imageName');
         yield ImageField::new('imageName')
             ->setBasePath('/img') // Chemin de base pour afficher l'image
             ->setUploadDir('public/img/ag35')

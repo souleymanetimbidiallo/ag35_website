@@ -37,6 +37,7 @@ class ServiceCrudController extends AbstractCrudController
             ->hideOnForm();
 
         yield TextField::new('titre');
+        yield TextField::new('imageName');
         yield ImageField::new('imageName')
             ->setBasePath('/img') // Chemin de base pour afficher l'image
             ->setUploadDir('public/img/ag35')

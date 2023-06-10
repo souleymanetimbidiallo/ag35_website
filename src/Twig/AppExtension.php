@@ -4,6 +4,7 @@ namespace App\Twig;
 
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
+use Twig\TwigFilter;
 
 class AppExtension extends AbstractExtension
 {
@@ -24,5 +25,17 @@ class AppExtension extends AbstractExtension
     public function getAppName(): string
     {
         return $this->appName;
+    }
+
+    public function getFilters()
+    {
+        return [
+            new TwigFilter('file_exists', [$this, 'fileExistsFilter']),
+        ];
+    }
+
+    public function fileExistsFilter($path)
+    {
+        return file_exists($path);
     }
 }
