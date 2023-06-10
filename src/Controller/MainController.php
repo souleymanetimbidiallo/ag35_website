@@ -68,7 +68,6 @@ class MainController extends AbstractController
         $temoins = $temoinRep->findAll();
         $images = $mesImageRepository->findAll();
         $evenements = $evenementRepository->findAll();
-        $menus = $menuRepository->findAll();
 
 
 

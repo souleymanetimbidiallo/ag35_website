@@ -19,9 +19,6 @@ adhesion:
 evenements:
   path: /evenements
   controller: App\Controller\EventController::index
-multimedia:
-  path: /multimedia
-  controller: App\Controller\MultimediaController::index  
 guide:
   path: /guide
   controller: App\Controller\GuideController::index  

@@ -53,7 +53,7 @@ class ActuController extends AbstractController
         return $this->render('actus.html.twig', [
             'current_menu' => 'actualites',
             'parametres'   => $parametres,
-            'actualites' => $actualites
+            'actualites' => $actualites,
             'images' => $images
         ]);
     }
