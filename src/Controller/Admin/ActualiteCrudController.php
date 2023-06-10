@@ -40,6 +40,7 @@ class ActualiteCrudController extends AbstractCrudController
         yield TextField::new('titre');
         yield DateTimeField::new('datePublication')
             ->setFormat('dd/MM/yyyy hh:mm');
+        yield TextField::new('imageName');
         yield ImageField::new('imageName')
             ->setBasePath('/img') // Chemin de base pour afficher l'image
             ->setUploadDir('public/img/ag35')

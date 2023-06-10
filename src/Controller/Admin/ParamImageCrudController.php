@@ -6,6 +6,7 @@ use App\Entity\ParamImage;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class ParamImageCrudController extends AbstractCrudController
 {
@@ -29,6 +30,7 @@ class ParamImageCrudController extends AbstractCrudController
 
     public function configureFields(string $pageName): iterable
     {
+        yield TextField::new('imageName');
         yield ImageField::new('imageName')
             ->setBasePath('/img') // Chemin de base pour afficher l'image
             ->setUploadDir('public/img/ag35')

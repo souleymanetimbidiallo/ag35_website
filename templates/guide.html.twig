@@ -18,13 +18,28 @@
 	</div>
 
 	<!-- Page Header End -->
+	<div class="container bg-light my-5 py-5">
+		<div class="col-12 text-center">
+			<h2 class="text-primary">Guide</h2>
+			<p>
 
-	<h7>
+
+				Bienvenue sur le site de l'Association AG35 ! Nous sommes une association dédiée à la promotion de la culture guinéenne et à la réalisation de projets de développement en Guinée. Que vous soyez nouvel étudiant, non étudiant ou une nouvelle famille à Rennes, notre page de Guides est conçue pour vous aider à vous installer et à vous intégrer à notre association. Les guides sont disponibles en format PDF et fournissent des informations utiles pour faciliter votre transition.
 
 
-		Bienvenue sur le site de l'Association AG35 ! Nous sommes une association dédiée à la promotion de la culture guinéenne et à la réalisation de projets de développement en Guinée. Que vous soyez nouvel étudiant, non étudiant ou une nouvelle famille à Rennes, notre page de Guides est conçue pour vous aider à vous installer et à vous intégrer à notre association. Les guides sont disponibles en format PDF et fournissent des informations utiles pour faciliter votre transition.
+			</p>
+		</div>
 
 
-	</h7>
+		{% for guide in guides %}
+			{% set pdfPath = 'img/ag35/' ~ guide.pdfName %}
+			{% if app.request.server.get('DOCUMENT_ROOT') ~ asset(pdfPath)|file_exists %}
+				<div class="text-center">
+					<a href="{{ asset(pdfPath) }}" target="_blank" rel="noopener noreferrer" download>Télécharger le fichier PDF</a>
+				</div>
+			{% endif %}
+			<br>
+		{% endfor %}
 
+	</div>
 </br>{% endblock %}

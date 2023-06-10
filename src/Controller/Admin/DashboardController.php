@@ -6,6 +6,7 @@ use App\Entity\Actualite;
 use App\Entity\Admin;
 use App\Entity\Contact;
 use App\Entity\Evenement;
+use App\Entity\Guide;
 use App\Entity\Media;
 use App\Entity\Membre;
 use App\Entity\MesImage;
@@ -51,6 +52,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Valeur-Asso', 'fas fa-bullseye', Valeur::class);
         yield MenuItem::linkToCrud('Partenaires-Sponsors', 'fas fa-handshake', ParamImage::class);
         yield MenuItem::linkToCrud('Images', 'fas fa-images', MesImage::class);
+        yield MenuItem::linkToCrud('Guide-PDF', 'fas fa-file', Guide::class);
         yield MenuItem::linkToCrud('Admin', 'fas fa-lock', Admin::class);
     }
 }

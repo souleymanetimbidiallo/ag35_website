@@ -45,6 +45,7 @@ class EvenementCrudController extends AbstractCrudController
             ->setFormat('dd/MM/yyyy hh:mm');
         yield TextField::new('prix');
         yield TextField::new('adresse');
+        yield TextField::new('imageName');
         yield ImageField::new('imageName')
             ->setBasePath('/img') // Chemin de base pour afficher l'image
             ->setUploadDir('public/img/ag35')

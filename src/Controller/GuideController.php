@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\GuideRepository;
 use App\Repository\MesImageRepository;
 use App\Service\MenuService;
 use App\Service\ParameterService;
@@ -14,7 +15,7 @@ class GuideController extends AbstractController
     /**
      * @Route("/guide", name="app_guide")
      */
-    public function index(ParameterService $parameterService, MenuService $menuService, MesImageRepository $mesImageRepository): Response
+    public function index(ParameterService $parameterService, MenuService $menuService, MesImageRepository $mesImageRepository, GuideRepository $guideRepository): Response
     {
         $parametres = [
             'site_name' => $parameterService->getSiteName(),
@@ -46,10 +47,12 @@ class GuideController extends AbstractController
         ];
 
         $images = $mesImageRepository->findAll();
+        $guides = $guideRepository->findAll();
         return $this->render('guide.html.twig', [
             'current_menu' => 'guide',
             'parametres'   => $parametres,
-            'images' => $images
+            'images' => $images,
+            'guides' => $guides,
         ]);
     }
 }
