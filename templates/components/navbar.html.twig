@@ -3,7 +3,7 @@
 	<div class="container">
 		<nav class="navbar navbar-expand-lg bg-white navbar-light p-lg-0">
 			<a href="index.html" class="navbar-brand d-lg-none">
-				<h1 class="fw-bold m-0">AG35</h1>
+				<h1 class="fw-bold m-0">{{ parametres.site_name }}</h1>
 			</a>
 
 			<button type="button" class="navbar-toggler me-0" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
@@ -24,7 +24,6 @@
 							<a class="dropdown-item {% if current_menu is defined and current_menu == 'guide' %} active {% endif %}" href="{{ path('app_guide') }}">{{ parametres.menu_guide }}</a>
 						</div>
 					</div>
-
 					<a class="nav-item nav-link {% if current_menu is defined and current_menu == 'multimedia' %} active {% endif %}" href="{{ path('app_multimedia') }}">{{ parametres.menu_multimedia }}</a>
 					<a class="nav-item nav-link {% if current_menu is defined and current_menu == 'don' %} active {% endif %}" href="https://www.helloasso.com/associations/association-guineenne-d-ile-et-vilaine-ag35/formulaires/1">{{ parametres.menu_donation }}</a>
 					<a class="nav-item nav-link {% if current_menu is defined and current_menu == 'adhesion' %} active {% endif %}" href="{{ path('app_adhesion') }}">{{ parametres.menu_adhesion }}</a>

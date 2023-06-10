@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Repository\EvenementRepository;
+use App\Repository\MesImageRepository;
 use App\Service\MenuService;
 use App\Service\ParameterService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -14,7 +15,7 @@ class DetailsEventController extends AbstractController
     /**
      * @Route("/details_event", name="app_details_event")
      */
-    public function index(ParameterService $parameterService, EvenementRepository $evenementRepository, MenuService $menuService): Response
+    public function index(ParameterService $parameterService, EvenementRepository $evenementRepository, MesImageRepository $mesImageRepository, MenuService $menuService): Response
     {
 
         $parametres = [
@@ -26,6 +27,7 @@ class DetailsEventController extends AbstractController
             'lien_page_fb' => $parameterService->getLienPageFb(),
             'lien_groupe_fb' => $parameterService->getLienGroupeFb(),
             'lien_whatsApp' => $parameterService->getLienWhatsApp(),
+            'nom_association' => $parameterService->getParametreByName("nom_association"),
             'menu_accueil' => $menuService->getAccueil(),
             'menu_apropos' => $menuService->getApropos(),
             'menu_activite' => $menuService->getActivite(),
@@ -46,17 +48,18 @@ class DetailsEventController extends AbstractController
             'nos_partenaires' => $parameterService->getParametreByName("nos_partenaires"),
             'texte_nos_partenaires' => $parameterService->getParametreByName("texte_nos_partenaires"),
             'nous_sommes' => $parameterService->getParametreByName("site_nous_sommes"),
-            'nom_association' => $parameterService->getParametreByName("nom_association"),
             'lien_billeterie' => $parameterService->getParametreByName("lien_billeterie")
 
         ];
 
         $evenements = $evenementRepository->findAll();
+        $images = $mesImageRepository->findAll();
 
         return $this->render('details_event.html.twig', [
             'current_menu' => 'details_event',
             'parametres'   => $parametres,
-            'evenements' => $evenements
+            'evenements' => $evenements,
+            'images' => $images
         ]);
     }
 }
