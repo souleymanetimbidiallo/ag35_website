@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Repository\ActualiteRepository;
+use App\Repository\MesImageRepository;
 use App\Service\MenuService;
 use App\Service\ParameterService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -14,12 +15,12 @@ class ActuController extends AbstractController
     /**
      * @Route("/actualites", name="app_actualites")
      */
-    public function index(ParameterService $parameterService, MenuService $menuService, ActualiteRepository $actualiteRepository): Response
+    public function index(ParameterService $parameterService, MenuService $menuService, ActualiteRepository $actualiteRepository, MesImageRepository $mesImageRepository): Response
     {
         $parametres = [
             'site_name' => $parameterService->getSiteName(),
             'nom_association' => $parameterService->getParametreByName("nom_association"),
-            'site_logo' => $parameterService->getSiteLogo(),
+            #'site_logo' => $parameterService->getSiteLogo(),
             'address' => $parameterService->getSiteAdresse(),
             'email' => $parameterService->getSiteEmail(),
             'telephone' => $parameterService->getSiteTelephone(),
@@ -45,6 +46,7 @@ class ActuController extends AbstractController
             'nous_sommes' => $parameterService->getParametreByName("site_nous_sommes"),
             'lien_actualite' => $parameterService->getParametreByName("lien_actualite")
         ];
+        $images = $mesImageRepository->findAll();
 
         $actualites = $actualiteRepository->findAll();
 
@@ -52,6 +54,7 @@ class ActuController extends AbstractController
             'current_menu' => 'actualites',
             'parametres'   => $parametres,
             'actualites' => $actualites
+            'images' => $images
         ]);
     }
 }

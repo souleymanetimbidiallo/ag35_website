@@ -6,7 +6,10 @@
 		<div class="carousel" id="carousel" data-bs-ride="carousel">
 			<div class="carousel-inner">
 				<div class="carousel-item active " data-bs-interval="2000">
-					<img class="w-100" src="img/{{ parametres.asso_img3 }}" alt="Image">
+					{% for image in images %}
+
+						<img class="w-100" src="{{ asset('img/ag35/' ~ image.imageName2) }}" alt="Image">
+					{% endfor %}
 					<div class="carousel-caption">
 						<div class="container">
 							<div class="row justify-content-start">
@@ -21,10 +24,18 @@
 					</div>
 				</div>
 				<div class="carousel-item" data-bs-interval="2000">
-					<img class="w-100" src="img/{{ parametres.asso_img1 }}" alt="Image 1">
+					{% for image in images %}
+
+
+						<img class="w-100" src="{{ asset('img/ag35/' ~ image.imageName3) }}" alt="Image 1">
+					{% endfor %}
 				</div>
 				<div class="carousel-item" data-bs-interval="2000">
-					<img class="w-100" src="img/{{ parametres.asso_img3 }}" alt="Image">
+					{% for image in images %}
+
+
+						<img class="w-100" src="{{ asset('img/ag35/' ~ image.imageName4) }}" alt="Image">
+					{% endfor %}
 				</div>
 			</div>
 			<button class="carousel-control-prev" type="button" data-bs-target="#carousel" data-bs-slide="prev">
@@ -90,6 +101,31 @@ arrows: false
 				</div>
 				<h1 class="display-6 mb-4">{{ parametres.accueil_video }}</h1>
 
+		
+																																																																																																																																																																																																																																												<div class="col-lg-6 pt-lg-5 wow fadeIn" data-wow-delay="0.5s">
+																																																																																																																																																																																																																																													<div
+																																																																																																																																																																																																																																														class="bg-white rounded-top p-5 mt-lg-5">
+																																																																																																																																																																																																																																														
+																																																																																																																																																																																																																																														<h1 class="display-6 mb-4">Présentation de l'AG35</h1>
+																																																																																																																																																																																																																																														
+																																																																																																																																																																																																																																														<div class="row g-5 pt-2 mb-5">
+																																																																																																																																																																																																																																															<div class="col-sm-6">
+																																																																																																																																																																																																																																																<img class="img-fluid mb-4" src="img/icon/icon-5.png" alt="">
+																																																																																																																																																																																																																																																<h5 class="mb-3">Managed Services</h5>
+																																																																																																																																																																																																																																																<span>Clita erat ipsum et lorem et sit sed stet lorem</span>
+																																																																																																																																																																																																																																															</div>
+																																																																																																																																																																																																																																															<div class="col-sm-6">
+																																																																																																																																																																																																																																																<img class="img-fluid mb-4" src="img/icon/icon-2.png" alt="">
+																																																																																																																																																																																																																																																<h5 class="mb-3">Dedicated Experts</h5>
+																																																																																																																																																																																																																																																<span>Clita erat ipsum et lorem et sit sed stet lorem</span>
+																																																																																																																																																																																																																																															</div>
+																																																																																																																																																																																																																																														</div>
+																																																																																																																																																																																																																																														<a class="btn btn-primary rounded-pill py-3 px-5" href="">Explore More</a>
+																																																																																																																																																																																																																																													</div>
+																																																																																																																																																																																																																																												</div>
+																																																																																																																																																																																																																																											-->
+
+
 			</div>
 		</div>
 	</div>
@@ -113,7 +149,8 @@ arrows: false
 <!-- Video Modal End -->
 
 
-<!-- Service Start 
+
+<!-- Service Start -->
 		
 		
 		
@@ -151,134 +188,10 @@ arrows: false
 </div>
 <!-- Project End -->
 
-
+																																																																																				
 <!-- Quote Start -->
 
-<!-- 
-																																																																																										
-																																																																																										<div class="container-xxl py-5">
-																																																																																											<div class="container">
-																																																																																												<div class="text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
-																																																																																													<p class="fs-5 fw-medium text-primary">Le bureau</p>
-																																																																																													<h1 class="display-5 mb-5">Les dirigeants de l'AG35</h1>
-																																																																																												</div>
-																																																																																												<div class="row g-4">
-																																																																																													<div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-																																																																																														<div class="team-item rounded overflow-hidden pb-4">
-																																																																																															<img class="img-fluid mb-4" src="img/team-1.jpg" alt="">
-																																																																																															<h5>Alex Robin</h5>
-																																																																																															<span class="text-primary">Founder & CEO</span>
-																																																																																															<ul class="team-social">
-																																																																																																<li>
-																																																																																																	<a class="btn btn-square" href="">
-																																																																																																		<i class="fab fa-facebook-f"></i>
-																																																																																																	</a>
-																																																																																																</li>
-																																																																																																<li>
-																																																																																																	<a class="btn btn-square" href="">
-																																																																																																		<i class="fab fa-twitter"></i>
-																																																																																																	</a>
-																																																																																																</li>
-																																																																																																<li>
-																																																																																																	<a class="btn btn-square" href="">
-																																																																																																		<i class="fab fa-instagram"></i>
-																																																																																																	</a>
-																																																																																																</li>
-																																																																																																<li>
-																																																																																																	<a class="btn btn-square" href="">
-																																																																																																		<i class="fab fa-linkedin-in"></i>
-																																																																																																	</a>
-																																																																																																</li>
-																																																																																															</ul>
-																																																																																														</div>
-																																																																																													</div>
-																																																																																													<div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-																																																																																														<div class="team-item rounded overflow-hidden pb-4">
-																																																																																															<img class="img-fluid mb-4" src="img/team-2.jpg" alt="">
-																																																																																															<h5>Adam Crew</h5>
-																																																																																															<span class="text-primary">Co Founder</span>
-																																																																																															<ul class="team-social">
-																																																																																																<li>
-																																																																																																	<a class="btn btn-square" href="">
-																																																																																																		<i class="fab fa-facebook-f"></i>
-																																																																																																	</a>
-																																																																																																</li>
-																																																																																																<li>
-																																																																																																	<a class="btn btn-square" href="">
-																																																																																																		<i class="fab fa-twitter"></i>
-																																																																																																	</a>
-																																																																																																</li>
-																																																																																																<li>
-																																																																																																	<a class="btn btn-square" href="">
-																																																																																																		<i class="fab fa-instagram"></i>
-																																																																																																	</a>
-																																																																																																</li>
-																																																																																																<li>
-																																																																																																	<a class="btn btn-square" href="">
-																																																																																																		<i class="fab fa-linkedin-in"></i>
-																																																																																																	</a>
-																																																																																																</li>
-																																																																																															</ul>
-																																																																																														</div>
-																																																																																													</div>
-																																																																																													<div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-																																																																																														<div class="team-item rounded overflow-hidden pb-4">
-																																																																																															<img class="img-fluid mb-4" src="img/team-3.jpg" alt="">
-																																																																																															<h5>Boris Johnson</h5>
-																																																																																															<span class="text-primary">Executive Manager</span>
-																																																																																															<ul class="team-social">
-																																																																																																<li>
-																																																																																																	<a class="btn btn-square" href="">
-																																																																																																		<i class="fab fa-facebook-f"></i>
-																																																																																																	</a>
-																																																																																																</li>
-																																																																																																<li>
-																																																																																																	<a class="btn btn-square" href="">
-																																																																																																		<i class="fab fa-twitter"></i>
-																																																																																																	</a>
-																																																																																																</li>
-																																																																																																<li>
-																																																																																																	<a class="btn btn-square" href="">
-																																																																																																		<i class="fab fa-instagram"></i>
-																																																																																																	</a>
-																																																																																																</li>
-																																																																																																<li>
-																																																																																																	<a class="btn btn-square" href="">
-																																																																																																		<i class="fab fa-linkedin-in"></i>
-																																																																																																	</a>
-																																																																																																</li>
-																																																																																															</ul>
-																																																																																														</div>
-																																																																																													</div>
-																																																																																													<div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
-																																																																																														<div class="team-item rounded overflow-hidden pb-4">
-																																																																																															<img class="img-fluid mb-4" src="img/team-4.jpg" alt="">
-																																																																																															<h5>Robert Jordan</h5>
-																																																																																															<span class="text-primary">Digital Marketer</span>
-																																																																																															<ul class="team-social">
-																																																																																																<li>
-																																																																																																	<a class="btn btn-square" href="">
-																																																																																																		<i class="fab fa-facebook-f"></i>
-																																																																																																	</a>
-																																																																																																</li>
-																																																																																																<li>
-																																																																																																	<a class="btn btn-square" href="">
-																																																																																																		<i class="fab fa-twitter"></i>
-																																																																																																	</a>
-																																																																																																</li>
-																																																																																																<li>
-																																																																																																	<a class="btn btn-square" href="">
-																																																																																																		<i class="fab fa-instagram"></i>
-																																																																																																	</a>
-																																																																																																</li>
-																																																																																																<li>
-																																																																																																	<a class="btn btn-square" href="">
-																																																																																																		<i class="fab fa-linkedin-in"></i>
-																																																																																																	</a>
-																																																																																																</li>
-																																																																																															</ul>
-																																																																																														</div>
-																				
+																																																																																																													
 			<!-- Testimonial Start -->
 	<div class="container-xxl pt-5"> <div class="container">
 		<div
@@ -297,6 +210,7 @@ arrows: false
 					</span>
 				</div>
 			{% endfor %}
+
 		</div>
 	</div>
 </div>
