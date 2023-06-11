@@ -41,22 +41,6 @@ class ParameterService
         $this->entityManager->flush();
     }
 
-    public function getSiteLogo()
-    {
-        $repository = $this->entityManager->getRepository(Parametre::class);
-        $parametre = $repository->findOneBy(['nom' => "site_logo"]);
-
-        return $parametre->getValeur();
-    }
-
-    public function setSiteLogo($siteLogo)
-    {
-        $repository = $this->entityManager->getRepository(Parametre::class);
-        $parametre = $repository->findOneBy(['nom' => "site_logo"]);
-        $parametre->setValeur($siteLogo);
-        $this->entityManager->flush();
-    }
-
 
     public function getSiteAdresse()
     {
