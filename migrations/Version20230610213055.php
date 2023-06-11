@@ -41,6 +41,62 @@ final class Version20230610213055 extends AbstractMigration
         $this->addSql('ALTER TABLE evenement ADD CONSTRAINT FK_B26681E642B8210 FOREIGN KEY (admin_id) REFERENCES admin (id)');
         $this->addSql('ALTER TABLE media ADD CONSTRAINT FK_6A2CA10C642B8210 FOREIGN KEY (admin_id) REFERENCES admin (id)');
         $this->addSql('ALTER TABLE membre ADD CONSTRAINT FK_F6B4FB29642B8210 FOREIGN KEY (admin_id) REFERENCES admin (id)');
+
+        $this->addSql("INSERT INTO actualite (admin_id, titre, description, date_publication) VALUES (1, 'Titre de l''actualité', 'Description de l''actualité', NOW())");
+        $this->addSql("INSERT INTO actualite (admin_id, titre, description, date_publication) VALUES (1, 'Nouvelle actualité', 'Description de la nouvelle actualité', NOW())");
+        $this->addSql("INSERT INTO actualite (admin_id, titre, description, date_publication) VALUES (1, 'Actualité importante', 'Description de l\'actualité importante', NOW())");
+
+        $this->addSql("INSERT INTO admin (email, roles, password, nom, prenom) VALUES (1, 'yayakomara56@gmail.com', '[\"ROLE_ADMIN\"]', 'demo', 'Komara', 'Yaya')");
+
+        $this->addSql("INSERT INTO evenement (id, admin_id, titre, commentaire, date_debut, date_fin, adresse, prix, image_name) VALUES (2, NULL, '4. Union', 'je suis l''evenement1', '2023-06-06 13:33:32', '2023-06-06 13:33:32', '7 rue jean monet', '50 euros', 'evenement1.jpg')");
+        $this->addSql("INSERT INTO evenement (id, admin_id, titre, commentaire, date_debut, date_fin, adresse, prix, image_name) VALUES (3, NULL, '2. Engagement', 'je suis l''evenement 2', '2023-06-06 13:33:32', '2023-06-06 13:33:32', '7 rue prof charles', '70 euros', 'evenement2.jpg')");
+        $this->addSql("INSERT INTO evenement (id, admin_id, titre, commentaire, date_debut, date_fin, adresse, prix, image_name) VALUES (4, NULL, 'journée mondiale', 'evenement 3', '2023-06-15 13:51:00', '2023-06-30 13:51:00', '56 Rue louis vuitton', '100', 'evenement3.jpg')");
+
+        $this->addSql("INSERT INTO membre (id, admin_id, nom, prenom, email, telephone, ville_origine, profession, date_adhesion, bureau, fonction, image_name) VALUES (1, NULL, 'condé', 'hady', 'condehady90@gmail.com', '0753037847', 'Rennes', 'trésorier', '2023-05-12', 1, 'trésorier', 'IMG_20200905_181929 (1)-min.jpg')");
+
+        $this->addSql("INSERT INTO menu (id, nom, lien) VALUES (1, 'accueil', 'Accueil'),");
+        $this->addSql("INSERT INTO menu (id, nom, lien) VALUES (2, 'apropos', 'A propos')");
+        $this->addSql("INSERT INTO menu (id, nom, lien) VALUES (3, 'activite', 'Activité')");
+        $this->addSql("INSERT INTO menu (id, nom, lien) VALUES (4, 'multimedia', 'Multimedia')");
+        $this->addSql("INSERT INTO menu (id, nom, lien) VALUES (5, 'donation', 'Donation')");
+        $this->addSql("INSERT INTO menu (id, nom, lien) VALUES (6, 'adhesion', 'Adhesion')");
+        $this->addSql("INSERT INTO menu (id, nom, lien) VALUES (7, 'contact', 'Contact')");
+        $this->addSql("INSERT INTO menu (id, nom, lien) VALUES (8, 'evenement', 'Evenement')");
+        $this->addSql("INSERT INTO menu (id, nom, lien) VALUES (9, 'actualite', 'Actualité')");
+        $this->addSql("INSERT INTO menu (id, nom, lien) VALUES (10, 'guide', 'Guide')");
+
+        $this->addSql("INSERT INTO menu (id, nom, lien) VALUES (10, 'guide', 'Guide')");
+
+
+        $this->addSql("INSERT INTO mes_image (id, image_name1, image_name2, image_name3, image_name4, image_name5, image_name6, image_name7, image_name8) VALUES (1, NULL, 'fond2.jpg', 'fond3.jpg', 'fond1.jpg', NULL, NULL, NULL, NULL);");
+
+        $this->addSql("INSERT INTO parametre (id, nom, valeur) VALUES (2, 'site_adresse', '40 Boulevard Jeanne D''Arc 35000 Rennes')");
+        $this->addSql("INSERT INTO parametre (id, nom, valeur) VALUES (3, 'site_telephone', '+33 6 26 69 53 03')");
+        $this->addSql("INSERT INTO parametre (id, nom, valeur) VALUES (4, 'site_email', 'assoguinée@gmail.com')");
+        $this->addSql("INSERT INTO parametre (id, nom, valeur) VALUES (5, 'lien_page_fb', 'https://www.facebook.com/profile.php?id=100090531087557')");
+        $this->addSql("INSERT INTO parametre (id, nom, valeur) VALUES (6, 'lien_groupe_fb', 'https://www.facebook.com/groups/277419572894')");
+        $this->addSql("INSERT INTO parametre (id, nom, valeur) VALUES (7, 'lien_whatsApp', 'https://chat.whatsapp.com/CEwnOWS4VreAefOIy0kq3v')");
+        $this->addSql("INSERT INTO parametre (id, nom, valeur) VALUES (8, 'logo', 'guinea.png')");
+        $this->addSql("INSERT INTO parametre (id, nom, valeur) VALUES (14, 'nom_association', 'Association guinéenne d''Ille-et-Vilaine')");
+        $this->addSql("INSERT INTO parametre (id, nom, valeur) VALUES (27, 'fond1', 'fond1.jpg')");
+        $this->addSql("INSERT INTO parametre (id, nom, valeur) VALUES (28, 'fond3', 'fond3.jpeg')");
+        $this->addSql("INSERT INTO parametre (id, nom, valeur) VALUES (29, 'fond2', 'fond2.jpg')");
+        $this->addSql("INSERT INTO parametre (id, nom, valeur) VALUES (30, 'site_logo', 'ag35_logo.png')");
+        $this->addSql("INSERT INTO parametre (id, nom, valeur) VALUES (31, 'titre_accueil_video', 'Cliquer ci-dessus pour regarder la présentation de l''AG35')");
+        $this->addSql("INSERT INTO parametre (id, nom, valeur) VALUES (32, 'titre_accueil_event', 'Nos derniers événements')");
+        $this->addSql("INSERT INTO parametre (id, nom, valeur) VALUES (34, 'titre_accueil_temoin', 'Ce que les gens disent de nos services !')");
+        $this->addSql("INSERT INTO parametre (id, nom, valeur) VALUES (35, 'nos_valeurs', 'Nos valeurs')");
+        $this->addSql("INSERT INTO parametre (id, nom, valeur) VALUES (36, 'nos_gouvernances', 'Gouvernance & Bureau')");
+        $this->addSql("INSERT INTO parametre (id, nom, valeur) VALUES (37, 'nos_partenaires', 'Partenaires et Sponsors')");
+        $this->addSql("INSERT INTO parametre (id, nom, valeur) VALUES (38, 'texte_nos_valeurs', 'Nous croyons en ces valeurs et les portons dans toutes nos activités. Elles nous distinguent et nous définissent.')");
+        $this->addSql("INSERT INTO parametre (id, nom, valeur) VALUES (39, 'texte_nos_gouvernances', 'L''association Guinéenne d''Ille et vilaine AG35 est composée d''une assemblée générale, d''un bureau exécutif, des membres actifs ou adhérents, des membres d''honneur, bienfaiteurs et sympathisants.')");
+        $this->addSql("INSERT INTO parametre (id, nom, valeur) VALUES (40, 'texte_nos_partenaires', 'Nous travaillons avec différents acteurs institutionnels, associatifs et des startups qui nous accompagnent dans nos différentes activités.')");
+        $this->addSql("INSERT INTO parametre (id, nom, valeur) VALUES (41, 'site_nous_sommes', 'Nous sommes')");
+        $this->addSql("INSERT INTO parametre (id, nom, valeur) VALUES (42, 'site_name', 'AG35')");
+        $this->addSql("INSERT INTO parametre (id, nom, valeur) VALUES (44, 'lien_presentation_youtube', 'https://www.youtube.com/watch?v=31U4GWsYUVw')");
+        $this->addSql("INSERT INTO parametre (id, nom, valeur) VALUES (45, 'lien_billeterie', 'https://www.helloasso.com/associations/association-guineenne-d-ile-et-vilaine-ag35/formulaires/1')");
+        $this->addSql("INSERT INTO parametre (id, nom, valeur) VALUES (46, 'lien_actualite', 'https://www.afroguinee.com/tag/miss-guinee/')");
+        $this->addSql("INSERT INTO parametre (id, nom, valeur) VALUES (47, 'lien_adhesion', 'https://www.helloasso.com/associations/association-guineenne-d-ile-et-vilaine-ag35/adhesions/adhesion-a-ag35')");
     }
 
     public function down(Schema $schema): void
