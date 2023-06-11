@@ -42,21 +42,20 @@ final class Version20230610213055 extends AbstractMigration
         $this->addSql('ALTER TABLE media ADD CONSTRAINT FK_6A2CA10C642B8210 FOREIGN KEY (admin_id) REFERENCES admin (id)');
         $this->addSql('ALTER TABLE membre ADD CONSTRAINT FK_F6B4FB29642B8210 FOREIGN KEY (admin_id) REFERENCES admin (id)');
 
-        $this->addSql("INSERT INTO admin (email, roles, password, nom, prenom) VALUES (1, 'yayakomara56@gmail.com', '[\"ROLE_ADMIN\"]', 'demo', 'Komara', 'Yaya')");
+
+        /*$this->addSql("INSERT INTO admin (email, roles, password, nom, prenom) VALUES (1, 'yayakomara56@gmail.com', 'ROLE_ADMIN', 'demo', 'Komara', 'Yaya')");
 
         $this->addSql("INSERT INTO actualite (admin_id, titre, description, date_publication) VALUES (1, 'Titre de l''actualité', 'Description de l''actualité', NOW())");
         $this->addSql("INSERT INTO actualite (admin_id, titre, description, date_publication) VALUES (1, 'Nouvelle actualité', 'Description de la nouvelle actualité', NOW())");
         $this->addSql("INSERT INTO actualite (admin_id, titre, description, date_publication) VALUES (1, 'Actualité importante', 'Description de l\'actualité importante', NOW())");
-
-        $this->addSql("INSERT INTO admin (email, roles, password, nom, prenom) VALUES (1, 'yayakomara56@gmail.com', '[\"ROLE_ADMIN\"]', 'demo', 'Komara', 'Yaya')");
 
         $this->addSql("INSERT INTO evenement (id, admin_id, titre, commentaire, date_debut, date_fin, adresse, prix, image_name) VALUES (2, NULL, '4. Union', 'je suis l''evenement1', '2023-06-06 13:33:32', '2023-06-06 13:33:32', '7 rue jean monet', '50 euros', 'evenement1.jpg')");
         $this->addSql("INSERT INTO evenement (id, admin_id, titre, commentaire, date_debut, date_fin, adresse, prix, image_name) VALUES (3, NULL, '2. Engagement', 'je suis l''evenement 2', '2023-06-06 13:33:32', '2023-06-06 13:33:32', '7 rue prof charles', '70 euros', 'evenement2.jpg')");
         $this->addSql("INSERT INTO evenement (id, admin_id, titre, commentaire, date_debut, date_fin, adresse, prix, image_name) VALUES (4, NULL, 'journée mondiale', 'evenement 3', '2023-06-15 13:51:00', '2023-06-30 13:51:00', '56 Rue louis vuitton', '100', 'evenement3.jpg')");
 
         $this->addSql("INSERT INTO membre (id, admin_id, nom, prenom, email, telephone, ville_origine, profession, date_adhesion, bureau, fonction, image_name) VALUES (1, NULL, 'condé', 'hady', 'condehady90@gmail.com', '0753037847', 'Rennes', 'trésorier', '2023-05-12', 1, 'trésorier', 'IMG_20200905_181929 (1)-min.jpg')");
-
-        $this->addSql("INSERT INTO menu (id, nom, lien) VALUES (1, 'accueil', 'Accueil'),");
+*/
+        $this->addSql("INSERT INTO menu (id, nom, lien) VALUES (1, 'accueil', 'Accueil')");
         $this->addSql("INSERT INTO menu (id, nom, lien) VALUES (2, 'apropos', 'A propos')");
         $this->addSql("INSERT INTO menu (id, nom, lien) VALUES (3, 'activite', 'Activité')");
         $this->addSql("INSERT INTO menu (id, nom, lien) VALUES (4, 'multimedia', 'Multimedia')");
@@ -67,11 +66,11 @@ final class Version20230610213055 extends AbstractMigration
         $this->addSql("INSERT INTO menu (id, nom, lien) VALUES (9, 'actualite', 'Actualité')");
         $this->addSql("INSERT INTO menu (id, nom, lien) VALUES (10, 'guide', 'Guide')");
 
-        $this->addSql("INSERT INTO menu (id, nom, lien) VALUES (10, 'guide', 'Guide')");
+        /*$this->addSql("INSERT INTO menu (id, nom, lien) VALUES (10, 'guide', 'Guide')");
 
 
         $this->addSql("INSERT INTO mes_image (id, image_name1, image_name2, image_name3, image_name4, image_name5, image_name6, image_name7, image_name8) VALUES (1, NULL, 'fond2.jpg', 'fond3.jpg', 'fond1.jpg', NULL, NULL, NULL, NULL);");
-
+*/
         $this->addSql("INSERT INTO parametre (id, nom, valeur) VALUES (2, 'site_adresse', '40 Boulevard Jeanne D''Arc 35000 Rennes')");
         $this->addSql("INSERT INTO parametre (id, nom, valeur) VALUES (3, 'site_telephone', '+33 6 26 69 53 03')");
         $this->addSql("INSERT INTO parametre (id, nom, valeur) VALUES (4, 'site_email', 'assoguinée@gmail.com')");
