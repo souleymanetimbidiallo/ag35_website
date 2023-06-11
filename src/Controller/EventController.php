@@ -26,7 +26,6 @@ class EventController extends AbstractController
         $parametres = [
             'site_name' => $parameterService->getSiteName(),
             'nom_association' => $parameterService->getParametreByName("nom_association"),
-            #'site_logo' => $parameterService->getSiteLogo(),
             'address' => $parameterService->getSiteAdresse(),
             'email' => $parameterService->getSiteEmail(),
             'telephone' => $parameterService->getSiteTelephone(),
@@ -59,7 +58,7 @@ class EventController extends AbstractController
             'current_menu' => 'evenements',
             'parametres'   => $parametres,
             'images' => $images,
-           'evenements' => $evenements
+            'evenements' => $evenements
         ]);
     }
 }

@@ -27,9 +27,7 @@ class MainController extends AbstractController
 
         $parametres = [
             'site_name' => $parameterService->getParametreByName("site_name"),
-            #'site_logo' => $parameterService->getSiteLogo(),
             'lien_presentation_youtube' => $parameterService->getParametreByName("lien_presentation_youtube"),
-            'site_logo' => $parameterService->getSiteLogo(),
             'address' => $parameterService->getParametreByName("site_adresse"),
             'email' => $parameterService->getSiteEmail(),
             'telephone' => $parameterService->getSiteTelephone(),
