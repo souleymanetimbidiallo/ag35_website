@@ -42,6 +42,8 @@ final class Version20230610213055 extends AbstractMigration
         $this->addSql('ALTER TABLE media ADD CONSTRAINT FK_6A2CA10C642B8210 FOREIGN KEY (admin_id) REFERENCES admin (id)');
         $this->addSql('ALTER TABLE membre ADD CONSTRAINT FK_F6B4FB29642B8210 FOREIGN KEY (admin_id) REFERENCES admin (id)');
 
+        $this->addSql("INSERT INTO admin (email, roles, password, nom, prenom) VALUES (1, 'yayakomara56@gmail.com', '[\"ROLE_ADMIN\"]', 'demo', 'Komara', 'Yaya')");
+
         $this->addSql("INSERT INTO actualite (admin_id, titre, description, date_publication) VALUES (1, 'Titre de l''actualité', 'Description de l''actualité', NOW())");
         $this->addSql("INSERT INTO actualite (admin_id, titre, description, date_publication) VALUES (1, 'Nouvelle actualité', 'Description de la nouvelle actualité', NOW())");
         $this->addSql("INSERT INTO actualite (admin_id, titre, description, date_publication) VALUES (1, 'Actualité importante', 'Description de l\'actualité importante', NOW())");
