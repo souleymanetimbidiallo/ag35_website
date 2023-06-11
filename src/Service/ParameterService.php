@@ -42,6 +42,7 @@ class ParameterService
     }
 
 
+
     public function getSiteAdresse()
     {
         $repository = $this->entityManager->getRepository(Parametre::class);
@@ -155,56 +156,8 @@ class ParameterService
     public function setNomAsso($nom_asso)
     {
         $repository = $this->entityManager->getRepository(Parametre::class);
-        $parametre = $repository->findOneBy(['nom' => "nom_asso"]);
+        $parametre = $repository->findOneBy(['nom' => "nom_association"]);
         $parametre->setValeur($nom_asso);
-        $this->entityManager->flush();
-    }
-
-    public function getAssoImg1()
-    {
-        $repository = $this->entityManager->getRepository(Parametre::class);
-        $parametre = $repository->findOneBy(['nom' => "fond1"]);
-
-        return $parametre->getValeur();
-    }
-
-    public function setAssoImg1($asso_img1)
-    {
-        $repository = $this->entityManager->getRepository(Parametre::class);
-        $parametre = $repository->findOneBy(['nom' => "fond1"]);
-        $parametre->setValeur($asso_img1);
-        $this->entityManager->flush();
-    }
-
-    public function getAssoImg2()
-    {
-        $repository = $this->entityManager->getRepository(Parametre::class);
-        $parametre = $repository->findOneBy(['nom' => "fond2"]);
-
-        return $parametre->getValeur();
-    }
-
-    public function setAssoImg2($asso_img2)
-    {
-        $repository = $this->entityManager->getRepository(Parametre::class);
-        $parametre = $repository->findOneBy(['nom' => "fond2"]);
-        $parametre->setValeur($asso_img2);
-        $this->entityManager->flush();
-    }
-
-    public function getAssoImg3()
-    {
-        $repository = $this->entityManager->getRepository(Parametre::class);
-        $parametre = $repository->findOneBy(['nom' => "fond3"]);
-
-        return $parametre->getValeur();
-    }
-
-    public function setAssoImg3($asso_img3)
-    {
-        $repository = $this->entityManager->getRepository(Parametre::class);
-        $parametre = $repository->findOneBy(['nom' => "fond3"]);
-        $parametre->setValeur($asso_img3);
         $this->entityManager->flush();
     }
 
