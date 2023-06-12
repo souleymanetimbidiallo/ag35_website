@@ -6,6 +6,7 @@ use App\Repository\GuideRepository;
 use App\Repository\MesImageRepository;
 use App\Service\MenuService;
 use App\Service\ParameterService;
+use App\Service\TexteService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -15,7 +16,7 @@ class GuideController extends AbstractController
     /**
      * @Route("/guide", name="app_guide")
      */
-    public function index(ParameterService $parameterService, MenuService $menuService, MesImageRepository $mesImageRepository, GuideRepository $guideRepository): Response
+    public function index(ParameterService $parameterService, MenuService $menuService, MesImageRepository $mesImageRepository, GuideRepository $guideRepository, TexteService $texteService): Response
     {
         $parametres = [
             'site_name' => $parameterService->getSiteName(),
@@ -42,7 +43,9 @@ class GuideController extends AbstractController
             'texte_nos_gouvernances' => $parameterService->getParametreByName("texte_nos_gouvernances"),
             'nos_partenaires' => $parameterService->getParametreByName("nos_partenaires"),
             'texte_nos_partenaires' => $parameterService->getParametreByName("texte_nos_partenaires"),
-            'nous_sommes' => $parameterService->getParametreByName("site_nous_sommes")
+            'nous_sommes' => $parameterService->getParametreByName("site_nous_sommes"),
+            'texte_guide' => $texteService->getParametreByName('texte_guide'),
+            'lien_donation' => $parameterService->getParametreByName('lien_donation')
         ];
 
         $images = $mesImageRepository->findAll();

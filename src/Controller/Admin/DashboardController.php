@@ -13,6 +13,7 @@ use App\Entity\MesImage;
 use App\Entity\ParamImage;
 use App\Entity\Service;
 use App\Entity\Temoin;
+use App\Entity\TexteParam;
 use App\Entity\Valeur;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -52,6 +53,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Valeur-Asso', 'fas fa-bullseye', Valeur::class);
         yield MenuItem::linkToCrud('Partenaires-Sponsors', 'fas fa-handshake', ParamImage::class);
         yield MenuItem::linkToCrud('Images', 'fas fa-images', MesImage::class);
+        yield MenuItem::linkToCrud('Textes', 'fas fa-text', TexteParam::class);
         yield MenuItem::linkToCrud('Guide-PDF', 'fas fa-file', Guide::class);
         yield MenuItem::linkToCrud('Admin', 'fas fa-lock', Admin::class);
     }

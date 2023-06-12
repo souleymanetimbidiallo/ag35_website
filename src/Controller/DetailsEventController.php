@@ -6,6 +6,7 @@ use App\Repository\EvenementRepository;
 use App\Repository\MesImageRepository;
 use App\Service\MenuService;
 use App\Service\ParameterService;
+use App\Service\TexteService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -47,7 +48,8 @@ class DetailsEventController extends AbstractController
             'nos_partenaires' => $parameterService->getParametreByName("nos_partenaires"),
             'texte_nos_partenaires' => $parameterService->getParametreByName("texte_nos_partenaires"),
             'nous_sommes' => $parameterService->getParametreByName("site_nous_sommes"),
-            'lien_billeterie' => $parameterService->getParametreByName("lien_billeterie")
+            'lien_billeterie' => $parameterService->getParametreByName("lien_billeterie"),
+            'lien_donation' => $parameterService->getParametreByName('lien_donation')
 
         ];
 

@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Service\MenuService;
 use App\Service\ParameterService;
-
+use App\Service\TexteService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -42,7 +42,8 @@ class DonController extends AbstractController
             'texte_nos_gouvernances' => $parameterService->getParametreByName("texte_nos_gouvernances"),
             'nos_partenaires' => $parameterService->getParametreByName("nos_partenaires"),
             'texte_nos_partenaires' => $parameterService->getParametreByName("texte_nos_partenaires"),
-            'nous_sommes' => $parameterService->getParametreByName("site_nous_sommes")
+            'nous_sommes' => $parameterService->getParametreByName("site_nous_sommes"),
+            'lien_donation' => $parameterService->getParametreByName('lien_donation')
         ];
 
         return $this->render('don.html.twig', [

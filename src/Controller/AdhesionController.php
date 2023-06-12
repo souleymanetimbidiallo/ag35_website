@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Repository\MesImageRepository;
 use App\Service\MenuService;
 use App\Service\ParameterService;
+use App\Service\TexteService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -14,7 +15,7 @@ class AdhesionController extends AbstractController
     /**
      * @Route("/adhesion", name="app_adhesion") 
      */
-    public function index(ParameterService $parameterService, MenuService $menuService, MesImageRepository $mesImageRepository): Response
+    public function index(ParameterService $parameterService, MenuService $menuService, MesImageRepository $mesImageRepository, TexteService $texteService): Response
     {
 
         $parametres = [
@@ -44,6 +45,8 @@ class AdhesionController extends AbstractController
             'texte_nos_partenaires' => $parameterService->getParametreByName("texte_nos_partenaires"),
             'nous_sommes' => $parameterService->getParametreByName("site_nous_sommes"),
             'lien_adhesion' => $parameterService->getParametreByName("lien_adhesion"),
+            'texte_adhesion' => $texteService->getParametreByName('texte_adhesion'),
+            'lien_donation' => $texteService->getParametreByName('lien_donation')
 
         ];
         $images = $mesImageRepository->findAll();

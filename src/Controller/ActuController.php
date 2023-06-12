@@ -6,6 +6,7 @@ use App\Repository\ActualiteRepository;
 use App\Repository\MesImageRepository;
 use App\Service\MenuService;
 use App\Service\ParameterService;
+use App\Service\TexteService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -15,7 +16,7 @@ class ActuController extends AbstractController
     /**
      * @Route("/actualites", name="app_actualites")
      */
-    public function index(ParameterService $parameterService, MenuService $menuService, ActualiteRepository $actualiteRepository, MesImageRepository $mesImageRepository): Response
+    public function index(ParameterService $parameterService, MenuService $menuService, ActualiteRepository $actualiteRepository, MesImageRepository $mesImageRepository, TexteService $texteService): Response
     {
         $parametres = [
             'site_name' => $parameterService->getSiteName(),
@@ -43,7 +44,9 @@ class ActuController extends AbstractController
             'nos_partenaires' => $parameterService->getParametreByName("nos_partenaires"),
             'texte_nos_partenaires' => $parameterService->getParametreByName("texte_nos_partenaires"),
             'nous_sommes' => $parameterService->getParametreByName("site_nous_sommes"),
-            'lien_actualite' => $parameterService->getParametreByName("lien_actualite")
+            'lien_actualite' => $parameterService->getParametreByName("lien_actualite"),
+            'texte_actu' => $texteService->getParametreByName('texte_actu'),
+            'lien_donation' => $texteService->getParametreByName('lien_donation')
         ];
         $images = $mesImageRepository->findAll();
 
