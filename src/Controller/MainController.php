@@ -10,6 +10,7 @@ use App\Repository\ServiceRepository;
 use App\Repository\TemoinRepository;
 use App\Service\MenuService;
 use App\Service\ParameterService;
+use App\Service\TexteService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Dotenv\Dotenv;
 use Symfony\Component\HttpFoundation\Request;
@@ -38,7 +39,6 @@ class MainController extends AbstractController
             'menu_accueil' => $menuService->getAccueil(),
             'menu_apropos' => $menuService->getApropos(),
             'menu_activite' => $menuService->getActivite(),
-            'menu_multimedia' => $menuService->getMultimedia(),
             'menu_donation' => $menuService->getDonation(),
             'menu_adhesion' => $menuService->getAdhesion(),
             'menu_contact' => $menuService->getContact(),
@@ -54,7 +54,8 @@ class MainController extends AbstractController
             'texte_nos_gouvernances' => $parameterService->getParametreByName("texte_nos_gouvernances"),
             'nos_partenaires' => $parameterService->getParametreByName("nos_partenaires"),
             'texte_nos_partenaires' => $parameterService->getParametreByName("texte_nos_partenaires"),
-            'nous_sommes' => $parameterService->getParametreByName("site_nous_sommes")
+            'nous_sommes' => $parameterService->getParametreByName("site_nous_sommes"),
+            'lien_donation' => $parameterService->getParametreByName('lien_donation')
 
 
 

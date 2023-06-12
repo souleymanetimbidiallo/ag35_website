@@ -57,21 +57,19 @@
 
 				<h4 class="text-white mb-4">Liens rapides</h4>
 
-				<a class="btn btn-link" href="/about">A propos</a>
+				<a class="btn btn-link" href="/about">{{parametres.menu_apropos }}</a>
 
-				<a class="btn btn-link" href="/evenements">Evénements</a>
+				<a class="btn btn-link" href="/evenements">{{ parametres.menu_evenement }}</a>
 
-				<a class="btn btn-link" href="/actualites">Actualités</a>
+				<a class="btn btn-link" href="/actualites">{{ parametres.menu_actualite }}</a>
 
-				<a class="btn btn-link" href="/guide">Guides</a>
+				<a class="btn btn-link" href="/guide">{{ parametres.menu_guide }}</a>
 
-				<a class="btn btn-link" href="/multimedia">Multimédia</a>
+				<a class="btn btn-link" href="{{ parametres.lien_donation }}" target=" _blank">{{ parametres.menu_donation }}</a>
 
-				<a class="btn btn-link" href="/don">Donation</a>
+				<a class="btn btn-link" href="/adhesion">{{ parametres.menu_adhesion }}</a>
 
-				<a class="btn btn-link" href="/adhesion">Adhésion</a>
-
-				<a class="btn btn-link" href="/contact">Contact</a>
+				<a class="btn btn-link" href="/contact">{{ parametres.menu_contact }}</a>
 
 			</div>
 
