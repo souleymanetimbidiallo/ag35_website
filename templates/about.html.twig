@@ -36,10 +36,10 @@
 						<li>Créer, favoriser et consolider les liens de fraternité, de solidarité et d’entraide entre les																																																																																																																																																																																																																																																																																																																																																																																																																					guinéen(ne)s ;</li>
 						<li>Porter, accompagner et soutenir le développement et l’intégraon socio-professionnels et																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																					culturels des guinéen(ne)s en Ille-et-Vilaine ;</li>
 						<li>Promouvoir, encourager et communiquer sur les initiatives et les acvités de ses membres
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																												et de ses partenaires et les aider dans la réalisaon de leurs projets ;</li>
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																															et de ses partenaires et les aider dans la réalisaon de leurs projets ;</li>
 						culturels des guinéen(ne)s en Ille-et-Vilaine ;</li>
 					<li>Promouvoir, encourager et communiquer sur les initiatives et les acvités de ses membres
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																			et de ses partenaires et les aider dans la réalisaon de leurs projets ;</li>
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																	et de ses partenaires et les aider dans la réalisaon de leurs projets ;</li>
 					<li>Initier et accompagner tous projets de développement en faveur de la Guinée ;</li>
 					<li>Accueillir et accompagner les nouveaux étudiants ;</li>
 					<li>Créer des réseaux d'échange et de partenariats ;</li>
@@ -48,8 +48,8 @@
 
 				culturels des guinéen(ne)s en Ille-et-Vilaine ;</li>
 			<li>Promouvoir, encourager et communiquer sur les initiatives et les acvités de ses membres
-																																				
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																												culturels des guinéen(ne)s en Ille-et-Vilaine ;</li>
+																																																								
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																culturels des guinéen(ne)s en Ille-et-Vilaine ;</li>
 
 			et de ses partenaires et les aider dans la réalisaon de leurs projets ;</li>
 		culturels des guinéen(ne)s en Ille-et-Vilaine ;</li>
@@ -63,12 +63,12 @@
 	<h4 class="card-title text-primary">{{ valeur.titre }}</h4>
 	<p class="card-text">{{ valeur.descriptif }}</p>
 </div></div></div>{% endfor %}</div></div><!-- Nos Valeurs End --><!-- Team Start --><div class="container bg-light my-5 py-5"><div class="row"><div class="col-12 text-center"><h2 class="text-primary">{{parametres.nos_gouvernances}}</h2><p>{{parametres.texte_nos_gouvernances}}</p></div></div><div class="container-xxl py-5"><div class="container"><div class="row g-4">{% for mBureau in bureau %}
-<div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-	<div class="team-item rounded overflow-hidden pb-4">
-		<img class="img-fluid mb-4" src="{{ asset('img/ag35/' ~ mBureau.imageName) }}" alt="Photo">
-		<h5>{{mBureau.prenom}}
-			{{mBureau.nom}}</h5>
-		<span class="text-primary">{{mBureau.fonction}}</span>
+<div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s" style="height: 350px;">
+	<div class="team-item rounded overflow-hidden pb-4" style="height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
+		<img class="img-fluid mb-4" src="{{ asset('img/ag35/' ~ mBureau.imageName) }}" alt="Photo" style="object-fit: cover; width: auto; height: 100%; max-width: 100%;">
+		<h5>{{ mBureau.prenom }}
+			{{ mBureau.nom }}</h5>
+		<span class="text-primary">{{ mBureau.fonction }}</span>
 	</div>
 </div>{% endfor %}</div></div></div></div><!-- Team End --><!-- Partenaires et Sponsors --><div class="container bg-light my-5 py-5"><div class="row"><div class="col-12 text-center"><h2 class="text-primary">{{ parametres.nos_partenaires }}</h2><p>{{ parametres.texte_nos_partenaires }}</p></div></div><div class="row justify-content-center"><div class="col-12 partner-logos"><div class="d-flex justify-content-between align-items-center">{% if partenaires is not null %}
 {% for partenaire in partenaires %}
