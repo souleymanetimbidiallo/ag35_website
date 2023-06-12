@@ -35,6 +35,7 @@ class SecurityController extends AbstractController
             'menu_actualite' => $menuService->getActualite(),
             'menu_guide' => $menuService->getGuide(),
             'nom_association' => $parameterService->getParametreByName("nom_association"),
+            'lien_donation' => $parameterService->getParametreByName('lien_donation')
         ];
 
         $images = $mesImageRepository->findAll();

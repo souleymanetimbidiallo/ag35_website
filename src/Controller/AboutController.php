@@ -8,7 +8,7 @@ use App\Repository\ParamImageRepository;
 use App\Repository\ValeurRepository;
 use App\Service\MenuService;
 use App\Service\ParameterService;
-
+use App\Service\TexteService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -19,7 +19,7 @@ class AboutController extends AbstractController
      * @Route("/about", name="app_about")
      */
 
-    public function index(ParameterService $parameterService, MembreRepository $membreRepository, ValeurRepository $valeurRep, ParamImageRepository $paramImageRepository, MenuService $menuService, MesImageRepository $mesImageRepository): Response
+    public function index(ParameterService $parameterService, MembreRepository $membreRepository, ValeurRepository $valeurRep, ParamImageRepository $paramImageRepository, MenuService $menuService, MesImageRepository $mesImageRepository, TexteService $texteService): Response
     {
 
         $parametres = [
@@ -47,7 +47,9 @@ class AboutController extends AbstractController
             'texte_nos_gouvernances' => $parameterService->getParametreByName("texte_nos_gouvernances"),
             'nos_partenaires' => $parameterService->getParametreByName("nos_partenaires"),
             'texte_nos_partenaires' => $parameterService->getParametreByName("texte_nos_partenaires"),
-            'nous_sommes' => $parameterService->getParametreByName("site_nous_sommes")
+            'nous_sommes' => $parameterService->getParametreByName("site_nous_sommes"),
+            'texte_about' => $texteService->getParametreByName('texte_about'),
+            'lien_donation' => $texteService->getParametreByName('lien_donation')
         ];
 
 
