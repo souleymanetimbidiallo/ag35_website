@@ -5,53 +5,45 @@
 	<div class="container-fluid px-0 mb-5">
 		<div class="carousel" id="carousel" data-bs-ride="carousel">
 			<div class="carousel-inner">
-				<div class="carousel-item active " data-bs-interval="2000">
-					{% for image in images %}
+				{% for image in images %}
+					<div class="carousel-item active" data-bs-interval="2000" style="background-image: url('{{ asset('img/ag35/' ~ image.imageName2) }}'); background-size: cover; background-position: center; height: 100vh;">
 
-						<img class="w-100" src="{{ asset('img/ag35/' ~ image.imageName2) }}" alt="Image" style="max-width: 1600px; max-height: 800px; min-width: 650px; min-height: 450px;">
-					{% endfor %}
-					<div class="carousel-caption">
-						<div class="container">
-							<div class="row justify-content-start">
-								<div class="col-lg-7 text-start">
-									<p class="fs-4 text-white animated slideInRight">
-										<strong>{{ parametres.site_name }}</strong>
-									</p>
-									<h1 class="display-1 text-white mb-4 animated slideInRight">{{  parametres.nom_association }}</h1>
+						<div class="carousel-caption">
+							<div class="container">
+								<div class="row justify-content-start">
+									<div class="col-lg-7 text-start">
+										<p class="fs-4 text-white animated slideInRight">
+											<strong>{{ parametres.site_name }}</strong>
+										</p>
+										<h1 class="display-1 text-white mb-4 animated slideInRight">{{  parametres.nom_association }}</h1>
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-				<div class="carousel-item" data-bs-interval="2000">
-					{% for image in images %}
-
-
-						<img class="w-100" src="{{ asset('img/ag35/' ~ image.imageName3) }}" alt="Image 1" style="max-width: 1600px; max-height: 800px; min-width: 650px; min-height: 450px;">
-					{% endfor %}
-				</div>
-				<div class="carousel-item" data-bs-interval="2000">
-					{% for image in images %}
-
-
-						<img class="w-100" src="{{ asset('img/ag35/' ~ image.imageName4) }}" alt="Image" style="max-width: 1600px; max-height: 800px; min-width: 650px; min-height: 450px;">
-					{% endfor %}
-				</div>
+				{% endfor %}
+				{% for image in images %}
+					<div class="carousel-item" data-bs-interval="2000" style="background-image: url('{{ asset('img/ag35/' ~ image.imageName3) }}'); background-size: cover; background-position: center; height: 100vh;"></div>
+				{% endfor %}
+				{% for image in images %}
+					<div class="carousel-item" data-bs-interval="2000" style="background-image: url('{{ asset('img/ag35/' ~ image.imageName4) }}'); background-size: cover; background-position: center; height: 100vh;"></div>
+				{% endfor %}
 			</div>
-			<button class="carousel-control-prev" type="button" data-bs-target="#carousel" data-bs-slide="prev">
-				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-				<span class="visually-hidden">Previous</span>
-			</button>
-			<button class="carousel-control-next" type="button" data-bs-target="#carousel" data-bs-slide="next">
-				<span class="carousel-control-next-icon" aria-hidden="true"></span>
-				<span class="visually-hidden">Next</span>
-			</button>
 		</div>
+		<button class="carousel-control-prev" type="button" data-bs-target="#carousel" data-bs-slide="prev">
+			<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+			<span class="visually-hidden">Previous</span>
+		</button>
+		<button class="carousel-control-next" type="button" data-bs-target="#carousel" data-bs-slide="next">
+			<span class="carousel-control-next-icon" aria-hidden="true"></span>
+			<span class="visually-hidden">Next</span>
+		</button>
 	</div>
+</div>
 
-	<script type="text/javascript" src="slick/slick.min.js"></script>
-	<script type="text/javascript">
-		$(document).ready(function () {
+<script type="text/javascript" src="slick/slick.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function () {
 $('.carousel').slick({
 slidesToShow: 3,
 slidesToScroll: 1,
@@ -61,130 +53,110 @@ dots: true,
 arrows: false
 });
 });
-	</script>
+</script>
 
-	<!-- Carousel End -->
+<!-- Carousel End -->
 
 
-	<!-- Features Start -->
-	<div class="container-xxl py-5">
-		<div class="container">
-			<div class="row g-0 feature-row">
-				{% for service in services %}
-					<div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.1s">
-						<div class="feature-item border h-100 p-5">
-							<div class="btn-square bg-light rounded-circle mb-4" style="width: 64px; height: 64px;">
-								<img class="img-fluid" src="{{ asset('img/ag35/' ~ service.imageName) }}" alt="Icon">
-							</div>
-							<h5 class="mb-3">{{service.titre}}</h5>
-							<p class="mb-0">{{ service.descriptif }}</p>
+<!-- Features Start -->
+<div class="container-xxl py-5">
+	<div class="container">
+		<div class="row g-0 feature-row">
+			{% for service in services %}
+				<div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.1s">
+					<div class="feature-item border h-100 p-5">
+						<div class="btn-square bg-light rounded-circle mb-4" style="width: 64px; height: 64px;">
+							<img class="img-fluid" src="{{ asset('img/ag35/' ~ service.imageName) }}" alt="Icon">
 						</div>
-					</div>
-				{% endfor %}
-
-			</div>
-		</div>
-	</div>
-	<!-- Features End -->
-
-
-	<!-- About Start -->
-	<div class="container-xxl about my-5">
-		<div class="container">
-			<div class="row g-0">
-				<div class="col-lg-6">
-					<div class="h-100 d-flex align-items-center justify-content-center" style="min-height: 300px;">
-						<button type="button" class="btn-play" data-bs-toggle="modal" data-src="https://www.youtube.com/embed/DWRcNpR6Kdc" data-bs-target="#videoModal">
-							<span></span>
-						</button>
-					</div>
-				</div>
-				<h1 class="display-6 mb-4">{{ parametres.accueil_video }}</h1>
-
-
-			</div>
-		</div>
-	</div>
-</div></div><!-- About End --><!-- Video Modal Start --><div class="modal modal-video fade" id="videoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-<div class="modal-dialog">
-	<div class="modal-content rounded-0">
-		<div class="modal-header">
-			<h3 class="modal-title" id="exampleModalLabel">
-				video</h3>
-			<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">></div>
-			<div
-				class="modal-body">
-				<!-- 16:9 aspect ratio -->
-				<div class="ratio ratio-16x9">
-					<iframe class="embed-responsive-item" src="{{parametres.lien_presentation_youtube}}" id="video" allowfullscreen allowscriptaccess="always" allow="autoplay"></iframe>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-<!-- Video Modal End -->
-
-
-<!-- Service Start -->
-
-
-<!-- Project Start -->
-	<div class="container-xxl pt-5"> <div class="container">
-		<div class="text-center text-md-start pb-5 pb-md-0 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
-
-			<h1 class="display-5 mb-5">{{ parametres.accueil_event }}</h1>
-		</div>
-		<div class="owl-carousel project-carousel wow fadeInUp" data-wow-delay="0.1s">
-			{% for evenement in evenements %}
-				<div class="project-item mb-5">
-					<div class="position-relative">
-						<img class="img-fluid" src="{{ asset('img/ag35/' ~ evenement.imageName) }}" alt="Image">
-						<div class="project-overlay">
-							<a class="btn btn-lg-square btn-light rounded-circle m-1" href="/details_event?titre={{ evenement.titre|url_encode }}&commentaire={{ evenement.commentaire|url_encode }}&image={{ evenement.imageName }}&adresse={{ evenement.adresse|url_encode }}&prix={{ evenement.prix|url_encode }}">
-								<i class="fa fa-eye"></i>
-							</a>
-						</div>
-					</div>
-					<div class="p-4">
-						<a class="d-block h5" href="">{{ evenement.titre }}</a>
-
+						<h5 class="mb-3">{{service.titre}}</h5>
+						<p class="mb-0">{{ service.descriptif }}</p>
 					</div>
 				</div>
 			{% endfor %}
-		</div>
 
-
-		<div class="d-flex justify-content-center align-items-center">
-			<a href="/evenements" class="btn btn-primary">Voir plus</a>
 		</div>
 	</div>
 </div>
-<!-- Project End -->
+<!-- Features End -->
 
 
-<!-- Quote Start -->
+<!-- About Start -->
+<div class="container-xxl about my-5">
+	<div class="container">
+		<div class="row g-0">
+			<div class="col-lg-6">
+				<div class="h-100 d-flex align-items-center justify-content-center" style="min-height: 300px;">
+					<button type="button" class="btn-play" data-bs-toggle="modal" data-src="https://www.youtube.com/embed/DWRcNpR6Kdc" data-bs-target="#videoModal">
+						<span></span>
+					</button>
+				</div>
+			</div>
+			<h1 class="display-6 mb-4">{{ parametres.accueil_video }}</h1>
 
 
-<!-- Testimonial Start -->
-	<div class="container-xxl pt-5"> <div class="container">
+		</div>
+	</div>
+</div></div></div><!-- About End --><!-- Video Modal Start --><div class="modal modal-video fade" id="videoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"><div class="modal-dialog">
+<div class="modal-content rounded-0">
+	<div class="modal-header">
+		<h3 class="modal-title" id="exampleModalLabel">
+			video</h3>
+		<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">></div>
 		<div
-			class="text-center text-md-start pb-5 pb-md-0 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
-			<!--	<p class="fs-5 fw-medium text-primary">Testimonial</p> -->
-			<h1 class="display-5 mb-5">{{ parametres.accueil_temoin }}</h1>
-		</div>
-		<div class="owl-carousel testimonial-carousel wow fadeInUp" data-wow-delay="0.1s">
-			{% for temoin in temoins %}
-				<div class="testimonial-item rounded p-4 p-lg-5 mb-5">
-					<img class="mb-4" src="{{ asset('img/ag35/' ~ temoin.imageName) }}" alt="Icon">
-					<p class="mb-4">{{ temoin.descriptif }}
-					</p>
-					<h5>{{ temoin.nom }}</h5>
-					<span class="text-primary">{{ temoin.fonction }}
-					</span>
-				</div>
-			{% endfor %}
-
+			class="modal-body">
+			<!-- 16:9 aspect ratio -->
+			<div class="ratio ratio-16x9">
+				<iframe class="embed-responsive-item" src="{{parametres.lien_presentation_youtube}}" id="video" allowfullscreen allowscriptaccess="always" allow="autoplay"></iframe>
+			</div>
 		</div>
 	</div>
-</div>
-<!-- Testimonial End -->{% endblock %}
+</div></div><!-- Video Modal End --><!-- Service Start --><!-- Project Start -->
+<div class="container-xxl pt-5"> <div class="container">
+	<div class="text-center text-md-start pb-5 pb-md-0 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
+
+		<h1 class="display-5 mb-5">{{ parametres.accueil_event }}</h1>
+	</div>
+	<div class="owl-carousel project-carousel wow fadeInUp" data-wow-delay="0.1s">
+		{% for evenement in evenements %}
+			<div class="project-item mb-5">
+				<div class="position-relative">
+					<img class="img-fluid" src="{{ asset('img/ag35/' ~ evenement.imageName) }}" alt="Image">
+					<div class="project-overlay">
+						<a class="btn btn-lg-square btn-light rounded-circle m-1" href="/details_event?titre={{ evenement.titre|url_encode }}&commentaire={{ evenement.commentaire|url_encode }}&image={{ evenement.imageName }}&adresse={{ evenement.adresse|url_encode }}&prix={{ evenement.prix|url_encode }}">
+							<i class="fa fa-eye"></i>
+						</a>
+					</div>
+				</div>
+				<div class="p-4">
+					<a class="d-block h5" href="">{{ evenement.titre }}</a>
+
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+
+
+	<div class="d-flex justify-content-center align-items-center">
+		<a href="/evenements" class="btn btn-primary">Voir plus</a>
+	</div>
+</div></div><!-- Project End --><!-- Quote Start --><!-- Testimonial Start -->
+<div class="container-xxl pt-5"> <div class="container">
+	<div
+		class="text-center text-md-start pb-5 pb-md-0 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
+		<!--	<p class="fs-5 fw-medium text-primary">Testimonial</p> -->
+		<h1 class="display-5 mb-5">{{ parametres.accueil_temoin }}</h1>
+	</div>
+	<div class="owl-carousel testimonial-carousel wow fadeInUp" data-wow-delay="0.1s">
+		{% for temoin in temoins %}
+			<div class="testimonial-item rounded p-4 p-lg-5 mb-5">
+				<img class="mb-4" src="{{ asset('img/ag35/' ~ temoin.imageName) }}" alt="Icon">
+				<p class="mb-4">{{ temoin.descriptif }}
+				</p>
+				<h5>{{ temoin.nom }}</h5>
+				<span class="text-primary">{{ temoin.fonction }}
+				</span>
+			</div>
+		{% endfor %}
+
+	</div>
+</div></div><!-- Testimonial End -->{% endblock %}

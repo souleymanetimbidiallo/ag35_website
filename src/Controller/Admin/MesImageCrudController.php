@@ -72,5 +72,11 @@ class MesImageCrudController extends AbstractCrudController
             ->setUploadDir('public/img/ag35')
             ->setLabel('guineeApropos') // Libellé du champ
             ->onlyOnForms();
+        yield TextField::new('imageName8');
+        yield ImageField::new('imageName8')
+            ->setBasePath('/img') // Chemin de base pour afficher l'image
+            ->setUploadDir('public/img/ag35')
+            ->setLabel('img de Fond pour les pages') // Libellé du champ
+            ->onlyOnForms();
     }
 }
