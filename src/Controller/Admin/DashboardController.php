@@ -53,7 +53,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Valeur-Asso', 'fas fa-bullseye', Valeur::class);
         yield MenuItem::linkToCrud('Partenaires-Sponsors', 'fas fa-handshake', ParamImage::class);
         yield MenuItem::linkToCrud('Images', 'fas fa-images', MesImage::class);
-        yield MenuItem::linkToCrud('Textes', 'fas fa-text', TexteParam::class);
+        yield MenuItem::linkToCrud('Textes', 'fas fa-message', TexteParam::class);
         yield MenuItem::linkToCrud('Guide-PDF', 'fas fa-file', Guide::class);
         yield MenuItem::linkToCrud('Admin', 'fas fa-lock', Admin::class);
     }
