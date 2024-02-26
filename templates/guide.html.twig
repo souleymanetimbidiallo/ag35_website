@@ -6,7 +6,7 @@
 	<!-- Page Header Start -->
 
 	{% for image in images %}
-		<div class="container-fluid py-5 mb-5 wow" data-wow-delay="0.1s" style="background-image: url('{{ asset('img/ag35/' ~ image.imageName8) }}'); background-size: cover; background-position: center; min-height: 100vh;">
+		<div class="container-fluid py-5 mb-5 wow" data-wow-delay="0.1s" style="background-image: url('{{ asset('img/' ~ image.imageName8) }}'); background-size: cover; background-position: center; min-height: 100vh;">
 
 			<div class="container text-center py-5">
 
@@ -34,7 +34,7 @@
 
 
 		{% for guide in guides %}
-			{% set pdfPath = 'img/ag35/' ~ guide.pdfName %}
+			{% set pdfPath = 'pdf/' ~ guide.pdfName %}
 			{% if app.request.server.get('DOCUMENT_ROOT') ~ asset(pdfPath)|file_exists %}
 				<div class="text-center">
 					<a href="{{ asset(pdfPath) }}" target="_blank" rel="noopener noreferrer" download>Télécharger le fichier PDF</a>

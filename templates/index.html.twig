@@ -6,7 +6,7 @@
 		<div class="carousel" id="carousel" data-bs-ride="carousel">
 			<div class="carousel-inner">
 				{% for image in images %}
-					<div class="carousel-item active" data-bs-interval="2000" style="background-image: url('{{ asset('img/ag35/' ~ image.imageName2) }}'); background-size: cover; background-position: center; height: 100vh;">
+					<div class="carousel-item active" data-bs-interval="2000" style="background-image: url('{{ asset('img/' ~ image.imageName2) }}'); background-size: cover; background-position: center; height: 100vh;">
 
 						<div class="carousel-caption">
 							<div class="container">
@@ -23,10 +23,10 @@
 					</div>
 				{% endfor %}
 				{% for image in images %}
-					<div class="carousel-item" data-bs-interval="2000" style="background-image: url('{{ asset('img/ag35/' ~ image.imageName3) }}'); background-size: cover; background-position: center; height: 100vh;"></div>
+					<div class="carousel-item" data-bs-interval="2000" style="background-image: url('{{ asset('img/' ~ image.imageName3) }}'); background-size: cover; background-position: center; height: 100vh;"></div>
 				{% endfor %}
 				{% for image in images %}
-					<div class="carousel-item" data-bs-interval="2000" style="background-image: url('{{ asset('img/ag35/' ~ image.imageName4) }}'); background-size: cover; background-position: center; height: 100vh;"></div>
+					<div class="carousel-item" data-bs-interval="2000" style="background-image: url('{{ asset('img/' ~ image.imageName4) }}'); background-size: cover; background-position: center; height: 100vh;"></div>
 				{% endfor %}
 			</div>
 		</div>
@@ -66,7 +66,7 @@ arrows: false
 				<div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.1s">
 					<div class="feature-item border h-100 p-5">
 						<div class="btn-square bg-light rounded-circle mb-4" style="width: 64px; height: 64px;">
-							<img class="img-fluid" src="{{ asset('img/ag35/' ~ service.imageName) }}" alt="Icon">
+							<img class="img-fluid" src="{{ asset('img/' ~ service.imageName) }}" alt="Icon">
 						</div>
 						<h5 class="mb-3">{{service.titre}}</h5>
 						<p class="mb-0">{{ service.descriptif }}</p>
@@ -120,7 +120,7 @@ arrows: false
 		{% for evenement in evenements %}
 			<div class="project-item mb-5">
 				<div class="position-relative">
-					<img class="img-fluid" src="{{ asset('img/ag35/' ~ evenement.imageName) }}" alt="Image">
+					<img class="img-fluid" src="{{ asset('img/' ~ evenement.imageName) }}" alt="Image">
 					<div class="project-overlay">
 						<a class="btn btn-lg-square btn-light rounded-circle m-1" href="/details_event?titre={{ evenement.titre|url_encode }}&commentaire={{ evenement.commentaire|url_encode }}&image={{ evenement.imageName }}&adresse={{ evenement.adresse|url_encode }}&prix={{ evenement.prix|url_encode }}">
 							<i class="fa fa-eye"></i>
@@ -149,7 +149,7 @@ arrows: false
 	<div class="owl-carousel testimonial-carousel wow fadeInUp" data-wow-delay="0.1s">
 		{% for temoin in temoins %}
 			<div class="testimonial-item rounded p-4 p-lg-5 mb-5">
-				<img class="mb-4" src="{{ asset('img/ag35/' ~ temoin.imageName) }}" alt="Icon">
+				<img class="mb-4" src="{{ asset('img/' ~ temoin.imageName) }}" alt="Icon">
 				<p class="mb-4">{{ temoin.descriptif }}
 				</p>
 				<h5>{{ temoin.nom }}</h5>

@@ -4,7 +4,7 @@
 	<!-- Page Header Start -->
 	{% for image in images %}
 
-		<div class="container-fluid py-5 mb-5 wow" data-wow-delay="0.1s" style="background-image: url('{{ asset('img/ag35/' ~ image.imageName8) }}'); background-size: cover; background-position: center; min-height: 100vh;">
+		<div class="container-fluid py-5 mb-5 wow" data-wow-delay="0.1s" style="background-image: url('{{ asset('img/' ~ image.imageName8) }}'); background-size: cover; background-position: center; min-height: 100vh;">
 
 			<div class="container text-center py-5">
 
@@ -24,7 +24,7 @@
 				<p class="fs-5 fw-medium text-primary">Voici les détails de cet événement</p>
 				<div class="project-item mb-5">
 					{% if app.request.query.has('image') %}
-						{% set imagePath = '/img/ag35/' ~ app.request.query.get('image') %}
+						{% set imagePath = '/img/' ~ app.request.query.get('image') %}
 						<img class="img-fluid" src="{{ asset(imagePath) }}" alt="Image">
 					{% endif %}
 					<div class="p-4">

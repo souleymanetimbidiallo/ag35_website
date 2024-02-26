@@ -1,22 +1,18 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-	<!-- Page Header Start -->
-	{% for image in images %}
-		<div class="container-fluid py-5 mb-5 wow" data-wow-delay="0.1s" style="background-image: url('{{ asset('img/ag35/' ~ image.imageName8) }}'); background-size: cover; background-position: center; min-height: 100vh;">
-			<div class="container text-center py-5">
-				<h1 class="display-2 text-white mb-4 animated slideInDown">Devenez membre d’AG35</h1>
-				<nav aria-label="breadcrumb animated slideInDown"></nav>
-			</div>
-		</div>
-	{% endfor %}
-	<!-- Page Header End -->
-	<h7>
+	<div
+		class="container">
+		<!-- Page Header Start -->
 
+		<h1 class="display-2 text-dark mb-4 animated slideInDown">Devenez membre d’AG35</h1>
+		{% set points = parametres.texte_adhesion|split('.') %}
+		{% for point in points %}
+			{% if point|trim is not empty %}
+				<p>{{ point|trim }}</p>
+			{% endif %}
+		{% endfor %}
+		<a class="btn btn-primary" target="_blank" href="{{ parametres.lien_adhesion }}">Adhérer</a>
 
-		{{ parametres.texte_adhesion }}
-
-
-	</h7>
-</br>
-<a class="btn btn-primary" target="_blank" href="{{ parametres.lien_adhesion }}">Adhérer</a>{% endblock %}
+	</div>
+{% endblock %}

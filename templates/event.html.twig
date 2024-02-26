@@ -3,7 +3,7 @@
 {% block body %}
 	<!-- Page Header Start -->
 	{% for image in images %}
-		<div class="container-fluid py-5 mb-5 wow" data-wow-delay="0.1s" style="background-image: url('{{ asset('img/ag35/' ~ image.imageName8) }}'); background-size: cover; background-position: center; min-height: 100vh;">
+		<div class="container-fluid py-5 mb-5 wow" data-wow-delay="0.1s" style="background-image: url('{{ asset('img/' ~ image.imageName8) }}'); background-size: cover; background-position: center; min-height: 100vh;">
 
 			<div class="container text-center py-5">
 				<h1 class="display-2 text-white mb-4 animated slideInDown">Evenements</h1>
@@ -26,7 +26,7 @@
 				{% for evenement in evenements %}
 					<div class="project-item mb-5">
 						<div class="position-relative">
-							<img class="img-fluid" src="{{ asset('img/ag35/' ~ evenement.imageName) }}" alt="Image">
+							<img class="img-fluid" src="{{ asset('img/' ~ evenement.imageName) }}" alt="Image">
 							<div class="project-overlay">
 								<a class="btn btn-lg-square btn-light rounded-circle m-1" href="/details_event?titre={{ evenement.titre|url_encode }}&commentaire={{ evenement.commentaire|url_encode }}&image={{ evenement.imageName }}&adresse={{ evenement.adresse|url_encode }}&prix={{ evenement.prix|url_encode }}">
 									<i class="fa fa-eye"></i>

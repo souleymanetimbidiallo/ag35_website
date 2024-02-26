@@ -5,7 +5,7 @@
 
 	{% for image in images %}
 
-		<div class="container-fluid py-5 mb-5 wow" data-wow-delay="0.1s" style="background-image: url('{{ asset('img/ag35/' ~ image.imageName8) }}'); background-size: cover; background-position: center; min-height: 100vh;">
+		<div class="container-fluid py-5 mb-5 wow" data-wow-delay="0.1s" style="background-image: url('{{ asset('img/' ~ image.imageName8) }}'); background-size: cover; background-position: center; min-height: 100vh;">
 
 			<div class="container text-center py-5">
 
@@ -27,7 +27,7 @@
 			<div class="col-lg-6">
 				<div class="h-100 d-flex align-items-center justify-content-center" style="min-height: 300px;">
 					{% for image in images %}
-						<img src="{{ asset('img/ag35/' ~ image.imageName7) }}" class="img-fluid" alt="About Image">
+						<img src="{{ asset('img/' ~ image.imageName7) }}" class="img-fluid" alt="About Image">
 					{% endfor %}
 				</div>
 			</div>
@@ -35,8 +35,13 @@
 				<div class="bg-white rounded-top p-5 mt-lg-5">
 					<p class="fs-5 fw-medium text-primary">{{ parametres.nous_sommes }}</p>
 					<h1 class="display-6 mb-4">{{ parametres.nom_association }}</h1>
-					<ul class="list-unstyled mb-4">
-						{{ parametres.texte_about }}
+					<ul class="mb-4">
+						{% set points = parametres.texte_about|split(';') %}
+						{% for point in points %}
+							{% if point|trim is not empty %}
+								<li>{{ point|trim }}</li>
+							{% endif %}
+						{% endfor %}
 					</ul>
 				</li>
 			</ul>
@@ -73,7 +78,7 @@
 			{% for mBureau in bureau %}
 				<div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s" style="height: 350px;">
 					<div class="team-item rounded overflow-hidden pb-4" style="height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
-						<img class="img-fluid mb-4" src="{{ asset('img/ag35/' ~ mBureau.imageName) }}" alt="Photo" style="object-fit: cover; width: auto; height: 100%; max-width: 100%;">
+						<img class="img-fluid mb-4" src="{{ asset('img/' ~ mBureau.imageName) }}" alt="Photo" style="object-fit: cover; width: auto; height: 75%; max-width: 100%;">
 						<h5>{{ mBureau.prenom }}
 							{{ mBureau.nom }}</h5>
 						<span class="text-primary">{{ mBureau.fonction }}</span>
@@ -94,7 +99,7 @@
 		<div class="d-flex justify-content-between align-items-center">
 			{% if partenaires is not null %}
 				{% for partenaire in partenaires %}
-					<div class="partner-logo"><img src="{{ asset('img/ag35/' ~ partenaire.imageName) }}" alt="logo-partner-1" style="max-width: 150px; max-height: 150px;"></div>
+					<div class="partner-logo"><img src="{{ asset('img/' ~ partenaire.imageName) }}" alt="logo-partner-1" style="max-width: 150px; max-height: 150px;"></div>
 				{% endfor %}
 			{% endif %}
 		</div>
