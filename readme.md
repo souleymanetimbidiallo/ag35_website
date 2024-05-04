@@ -45,7 +45,7 @@ Si vous souhaitez exécuter le site en local, suivez ces étapes :
 
 ## Technologies Utilisées
 
-- Laravel pour le développement backend en PHP.
+- Symfony pour le développement backend en PHP.
 - Bootstrap pour le design et la mise en page.
 - PHP pour la logique serveur.
 - MySQL ou tout autre SGBD compatible avec Laravel pour la base de données.
