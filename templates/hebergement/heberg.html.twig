@@ -1,0 +1,15 @@
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouvel hébergement{% endblock %}
+
+{% block body %}
+    <h1>Nouvel hébergement</h1>
+
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+     {{ form_row(form.passeport) }}
+     {{ form_row(form.attestation) }}
+    <button type="submit">Enregistrer</button>
+    {{ form_end(form) }}
+{% endblock %}
