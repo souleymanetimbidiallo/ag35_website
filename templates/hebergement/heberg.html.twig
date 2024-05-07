@@ -8,8 +8,11 @@
 
     {{ form_start(form) }}
     {{ form_widget(form) }}
+{#
      {{ form_row(form.passeport) }}
      {{ form_row(form.attestation) }}
+     #}
+
     <button type="submit">Enregistrer</button>
     {{ form_end(form) }}
 {% endblock %}

@@ -22,17 +22,16 @@ class HebergementController extends AbstractController
 {
    // #[Route('/hebergement', name: 'app_hebergement')]
     public function index(
-    Request $request, 
-    ParameterService $parameterService, 
-    EntityManagerInterface $manager, 
-    ServiceRepository $serviceRepository,
-    MenuService $menuService,
-    MesImageRepository $mesImageRepository,
-    TexteService $texteService,
-    SluggerInterface $slugger, 
-    ?string $filesDirectory,
-    FileUploader $fileUploader
-    
+        Request $request, 
+        ParameterService $parameterService, 
+        EntityManagerInterface $manager, 
+        ServiceRepository $serviceRepository,
+        MenuService $menuService,
+        MesImageRepository $mesImageRepository,
+        TexteService $texteService,
+        SluggerInterface $slugger, 
+        ?string $filesDirectory, // the problem is here
+         FileUploader $fileUploader
     ): Response
     {
         $parametres = [
@@ -64,60 +63,74 @@ class HebergementController extends AbstractController
             'lien_donation' => $texteService->getParametreByName('lien_donation')
         ];
 
+            $hebergement = new Hebergement();
+            $form = $this->createForm(HebergementType::class, $hebergement);      
 
-        $hebergement = new Hebergement();
-        $form = $this->createForm(HebergementType::class, $hebergement);
-        
+            $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()) {
+                $hebergement = $form->getData();
+               
 
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $hebergement = $form->getData();
+             // Maintenant que l'enregistrement est fait, obtenir le chemin correct pour le répertoire de destination
+            $filesDirectory = $parameterService->getParametreByName('%kernel.project_dir%/public/uploads/fichiers');
 
-            /** @var UploadedFile $brochureFile */
-            $brochureFile = $form->get('passeport')->getData();
-            $attestationFile = $form->get('attestation')->getData();
+                /** @var UploadedFile $brochureFile */
+                $brochureFile = $form->get('passeport')->getData();
+                $attestationFile = $form->get('attestation')->getData(); 
 
-            if ($brochureFile) {
-                $newBrochureFileName = $fileUploader->upload($brochureFile);
-                $hebergement->setPasseport($newBrochureFileName);
-                try {
-                    $brochureFile->move($filesDirectory, $newBrochureFileName);
-                } catch (FileException $e) {
-                    // ... handle exception if something happens during file upload
+                if ($brochureFile) {
+                    $newBrochureFileName = $fileUploader->upload($brochureFile);
+                    $hebergement->setPasseport($newBrochureFileName);
+                    try {
+                        $brochureFile->move($filesDirectory, $newBrochureFileName);
+                    } catch (FileException $e) {
+                    // Gestion de l'erreur
+        //$this->logger->error('Erreur lors du déplacement du fichier : ' . $e->getMessage());
+
+        // Afficher un message d'erreur à l'utilisateur
+        $this->addFlash('error', 'Une erreur s\'est produite lors du téléchargement du fichier.');
+                    
+                    }
+                    
                 }
-            }
+            
+                if ($attestationFile) {
+                    $newAttestationFileName = $fileUploader->upload($attestationFile);
+                    $hebergement->setAttestation($newAttestationFileName);
+                    try {
+                        $attestationFile->move($filesDirectory, $newAttestationFileName);
+                    } catch (FileException $e) {
+                    // Gestion de l'erreur
+      //$this->logger->error('Erreur lors du déplacement du fichier : ' . $e->getMessage());
 
-            if ($attestationFile) {
-                $newAttestationFileName = $fileUploader->upload($attestationFile);
-                $hebergement->setAttestation($newAttestationFileName);
-                try {
-                    $attestationFile->move($filesDirectory, $newAttestationFileName);
-                } catch (FileException $e) {
-                    // ... handle exception if something happens during file upload
+        // Afficher un message d'erreur à l'utilisateur
+        $this->addFlash('error', 'Une erreur s\'est produite lors du téléchargement du fichier.');
+                    }
                 }
+                $entityManager = $this->getDoctrine()->getManager();
+                 // Enregistrer les données dans la base de données
+                 $manager->persist($hebergement);
+                 $manager->flush();  
+                $this->addFlash(
+                    'success',
+                    'Votre demande a été envoyé avec succès ! Nous reviendrons vers vous dans les plus bref délais.'
+                );
+            
+                // Redirection vers une autre page
+            return $this->redirectToRoute('hebergement');
             }
+            $hebergement->setPasseport(
+                $filesDirectory !== null ? new File($filesDirectory.DIRECTORY_SEPARATOR.$hebergement->getPasseport()) : null
+            );
+            
 
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($hebergement);
-            $entityManager->flush();    
-            // Redirection vers une autre page
-           return $this->redirectToRoute('app_hebergement');
-        }
-        $hebergement->setPasseport(
-            new File($filesDirectory.DIRECTORY_SEPARATOR.$hebergement->getPasseport())
-        );
-
-        $hebergement->setAttestation(
-            new File($filesDirectory.DIRECTORY_SEPARATOR.$hebergement->getAttestation())
-        );
-
-
-        return $this->render('hebergement/heberg.html.twig', [
-            'form' => $form->createView(),
-            'controller_name' => 'HebergementController',
-            'parametres' => $parametres,
-        ]);
+            $hebergement->setAttestation(
+                $filesDirectory !== null ? new File($filesDirectory.DIRECTORY_SEPARATOR.$hebergement->getAttestation()) : null
+            );
+            return $this->render('hebergement/heberg.html.twig', [
+                'form' => $form->createView(),
+                'controller_name' => 'HebergementController',
+                'parametres' => $parametres,
+            ]);
+        }  
     }
-  
-    
-}

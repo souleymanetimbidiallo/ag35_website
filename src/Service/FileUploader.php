@@ -7,11 +7,14 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 
 class FileUploader
 {
-    public function __construct(string $targetDirectory, SluggerInterface $slugger)
+    public function __construct(
+        string $targetDirectory, 
+        private SluggerInterface $slugger)  
     {
         $this->targetDirectory = $targetDirectory;
         $this->slugger = $slugger;
     }
+
     public function upload(UploadedFile $file): string
     {
         $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
