@@ -1,18 +1,41 @@
-
 {% extends 'base.html.twig' %}
 
-{% block title %}Nouvel hébergement{% endblock %}
+{% block title %}Formulaire d'hébergement{% endblock %}
 
 {% block body %}
-    <h1>Nouvel hébergement</h1>
-
-    {{ form_start(form) }}
-    {{ form_widget(form) }}
-{#
-     {{ form_row(form.passeport) }}
-     {{ form_row(form.attestation) }}
-     #}
-
-    <button type="submit">Enregistrer</button>
-    {{ form_end(form) }}
+    <div class="container">
+        <h1 class="mt-5 mb-4">Formulaire d'hébergement</h1>
+        <div class="row">
+            <div class="col-md-6">
+                {{ form_start(form, {'attr': {'class': 'needs-validation', 'novalidate': 'novalidate'}}) }}
+                <div class="mb-3">
+                    {{ form_row(form.nom, {'label': 'Nom', 'attr': {'class': 'form-control'}}) }}
+                </div>
+                <div class="mb-3">
+                    {{ form_row(form.prenom, {'label': 'Prénom', 'attr': {'class': 'form-control'}}) }}
+                </div>
+                <div class="mb-3">
+                    {{ form_row(form.email, {'label': 'E-mail', 'attr': {'class': 'form-control'}}) }}
+                </div>
+                <div class="mb-3">
+                    {{ form_row(form.universite, {'label': 'Université', 'attr': {'class': 'form-select'}}) }}
+                </div>
+                <div class="mb-3">
+                    {{ form_row(form.autre_universite, {'label': 'Autre Université', 'attr': {'class': 'form-control'}}) }}
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="mb-3">
+                    {{ form_row(form.passeport, {'label': 'Passeport (PDF)', 'attr': {'class': 'form-control'}}) }}
+                </div>
+                <div class="mb-3">
+                    {{ form_row(form.attestation, {'label': 'Attestation (PDF)', 'attr': {'class': 'form-control'}}) }}
+                </div>
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-primary">Enregistrer</button>
+                </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
 {% endblock %}

@@ -5,6 +5,10 @@ namespace App\Entity;
 use App\Repository\HebergementRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Mapping\ClassMetadata;
+
+
 
 #[ORM\Entity(repositoryClass: HebergementRepository::class)]
 class Hebergement
@@ -15,6 +19,7 @@ class Hebergement
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message:'le champ doit etre rempli')]
     private ?string $nom = null;
 
     #[ORM\Column(length: 255)]
@@ -27,9 +32,19 @@ class Hebergement
     private ?string $universite = null;
 
     #[ORM\Column(type: Types::BLOB)]
+    #[Assert\File(
+        maxSize: '1024k',
+        mimeTypes: ['application/pdf'],
+        mimeTypesMessage: 'Please upload a valid PDF',
+    )]
     private $passeport = null;
 
     #[ORM\Column(type: Types::BLOB)]
+    #[Assert\File(
+        maxSize: '1024k',
+        mimeTypes: ['application/pdf'],
+        mimeTypesMessage: 'Please upload a valid PDF',
+    )]
     private $attestation = null;
 
     public function getId(): ?int
@@ -108,4 +123,7 @@ class Hebergement
 
         return $this;
     }
+
+
+    
 }

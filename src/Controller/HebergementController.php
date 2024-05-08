@@ -18,9 +18,12 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use App\Service\FileUploader;
 use Symfony\Component\HttpFoundation\File\File;
+use Psr\Log\LoggerInterface;
 class HebergementController extends AbstractController
 {
    // #[Route('/hebergement', name: 'app_hebergement')]
+   private $logger;
+  
     public function index(
         Request $request, 
         ParameterService $parameterService, 
@@ -31,9 +34,12 @@ class HebergementController extends AbstractController
         TexteService $texteService,
         SluggerInterface $slugger, 
         ?string $filesDirectory, // the problem is here
-         FileUploader $fileUploader
+         FileUploader $fileUploader,
+         LoggerInterface $logger
+       
     ): Response
     {
+       
         $parametres = [
             'site_name' => $parameterService->getSiteName(),
             'nom_association' => $parameterService->getParametreByName("nom_association"),
@@ -62,7 +68,9 @@ class HebergementController extends AbstractController
             'nous_sommes' => $parameterService->getParametreByName("site_nous_sommes"),
             'lien_donation' => $texteService->getParametreByName('lien_donation')
         ];
+        
 
+       
             $hebergement = new Hebergement();
             $form = $this->createForm(HebergementType::class, $hebergement);      
 
@@ -83,13 +91,8 @@ class HebergementController extends AbstractController
                     $hebergement->setPasseport($newBrochureFileName);
                     try {
                         $brochureFile->move($filesDirectory, $newBrochureFileName);
-                    } catch (FileException $e) {
-                    // Gestion de l'erreur
-        //$this->logger->error('Erreur lors du déplacement du fichier : ' . $e->getMessage());
-
-        // Afficher un message d'erreur à l'utilisateur
-        $this->addFlash('error', 'Une erreur s\'est produite lors du téléchargement du fichier.');
-                    
+                    }catch (FileException $e) {
+                        // Afficher un message d'erreur personnalisé
                     }
                     
                 }
@@ -100,12 +103,10 @@ class HebergementController extends AbstractController
                     try {
                         $attestationFile->move($filesDirectory, $newAttestationFileName);
                     } catch (FileException $e) {
-                    // Gestion de l'erreur
-      //$this->logger->error('Erreur lors du déplacement du fichier : ' . $e->getMessage());
-
-        // Afficher un message d'erreur à l'utilisateur
-        $this->addFlash('error', 'Une erreur s\'est produite lors du téléchargement du fichier.');
+                        // Afficher un message d'erreur personnalisé
+                      
                     }
+
                 }
                 $entityManager = $this->getDoctrine()->getManager();
                  // Enregistrer les données dans la base de données
