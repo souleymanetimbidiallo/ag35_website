@@ -76,7 +76,7 @@ class HebergementType extends AbstractType
                 ]
             ])
             ->add('passeport', FileType::class, [
-                'required' => false,
+                'required' => true,
                 'mapped' => false,
                 'constraints' => [
                     new File([
@@ -91,7 +91,7 @@ class HebergementType extends AbstractType
             ])
 
             ->add('attestation', FileType::class, [
-                'required' => false,
+                'required' => true,
                 'mapped' => false,
                 'constraints' => [
                     new File([

@@ -116,12 +116,14 @@ class HebergementController extends AbstractController
                     'success',
                     'Votre demande a été envoyé avec succès ! Nous reviendrons vers vous dans les plus bref délais.'
                 );
+                
             
                 // Redirection vers une autre page
-            return $this->redirectToRoute('hebergement');
+                return $this->redirectToRoute('hebergement');
             }
             $hebergement->setPasseport(
-                $filesDirectory !== null ? new File($filesDirectory.DIRECTORY_SEPARATOR.$hebergement->getPasseport()) : null
+                $filesDirectory !== null ? new File($filesDirectory.DIRECTORY_SEPARATOR.$hebergement->getPasseport()) :null
+               
             );
             
 

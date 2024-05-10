@@ -19,15 +19,18 @@ class Hebergement
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message:'le champ doit etre rempli')]
+  // #[Assert\NotBlank(message:'le champ doit etre rempli')]
     private ?string $nom = null;
 
     #[ORM\Column(length: 255)]
+  // #[Assert\NotBlank(message:'le champ doit etre rempli')]
     private ?string $prenom = null;
 
+   //#[Assert\NotBlank(message:'le champ doit etre rempli')]
     #[ORM\Column(length: 255)]
     private ?string $email = null;
 
+    #[Assert\NotBlank(message:'le champ doit etre rempli')]
     #[ORM\Column(length: 255)]
     private ?string $universite = null;
 

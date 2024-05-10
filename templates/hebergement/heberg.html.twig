@@ -4,10 +4,11 @@
 
 {% block body %}
     <div class="container">
-        <h1 class="mt-5 mb-4">Formulaire d'hébergement</h1>
+        <h1 class="mt-5 mb-4">Formulaire de demande pour une attestation d'hébergement</h1>
         <div class="row">
             <div class="col-md-6">
-                {{ form_start(form, {'attr': {'class': 'needs-validation', 'novalidate': 'novalidate'}}) }}
+                {{ form_start(form, {'attr': {'class': 'needs-validation'}}) }}
+                
                 <div class="mb-3">
                     {{ form_row(form.nom, {'label': 'Nom', 'attr': {'class': 'form-control'}}) }}
                 </div>
@@ -15,7 +16,7 @@
                     {{ form_row(form.prenom, {'label': 'Prénom', 'attr': {'class': 'form-control'}}) }}
                 </div>
                 <div class="mb-3">
-                    {{ form_row(form.email, {'label': 'E-mail', 'attr': {'class': 'form-control'}}) }}
+                   {{ form_row(form.email) }}
                 </div>
                 <div class="mb-3">
                     {{ form_row(form.universite, {'label': 'Université', 'attr': {'class': 'form-select'}}) }}
