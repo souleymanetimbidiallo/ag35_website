@@ -1,0 +1,24 @@
+{# templates/envoyermail.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Envoyer Newsletter{% endblock %}
+
+{% block body %}
+    <h1>Envoyer Newsletter</h1>
+    <form method="post" action="{{ path('envoyer') }}">
+        {# Afficher une liste déroulante d'événements #}
+        <label for="evenement">Choisir un événement :</label>
+        <select id="evenement" name="evenement" class="form-control">
+            {% for evenement in evenements %}
+                <option value="{{ evenement.id }}">{{ evenement.titre }}</option>
+            {% endfor %}
+        </select>
+
+        {# Afficher le champ de contenu de la newsletter #}
+        <label for="contenu">Contenu de la newsletter :</label>
+        <textarea id="contenu" name="contenu" class="form-control"></textarea>
+
+        <button type="submit">Envoyer</button>
+    </form>
+{% endblock %}
