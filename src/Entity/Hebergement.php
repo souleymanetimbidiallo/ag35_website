@@ -7,10 +7,12 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 
 
 #[ORM\Entity(repositoryClass: HebergementRepository::class)]
+#[Vich\Uploadable]
 class Hebergement
 {
     #[ORM\Id]
@@ -33,7 +35,7 @@ class Hebergement
     #[Assert\NotBlank(message:'le champ doit etre rempli')]
     #[ORM\Column(length: 255)]
     private ?string $universite = null;
-
+   // #[Vich\UploadableField(mapping: 'ag35_files', fileNameProperty: 'passeport')]
     #[ORM\Column(type: Types::BLOB)]
     #[Assert\File(
         maxSize: '1024k',
@@ -41,7 +43,7 @@ class Hebergement
         mimeTypesMessage: 'Please upload a valid PDF',
     )]
     private $passeport = null;
-
+    //#[Vich\UploadableField(mapping: 'ag35_files', fileNameProperty: 'passeport')]
     #[ORM\Column(type: Types::BLOB)]
     #[Assert\File(
         maxSize: '1024k',

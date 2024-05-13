@@ -26,7 +26,7 @@ class HebergementType extends AbstractType
             ],
             'label' => 'Nom',
             'row_attr' => [
-                'class' => 'col-3'
+                'class' => 'col-10'
             ],
             'label_attr' => [
                 'class' => 'form-floating'
@@ -38,7 +38,7 @@ class HebergementType extends AbstractType
             ],
             'label' => 'Prénom',
             'row_attr' => [
-                'class' => 'col-3'
+                'class' => 'col-10'
             ],
             'label_attr' => [
                 'class' => 'form-floating'
@@ -51,7 +51,7 @@ class HebergementType extends AbstractType
             ],
             'label' => 'E-mail',
             'row_attr' => [
-                'class' => 'col-3'
+                'class' => 'col-10'
             ],
             'label_attr' => [
                 'class' => 'form-floating'
@@ -59,9 +59,12 @@ class HebergementType extends AbstractType
         ])
             ->add('universite', ChoiceType::class, [
                 'choices' => [
-                    'Universite Rennes 1' => 'Universite Rennes 1',
+                    'Universite Rennes' => 'Universite Rennes 1',
                     'Universite Rennes 2' => 'Universite Rennes 2',
                     'Autre' => 'autre',
+                ],
+                'row_attr' => [
+                    'class' => 'col-10'
                 ],
                 'placeholder' => 'Choisissez une option',
                 'required' => true,
@@ -70,6 +73,9 @@ class HebergementType extends AbstractType
                 'required' => false,
                 'mapped' => false,
                 'label' => false,
+                'row_attr' => [
+                    'class' => 'col-10'
+                ],
                 'attr' => [
                     'class' => 'autre-universite',
                     'placeholder' => 'Entrer Le nom de  l\'université'
@@ -78,14 +84,21 @@ class HebergementType extends AbstractType
             ->add('passeport', FileType::class, [
                 'required' => true,
                 'mapped' => false,
+                'row_attr' => [
+                    'class' => 'col-10'
+                ],
                 'constraints' => [
                     new File([
+                        'maxSize' => '1024k',
                         'mimeTypes' => [
                             'application/pdf',
                             'application/x-pdf',
+                            'image/jpeg',
+                            'image/pjpeg',
+                            
                            
                         ],
-                        'mimeTypesMessage' => 'Veuillez télécharger un fichier PDF valide.',
+                        'mimeTypesMessage' => 'Veuillez télécharger un fichier PDF valide ou une image jpg.',
                     ])
                 ],
             ])
@@ -93,14 +106,21 @@ class HebergementType extends AbstractType
             ->add('attestation', FileType::class, [
                 'required' => true,
                 'mapped' => false,
+                'row_attr' => [
+                    'class' => 'col-10'
+                ],
                 'constraints' => [
                     new File([
+                        'maxSize' => '1024k',
                         'mimeTypes' => [
                             'application/pdf',
                             'application/x-pdf',
+                            'image/jpeg',
+                            'image/pjpeg', 
+                            'image/png',
                             
                         ],
-                        'mimeTypesMessage' => 'Veuillez télécharger un fichier PDF valide.',
+                        'mimeTypesMessage' => 'Veuillez télécharger un fichier PDF valide ou une image jpg.',
                     ])
                 ],
              ]);
