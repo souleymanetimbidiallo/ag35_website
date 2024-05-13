@@ -1,45 +1,45 @@
-<!-- Topbar Start -->
-<div class="container-fluid bg-primary text-white d-flex">
-	<div class="container py-3">
-		<div class="d-flex align-items-center">
-			<a href="/" class="d-flex align-items-center">
-				{% if parametres.site_name %}
-					<h2 class="text-white fw-bold m-0">{{ parametres.site_name }}</h2>
-				{% endif %}
-				{% for image in images %}
-					<img src="{{ asset('img/' ~ image.imageName1) }}" alt="Votre Image" style="max-width: 50px; max-height: 50px; margin-left: 10px;">
-				{% endfor %}
-			</a>
-		</div>
-		<div class="ms-auto d-flex align-items-center">
-			<small class="ms-2 text-truncate" style="max-width: 350px;">
-				<i class="fa fa-map-marker-alt me-3"></i>
-				{{ parametres.address }}
-			</small>
 
-			<small class="ms-4 text-truncate" style="max-width: 250px;">
-				<i class="fa fa-envelope me-3"></i>
-				<a class="text-light" href="mailto:assoguinee35@gmail.com">{{ parametres.email }}</a>
-			</small>
-			<small class="ms-4">
-				<i class="fa fa-phone-alt me-3"></i>
-				<a class="text-light" href="tel:assoguinee35@gmail.com">{{ parametres.telephone }}</a>
-			</small>
-			<div class="ms-3 d-flex">
-				<a class="btn btn-sm-square btn-light text-primary rounded-circle ms-2" href="{{ parametres.lien_page_fb }}" target="_blank">
-					<i class="fab fa-facebook-f"></i>
-				</a>
-				<p class="ms-2 mb-0">Page</p>
-				<a class="btn btn-sm-square btn-light text-primary rounded-circle ms-2" href="{{ parametres.lien_groupe_fb }}" target="_blank">
-					<i class="fab fa-facebook-f"></i>
-				</a>
-				<p class="ms-2 mb-0">Groupe</p>
-				<a class="btn btn-sm-square btn-success rounded-circle ms-2" href="{{ parametres.lien_whatsApp }}" target="_blank">
-					<i class="fab fa-whatsapp"></i>
-				</a>
-				<p class="ms-2 mb-0">Groupe Public</p>
-			</div>
-		</div>
-	</div>
+<!-- Topbar Start -->
+
+<div class="container-fluid bg-primary text-white d-flex">
+    <div class="container py-3">
+        <div class="d-flex align-items-center">
+            <a href="/" class="d-flex align-items-center">
+                {% if parametres.site_name %}
+                    <h2 class="text-white fw-bold m-0">{{ parametres.site_name }}</h2>
+                {% endif %}
+
+            </a>
+        </div>
+        <div class="ms-auto d-flex align-items-center">
+            <small class="ms-2 text-truncate" style="max-width: 350px;">
+                <i class="fa fa-map-marker-alt me-3"></i>
+                {{ parametres.address }}
+            </small>
+
+            <small class="ms-4 text-truncate" style="max-width: 250px;">
+                <i class="fa fa-envelope me-3"></i>
+                <a class="text-light" href="mailto:assoguinee35@gmail.com">{{ parametres.email }}</a>
+            </small>
+            <small class="ms-4">
+                <i class="fa fa-phone-alt me-3"></i>
+                <a class="text-light" href="tel:assoguinee35@gmail.com">{{ parametres.telephone }}</a>
+            </small>
+            <div class="ms-3 d-flex">
+                <a class="btn btn-sm-square btn-light text-primary rounded-circle ms-2" href="{{ parametres.lien_page_fb }}" target="_blank">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <p class="ms-2 mb-0">Page</p>
+                <a class="btn btn-sm-square btn-light text-primary rounded-circle ms-2" href="{{ parametres.lien_groupe_fb }}" target="_blank">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <p class="ms-2 mb-0">Groupe</p>
+                <a class="btn btn-sm-square btn-success rounded-circle ms-2" href="{{ parametres.lien_whatsApp }}" target="_blank">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+                <p class="ms-2 mb-0">Groupe Public</p>
+            </div>
+        </div>
+    </div>
 </div>
 <!-- Topbar End -->

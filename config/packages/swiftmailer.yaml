@@ -1,0 +1,8 @@
+swiftmailer:
+    transport: smtp
+    host: 'smtp.gmail.com' # Adresse du serveur SMTP de Gmail
+    port: 587 # Port SMTP de Gmail
+    encryption: tls # Méthode de chiffrement TLS pour la sécurité
+    username: 'fatouthioro24@gmail.com' # Votre adresse e-mail Gmail
+    password: 'Ramata@1962' # Mot de passe de votre compte Gmail
+    spool: { type: 'memory' } # Spécifie le type de mémoire pour le spool des e-mails

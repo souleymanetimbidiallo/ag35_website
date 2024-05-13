@@ -56,5 +56,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Textes', 'fas fa-message', TexteParam::class);
         yield MenuItem::linkToCrud('Guide-PDF', 'fas fa-file', Guide::class);
         yield MenuItem::linkToCrud('Admin', 'fas fa-lock', Admin::class);
+        // yield MenuItem::linkToRoute('Envoyer Newsletter', 'fas fa-envelope', 'envoyer');
+        yield MenuItem::linkToUrl('Envoyer Newsletter', 'fas fa-envelope', '/envoyer');
     }
 }
