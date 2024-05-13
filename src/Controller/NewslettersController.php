@@ -136,6 +136,7 @@ public function inscriptionNewsletter(Request $request, SessionInterface $sessio
                     'from' => 'hadjasorybintabah@gmail.com',
                     'to' => $abonne->getEmail(),
                     'subject' => $evenement->getTitre(),
+                    
                     'text' => $contenuMail,
                 ]);
             }

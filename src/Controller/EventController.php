@@ -2,16 +2,12 @@
 
 namespace App\Controller;
 
-
 use App\Repository\MesImageRepository;
-
-
 use App\Repository\EvenementRepository;
-
 use App\Service\MenuService;
 use App\Service\ParameterService;
-use App\Service\TexteService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -20,10 +16,8 @@ class EventController extends AbstractController
     /**
      * @Route("/evenements", name="app_evenements")
      */
-
-    public function index(ParameterService $parameterService, MenuService $menuService, MesImageRepository $mesImageRepository, EvenementRepository $evenementRepository): Response
+    public function index(ParameterService $parameterService, MenuService $menuService, MesImageRepository $mesImageRepository, EvenementRepository $evenementRepository, Request $request): Response
     {
-
         $parametres = [
             'site_name' => $parameterService->getSiteName(),
             'nom_association' => $parameterService->getParametreByName("nom_association"),
@@ -53,14 +47,22 @@ class EventController extends AbstractController
             'lien_donation' => $parameterService->getParametreByName('lien_donation')
         ];
 
-
         $images = $mesImageRepository->findAll();
-        $evenements = $evenementRepository->findAll();
+
+        // Si le bouton "Événements à venir" est cliqué, récupérer les événements à venir
+        if ($request->query->get('upcoming_events')) {
+             $evenements = $evenementRepository->findUpcomingEvents();
+        }
+        else {
+                    // Par défaut, récupérer tous les événements
+             $evenements = $evenementRepository->findAll();
+        }
         return $this->render('event.html.twig', [
             'current_menu' => 'evenements',
-            'parametres'   => $parametres,
+            'parametres' => $parametres,
             'images' => $images,
             'evenements' => $evenements
         ]);
     }
 }
+
