@@ -19,16 +19,17 @@ use App\Repository\MesImageRepository;
 use App\Service\TexteService;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use App\Repository\NewsletterRepository;
 
 class NewslettersController extends AbstractController
 {
-    private $evenementRepository;
+    private $newsletterRepository;
 
-    public function __construct(EvenementRepository $evenementRepository)
+    public function __construct(NewsletterRepository $newsletterRepository)
     {
-        $this->evenementRepository = $evenementRepository;
+        $this->newsletterRepository = $newsletterRepository;
     }
-
     /**
  * @Route("/inscription-newsletter", name="inscription_newsletter", methods={"POST"})
  */
@@ -58,8 +59,8 @@ public function inscriptionNewsletter(Request $request, SessionInterface $sessio
 }
 
 
-    /**
-     * @Route("/envoyer", name="envoyer", methods={"GET","POST"})
+     /**
+     * @Route("/envoyer", name="envoyer_newsletter", methods={"GET","POST"})
      */
     public function envoyerNewsletter(Request $request, MailerInterface $mailer, ParameterService $parameterService, MenuService $menuService, MesImageRepository $mesImageRepository, TexteService $texteService): Response
     {
@@ -95,59 +96,70 @@ public function inscriptionNewsletter(Request $request, SessionInterface $sessio
         ];
         $images = $mesImageRepository->findAll();
 
-        // Récupération des événements
-        $evenements = $this->evenementRepository->findAll();
+        // Récupération des abonnés à la newsletter
+        $abonnes = $this->newsletterRepository->findAll();
 
-        // Si le formulaire est soumis
         if ($request->isMethod('POST')) {
             // Récupération des données du formulaire
-            $evenementId = $request->request->get('evenement');
-            $contenuNewsletter = $request->request->get('contenu');
+            $sujet = $request->request->get('sujet');
+            $contenu = $request->request->get('contenu');
+    
+            // Traitement de la pièce jointe s'il y en a une
+            $pieceJointe = $request->files->get('piece_jointe');
+            $pieceJointePath = null;
 
-            // Récupération de l'événement sélectionné
-            $evenement = $this->getDoctrine()->getRepository(Evenement::class)->find($evenementId);
-
+            if ($pieceJointe instanceof UploadedFile) {
+                // Déplacer la pièce jointe vers le dossier des pièces jointes
+                $pieceJointePath = $this->moveUploadedFile($pieceJointe);
+            }
+    
             // Création d'une instance du configurateur HttpClientConfigurator
             $configurator = new HttpClientConfigurator();
             $mailgunkey = $_ENV["MAILGUN_API_KEY"];
-            $configurator->setApiKey(mailgunkey);
-
+            $configurator->setApiKey($mailgunkey);
+    
             // Création d'une instance du client Mailgun avec le configurateur
             $mgClient = new Mailgun($configurator);
-
+    
             // Domaine Mailgun
             $domain = "sandboxb71804ec757c4da09ddffea0996c7d80.mailgun.org";
-
-            // Récupération des abonnés à la newsletter
-            $abonnes = $this->getDoctrine()->getRepository(Newsletter::class)->findAll();
-
+    
             foreach ($abonnes as $abonne) {
                 // Construction du contenu du mail
-                $contenuMail = sprintf("Bonjour %s %s,\n\n[image]\n%s\n%s\n%s\n%s", 
+                $contenuMail = sprintf("Bonjour %s %s,\n\n%s", 
                     $abonne->getFirstName(), 
                     $abonne->getLastName(), 
-                    $evenement->getCommentaire(), 
-                    $evenement->getPrix(), 
-                    $evenement->getAdresse(), 
-                    $evenement->getDateDebut()->format('Y-m-d H:i:s')
+                    $contenu
                 );
+            
+                // Attachez la pièce jointe à l'e-mail si elle existe
+                $attachment = null;
+                if ($pieceJointePath !== null) {
+                    // Créez un tableau avec les détails de la pièce jointe
+                    $attachment = [
+                        'filePath' => $pieceJointePath,
+                        'filename' => $pieceJointe->getClientOriginalName()
+                    ];
+                }
 
+            
                 // Envoi de l'e-mail via Mailgun
                 $mgClient->messages()->send($domain, [
                     'from' => 'hadjasorybintabah@gmail.com',
                     'to' => $abonne->getEmail(),
-                    'subject' => $evenement->getTitre(),
+                    'subject' => $sujet,
                     'text' => $contenuMail,
+                    'attachment' => [$attachment] // Ajout de la pièce jointe dans un tableau
                 ]);
+
             }
-
+    
             // Redirection vers une page de confirmation après envoi des e-mails
-            return $this->redirectToRoute('envoyer');
+            return $this->redirectToRoute('envoyer_newsletter');
         }
-
+    
         // Affichage du formulaire dans la vue envoyermail.html.twig
         return $this->render('envoyermail.html.twig', [
-            'evenements' => $evenements,
             'parametres'   => $parametres
         ]);
     }
@@ -158,6 +170,25 @@ public function inscriptionNewsletter(Request $request, SessionInterface $sessio
     public function confirmationEnvoi(): Response
     {
         return $this->render('envoyermail.html.twig');
+    }
+
+        /**
+     * Déplacer le fichier téléchargé vers le dossier des pièces jointes.
+     *
+     * @param UploadedFile $file
+     * @return string Chemin de la pièce jointe déplacée
+     */
+    private function moveUploadedFile(UploadedFile $file): ?string
+    {
+        $uploadsDirectory = $this->getParameter('uploads_directory');
+        $fileName = uniqid().'.'.$file->guessExtension();
+    
+        try {
+            $file->move($uploadsDirectory, $fileName);
+            return $uploadsDirectory.'/'.$fileName;
+        } catch (FileException $e) {
+            return null;
+        }
     }
 }
 

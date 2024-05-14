@@ -6,19 +6,20 @@
 
 {% block body %}
     <h1>Envoyer Newsletter</h1>
-    <form method="post" action="{{ path('envoyer') }}">
-        {# Afficher une liste déroulante d'événements #}
-        <label for="evenement">Choisir un événement :</label>
-        <select id="evenement" name="evenement" class="form-control">
-            {% for evenement in evenements %}
-                <option value="{{ evenement.id }}">{{ evenement.titre }}</option>
-            {% endfor %}
-        </select>
+    <form method="post" action="{{ path('envoyer_newsletter') }}" enctype="multipart/form-data">
+        {# Champ pour le sujet du mail #}
+        <label for="sujet">Sujet du mail :</label>
+        <input type="text" id="sujet" name="sujet" class="form-control" required>
 
-        {# Afficher le champ de contenu de la newsletter #}
-        <label for="contenu">Contenu de la newsletter :</label>
-        <textarea id="contenu" name="contenu" class="form-control"></textarea>
+        {# Champ pour le contenu du mail #}
+        <label for="contenu">Contenu du mail :</label>
+        <textarea id="contenu" name="contenu" class="form-control" required></textarea>
 
+        {# Champ pour l'ajout d'une pièce jointe #}
+        <label for="piece_jointe">Pièce jointe :</label>
+        <input type="file" id="piece_jointe" name="piece_jointe" class="form-control">
+
+        {# Bouton pour envoyer la newsletter #}
         <button type="submit">Envoyer</button>
     </form>
 {% endblock %}

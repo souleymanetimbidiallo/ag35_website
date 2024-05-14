@@ -1,5 +1,6 @@
 parameters:
     img_params: '%kernel.project_dir%/public/params/images'
+    uploads_directory: 'D:\AG35\ag35_website\public\pdf'
 
 services:
     # default configuration for services in *this* file
