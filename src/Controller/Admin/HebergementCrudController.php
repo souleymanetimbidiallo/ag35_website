@@ -3,15 +3,23 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Hebergement;
+use App\Entity\Membre;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
-use FOS\CKEditorBundle\Form\Type\CKEditorType;
-use EasyCorp\Bundle\EasyAdminBundle\Field\Field;
-use EasyCorp\Bundle\EasyAdminBundle\Field\FileField; 
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
+use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TelephoneField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
+use Vich\UploaderBundle\Form\Type\VichImageType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use EasyCorp\Bundle\EasyAdminBundle\Field\FileField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\FieldTrait;
+use EasyCorp\Bundle\EasyAdminBundle\Field\FieldTrait as BaseFieldTrait;
 
 class HebergementCrudController extends AbstractCrudController
 {
@@ -32,33 +40,29 @@ class HebergementCrudController extends AbstractCrudController
         ;
     }
     public function configureFields(string $pageName): iterable
-    {
-        return [
-            IdField::new('id')->hideOnForm(),
-            TextField::new('Nom'),
-            TextField::new('Prenom'),
-            EmailField::new('Email'),
-            TextField::new('Universite'),
-            //ImageField::new('passeport')
-            //->setLabel('passeport')
-            //->setBasePath('/uploads') // Chemin de base pour afficher l'image
-            // ->setUploadDir('public/uploads/fichiers')
-            // ->setLabel('passeport') // Libellé du champ
-            // //->onlyOnForms(); // Afficher le champ uniquement sur les formulaires
-              
-        ];
-    //     yield TextField::new('passeport');
-    //     yield ImageField::new('passeport')
-    //    ->setBasePath('/uploads') // Chemin de base pour afficher l'image
-    //    ->setUploadDir('public/uploads/fichiers')
-    //    ->setLabel('passeport') // Libellé du champ
-    //    ->onlyOnForms(); // Afficher le champ uniquement sur les formulaires
-    //     yield TextField::new('attestation');
-    //     yield ImageField::new('attestation')
-    //    ->setBasePath('/uploads') // Chemin de base pour afficher l'image
-    //    ->setUploadDir('public/uploads/fichiers')
-    //    ->setLabel('attestation') // Libellé du champ
-    //    ->onlyOnForms();
-    }
+            {
+                yield IdField::new('id')
+                ->hideOnForm();
+
+            yield TextField::new('nom');
+            yield TextField::new('prenom');
+            yield EmailField::new('email');
+            yield TextField::new('universite');
+
+             yield TextField::new('passeport');
+                yield ImageField::new('passeport')
+               ->setBasePath('/uploads') // Chemin de base pour afficher l'image
+               ->setUploadDir('public/uploads/fichiers')
+               ->setLabel('passeport') // Libellé du champ
+               ->onlyOnForms(); 
+                yield TextField::new('attestation');
+                yield ImageField::new('attestation')
+               ->setBasePath('/uploads') // Chemin de base pour afficher l'image
+               ->setUploadDir('public/uploads/fichiers')
+               ->setLabel('attestation') // Libellé du champ
+               ->onlyOnForms(); 
+            
+        
     
+}
 }

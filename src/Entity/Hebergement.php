@@ -17,40 +17,33 @@ class Hebergement
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Column(type: 'integer')]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-  // #[Assert\NotBlank(message:'le champ doit etre rempli')]
+    #[Assert\NotBlank(message: 'le champ doit etre rempli')]
     private ?string $nom = null;
 
     #[ORM\Column(length: 255)]
-  // #[Assert\NotBlank(message:'le champ doit etre rempli')]
+    #[Assert\NotBlank(message: 'le champ doit etre rempli')]
     private ?string $prenom = null;
 
-   //#[Assert\NotBlank(message:'le champ doit etre rempli')]
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'le champ doit etre rempli')]
+    #[Assert\Email(message: 'Veuillez entrer une adresse email valide')]
     private ?string $email = null;
 
-    #[Assert\NotBlank(message:'le champ doit etre rempli')]
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'le champ doit etre rempli')]
     private ?string $universite = null;
-   // #[Vich\UploadableField(mapping: 'ag35_files', fileNameProperty: 'passeport')]
-    #[ORM\Column(type: Types::BLOB)]
-    #[Assert\File(
-        maxSize: '1024k',
-        mimeTypes: ['application/pdf'],
-        mimeTypesMessage: 'Please upload a valid PDF',
-    )]
-    private $passeport = null;
-    //#[Vich\UploadableField(mapping: 'ag35_files', fileNameProperty: 'passeport')]
-    #[ORM\Column(type: Types::BLOB)]
-    #[Assert\File(
-        maxSize: '1024k',
-        mimeTypes: ['application/pdf'],
-        mimeTypesMessage: 'Please upload a valid PDF',
-    )]
-    private $attestation = null;
+
+    #[Vich\UploadableField(mapping: 'ag35_files', fileNameProperty: 'passeport')]
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $passeport = null;
+
+    #[Vich\UploadableField(mapping: 'ag35_files', fileNameProperty: 'attestation')]
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $attestation = null;
 
     public function getId(): ?int
     {
@@ -62,7 +55,7 @@ class Hebergement
         return $this->nom;
     }
 
-    public function setNom(string $nom): static
+    public function setNom(string $nom): self
     {
         $this->nom = $nom;
 
@@ -74,7 +67,7 @@ class Hebergement
         return $this->prenom;
     }
 
-    public function setPrenom(string $prenom): static
+    public function setPrenom(string $prenom): self
     {
         $this->prenom = $prenom;
 
@@ -86,7 +79,7 @@ class Hebergement
         return $this->email;
     }
 
-    public function setEmail(string $email): static
+    public function setEmail(string $email): self
     {
         $this->email = $email;
 
@@ -98,37 +91,36 @@ class Hebergement
         return $this->universite;
     }
 
-    public function setUniversite(string $universite): static
+    public function setUniversite(string $universite): self
     {
         $this->universite = $universite;
 
         return $this;
     }
 
-    public function getPasseport()
+    public function getPasseport(): ?string
     {
         return $this->passeport;
     }
 
-    public function setPasseport($passeport): static
+    public function setPasseport(?string $passeport): self
     {
         $this->passeport = $passeport;
 
         return $this;
     }
 
-    public function getAttestation()
+    public function getAttestation(): ?string
     {
         return $this->attestation;
     }
 
-    public function setAttestation($attestation): static
+    public function setAttestation(?string $attestation): self
     {
         $this->attestation = $attestation;
 
         return $this;
     }
-
 
     
 }
