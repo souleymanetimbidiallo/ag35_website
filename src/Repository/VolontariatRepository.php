@@ -20,6 +20,23 @@ class VolontariatRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Volontariat::class);
     }
+    public function save(Volontariat $entity, bool $flush = false): void
+    {
+        $this->getEntityManager()->persist($entity);
+
+        if ($flush) {
+            $this->getEntityManager()->flush();
+        }
+    }
+
+    public function remove(Volontariat $entity, bool $flush = false): void
+    {
+        $this->getEntityManager()->remove($entity);
+
+        if ($flush) {
+            $this->getEntityManager()->flush();
+        }
+    }
 
 //    /**
 //     * @return Volontariat[] Returns an array of Volontariat objects

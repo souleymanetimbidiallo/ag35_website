@@ -161,6 +161,21 @@ class MenuService
         $menu->setLien($actualite);
         $this->entityManager->flush();
     }
+    public function getVolontariat()
+    {
+        $repository = $this->entityManager->getRepository(Menu::class);
+        $menu = $repository->findOneBy(['nom' => "volontariat"]);
+
+        return $menu->getLien();
+    }
+
+    public function setVolontariat($volontariat)
+    {
+        $repository = $this->entityManager->getRepository(Menu::class);
+        $menu = $repository->findOneBy(['nom' => "volontariat"]);
+        $menu->setLien($volontariat);
+        $this->entityManager->flush();
+    }
 
     public function getGuide()
     {

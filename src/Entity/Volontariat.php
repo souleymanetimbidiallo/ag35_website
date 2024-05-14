@@ -25,11 +25,11 @@ class Volontariat
     #[ORM\Column(length: 255)]
     private ?string $lieu = null;
 
-    #[ORM\Column(type: Types::DATE_IMMUTABLE)]
-    private ?\DateTimeImmutable $date_debut = null;
-
-    #[ORM\Column(type: Types::DATE_IMMUTABLE)]
-    private ?\DateTimeImmutable $date_fin = null;
+    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    private ?\DateTimeInterface $date_debut = null;
+    
+    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    private ?\DateTimeInterface $date_fin = null;
 
     #[ORM\OneToMany(mappedBy: 'volontariat', targetEntity: Volontaire::class, orphanRemoval: true)]
     private Collection $volontaire;
@@ -80,24 +80,24 @@ class Volontariat
         return $this;
     }
 
-    public function getDateDebut(): ?\DateTimeImmutable
+    public function getDateDebut(): ?\DateTimeInterface
     {
         return $this->date_debut;
     }
 
-    public function setDateDebut(\DateTimeImmutable $date_debut): static
+    public function setDateDebut(\DateTimeInterface $date_debut): static
     {
         $this->date_debut = $date_debut;
 
         return $this;
     }
 
-    public function getDateFin(): ?\DateTimeImmutable
+    public function getDateFin(): ?\DateTimeInterface
     {
         return $this->date_fin;
     }
 
-    public function setDateFin(\DateTimeImmutable $date_fin): static
+    public function setDateFin(\DateTimeInterface $date_fin): static
     {
         $this->date_fin = $date_fin;
 

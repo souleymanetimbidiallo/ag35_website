@@ -59,6 +59,7 @@ class HebergementController extends AbstractController
             'menu_evenement' => $menuService->getEvenement(),
             'menu_actualite' => $menuService->getActualite(),
             'menu_guide' => $menuService->getGuide(),
+            'menu_volontariat' => $menuService->getVolontariat(),
             'nos_valeurs' => $parameterService->getParametreByName("nos_valeurs"),
             'texte_nos_valeurs' => $parameterService->getParametreByName("texte_nos_valeurs"),
             'nos_gouvernances' => $parameterService->getParametreByName("nos_gouvernances"),

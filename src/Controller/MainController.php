@@ -45,6 +45,7 @@ class MainController extends AbstractController
             'menu_evenement' => $menuService->getEvenement(),
             'menu_actualite' => $menuService->getActualite(),
             'menu_guide' => $menuService->getGuide(),
+            'menu_volontariat' => $menuService->getVolontariat(),
             'accueil_video' => $parameterService->getTitre_accueil_video(),
             'accueil_event' => $parameterService->getTitre_accueil_event(),
             'accueil_temoin' => $parameterService->getTitre_accueil_temoin(),

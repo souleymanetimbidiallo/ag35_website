@@ -34,6 +34,7 @@ class SecurityController extends AbstractController
             'menu_evenement' => $menuService->getEvenement(),
             'menu_actualite' => $menuService->getActualite(),
             'menu_guide' => $menuService->getGuide(),
+            'menu_volontariat' => $menuService->getVolontariat(),
             'nom_association' => $parameterService->getParametreByName("nom_association"),
             'lien_donation' => $parameterService->getParametreByName('lien_donation')
         ];
