@@ -35,10 +35,27 @@ class NewslettersController extends AbstractController
  */
 public function inscriptionNewsletter(Request $request, SessionInterface $session): Response
 {
-    // Récupération des données du formulaire
-    $firstName = $request->request->get('firstName');
-    $lastName = $request->request->get('lastName');
-    $email = $request->request->get('email');
+// Récupération des données du formulaire
+$firstName = $request->request->get('modalFirstName');
+$lastName = $request->request->get('modalLastName');
+$email = $request->request->get('email');
+
+
+    // Vérifier si les champs prénom et nom de famille sont vides
+    if (empty($firstName) || empty($lastName)) {
+        // Afficher un message d'erreur et rediriger l'utilisateur
+        $session->getFlashBag()->add('error', 'Veuillez remplir tous les champs.');
+        return $this->redirect($request->headers->get('referer'));
+    }
+
+    // Vérifier si l'email existe déjà dans la base de données
+    $existingSubscriber = $this->newsletterRepository->findOneBy(['email' => $email]);
+
+    // Si l'email existe déjà, afficher un message d'erreur et rediriger l'utilisateur
+    if ($existingSubscriber) {
+        $session->getFlashBag()->add('error', 'Vous êtes déjà inscrit à la newsletter.');
+        return $this->redirect($request->headers->get('referer'));
+    }
 
     // Création d'une nouvelle instance de l'entité Newsletter
     $newsletter = new Newsletter();
@@ -57,6 +74,7 @@ public function inscriptionNewsletter(Request $request, SessionInterface $sessio
     // Redirection vers la page précédente (referer)
     return $this->redirect($request->headers->get('referer'));
 }
+
 
 
      /**
