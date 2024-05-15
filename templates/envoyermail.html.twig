@@ -5,21 +5,29 @@
 {% block title %}Envoyer Newsletter{% endblock %}
 
 {% block body %}
-    <h1>Envoyer Newsletter</h1>
-    <form method="post" action="{{ path('envoyer_newsletter') }}" enctype="multipart/form-data">
-        {# Champ pour le sujet du mail #}
-        <label for="sujet">Sujet du mail :</label>
-        <input type="text" id="sujet" name="sujet" class="form-control" required>
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <h1 class="mb-4">Envoyer Newsletter</h1>
+                <form method="post" action="{{ path('envoyer_newsletter') }}" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="sujet" class="form-label">Sujet du mail :</label>
+                        <input type="text" id="sujet" name="sujet" class="form-control" required>
+                    </div>
 
-        {# Champ pour le contenu du mail #}
-        <label for="contenu">Contenu du mail :</label>
-        <textarea id="contenu" name="contenu" class="form-control" required></textarea>
+                    <div class="mb-3">
+                        <label for="contenu" class="form-label">Contenu du mail :</label>
+                        <textarea id="contenu" name="contenu" class="form-control" required></textarea>
+                    </div>
 
-        {# Champ pour l'ajout d'une pièce jointe #}
-        <label for="piece_jointe">Pièce jointe :</label>
-        <input type="file" id="piece_jointe" name="piece_jointe" class="form-control">
+                    <div class="mb-3">
+                        <label for="piece_jointe" class="form-label">Pièce jointe :</label>
+                        <input type="file" id="piece_jointe" name="piece_jointe" class="form-control">
+                    </div>
 
-        {# Bouton pour envoyer la newsletter #}
-        <button type="submit">Envoyer</button>
-    </form>
+                    <button type="submit" class="btn btn-primary">Envoyer</button>
+                </form>
+            </div>
+        </div>
+    </div>
 {% endblock %}
