@@ -1,0 +1,69 @@
+<?php
+
+namespace App\Form;
+
+use App\Entity\Volontaire;
+use App\Entity\Volontariat;
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+
+
+use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TelType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+
+class VolontaireType extends AbstractType
+{
+    public function buildForm(FormBuilderInterface $builder, array $options): void
+    {
+        $builder
+        ->add('volontariat_id', HiddenType::class, [
+            'data' => $options['volontariat_id'],
+            'mapped' => false, // Ceci évite que Symfony essaie de mapper ce champ à une propriété de l'entité
+        ])
+        
+        ->add('nom', TextType::class, [
+            'label' => 'Nom',
+        ])
+        ->add('prenom', TextType::class, [
+            'label' => 'Prénom',
+        ])
+        ->add('email', EmailType::class, [
+            'attr' => [
+                'class' => 'form-control',
+                'placeholder' => 'Email',
+            ],
+            'label' => 'E-mail',
+            'row_attr' => [
+                'class' => 'col-10'
+            ],
+            'label_attr' => [
+                'class' => 'form-floating'
+            ]
+            ])
+        ->add('telephone', TelType::class, [
+            'label' => 'Téléphone',
+        ])
+        ->add('motivation', TextareaType::class, [
+            'label' => 'Motivation',
+        ]);
+        
+    }
+
+    public function configureOptions(OptionsResolver $resolver): void
+    {
+       
+        $resolver->setDefaults([
+            'data_class' => Volontaire::class,
+            'volontariat_id' => null,
+        ]);
+    }
+}

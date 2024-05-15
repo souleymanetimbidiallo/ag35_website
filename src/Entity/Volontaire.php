@@ -100,7 +100,7 @@ class Volontaire
 
     public function getVolontariat(): ?Volontariat
     {
-        return $this->volontariat;
+        return $this->volontariat ? $this->volontariat->getId() : null;
     }
 
     public function setVolontariat(?Volontariat $volontariat): static

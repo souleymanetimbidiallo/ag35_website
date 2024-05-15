@@ -32,5 +32,5 @@ hebergement:
   path: /hebergement
   controller: App\Controller\HebergementController::index
 volontaire:
-    path: '/volontaire/{id}'
+    path: /volontaire
     controller: App\Controller\VolontaireController::index
