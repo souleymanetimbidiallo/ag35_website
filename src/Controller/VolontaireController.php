@@ -101,7 +101,7 @@ class VolontaireController extends AbstractController
        $this->addFlash('success', 'Votre demande de volontariat a été enregistrée avec succès !');
 
        // Rediriger l'utilisateur vers une autre page
-       return $this->redirectToRoute('actu');
+       return $this->redirectToRoute('volontaire');
     }
     return $this->render('volontaire/volontaire.html.twig', [
         'form' => $form->createView(),
