@@ -3,6 +3,7 @@
 {% block title %}Formulaire de Volontariat{% endblock %}
 
 {% block body %}
+ <div id="message" style="display: none;" class="alert alert-success">Nous avons bien reçu votre demande ,nous vous contacterons dans les plus brefs délai!</div>
 <div class="container">
     <h1 class="mt-5 mb-4">Formulaire pour être volontaire</h1>
     <div class="row">
@@ -31,10 +32,6 @@
             {{ form_end(form) }}
         </div>
     </div>
-    {% for message in app.flashes('success') %}
-    <div class="alert alert-success">
-        {{ message }}
-    </div>
-{% endfor %}
+   
 </div>
 {% endblock %}

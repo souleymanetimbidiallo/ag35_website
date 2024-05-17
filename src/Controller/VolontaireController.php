@@ -97,9 +97,6 @@ class VolontaireController extends AbstractController
        $entityManager->persist($volontaire);
        $entityManager->flush();
 
-       // Ajouter un message flash de succès
-       $this->addFlash('success', 'Votre demande de volontariat a été enregistrée avec succès !');
-
        // Rediriger l'utilisateur vers une autre page
        return $this->redirectToRoute('volontaire');
     }

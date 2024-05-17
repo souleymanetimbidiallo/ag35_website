@@ -13,6 +13,11 @@
     bottom: 30px;
     z-index: 99;
 }
+.autre-universite[disabled] {
+    background-color: #eee; /* Couleur de fond grise */
+    pointer-events: none; /* Rendre le champ non cliquable */
+}
+
 
 .fw-medium {
     font-weight: 500;
