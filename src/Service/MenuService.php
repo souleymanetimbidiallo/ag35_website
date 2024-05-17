@@ -192,4 +192,19 @@ class MenuService
         $menu->setLien($guide);
         $this->entityManager->flush();
     }
+    public function getHebergement()
+    {
+        $repository = $this->entityManager->getRepository(Menu::class);
+        $menu = $repository->findOneBy(['nom' => "hebergement"]);
+
+        return $menu->getLien();
+    }
+
+    public function setHebergement($hebergement)
+    {
+        $repository = $this->entityManager->getRepository(Menu::class);
+        $menu = $repository->findOneBy(['nom' => "hebergement"]);
+        $menu->setLien($hebergement);
+        $this->entityManager->flush();
+    }
 }

@@ -5,31 +5,34 @@
 {% block body %}
 <div class="container-xxl pt-5">
     <div class="container">
-        <div class="text-center text-md-start pb-5 pb-md-0 wow fadeInUp" style="max-width: 500px;">
-            <p class="fs-5 fw-medium text-primary">Les volontariats</p>
-            <h1 class="display-5 mb-5">Nos opportunités de volontariat</h1>
-        </div>
-        <div class="row row-cols-1 row-cols-md-2 g-4">
+        <h1 class="display-2 text-dark mb-4 animated slideInDown">Devenez Bénévole chez AG35</h1>
+        <h3>Ensemble, Changeons le Monde</h3> 
+        {% set points = parametres.texte_volontaire|split('.') %}
+        {% for point in points %}
+            {% if point|trim is not empty %}
+                <p>{{ point|trim }}</p>
+            {% endif %}
+        {% endfor %}
+        
+        <div class="owl-carousel project-carousel" data-loop="false">
             {% for volontariat in volontariats %}
-            <div class="col">
-                <div class="card h-100">
-                   
-                    <div class="card-body">
-                        <h5 class="card-title">{{ volontariat.titre }}</h5>
-                        <p class="card-text">{{ volontariat.description }}</p>
-                        <p class="card-text"><small class="text-muted">Lieu : {{ volontariat.lieu }}</small></p>
-                        {% if volontariat.dateDebut is not null %}
-                        <p class="card-text">Date de début : {{ volontariat.dateDebut|date('d/m/Y H:i') }}</p>
-                        {% endif %}
-                        {% if volontariat.dateFin is not null %}
-                        <p class="card-text">Date de fin : {{ volontariat.dateFin|date('d/m/Y H:i') }}</p>
-                        {% endif %}
-                        <p>{{ "Voulez-vous être volontaire à cette activité ? Si oui " }}</p>
-                <a href="{{ path('volontaire', {'id': volontariat.id}) }}" class="btn btn-primary">Cliquez ici</a>
-
+                <div class="project-item mb-5">
+                    <div class="card position-relative">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ volontariat.titre }}</h5>
+                            <p class="card-text">{{ volontariat.description }}</p>
+                            <p class="card-text"><small class="text-muted">Lieu : {{ volontariat.lieu }}</small></p>
+                            {% if volontariat.dateDebut is not null %}
+                                <p class="card-text">Date de début : {{ volontariat.dateDebut|date('d/m/Y H:i') }}</p>
+                            {% endif %}
+                            {% if volontariat.dateFin is not null %}
+                                <p class="card-text">Date de fin : {{ volontariat.dateFin|date('d/m/Y H:i') }}</p>
+                            {% endif %}
+                            <p>{{ "Voulez-vous être volontaire à cette activité ? Si oui " }}</p>
+                            <a href="{{ path('volontaire', {'id': volontariat.id}) }}" class="btn btn-primary">Cliquez ici</a>
+                        </div>
                     </div>
                 </div>
-            </div>
             {% endfor %}
         </div>
     </div>

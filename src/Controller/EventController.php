@@ -39,6 +39,7 @@ class EventController extends AbstractController
             'menu_multimedia' => $menuService->getMultimedia(),
             'menu_donation' => $menuService->getDonation(),
             'menu_adhesion' => $menuService->getAdhesion(),
+            'menu_hebergement' => $menuService->getHebergement(),
             'menu_contact' => $menuService->getContact(),
             'menu_evenement' => $menuService->getEvenement(),
             'menu_actualite' => $menuService->getActualite(),
