@@ -28,7 +28,7 @@ app_volontariat:
 details_event:
   path: /details_event
   controller: App\Controller\DetailsEventController::index  
-app_hebergement:
+hebergement:
   path: /hebergement
   controller: App\Controller\HebergementController::index
 volontaire:
