@@ -25,3 +25,6 @@ guide:
 details_event:
   path: /details_event
   controller: App\Controller\DetailsEventController::index  
+hebergement:
+  path: /hebergement
+  controller: App\Controller\HebergementController::index
