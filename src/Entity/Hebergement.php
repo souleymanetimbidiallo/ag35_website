@@ -37,11 +37,11 @@ class Hebergement
     #[Assert\NotBlank(message: 'le champ doit etre rempli')]
     private ?string $universite = null;
 
-    #[Vich\UploadableField(mapping: 'ag35_files', fileNameProperty: 'passeport')]
+    //#[Vich\UploadableField(mapping: 'ag35_files', fileNameProperty: 'passeport')]
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $passeport = null;
 
-    #[Vich\UploadableField(mapping: 'ag35_files', fileNameProperty: 'attestation')]
+    //#[Vich\UploadableField(mapping: 'ag35_files', fileNameProperty: 'attestation')]
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $attestation = null;
 

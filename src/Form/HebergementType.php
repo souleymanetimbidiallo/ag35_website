@@ -74,13 +74,15 @@ class HebergementType extends AbstractType
                 'mapped' => false,
                 'label' => false,
                 'row_attr' => [
-                    'class' => 'col-10'
+                    'class' => 'col-10 autre-universite', // Ajouter la classe CSS ici
                 ],
                 'attr' => [
-                    'class' => 'autre-universite',
-                    'placeholder' => 'Entrer Le nom de  l\'université'
+                    'class' => 'form-control',
+                    'placeholder' => 'Entrer Le nom de  l\'université',
+                  
                 ]
             ])
+            
             ->add('passeport', FileType::class, [
                 'required' => true,
                 'mapped' => false,

@@ -22,9 +22,15 @@ evenements:
 guide:
   path: /guide
   controller: App\Controller\GuideController::index  
+app_volontariat:
+  path: /volontariat
+  controller: App\Controller\VolontariatController::index  
 details_event:
   path: /details_event
   controller: App\Controller\DetailsEventController::index  
 hebergement:
   path: /hebergement
   controller: App\Controller\HebergementController::index
+volontaire:
+    path: /volontaire
+    controller: App\Controller\VolontaireController::index

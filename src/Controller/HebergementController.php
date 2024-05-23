@@ -55,10 +55,12 @@ class HebergementController extends AbstractController
             'menu_multimedia' => $menuService->getMultimedia(),
             'menu_donation' => $menuService->getDonation(),
             'menu_adhesion' => $menuService->getAdhesion(),
+            'menu_hebergement' => $menuService->getHebergement(),
             'menu_contact' => $menuService->getContact(),
             'menu_evenement' => $menuService->getEvenement(),
             'menu_actualite' => $menuService->getActualite(),
             'menu_guide' => $menuService->getGuide(),
+            'menu_volontariat' => $menuService->getVolontariat(),
             'nos_valeurs' => $parameterService->getParametreByName("nos_valeurs"),
             'texte_nos_valeurs' => $parameterService->getParametreByName("texte_nos_valeurs"),
             'nos_gouvernances' => $parameterService->getParametreByName("nos_gouvernances"),
@@ -112,11 +114,6 @@ class HebergementController extends AbstractController
                  // Enregistrer les données dans la base de données
                  $manager->persist($hebergement);
                  $manager->flush();  
-                $this->addFlash(
-                    'success',
-                    'Votre demande a été envoyé avec succès ! Nous reviendrons vers vous dans les plus bref délais.'
-                );
-                
             
                 // Redirection vers une autre page
                 return $this->redirectToRoute('hebergement');

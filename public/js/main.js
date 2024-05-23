@@ -82,6 +82,44 @@
             }
         }
     });
+    //GRISER LE CHAMP AUTRE UNIVERSITE 
+
+    // Attendez que le document soit prêt
+    document.addEventListener("DOMContentLoaded", function() {
+        var universiteField = document.querySelector("#hebergement_universite");
+        var autreUniversiteField = document.querySelector(".autre-universite");
     
+        function toggleAutreUniversiteField() {
+            if (universiteField.value === "autre") {
+                autreUniversiteField.style.display = "block";
+                autreUniversiteField.removeAttribute('disabled'); // Remove disabled attribute
+            } else {
+                autreUniversiteField.style.display = "none";
+                autreUniversiteField.setAttribute('disabled', 'disabled'); // Add disabled attribute
+            }
+        }
+    
+        toggleAutreUniversiteField();
+    
+        universiteField.addEventListener("change", toggleAutreUniversiteField);
+    });
+    document.addEventListener("DOMContentLoaded", function() {
+        console.log("Le DOM est chargé.");
+        var form = document.querySelector('form');
+        var message = document.getElementById('message');
+    
+        form.addEventListener('submit', function(event) {
+            // Afficher le message
+            message.style.display = 'block';
+    
+            // Masquer le message après 5 secondes (5000 millisecondes)
+            setTimeout(function() {
+                message.style.display = 'none';
+            }, 60000);
+        });
+    });
+        
+    
+
 })(jQuery);
 
