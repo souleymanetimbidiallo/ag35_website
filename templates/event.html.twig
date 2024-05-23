@@ -3,52 +3,78 @@
 {% block body %}
     <!-- Page Header Start -->
     {% for image in images %}
-        <div class="container-fluid py-5 mb-5 wow" data-wow-delay="0.1s" style="background-image: url('{{ asset('img/' ~ image.imageName8) }}'); background-size: cover; background-position: center; min-height: 100vh;">
+        <div class="container-fluid py-5 mb-5 wow" data-wow-delay="0.1s" style="background-image: url('{{ asset('img/' ~ image.imageName8) }}'); background-size: cover; background-position: center; min-height: 60vh;">
             <div class="container text-center py-5">
                 <h1 class="display-2 text-white mb-4 animated slideInDown">Evenements</h1>
                 <nav aria-label="breadcrumb animated slideInDown">
                     <ol class="breadcrumb justify-content-center mb-0">
+                    </ol>
                 </nav>
             </div>
         </div>
     {% endfor %}
     <!-- Page Header End -->
 
-    <!-- Project Start -->
+    <!-- Events Section Start -->
     <div class="container-xxl pt-5">
         <div class="container">
             <div class="text-center text-md-start pb-5 pb-md-0 wow fadeInUp" style="max-width: 500px;">
                 <p class="fs-5 fw-medium text-primary">Les événements</p>
                 <h1 class="display-5 mb-5">Nos événements et festivités</h1>
-				<!-- Bouton pour afficher les événements à venir ou tous les événements -->
-                {% if app.request.query.get('upcoming_events') %}
-                    <a href="{{ path('app_evenements') }}" class="btn btn-primary">Afficher tous les événements</a>
-                {% else %}
-                    <a href="{{ path('app_evenements', {'upcoming_events': 1}) }}" class="btn btn-primary">Événements à venir</a>
-                {% endif %}
             </div>
-            <div class="owl-carousel project-carousel" data-loop="false">
-                {% if evenements %}
-                    {% for evenement in evenements %}
-                        <div class="project-item mb-5">
-                            <div class="position-relative">
-                                <img class="img-fluid" src="{{ asset('img/' ~ evenement.imageName) }}" alt="Image">
-                                <div class="project-overlay">
-                                    <a class="btn btn-lg-square btn-light rounded-circle m-1" href="/details_event?titre={{ evenement.titre|url_encode }}&commentaire={{ evenement.commentaire|url_encode }}&image={{ evenement.imageName }}&adresse={{ evenement.adresse|url_encode }}&prix={{ evenement.prix|url_encode }}">
-                                        <i class="fa fa-eye"></i>
-                                    </a>
+            
+            <!-- Événements à venir -->
+            <div class="mb-5">
+                <h2>Événements à venir</h2>
+                <div class="owl-carousel project-carousel">
+                    {% if evenements_a_venir %}
+                        {% for evenement in evenements_a_venir %}
+                            <div class="project-item mb-5">
+                                <div class="position-relative">
+                                    <img class="img-fluid" src="{{ asset('img/' ~ evenement.imageName) }}" alt="Image">
+                                    <div class="project-overlay">
+                                        <a class="btn btn-lg-square btn-light rounded-circle m-1" href="{{ path('app_evenement_details', {'id': evenement.id}) }}&content={{ evenement.titre }}">
+                                            <i class="fa fa-eye"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="p-4">
+                                    <a class="d-block h5" href="{{ path('app_evenement_details', {'id': evenement.id}) }}">{{ evenement.titre }}</a>
                                 </div>
                             </div>
-                            <div class="p-4">
-                                <a class="d-block h5" href="">{{ evenement.titre }}</a>
+                        {% endfor %}
+                    {% else %}
+                        <div class="text-center">Aucun événement à venir</div>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <!-- Tous les événements -->
+            <div>
+                <h2>Tous les événements</h2>
+                <div class="owl-carousel project-carousel">
+                    {% if tous_les_evenements %}
+                        {% for evenement in tous_les_evenements %}
+                            <div class="project-item mb-5">
+                                <div class="position-relative">
+                                    <img class="img-fluid" src="{{ asset('img/' ~ evenement.imageName) }}" alt="Image">
+                                    <div class="project-overlay">
+                                        <a class="btn btn-lg-square btn-light rounded-circle m-1" href="{{ path('app_evenement_details', {'id': evenement.id}) }}">
+                                            <i class="fa fa-eye"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="p-4">
+                                    <a class="d-block h5" href="{{ path('app_evenement_details', {'id': evenement.id}) }}">{{ evenement.titre }}</a>
+                                </div>
                             </div>
-                        </div>
-                    {% endfor %}
-                {% else %}
-                    <div class="text-center">Aucun événement à venir</div>
-                {% endif %}
+                        {% endfor %}
+                    {% else %}
+                        <div class="text-center">Aucun événement disponible</div>
+                    {% endif %}
+                </div>
             </div>
         </div>
     </div>
-    <!-- Project End -->
+    <!-- Events Section End -->
 {% endblock %}

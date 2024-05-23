@@ -1,5 +1,15 @@
 {% extends 'base.html.twig' %}
 
+{% block head %}
+    <meta property="og:title" content="{{ evenement.titre }}" />
+    <meta property="og:description" content="{{ evenement.commentaire }}" />
+    <meta property="og:url" content="{{ url('app_evenement_details', {'id':evenement.id}) }}" />
+    {% if evenement.imagename is defined %}
+        {% set imagePath = absolute_url(asset('/img/' ~ evenement.imagename)) %}
+        <meta property="og:image" content="{{ imagePath }}" />
+    {% endif %}
+{% endblock %}
+
 {% block body %}
 	<!-- Page Header Start -->
 	{% for image in images %}
@@ -18,29 +28,42 @@
 	<!-- Page Header End -->
 
 	<!-- Project Start -->
-	<div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
-		<!-- Contenu à centrer -->
-		<div class="text-center">
-			<!-- Project Start -->
-			<div class="container-lg pt-5"> 
-				<div class="container">
-					<div class="text-center text-md-start pb-5 pb-md-0 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 800px;"> 
-						<div class="mb-5">
-							<p class="fs-5 fw-medium text-primary">Voici les détails de cet événement</p>
-							<div class="project-item">
-								{% if app.request.query.has('image') %}
-									{% set imagePath = '/img/' ~ app.request.query.get('image') %}
-									<img class="img-fluid" src="{{ asset(imagePath) }}" alt="Image">
-								{% endif %}
-								<div class="p-4">
-									<a class="d-block h5" href="">{{ app.request.query.get('titre') }}</a>
-									<span>Prix: {{ app.request.query.get('prix') }}</span><br/>
-									<span>Adresse: {{ app.request.query.get('adresse') }}</span><br/>
-									<span>Description: {{ app.request.query.get('commentaire') }}</span><br/>
-									<a class="btn btn-primary" href="{{ parametres.lien_billeterie }}">Acheter le billet</a>
-								</div>
-							</div>
-						</div>
+	<div class="container-xxl pt-5">
+		<div class="container">
+			<div class="text-center text-md-start pb-5 pb-md-0 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
+				<p class="fs-5 fw-medium text-primary">Voici les détails de cet événement</p>
+				<div class="project-item mb-5">
+					{% if evenement.imagename is defined %}
+						{% set imagePath = '/img/' ~ evenement.imagename %}
+						<img class="img-fluid" src="{{asset(imagePath)}}" alt="Image">
+					{% endif %}
+					<div class="p-4">
+						<a class="d-block h5" href="">{{evenement.titre}}</a>
+						<span>
+							Prix:
+							{{ evenement.prix }}</span>
+						<br/>
+						<span>Adresse:
+							{{ evenement.adresse }}</span>
+						<br/>
+						<span>Description:
+							{{ evenement.commentaire }}</span>
+						<br/>
+						<a class="btn btn-primary" href="{{ parametres.lien_billeterie }}">Acheter le billet</a><br/><br/>
+
+						<a class="btn btn-lg btn-primary rounded-0 m-1" href="https://www.facebook.com/sharer/sharer.php?u={{ url('app_evenement_details', {'id':evenement.id}) }}&quote={{ evenement.titre }}" target="_blank">
+							<i class="fab fa-facebook-f"></i> Partager sur Facebook
+						</a>
+
+						<a href="whatsapp://send?text={{ evenement.titre }} - {{ evenement.commentaire }} - {{ url('app_evenement_details', {'id':evenement.id}) }}" target="_blank" class="btn btn-lg btn-primary rounded-0 m-1">
+							<i class="fab fa-whatsapp"></i> Partager sur WhatsApp
+						</a>
+
+						<a class="btn btn-lg btn-primary rounded-0 m-1" href="https://twitter.com/intent/tweet?url={{ url('app_evenement_details', {'id':evenement.id}) }}&text={{ evenement.titre }}" target="_blank">
+							<i class="fab fa-twitter"></i> Partager sur Twitter
+						</a>
+						
+						
 					</div>
 				</div>
 			</div>
