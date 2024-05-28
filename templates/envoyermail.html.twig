@@ -1,5 +1,3 @@
-{# templates/envoyermail.html.twig #}
-
 {% extends 'base.html.twig' %}
 
 {% block title %}Envoyer Newsletter{% endblock %}
@@ -10,6 +8,16 @@
             <div class="col-lg-8">
                 <h1 class="mb-4">Envoyer Newsletter</h1>
                 <form method="post" action="{{ path('envoyer_newsletter') }}" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="categorie" class="form-label">Catégorie :</label>
+                        <select id="categorie" name="categorie" class="form-select" required>
+                            <option value="" disabled selected>Choisir une catégorie</option>
+                            {% for categorie in categories %}
+                                <option value="{{ categorie.id }}">{{ categorie.subject }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    
                     <div class="mb-3">
                         <label for="sujet" class="form-label">Sujet du mail :</label>
                         <input type="text" id="sujet" name="sujet" class="form-control" required>

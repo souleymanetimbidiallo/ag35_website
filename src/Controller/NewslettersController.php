@@ -21,6 +21,9 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use App\Repository\NewsletterRepository;
+use App\Repository\CategoriesujetRepository;
+use App\Entity\Categoriesujet;
+
 
 class NewslettersController extends AbstractController
 {
@@ -80,7 +83,7 @@ $email = $request->request->get('email');
      /**
      * @Route("/envoyer", name="envoyer_newsletter", methods={"GET","POST"})
      */
-    public function envoyerNewsletter(Request $request, MailerInterface $mailer, ParameterService $parameterService, MenuService $menuService, MesImageRepository $mesImageRepository, TexteService $texteService): Response
+    public function envoyerNewsletter(Request $request, MailerInterface $mailer, ParameterService $parameterService, MenuService $menuService, MesImageRepository $mesImageRepository, TexteService $texteService, CategoriesujetRepository $categoriesujetRepository): Response
     {
         $parametres = [
             'site_name' => $parameterService->getSiteName(),
@@ -116,11 +119,18 @@ $email = $request->request->get('email');
 
         // Récupération des abonnés à la newsletter
         $abonnes = $this->newsletterRepository->findAll();
+        $categories = $categoriesujetRepository->findAll();
 
         if ($request->isMethod('POST')) {
             // Récupération des données du formulaire
-            $sujet = $request->request->get('sujet');
+            $categorieId = $request->request->get('categorie');
+            $sujetUser = $request->request->get('sujet');
             $contenu = $request->request->get('contenu');
+
+            $categorie = $categoriesujetRepository->find($categorieId);
+            $categorieSujet = $categorie->getSubject();
+
+            $sujet = $categorieSujet . ': ' . $sujetUser;
     
             // Traitement de la pièce jointe s'il y en a une
             $pieceJointe = $request->files->get('piece_jointe');
@@ -178,7 +188,8 @@ $email = $request->request->get('email');
     
         // Affichage du formulaire dans la vue envoyermail.html.twig
         return $this->render('envoyermail.html.twig', [
-            'parametres'   => $parametres
+            'parametres'   => $parametres,
+            'categories' => $categories,
         ]);
     }
 
