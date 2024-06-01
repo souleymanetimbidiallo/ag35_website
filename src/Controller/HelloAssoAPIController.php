@@ -14,6 +14,8 @@ class HelloAssoAPIController extends AbstractController
     /**
      * @Route("/hello/asso", name="hello_asso")
      */
+    #[Route('/admin')]
+    #[IsGranted('ROLE_ADMIN')]
     public function index(HelloAssoService $helloAsso, ParameterService $parameterService, MenuService $menuService, TexteService $texteService): Response
     {
         $parametres = [
@@ -47,10 +49,10 @@ class HelloAssoAPIController extends AbstractController
             'lien_donation' => $texteService->getParametreByName('lien_donation')
         ];
         //dd($helloAsso->getDon());
-        dd($helloAsso->getAdhesion());
+       // dd($helloAsso->getAdhesion());
         return $this->render('hello_asso_api/index.html.twig', [
-             'data'=>$helloAsso->getDon(),
-             'data'=>$helloAsso->getAdhesion(),
+             'donations'=>$helloAsso->getDon(),
+             'adhesion'=>$helloAsso->getAdhesion(),
             'parametres' => $parametres,
             'controller_name' => 'HelloAssoAPIController',
         ]);
