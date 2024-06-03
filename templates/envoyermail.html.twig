@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Envoyer Newsletter{% endblock %}
+
+{% block body %}
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <h1 class="mb-4">Envoyer Newsletter</h1>
+                <form method="post" action="{{ path('envoyer_newsletter') }}" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="categorie" class="form-label">Catégorie :</label>
+                        <select id="categorie" name="categorie" class="form-select" required>
+                            <option value="" disabled selected>Choisir une catégorie</option>
+                            {% for categorie in categories %}
+                                <option value="{{ categorie.id }}">{{ categorie.subject }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="sujet" class="form-label">Sujet du mail :</label>
+                        <input type="text" id="sujet" name="sujet" class="form-control" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="contenu" class="form-label">Contenu du mail :</label>
+                        <textarea id="contenu" name="contenu" class="form-control" required></textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="piece_jointe" class="form-label">Pièce jointe :</label>
+                        <input type="file" id="piece_jointe" name="piece_jointe" class="form-control">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Envoyer</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
