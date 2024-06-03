@@ -41,9 +41,9 @@ class SecurityController extends AbstractController
         ];
 
         $images = $mesImageRepository->findAll();
-        if ($this->getUser()) {
-            return $this->redirectToRoute('accueil');
-        }
+    //    if ($this->getUser()) {
+    //         return $this->redirectToRoute('api');
+    //     }
 
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();

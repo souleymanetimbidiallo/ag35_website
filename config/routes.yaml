@@ -34,3 +34,6 @@ hebergement:
 volontaire:
     path: /volontaire
     controller: App\Controller\VolontaireController::index
+api:
+    path: /api
+    controller: App\Controller\HelloAssoAPIController::index
