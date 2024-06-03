@@ -39,6 +39,19 @@ class EvenementRepository extends ServiceEntityRepository
         }
     }
 
+    public function findUpcomingEvents()
+    {
+        return $this->createQueryBuilder('e')
+            ->where('e.dateDebut >= :today')
+            ->setParameter('today', new \DateTime())
+            ->orderBy('e.dateDebut', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+    
+    
+
+
 //    /**
 //     * @return Evenement[] Returns an array of Evenement objects
 //     */
