@@ -38,10 +38,12 @@ public function show(EvenementRepository $evenementRepository, ParameterService 
         'menu_multimedia' => $menuService->getMultimedia(),
         'menu_donation' => $menuService->getDonation(),
         'menu_adhesion' => $menuService->getAdhesion(),
+        'menu_hebergement' => $menuService->getHebergement(),
         'menu_contact' => $menuService->getContact(),
         'menu_evenement' => $menuService->getEvenement(),
         'menu_actualite' => $menuService->getActualite(),
         'menu_guide' => $menuService->getGuide(),
+        'menu_volontariat' => $menuService->getVolontariat(),
         'nos_valeurs' => $parameterService->getParametreByName("nos_valeurs"),
         'texte_nos_valeurs' => $parameterService->getParametreByName("texte_nos_valeurs"),
         'nos_gouvernances' => $parameterService->getParametreByName("nos_gouvernances"),
@@ -87,10 +89,12 @@ public function index(ParameterService $parameterService, MenuService $menuServi
         'menu_multimedia' => $menuService->getMultimedia(),
         'menu_donation' => $menuService->getDonation(),
         'menu_adhesion' => $menuService->getAdhesion(),
+        'menu_hebergement' => $menuService->getHebergement(),
         'menu_contact' => $menuService->getContact(),
         'menu_evenement' => $menuService->getEvenement(),
         'menu_actualite' => $menuService->getActualite(),
         'menu_guide' => $menuService->getGuide(),
+        'menu_volontariat' => $menuService->getVolontariat(),
         'nos_valeurs' => $parameterService->getParametreByName("nos_valeurs"),
         'texte_nos_valeurs' => $parameterService->getParametreByName("texte_nos_valeurs"),
         'nos_gouvernances' => $parameterService->getParametreByName("nos_gouvernances"),
@@ -115,6 +119,5 @@ public function index(ParameterService $parameterService, MenuService $menuServi
         'tous_les_evenements' => $tous_les_evenements,
     ]);
 }
-
 
 }

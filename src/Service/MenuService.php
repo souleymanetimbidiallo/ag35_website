@@ -161,6 +161,21 @@ class MenuService
         $menu->setLien($actualite);
         $this->entityManager->flush();
     }
+    public function getVolontariat()
+    {
+        $repository = $this->entityManager->getRepository(Menu::class);
+        $menu = $repository->findOneBy(['nom' => "volontariat"]);
+
+        return $menu->getLien();
+    }
+
+    public function setVolontariat($volontariat)
+    {
+        $repository = $this->entityManager->getRepository(Menu::class);
+        $menu = $repository->findOneBy(['nom' => "volontariat"]);
+        $menu->setLien($volontariat);
+        $this->entityManager->flush();
+    }
 
     public function getGuide()
     {
@@ -175,6 +190,21 @@ class MenuService
         $repository = $this->entityManager->getRepository(Menu::class);
         $menu = $repository->findOneBy(['nom' => "guide"]);
         $menu->setLien($guide);
+        $this->entityManager->flush();
+    }
+    public function getHebergement()
+    {
+        $repository = $this->entityManager->getRepository(Menu::class);
+        $menu = $repository->findOneBy(['nom' => "hebergement"]);
+
+        return $menu->getLien();
+    }
+
+    public function setHebergement($hebergement)
+    {
+        $repository = $this->entityManager->getRepository(Menu::class);
+        $menu = $repository->findOneBy(['nom' => "hebergement"]);
+        $menu->setLien($hebergement);
         $this->entityManager->flush();
     }
 }

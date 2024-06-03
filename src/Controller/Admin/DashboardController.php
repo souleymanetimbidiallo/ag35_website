@@ -16,6 +16,9 @@ use App\Entity\Temoin;
 use App\Entity\TexteParam;
 use App\Entity\Valeur;
 use App\Entity\Categoriesujet;
+use App\Entity\Hebergement;
+use App\Entity\Volontariat;
+use App\Entity\Volontaire;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -59,5 +62,8 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Admin', 'fas fa-lock', Admin::class);
         yield MenuItem::linkToCrud('Categoriesujet', 'fas fa-list', Categoriesujet::class);
         yield MenuItem::linkToRoute('Envoyer Newsletter', 'fas fa-envelope', 'envoyer_newsletter');
+        yield MenuItem::linkToCrud('Hébergement ', 'fas fa-lock', Hebergement::class);
+        yield MenuItem::linkToCrud('Volontariat ', 'fas fa-lock', Volontariat::class);
+        yield MenuItem::linkToCrud('Volontaire ', 'fas fa-lock', Volontaire::class);
     }
 }

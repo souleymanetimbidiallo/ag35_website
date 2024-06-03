@@ -38,7 +38,7 @@ class MembreRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
-
+ 
     public function findByCustomQuery(): array
     {
         $entityManager = $this->getEntityManager();
