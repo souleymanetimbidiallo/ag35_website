@@ -56,3 +56,7 @@ services:
             $apiUrl: '%env(HELLOASSO_API_URL)%'
             $clientId: '%env(HELLOASSO_CLIENT_ID)%'
             $clientSecret: '%env(HELLOASSO_CLIENT_SECRET)%'
+    App\Service\GoogleCalendarService:
+        arguments:
+            $clientId: '%env(GOOGLE_CLIENT_ID)%'
+            $redirectUri: '%env(GOOGLE_REDIRECT_URI)%'
