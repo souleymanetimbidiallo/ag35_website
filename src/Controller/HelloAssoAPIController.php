@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -8,6 +9,8 @@ use App\Service\HelloAssoService;
 use App\Service\MenuService;
 use App\Service\ParameterService;
 use App\Service\TexteService;
+use App\Repository\AdhesionsRepository;
+use App\Entity\Adhesions;
 
 class HelloAssoAPIController extends AbstractController
 {
@@ -15,8 +18,7 @@ class HelloAssoAPIController extends AbstractController
      * @Route("/hello/asso", name="hello_asso")
      */
     #[Route('/admin')]
-    #[IsGranted('ROLE_ADMIN')]
-    public function index(HelloAssoService $helloAsso, ParameterService $parameterService, MenuService $menuService, TexteService $texteService): Response
+    public function index(HelloAssoService $helloAsso, ParameterService $parameterService, MenuService $menuService, TexteService $texteService, AdhesionsRepository $adhesionsRepository): Response
     {
         $parametres = [
             'site_name' => $parameterService->getSiteName(),
@@ -48,13 +50,32 @@ class HelloAssoAPIController extends AbstractController
             'nous_sommes' => $parameterService->getParametreByName("site_nous_sommes"),
             'lien_donation' => $texteService->getParametreByName('lien_donation')
         ];
-        //dd($helloAsso->getDon());
-       // dd($helloAsso->getAdhesion());
+
+        $adhesions = $helloAsso->getAdhesion();
+
+        foreach ($adhesions['data'] as $adhesionData) {
+            $existingAdhesion = $adhesionsRepository->findOneBy(['email' => $adhesionData['payer']['email']]);
+
+            if (!$existingAdhesion) {
+                $adhesion = new Adhesions();
+                $adhesion->setNom($adhesionData['payer']['firstName'] ?? '');
+                $adhesion->setPrenom($adhesionData['payer']['lastName'] ?? '');
+                $adhesion->setEmail($adhesionData['payer']['email'] ?? '');
+                $adhesion->setTarif($adhesionData['name'] ?? '');
+                $adhesion->setMontant($adhesionData['amount'] ?? '');
+                $adhesion->setType($adhesionData['type'] ?? '');
+                $adhesion->setDate(new \DateTime($adhesionData['order']['date'] ?? 'now'));
+
+                $adhesionsRepository->save($adhesion, true);
+            }
+        }
+
         return $this->render('hello_asso_api/index.html.twig', [
-             'donations'=>$helloAsso->getDon(),
-             'adhesion'=>$helloAsso->getAdhesion(),
+            'donations' => $helloAsso->getDon(),
+            'adhesion' => $helloAsso->getAdhesion(),
             'parametres' => $parametres,
             'controller_name' => 'HelloAssoAPIController',
         ]);
     }
 }
+

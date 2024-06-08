@@ -30,9 +30,7 @@ class MembreCrudController extends AbstractCrudController
         return $crud
             ->setEntityLabelInPlural('Membres')
             ->setEntityLabelInSingular('Membre')
-
             ->setPageTitle("index", "AG35 - Administration des Membres")
-
             ->setPaginatorPageSize(10);
     }
 
@@ -66,4 +64,5 @@ class MembreCrudController extends AbstractCrudController
 
 
     }
+
 }

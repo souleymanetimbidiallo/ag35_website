@@ -32,6 +32,18 @@
                         <label for="piece_jointe" class="form-label">Pièce jointe :</label>
                         <input type="file" id="piece_jointe" name="piece_jointe" class="form-control">
                     </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Liste de diffusion :</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="newsletter" name="liste_diffusion[]" value="newsletter">
+                            <label class="form-check-label" for="newsletter">Newsletter</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="adherants" name="liste_diffusion[]" value="adherants">
+                            <label class="form-check-label" for="adherants">Adhérants</label>
+                        </div>
+                    </div>
 
                     <button type="submit" class="btn btn-primary">Envoyer</button>
                 </form>
