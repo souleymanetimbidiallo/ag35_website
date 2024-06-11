@@ -60,3 +60,7 @@ services:
         arguments:
             $clientId: '%env(GOOGLE_CLIENT_ID)%'
             $redirectUri: '%env(GOOGLE_REDIRECT_URI)%'
+            $scope:     '%env(GOOGLE_SCOPES)%'
+            $authConfig:     '%env(GOOGLE_AUTH_CONFIG)%'
+            $apiKey:     '%env(GOOGLE_API_KEY)%'
+            
