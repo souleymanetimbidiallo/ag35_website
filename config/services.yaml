@@ -4,14 +4,20 @@ parameters:
     filesDirectory: '%kernel.project_dir%/public/uploads/fichiers'
 
 services:
+    App\Service\ApiProvider:
+        autowire: true
+        autoconfigure: true
+
+    App\EventListener\FetchDataListener:
+        arguments:
+            $helloAssoService: '@App\Service\HelloAssoService'
+        tags:
+            - { name: kernel.event_listener, event: kernel.request }
     # default configuration for services in *this* file
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
      # config/services.yaml
-
-    
-
 
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
@@ -56,6 +62,7 @@ services:
             $apiUrl: '%env(HELLOASSO_API_URL)%'
             $clientId: '%env(HELLOASSO_CLIENT_ID)%'
             $clientSecret: '%env(HELLOASSO_CLIENT_SECRET)%'
+
     App\Service\GoogleCalendarService:
         arguments:
             $clientId: '%env(GOOGLE_CLIENT_ID)%'
@@ -63,4 +70,5 @@ services:
             $scope:     '%env(GOOGLE_SCOPES)%'
             $authConfig:     '%env(GOOGLE_AUTH_CONFIG)%'
             $apiKey:     '%env(GOOGLE_API_KEY)%'
-            
+    App\Command\SyncAdhesionsCommand:
+        tags: ['console.command']

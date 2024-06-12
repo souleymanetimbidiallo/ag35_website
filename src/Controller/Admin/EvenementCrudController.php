@@ -53,5 +53,6 @@ class EvenementCrudController extends AbstractCrudController
             ->onlyOnForms(); // Afficher le champ uniquement sur les formulaires
         yield TextareaField::new('commentaire')
             ->hideOnIndex();
+        yield TextField::new('lienBilleterie')->setLabel('Lien Billeterie');
     }
 }

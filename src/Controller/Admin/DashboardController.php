@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Actualite;
+use App\Entity\Adhesions;
 use App\Entity\Admin;
 use App\Entity\Contact;
 use App\Entity\Evenement;
@@ -25,14 +26,22 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use App\Service\HelloAssoService; // Ajoute le service HelloAssoService
 
 class DashboardController extends AbstractDashboardController
 {
+    private $helloAssoService;
+
+    public function __construct(HelloAssoService $helloAssoService)
+    {
+        $this->helloAssoService = $helloAssoService;
+    }
+
     #[Route('/admin', name: 'admin')]
     #[IsGranted('ROLE_ADMIN')]
     public function index(): Response
     {
-
+        $this->helloAssoService->syncAdhesions();
         return $this->render('admin/dashboard.html.twig');
     }
 
@@ -65,6 +74,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Hébergement ', 'fas fa-lock', Hebergement::class);
         yield MenuItem::linkToCrud('Volontariat ', 'fas fa-lock', Volontariat::class);
         yield MenuItem::linkToCrud('Volontaire ', 'fas fa-lock', Volontaire::class);
+        yield MenuItem::linkToCrud('Adhésions ', 'fas fa-lock', Adhesions::class);
         
     }
 }

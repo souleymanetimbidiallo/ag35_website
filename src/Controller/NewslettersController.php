@@ -22,6 +22,8 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use App\Repository\NewsletterRepository;
 use App\Repository\CategoriesujetRepository;
+use App\Repository\AdhesionsRepository;
+use App\Entity\Adhesions;
 use App\Entity\Categoriesujet;
 
 
@@ -79,122 +81,157 @@ $email = $request->request->get('email');
 }
 
 
+/**
+ * @Route("/envoyer", name="envoyer_newsletter", methods={"GET","POST"})
+ */
+public function envoyerNewsletter(Request $request, MailerInterface $mailer, ParameterService $parameterService, MenuService $menuService, MesImageRepository $mesImageRepository, TexteService $texteService, CategoriesujetRepository $categoriesujetRepository, AdhesionsRepository $adhesionsRepository): Response
+{
+    $parametres = [
+        'site_name' => $parameterService->getSiteName(),
+        'nom_association' => $parameterService->getParametreByName("nom_association"),
+        'address' => $parameterService->getSiteAdresse(),
+        'email' => $parameterService->getSiteEmail(),
+        'telephone' => $parameterService->getSiteTelephone(),
+        'lien_page_fb' => $parameterService->getLienPageFb(),
+        'lien_groupe_fb' => $parameterService->getLienGroupeFb(),
+        'lien_whatsApp' => $parameterService->getLienWhatsApp(),
+        'menu_accueil' => $menuService->getAccueil(),
+        'menu_apropos' => $menuService->getApropos(),
+        'menu_activite' => $menuService->getActivite(),
+        'menu_multimedia' => $menuService->getMultimedia(),
+        'menu_donation' => $menuService->getDonation(),
+        'menu_adhesion' => $menuService->getAdhesion(),
+        'menu_hebergement' => $menuService->getHebergement(),
+        'menu_contact' => $menuService->getContact(),
+        'menu_evenement' => $menuService->getEvenement(),
+        'menu_actualite' => $menuService->getActualite(),
+        'menu_guide' => $menuService->getGuide(),
+        'menu_volontariat' => $menuService->getVolontariat(),
+        'nos_valeurs' => $parameterService->getParametreByName("nos_valeurs"),
+        'texte_nos_valeurs' => $parameterService->getParametreByName("texte_nos_valeurs"),
+        'nos_gouvernances' => $parameterService->getParametreByName("nos_gouvernances"),
+        'texte_nos_gouvernances' => $parameterService->getParametreByName("texte_nos_gouvernances"),
+        'nos_partenaires' => $parameterService->getParametreByName("nos_partenaires"),
+        'texte_nos_partenaires' => $parameterService->getParametreByName("texte_nos_partenaires"),
+        'nous_sommes' => $parameterService->getParametreByName("site_nous_sommes"),
+        'lien_actualite' => $parameterService->getParametreByName("lien_actualite"),
+        'texte_actu' => $texteService->getParametreByName('texte_actu'),
+        'lien_donation' => $texteService->getParametreByName('lien_donation')
+    ];
 
-     /**
-     * @Route("/envoyer", name="envoyer_newsletter", methods={"GET","POST"})
-     */
-    public function envoyerNewsletter(Request $request, MailerInterface $mailer, ParameterService $parameterService, MenuService $menuService, MesImageRepository $mesImageRepository, TexteService $texteService, CategoriesujetRepository $categoriesujetRepository): Response
-    {
-        $parametres = [
-            'site_name' => $parameterService->getSiteName(),
-            'nom_association' => $parameterService->getParametreByName("nom_association"),
-            'address' => $parameterService->getSiteAdresse(),
-            'email' => $parameterService->getSiteEmail(),
-            'telephone' => $parameterService->getSiteTelephone(),
-            'lien_page_fb' => $parameterService->getLienPageFb(),
-            'lien_groupe_fb' => $parameterService->getLienGroupeFb(),
-            'lien_whatsApp' => $parameterService->getLienWhatsApp(),
-            'menu_accueil' => $menuService->getAccueil(),
-            'menu_apropos' => $menuService->getApropos(),
-            'menu_activite' => $menuService->getActivite(),
-            'menu_multimedia' => $menuService->getMultimedia(),
-            'menu_donation' => $menuService->getDonation(),
-            'menu_adhesion' => $menuService->getAdhesion(),
-            'menu_hebergement' => $menuService->getHebergement(),
-            'menu_contact' => $menuService->getContact(),
-            'menu_evenement' => $menuService->getEvenement(),
-            'menu_actualite' => $menuService->getActualite(),
-            'menu_guide' => $menuService->getGuide(),
-            'menu_volontariat' => $menuService->getVolontariat(),
-            'nos_valeurs' => $parameterService->getParametreByName("nos_valeurs"),
-            'texte_nos_valeurs' => $parameterService->getParametreByName("texte_nos_valeurs"),
-            'nos_gouvernances' => $parameterService->getParametreByName("nos_gouvernances"),
-            'texte_nos_gouvernances' => $parameterService->getParametreByName("texte_nos_gouvernances"),
-            'nos_partenaires' => $parameterService->getParametreByName("nos_partenaires"),
-            'texte_nos_partenaires' => $parameterService->getParametreByName("texte_nos_partenaires"),
-            'nous_sommes' => $parameterService->getParametreByName("site_nous_sommes"),
-            'lien_actualite' => $parameterService->getParametreByName("lien_actualite"),
-            'texte_actu' => $texteService->getParametreByName('texte_actu'),
-            'lien_donation' => $texteService->getParametreByName('lien_donation')
-        ];
-        $images = $mesImageRepository->findAll();
+    $images = $mesImageRepository->findAll();
 
-        // Récupération des abonnés à la newsletter
-        $abonnes = $this->newsletterRepository->findAll();
-        $categories = $categoriesujetRepository->findAll();
+    // Récupération des abonnés à la newsletter
+    $abonnes = $this->newsletterRepository->findAll();
+    $categories = $categoriesujetRepository->findAll();
+    $adherants = $adhesionsRepository->findAll();
 
-        if ($request->isMethod('POST')) {
-            // Récupération des données du formulaire
-            $categorieId = $request->request->get('categorie');
-            $sujetUser = $request->request->get('sujet');
-            $contenu = $request->request->get('contenu');
+    if ($request->isMethod('POST')) {
+        // Récupération des données du formulaire
+        $categorieId = $request->request->get('categorie');
+        $sujetUser = $request->request->get('sujet');
+        $contenu = $request->request->get('contenu');
+        $listeDiffusion = $request->request->get('liste_diffusion', []);
+        $categorie = $categoriesujetRepository->find($categorieId);
+        $categorieSujet = $categorie->getSubject();
 
-            $categorie = $categoriesujetRepository->find($categorieId);
-            $categorieSujet = $categorie->getSubject();
+        $sujet = $categorieSujet . ': ' . $sujetUser;
 
-            $sujet = $categorieSujet . ': ' . $sujetUser;
-    
-            // Traitement de la pièce jointe s'il y en a une
-            $pieceJointe = $request->files->get('piece_jointe');
-            $pieceJointePath = null;
+        // Traitement de la pièce jointe s'il y en a une
+        $pieceJointe = $request->files->get('piece_jointe');
+        $pieceJointePath = null;
 
-            if ($pieceJointe instanceof UploadedFile) {
-                // Déplacer la pièce jointe vers le dossier des pièces jointes
-                $pieceJointePath = $this->moveUploadedFile($pieceJointe);
-            }
-    
-            // Création d'une instance du configurateur HttpClientConfigurator
-            $configurator = new HttpClientConfigurator();
-            $mailgunkey = $_ENV["MAILGUN_API_KEY"];
-            $configurator->setApiKey($mailgunkey);
-    
-            // Création d'une instance du client Mailgun avec le configurateur
-            $mgClient = new Mailgun($configurator);
-    
-            // Domaine Mailgun
-            $domain = "sandboxb71804ec757c4da09ddffea0996c7d80.mailgun.org";
-    
-            foreach ($abonnes as $abonne) {
-                // Construction du contenu du mail
-                $contenuMail = sprintf("Bonjour %s %s,\n\n%s", 
-                    $abonne->getFirstName(), 
-                    $abonne->getLastName(), 
-                    $contenu
-                );
-            
-                // Attachez la pièce jointe à l'e-mail si elle existe
-                $attachment = null;
-                if ($pieceJointePath !== null) {
-                    // Créez un tableau avec les détails de la pièce jointe
-                    $attachment = [
-                        'filePath' => $pieceJointePath,
-                        'filename' => $pieceJointe->getClientOriginalName()
-                    ];
-                }
-
-            
-                // Envoi de l'e-mail via Mailgun
-                $mgClient->messages()->send($domain, [
-                    'from' => 'hadjasorybintabah@gmail.com',
-                    'to' => $abonne->getEmail(),
-                    'subject' => $sujet,
-                    'text' => $contenuMail,
-                    'attachment' => [$attachment] // Ajout de la pièce jointe dans un tableau
-                ]);
-
-            }
-    
-            // Redirection vers une page de confirmation après envoi des e-mails
-            return $this->redirectToRoute('envoyer_newsletter');
+        if ($pieceJointe instanceof UploadedFile) {
+            // Déplacer la pièce jointe vers le dossier des pièces jointes
+            $pieceJointePath = $this->moveUploadedFile($pieceJointe);
         }
-    
-        // Affichage du formulaire dans la vue envoyermail.html.twig
-        return $this->render('envoyermail.html.twig', [
-            'parametres'   => $parametres,
-            'categories' => $categories,
-        ]);
+
+        // Création d'une instance du configurateur HttpClientConfigurator
+        $configurator = new HttpClientConfigurator();
+        $mailgunkey = $_ENV["MAILGUN_API_KEY"];
+        $configurator->setApiKey($mailgunkey);
+
+        // Création d'une instance du client Mailgun avec le configurateur
+        $mgClient = new Mailgun($configurator);
+
+        // Domaine Mailgun
+        $domain = "sandboxb71804ec757c4da09ddffea0996c7d80.mailgun.org";
+
+        // Liste des destinataires
+        $destinataires = [];
+
+        // Ajout des abonnés à la liste des destinataires
+        if (in_array('newsletter', $listeDiffusion)) {
+            foreach ($abonnes as $abonne) {
+                $destinataires[] = [
+                    'email' => $abonne->getEmail(),
+                    'firstName' => $abonne->getFirstName(),
+                    'lastName' => $abonne->getLastName()
+                ];
+            }
+        }
+
+        // Ajout des adhérants à la liste des destinataires
+        if (in_array('adherants', $listeDiffusion)) {
+            foreach ($adherants as $adherant) {
+                $destinataires[] = [
+                    'email' => $adherant->getEmail(),
+                    'firstName' => $adherant->getnom(),
+                    'lastName' => $adherant->getprenom()
+                ];
+            }
+        }
+
+        foreach ($destinataires as $destinataire) {
+            // Construction du contenu du mail
+            $contenuMail = sprintf("Bonjour %s %s,\n\n%s", 
+                $destinataire['firstName'], 
+                $destinataire['lastName'], 
+                $contenu
+            );
+            // Attachez la pièce jointe à l'e-mail si elle existe
+            $attachment = null;
+            if ($pieceJointePath !== null) {
+                // Créez un tableau avec les détails de la pièce jointe
+                $attachment = [
+                    'filePath' => $pieceJointePath,
+                    'filename' => $pieceJointe->getClientOriginalName()
+                ];
+            }
+
+            // Construction des paramètres de l'e-mail
+            $params = [
+                'from' => 'hadjasorybintabah@gmail.com',
+                'to' => $destinataire['email'],
+                'subject' => $sujet,
+                'text' => $contenuMail,
+            ];
+
+            // Ajoutez la pièce jointe aux paramètres de l'e-mail si elle existe
+            if ($attachment !== null) {
+                $params['attachment'] = [
+                    [
+                        'filePath' => $attachment['filePath'],
+                        'filename' => $attachment['filename']
+                    ]
+                ];
+            }
+
+            // Envoi de l'e-mail via Mailgun
+            $mgClient->messages()->send($domain, $params);
+        }
+
+        return $this->redirectToRoute('envoyer_newsletter');
     }
 
+    return $this->render('envoyermail.html.twig', [
+        'parametres' => $parametres,
+        'images' => $images,
+        'categories' => $categories,
+        'abonnes' => $abonnes,
+        'adherants' => $adherants
+    ]);
+}
     /**
      * @Route("/confirmation-envoi", name="confirmation_envoi")
      */
@@ -221,6 +258,7 @@ $email = $request->request->get('email');
             return null;
         }
     }
+
 }
 
 
