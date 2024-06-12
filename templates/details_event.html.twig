@@ -51,7 +51,7 @@
                         <span>Description:
                             {{ evenement.commentaire }}</span>
                         <br/>
-                        <a class="btn btn-primary" href="{{ parametres.lien_billeterie }}">Acheter le billet</a><br/><br/>
+                        <a class="btn btn-primary" href="{{ evenement.lienBilleterie }}">Acheter le billet</a><br/><br/>
 
                         <div class="fb-share-button" data-href="{{ url('app_evenement_details', {'id':evenement.id}) }}" data-layout="button" data-size="large">
                             <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ url('app_evenement_details', {'id':evenement.id}) }}" class="fb-xfbml-parse-ignore">Partager</a>
