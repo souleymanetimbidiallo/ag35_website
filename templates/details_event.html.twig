@@ -1,9 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block head %}
+    {{ parent() }}
     <meta property="og:title" content="{{ evenement.titre }}" />
     <meta property="og:description" content="{{ evenement.commentaire }}" />
     <meta property="og:url" content="{{ url('app_evenement_details', {'id':evenement.id}) }}" />
+	<meta property="og:image" content="http://127.0.0.1:8000/img/carousel-1.jpg" />
     {% if evenement.imagename is defined %}
         {% set imagePath = absolute_url(asset('/img/' ~ evenement.imagename)) %}
         <meta property="og:image" content="{{ imagePath }}" />
@@ -11,63 +13,65 @@
 {% endblock %}
 
 {% block body %}
-	<!-- Page Header Start -->
-	{% for image in images %}
+    <!-- Page Header Start -->
+    {% for image in images %}
 
-		<div class="container-fluid py-5 mb-5 wow" data-wow-delay="0.1s" style="background-image: url('{{ asset('img/' ~ image.imageName8) }}'); background-size: cover; background-position: center; min-height: 100vh;">
+        <div class="container-fluid py-5 mb-5 wow" data-wow-delay="0.1s" style="background-image: url('{{ asset('img/' ~ image.imageName8) }}'); background-size: cover; background-position: center; min-height: 100vh;">
 
-			<div class="container text-center py-5">
+            <div class="container text-center py-5">
 
-				<h1 class="display-2 text-white mb-4 animated slideInDown">Détails de l'événement</h1>
+                <h1 class="display-2 text-white mb-4 animated slideInDown">Détails de l'événement</h1>
 
-			</div>
+            </div>
 
-		</div>
+        </div>
 
-	{% endfor %}
-	<!-- Page Header End -->
+    {% endfor %}
+    <!-- Page Header End -->
 
-	<!-- Project Start -->
-	<div class="container-xxl pt-5">
-		<div class="container">
-			<div class="text-center text-md-start pb-5 pb-md-0 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
-				<p class="fs-5 fw-medium text-primary">Voici les détails de cet événement</p>
-				<div class="project-item mb-5">
-					{% if evenement.imagename is defined %}
-						{% set imagePath = '/img/' ~ evenement.imagename %}
-						<img class="img-fluid" src="{{asset(imagePath)}}" alt="Image">
-					{% endif %}
-					<div class="p-4">
-						<a class="d-block h5" href="">{{evenement.titre}}</a>
-						<span>
-							Prix:
-							{{ evenement.prix }}</span>
-						<br/>
-						<span>Adresse:
-							{{ evenement.adresse }}</span>
-						<br/>
-						<span>Description:
-							{{ evenement.commentaire }}</span>
-						<br/>
-						<a class="btn btn-primary" href="{{ parametres.lien_billeterie }}">Acheter le billet</a><br/><br/>
+    <!-- Project Start -->
+    <div class="container-xxl pt-5">
+        <div class="container">
+            <div class="text-center text-md-start pb-5 pb-md-0 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
+                <p class="fs-5 fw-medium text-primary">Voici les détails de cet événement</p>
+                <div class="project-item mb-5">
+                    {% if evenement.imagename is defined %}
+                        {% set imagePath = '/img/' ~ evenement.imagename %}
+                        <img class="img-fluid" src="{{asset(imagePath)}}" alt="Image">
+                    {% endif %}
+                    <div class="p-4">
+                        <a class="d-block h5" href="">{{evenement.titre}}</a>
+                        <span>
+                            Prix:
+                            {{ evenement.prix }}</span>
+                        <br/>
+                        <span>Adresse:
+                            {{ evenement.adresse }}</span>
+                        <br/>
+                        <span>Description:
+                            {{ evenement.commentaire }}</span>
+                        <br/>
+                        <a class="btn btn-primary" href="{{ evenement.lienBilleterie }}">Acheter le billet</a><br/><br/>
 
-						<a class="btn btn-lg btn-primary rounded-0 m-1" href="https://www.facebook.com/sharer/sharer.php?u={{ url('app_evenement_details', {'id':evenement.id}) }}&quote={{ evenement.titre }}" target="_blank">
-							<i class="fab fa-facebook-f"></i> Partager sur Facebook
-						</a>
+                        <div class="fb-share-button" data-href="{{ url('app_evenement_details', {'id':evenement.id}) }}" data-layout="button" data-size="large">
+                            <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ url('app_evenement_details', {'id':evenement.id}) }}" class="fb-xfbml-parse-ignore">Partager</a>
+                        </div>
+                        
+                        <a href="whatsapp://send?text={{ evenement.titre }} - {{ evenement.commentaire }} - {{ url('app_evenement_details', {'id':evenement.id}) }}" target="_blank" class="btn btn-lg btn-success rounded-0 m-1">
+                            <i class="fab fa-whatsapp"></i> Partager sur WhatsApp
+                        </a>
+                        
+                        <a class="btn btn-lg btn-info rounded-0 m-1" href="https://twitter.com/intent/tweet?url={{ url('app_evenement_details', {'id':evenement.id}) }}&text={{ evenement.titre }}" target="_blank">
+                            <i class="fab fa-twitter"></i> Partager sur Twitter
+                        </a>
+                        
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Project End -->
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v11.0&appId=474582391901824&autoLogAppEvents=1" nonce="m9o31FDh"></script>
 
-						<a href="whatsapp://send?text={{ evenement.titre }} - {{ evenement.commentaire }} - {{ url('app_evenement_details', {'id':evenement.id}) }}" target="_blank" class="btn btn-lg btn-primary rounded-0 m-1">
-							<i class="fab fa-whatsapp"></i> Partager sur WhatsApp
-						</a>
-
-						<a class="btn btn-lg btn-primary rounded-0 m-1" href="https://twitter.com/intent/tweet?url={{ url('app_evenement_details', {'id':evenement.id}) }}&text={{ evenement.titre }}" target="_blank">
-							<i class="fab fa-twitter"></i> Partager sur Twitter
-						</a>
-						
-						
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- Project End -->
 {% endblock %}

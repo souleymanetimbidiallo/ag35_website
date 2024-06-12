@@ -12,15 +12,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Mailer\MailerInterface;
-use Symfony\Component\Mime\Email;
 use App\Repository\ServiceRepository;
 use App\Service\TexteService;
+use Mailgun\Mailgun;
+use Mailgun\HttpClient\HttpClientConfigurator;
 
 class ContactController extends AbstractController
 {
-
-
     /**
      * @Route("/contact", name="app_contact")
      */
@@ -28,7 +26,6 @@ class ContactController extends AbstractController
         ParameterService $parameterService,
         Request $request,
         EntityManagerInterface $manager,
-        MailerInterface $mailer,
         ServiceRepository $serviceRepository,
         MenuService $menuService,
         MesImageRepository $mesImageRepository,
@@ -44,14 +41,29 @@ class ContactController extends AbstractController
             $manager->persist($contact);
             $manager->flush();
 
-            //Sending Mail with Mailer Bundle
-            $email = (new Email())
-                ->from($contact->getEmail())
-                ->to('admin@ag35.com')
-                ->subject($contact->getTitre())
-                ->html($contact->getMessage());
+            // Configuration de Mailgun
+            $configurator = new HttpClientConfigurator();
+            $mailgunKey = $_ENV["MAILGUN_API_KEY"];
+            $configurator->setApiKey($mailgunKey);
+            $mgClient = new Mailgun($configurator);
+            $domain = "sandboxb71804ec757c4da09ddffea0996c7d80.mailgun.org";
 
-            $mailer->send($email);
+            // Contenu de l'email
+            $messageContent = $contact->getMessage() . "\n\n" .
+                            "Nom: " . $contact->getNom() . "\n" .
+                            "Prénom: " . $contact->getPrenom() . "\n" .
+                            "Téléphone: " . $contact->getTelephone();
+
+            $params = [
+                'from' => $contact->getEmail(),
+                'to' => 'hadjasorybintabah@gmail.com',
+                'subject' => $contact->getTitre(),
+                'text' => $messageContent,
+                'html' => nl2br($messageContent) // Convertir les sauts de ligne en balises <br> pour HTML
+            ];
+
+            // Envoi de l'email via Mailgun
+            $mgClient->messages()->send($domain, $params);
 
             return $this->redirectToRoute('app_contact');
         }
@@ -87,10 +99,9 @@ class ContactController extends AbstractController
             'lien_donation' => $texteService->getParametreByName('lien_donation')
         ];
 
-
         $choices = $serviceRepository->findAllTitres();
         $images = $mesImageRepository->findAll();
-        //dd($choices);
+
         return $this->render('contact.html.twig', [
             'current_menu' => 'contact',
             'parametres'   => $parametres,

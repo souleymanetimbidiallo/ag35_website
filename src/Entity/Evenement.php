@@ -45,7 +45,8 @@ class Evenement
     #[ORM\Column]
     private ?string $prix = null;
 
-
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $lienBilleterie = null;
 
     public function getId(): ?int
     {
@@ -99,7 +100,6 @@ class Evenement
 
         return $this;
     }
-
 
     public function getAdresse(): ?string
     {
@@ -159,6 +159,18 @@ class Evenement
     public function setPrix(string $prix): self
     {
         $this->prix = $prix;
+
+        return $this;
+    }
+
+    public function getLienBilleterie(): ?string
+    {
+        return $this->lienBilleterie;
+    }
+
+    public function setLienBilleterie(?string $lienBilleterie): self
+    {
+        $this->lienBilleterie = $lienBilleterie;
 
         return $this;
     }

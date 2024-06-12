@@ -1,0 +1,9 @@
+{% extends '@EasyAdmin/crud/index.html.twig' %}
+
+{# Bloc pour ajouter des actions personnalisées à la liste des actions de page #}
+{% block page_actions %}
+    {{ parent() }} {# Affiche les actions par défaut #}
+
+    {# Votre bouton personnalisé #}
+    <a href="{{ path('hello_asso') }}" class="btn btn-primary">Appeler HelloAsso</a>
+{% endblock %}
