@@ -15,6 +15,7 @@
         "easycorp/easyadmin-bundle": "^4.10",
         "friendsofsymfony/ckeditor-bundle": "^2.4",
         "google/apiclient": "^2.16",
+        "mailgun/mailgun-php": "*",
         "phpdocumentor/reflection-docblock": "^5.3",
         "phpstan/phpdoc-parser": "^1.20",
         "sensio/framework-extra-bundle": "^6.1",
