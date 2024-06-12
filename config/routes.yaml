@@ -37,3 +37,9 @@ volontaire:
 api:
     path: /api
     controller: App\Controller\HelloAssoAPIController::index
+calendar:
+    path: /calendar
+    controller: App\Controller\CalendarController::index
+cal:
+    path: /cal
+    controller: App\Controller\CalController::index

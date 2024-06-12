@@ -14,6 +14,7 @@
         "doctrine/orm": "^2.14",
         "easycorp/easyadmin-bundle": "^4.10",
         "friendsofsymfony/ckeditor-bundle": "^2.4",
+        "google/apiclient": "^2.16",
         "phpdocumentor/reflection-docblock": "^5.3",
         "phpstan/phpdoc-parser": "^1.20",
         "sensio/framework-extra-bundle": "^6.1",
@@ -82,7 +83,8 @@
         "auto-scripts": {
             "cache:clear": "symfony-cmd",
             "assets:install %PUBLIC_DIR%": "symfony-cmd",
-            "ckeditor:install": "symfony-cmd"
+            "ckeditor:install": "symfony-cmd",
+            "pre-autoload-dump": "Google\\Task\\Composer::cleanup"
         },
         "post-install-cmd": [
             "@auto-scripts"
@@ -98,6 +100,7 @@
         "symfony": {
             "allow-contrib": false,
             "require": "5.4.*"
+            
         }
     },
     "require-dev": {

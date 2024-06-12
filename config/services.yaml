@@ -62,5 +62,13 @@ services:
             $apiUrl: '%env(HELLOASSO_API_URL)%'
             $clientId: '%env(HELLOASSO_CLIENT_ID)%'
             $clientSecret: '%env(HELLOASSO_CLIENT_SECRET)%'
+
+    App\Service\GoogleCalendarService:
+        arguments:
+            $clientId: '%env(GOOGLE_CLIENT_ID)%'
+            $redirectUri: '%env(GOOGLE_REDIRECT_URI)%'
+            $scope:     '%env(GOOGLE_SCOPES)%'
+            $authConfig:     '%env(GOOGLE_AUTH_CONFIG)%'
+            $apiKey:     '%env(GOOGLE_API_KEY)%'
     App\Command\SyncAdhesionsCommand:
         tags: ['console.command']
