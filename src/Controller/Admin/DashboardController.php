@@ -75,7 +75,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Volontariat ', 'fas fa-lock', Volontariat::class);
         yield MenuItem::linkToCrud('Volontaire ', 'fas fa-lock', Volontaire::class);
         yield MenuItem::linkToCrud('Adhésions ', 'fas fa-lock', Adhesions::class);
-        yield MenuItem::linkToRoute('Calendrier', 'fas fa-lock', 'cal');
+        yield MenuItem::linkToRoute('Calendrier', 'fas fa-calendar', 'cal');
         yield MenuItem::linkToRoute('Donations', 'fas fa-lock', 'api');
         
     }
