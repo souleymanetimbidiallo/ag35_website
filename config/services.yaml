@@ -1,6 +1,6 @@
 parameters:
     img_params: '%kernel.project_dir%/public/params/images'
-    uploads_directory: 'D:\AG35\ag35_website\public\pdf'
+    uploads_directory: '%kernel.project_dir%/public/pdf'
     filesDirectory: '%kernel.project_dir%/public/uploads/fichiers'
 
 services:
