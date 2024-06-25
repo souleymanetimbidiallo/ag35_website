@@ -61,16 +61,27 @@ public function __construct(SessionInterface $session)
      $accessToken=$request->query->get('code');
      //dd($accessToken);
      $events = $calendarService->getEvents();
+     $formattedEvents = array_map(function($event) {
+        $start = new \DateTime($event->start->dateTime ?: $event->start->dateTime);
+        $end = new \DateTime($event->end->dateTime ?: $event->end->dateTime);
 
+        $formattedEvent = [
+            'title' => $event->getSummary(),
+            'start' => $start->format('Y-m-d\TH:i:s'),
+            'end' => $end ? $end->format('Y-m-d\TH:i:s') : null, // Vérifier si $end est défini avant de l'utiliser
+            'displayTime' => $start->format('g:i a') . ' à ' . ($end ? $end->format('g:i a') : ''),
+        ];
+        return $formattedEvent;
+    }, $events);
 
        // Afficher les événements pour débogage
-        //dd($events);
+       // dd($events);
 
        // Rendre la vue
        return $this->render('cal/index.html.twig', [
            'controller_name' => 'CalController',
            'parametres' => $parametres,
-           'events'=>$events,
+           'events' => json_encode($formattedEvents),
           
        ]);
     }

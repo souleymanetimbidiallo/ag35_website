@@ -71,7 +71,7 @@ class GoogleCalendarService
                 break;
             }
         }
-    dd($allEvents);
+       //dd($allEvents);
         // Retourner tous les événements récupérés
         return $allEvents;
     }
