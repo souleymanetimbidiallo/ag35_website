@@ -24,7 +24,7 @@
                         <tr>
                             <td>{{ donation.order.id }}</td>
                             <td>{{ donation.order.date }}</td>
-                            <td>{{ donation.amount }}</td>
+                            <td>{{ donation.amount / 100 }} €</td>
                             <td>{{ donation.payer.firstName }} {{ donation.payer.lastName }}</td>
                             <td>{{ donation.payer.email }}</td>
                             <td>{{ donation.payer.address }}, {{ donation.payer.city }} {{ donation.payer.zipCode }}, {{ donation.payer.country }}</td>
@@ -53,7 +53,7 @@
                             <tr>
                                 <td>{{ adhesion.order.id }}</td>
                                 <td>{{ adhesion.order.date }}</td>
-                                <td>{{ adhesion.amount }}</td>
+                                <td>{{ adhesion.amount / 100 }} €</td>
                                 <td>{{ adhesion.type }}</td>
                                 <td>{{ adhesion.payer.firstName }} {{ adhesion.payer.lastName }}</td>
                                 <td>{{ adhesion.payer.email }}</td>
