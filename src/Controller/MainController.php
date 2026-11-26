@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 
+use App\Repository\ActualiteRepository;
 use App\Repository\MesImageRepository;
+use App\Repository\ParamImageRepository;
 use App\Repository\EvenementRepository;
 use App\Repository\MenuRepository;
 use App\Repository\ServiceRepository;
@@ -23,7 +25,7 @@ class MainController extends AbstractController
     /**
      * @Route("/", name="app_accueil")
      */
-    public function index(ParameterService $parameterService, MenuService $menuService, ServiceRepository $serviceRepository, TemoinRepository $temoinRep, MesImageRepository $mesImageRepository, EvenementRepository $evenementRepository): Response
+    public function index(ParameterService $parameterService, MenuService $menuService, ServiceRepository $serviceRepository, TemoinRepository $temoinRep, MesImageRepository $mesImageRepository, EvenementRepository $evenementRepository, ActualiteRepository $actualiteRepository, ParamImageRepository $paramImageRepository): Response
     {
 
         $parametres = [
@@ -67,6 +69,16 @@ class MainController extends AbstractController
         $images = $mesImageRepository->findAll();
         $evenements = $evenementRepository->findAll();
 
+        // Événements à venir (pas encore terminés) du plus proche au plus lointain, puis passés du plus récent au plus ancien
+        $maintenant = new \DateTime();
+        $aVenir = array_values(array_filter($evenements, fn ($e) => $e->getDateFin() >= $maintenant));
+        usort($aVenir, fn ($a, $b) => $a->getDateDebut() <=> $b->getDateDebut());
+        $passes = array_values(array_filter($evenements, fn ($e) => $e->getDateFin() < $maintenant));
+        usort($passes, fn ($a, $b) => $b->getDateDebut() <=> $a->getDateDebut());
+
+        $actualites = $actualiteRepository->findBy([], ['datePublication' => 'DESC'], 3);
+        $partenaires = $paramImageRepository->findAll();
+
 
 
         return $this->render('index.html.twig', [
@@ -75,7 +87,11 @@ class MainController extends AbstractController
             'services' => $services,
             'temoins' => $temoins,
             'images' => $images,
-            'evenements' => $evenements
+            'evenements' => $evenements,
+            'evenements_a_venir' => $aVenir,
+            'evenements_passes' => $passes,
+            'actualites' => $actualites,
+            'partenaires' => $partenaires,
         ]);
     }
 }

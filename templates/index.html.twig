@@ -1,7 +1,5 @@
 {% extends 'base.html.twig' %}
 
-{% set lien_don = parametres.lien_donation|default('https://www.helloasso.com/associations/association-guineenne-d-ile-et-vilaine-ag35/formulaires/1') %}
-
 {# Images du diaporama : les trois visuels de la première entrée MesImage #}
 {% set slides = [] %}
 {% if images|length > 0 %}
@@ -12,7 +10,7 @@
 {% endif %}
 
 {# Vidéo de présentation : paramètre "lien_presentation_youtube" s'il existe #}
-{% set video_url = parametres.lien_presentation_youtube|default('https://www.youtube-nocookie.com/embed/sRYxgz6Zepc') %}
+{% set video_url = parametres.lien_presentation_youtube|default('https://www.youtube-nocookie.com/embed/uhm9nODb8AA') %}
 
 {% block body %}
 
@@ -82,6 +80,49 @@
 		</div>
 	</section>
 
+	<!-- Prochain événement -->
+	{% set prochain = evenements_a_venir|first %}
+	{% if prochain %}
+		{% set mois_longs = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'] %}
+		{% set jours = ['dimanche', 'lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi'] %}
+		{% set debut = prochain.dateDebut %}
+		{% set ecart = ((debut|date('Y-m-d')|date('U') - 'today'|date('U')) / 86400)|round %}
+		{% if debut|date('U') <= 'now'|date('U') %}
+			{% set quand = 'En ce moment' %}
+		{% elseif ecart == 0 %}
+			{% set quand = 'Aujourd\'hui' %}
+		{% elseif ecart == 1 %}
+			{% set quand = 'Demain' %}
+		{% else %}
+			{% set quand = 'Dans ' ~ ecart ~ ' jours' %}
+		{% endif %}
+		<section class="next-event-wrap" aria-labelledby="titre-prochain">
+			<div class="container">
+				<div class="next-event">
+					<div class="next-event-date" aria-hidden="true">
+						<span class="d">{{ debut|date('d') }}</span>
+						<span class="m">{{ ['jan', 'fév', 'mars', 'avr', 'mai', 'juin', 'juil', 'août', 'sept', 'oct', 'nov', 'déc'][debut|date('n') - 1] }}</span>
+					</div>
+					<div class="next-event-body">
+						<span class="next-event-tag"><i class="fa fa-bell" aria-hidden="true"></i> Prochain événement · {{ quand }}</span>
+						<h2 id="titre-prochain">{{ prochain.titre }}</h2>
+						<p class="next-event-meta">
+							<span><i class="fa fa-calendar-alt" aria-hidden="true"></i>{{ jours[debut|date('w')]|capitalize }} {{ debut|date('j') }} {{ mois_longs[debut|date('n') - 1] }} {{ debut|date('Y') }} à {{ debut|date('G\\hi') }}</span>
+							{% if prochain.adresse %}<span><i class="fa fa-map-marker-alt" aria-hidden="true"></i>{{ prochain.adresse }}</span>{% endif %}
+							{% if prochain.prix %}<span><i class="fa fa-ticket-alt" aria-hidden="true"></i>{{ prochain.prix matches '/^\\d+$/' ? prochain.prix ~ ' €' : prochain.prix }}</span>{% endif %}
+						</p>
+					</div>
+					<div class="next-event-ctas">
+						{% if prochain.lienBilleterie %}
+							<a href="{{ prochain.lienBilleterie }}" class="btn btn-ag-yellow" target="_blank" rel="noopener"><i class="fa fa-ticket-alt me-1" aria-hidden="true"></i> Réserver</a>
+						{% endif %}
+						<a href="{{ path('app_evenement_details', {id: prochain.id}) }}" class="btn {{ prochain.lienBilleterie ? 'btn-ag-ghost' : 'btn-ag-yellow' }}">Voir le détail</a>
+					</div>
+				</div>
+			</div>
+		</section>
+	{% endif %}
+
 	<!-- Services -->
 	{% if services|length > 0 %}
 		<section class="section section-white" aria-labelledby="titre-services">
@@ -119,15 +160,18 @@
 				<div class="row g-0 align-items-stretch">
 					<div class="col-lg-5 d-flex align-items-center">
 						<div class="video-text">
-							<span class="eyebrow">Découvrir l'AG35</span>
-							<h2 id="titre-video" class="mb-3">Qui sommes-nous ?</h2>
-							<p class="mb-4">Regardez la vidéo de présentation de l'association et découvrez nos actions.</p>
-							<a href="{{ path('app_about') }}" class="btn btn-ag-yellow">En savoir plus</a>
+							<span class="eyebrow">L'AG35 en images</span>
+							<h2 id="titre-video" class="mb-3">Fête de l'indépendance 2026</h2>
+							<p class="mb-4">Revivez la fête de l'indépendance de la Guinée organisée par l'AG35 à Rennes : musique, culture et convivialité, toute la communauté réunie.</p>
+							<div class="d-flex flex-wrap gap-2">
+								<a href="{{ path('app_evenements') }}" class="btn btn-ag-yellow">Nos prochains événements</a>
+								<a href="{{ path('app_about') }}" class="btn btn-ag-ghost">Qui sommes-nous ?</a>
+							</div>
 						</div>
 					</div>
 					<div class="col-lg-7">
 						<div class="ratio ratio-16x9">
-							<iframe src="{{ video_url }}" title="Présentation de l'AG35" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+							<iframe src="{{ video_url }}" title="Fête de l'indépendance de la Guinée 2026 à Rennes, organisée par l'AG35" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 						</div>
 					</div>
 				</div>
@@ -136,20 +180,62 @@
 	</section>
 
 	<!-- Événements -->
-	{% if evenements|length > 0 %}
+	{# Le prochain événement est déjà dans le bandeau : on affiche les suivants, puis les plus récents passés #}
+	{% set agenda = evenements_a_venir|slice(1)|merge(evenements_passes)|slice(0, 3) %}
+	{% if agenda|length > 0 %}
 		<section class="section section-white" aria-labelledby="titre-events">
 			<div class="container">
 				<div class="section-head-row">
 					<div class="section-head">
 						<span class="eyebrow">Agenda</span>
-						<h2 class="section-title" id="titre-events">{{ parametres.accueil_event|default('Nos derniers événements') }}</h2>
+						<h2 class="section-title" id="titre-events">{{ evenements_a_venir|length > 1 ? 'Au programme' : parametres.accueil_event|default('Nos derniers événements') }}</h2>
 					</div>
 					<a href="{{ path('app_evenements') }}" class="link-arrow">Tous les événements <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
 				</div>
 				<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-					{% for evenement in evenements|sort((a, b) => b.dateDebut <=> a.dateDebut)|slice(0, 3) %}
+					{% for evenement in agenda %}
 						<div class="col">
-							{% include 'components/event_card.html.twig' %}
+							{% include 'components/event_card.html.twig' with {passe: evenement in evenements_passes} %}
+						</div>
+					{% endfor %}
+				</div>
+			</div>
+		</section>
+	{% endif %}
+
+	<!-- Actualités -->
+	{% if actualites|length > 0 %}
+		{% set mois_actu = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'] %}
+		<section class="section" aria-labelledby="titre-actus">
+			<div class="container">
+				<div class="section-head-row">
+					<div class="section-head">
+						<span class="eyebrow">La vie de l'association</span>
+						<h2 class="section-title" id="titre-actus">Dernières actualités</h2>
+					</div>
+					<a href="{{ path('app_actualites') }}" class="link-arrow">Toutes les actualités <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+				</div>
+				<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+					{% for actualite in actualites %}
+						<div class="col">
+							<article class="news-card">
+								<div class="news-media">
+									{% if actualite.imageName %}
+										<img src="{{ asset('img/' ~ actualite.imageName) }}" alt="" loading="lazy" onerror="this.remove()">
+									{% endif %}
+								</div>
+								<div class="news-body">
+									{% if actualite.datePublication %}
+										<time class="news-date" datetime="{{ actualite.datePublication|date('Y-m-d') }}">
+											{{ actualite.datePublication|date('j') }} {{ mois_actu[actualite.datePublication|date('n') - 1] }} {{ actualite.datePublication|date('Y') }}
+										</time>
+									{% endif %}
+									<h3>{{ actualite.titre }}</h3>
+									{% set resume = actualite.description|striptags|trim %}
+									<p>{{ resume|length > 160 ? resume|slice(0, 157)|trim ~ '…' : resume }}</p>
+									<a href="{{ path('app_actualites') }}" class="link-arrow mt-auto pt-2">Lire <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+								</div>
+							</article>
 						</div>
 					{% endfor %}
 				</div>
@@ -185,6 +271,23 @@
 						</div>
 					{% endfor %}
 				</div>
+			</div>
+		</section>
+	{% endif %}
+
+	<!-- Partenaires -->
+	{% if partenaires|length > 0 %}
+		<section class="section-sm partners-band" aria-labelledby="titre-partenaires">
+			<div class="container">
+				<p class="partners-title" id="titre-partenaires">Ils nous soutiennent</p>
+				<div class="partners">
+					{% for partenaire in partenaires %}
+						<div class="partner">
+							<img src="{{ asset('img/' ~ partenaire.imageName) }}" alt="Logo partenaire" loading="lazy">
+						</div>
+					{% endfor %}
+				</div>
+				<p class="text-center mt-4 mb-0"><a class="link-arrow" href="{{ path('app_contact') }}">Devenir partenaire <i class="fa fa-arrow-right" aria-hidden="true"></i></a></p>
 			</div>
 		</section>
 	{% endif %}

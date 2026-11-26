@@ -1,54 +1,58 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Log in!
+{% block title %}Connexion · {{ parent() }}{% endblock %}
+
+{% block meta_tags %}
+	<meta name="robots" content="noindex">
 {% endblock %}
 
 {% block body %}
-	<div class="container">
-		<div class="row justify-content-center">
-			<div class="col-md-6">
-				<form method="post" class="form-signin">
-					{% if error %}
-						<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-					{% endif %}
-
-					{% if app.user %}
-						<div class="mb-3">
-							You are logged in as
-							{{ app.user.userIdentifier }},
-							<a href="{{ path('app_logout') }}">Logout</a>
+	<section class="section">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-md-8 col-lg-5">
+					<div class="form-card">
+						<div class="text-center mb-4">
+							<img src="{{ asset('img/logo_ag35.png') }}" alt="" width="64" height="64" class="mb-3">
+							<h1 class="h3 mb-1">Espace administration</h1>
+							<p class="text-muted-ag mb-0">Connectez-vous pour gérer le site de l'AG35.</p>
 						</div>
-					{% endif %}
 
-					<h1 class="h3 mb-3 font-weight-normal text-center">Authentification</h1>
-					<div class="form-label-group">
-						<label for="inputEmail">Email</label>
-						<input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+						{% if error %}
+							<div class="alert alert-danger" role="alert">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+						{% endif %}
+
+						{% if app.user %}
+							<div class="alert-ag mb-4" role="status">
+								<i class="fa fa-user-check mt-1" aria-hidden="true"></i>
+								<span>
+									Vous êtes connecté·e en tant que <strong>{{ app.user.userIdentifier }}</strong>.
+									<a href="{{ path('admin') }}">Aller à l'administration</a> ·
+									<a href="{{ path('app_logout') }}">Se déconnecter</a>
+								</span>
+							</div>
+						{% endif %}
+
+						<form method="post">
+							<div class="mb-3">
+								<label for="inputEmail" class="form-label">E-mail</label>
+								<input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+							</div>
+							<div class="mb-4">
+								<label for="inputPassword" class="form-label">Mot de passe</label>
+								<input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+							</div>
+
+							<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+							<button class="btn btn-primary w-100" type="submit">
+								<i class="fa fa-lock me-1" aria-hidden="true"></i> Se connecter
+							</button>
+						</form>
 					</div>
-					<div class="form-label-group mt-3">
-						<label for="inputPassword">Password</label>
-						<input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
-					</div>
-
-					<input
-					type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-
-					{#
-									        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
-									        See https://symfony.com/doc/current/security/remember_me.html
-									
-									        <div class="checkbox mb-3">
-									            <label>
-									                <input type="checkbox" name="_remember_me"> Remember me
-									            </label>
-									        </div>
-									    #}
-
-					<button class="btn btn-lg btn-primary btn-block mt-3" type="submit">
-						Se connecter
-					</button>
-				</form>
+					<p class="text-center mt-3 mb-0"><a class="link-arrow" href="{{ path('app_accueil') }}"><i class="fa fa-arrow-left" aria-hidden="true"></i> Retour au site</a></p>
+				</div>
 			</div>
 		</div>
-	</div>
+	</section>
 {% endblock %}

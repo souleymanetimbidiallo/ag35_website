@@ -1,5 +1,3 @@
-{% set lien_don = parametres.lien_donation|default('https://www.helloasso.com/associations/association-guineenne-d-ile-et-vilaine-ag35/formulaires/1') %}
-
 <footer class="site-footer">
 	<div class="tricolor" aria-hidden="true"></div>
 	<div class="container footer-main">
@@ -32,9 +30,10 @@
 					<li><a href="{{ path('app_about') }}">{{ parametres.menu_apropos }}</a></li>
 					<li><a href="{{ path('app_evenements') }}">{{ parametres.menu_evenement }}</a></li>
 					<li><a href="{{ path('app_actualites') }}">{{ parametres.menu_actualite }}</a></li>
-					<li><a href="{{ path('app_guide') }}">{{ parametres.menu_guide }}</a></li>
+					<li><a href="{{ path('app_guide') }}">Guide de l'étudiant</a></li>
+					<li><a href="{{ path('app_faq') }}">Questions fréquentes</a></li>
 					<li><a href="{{ path('app_adhesion') }}">{{ parametres.menu_adhesion }}</a></li>
-					<li><a href="{{ lien_don }}" target="_blank" rel="noopener">{{ parametres.menu_donation }}</a></li>
+					<li><a href="{{ path('app_don') }}">{{ parametres.menu_donation }}</a></li>
 					<li><a href="{{ path('app_contact') }}">{{ parametres.menu_contact }}</a></li>
 				</ul>
 			</div>
@@ -80,7 +79,11 @@
 	<div class="footer-bottom">
 		<div class="container d-flex flex-column flex-md-row justify-content-between gap-2 text-center text-md-start">
 			<span>&copy; {{ 'now'|date('Y') }} {{ parametres.nom_association }}. Tous droits réservés.</span>
-			<span>Thème de base : <a href="https://htmlcodex.com" target="_blank" rel="noopener">HTML Codex</a></span>
+			<span>
+				<a href="{{ path('app_mentions_legales') }}">Mentions légales</a> ·
+				<a href="{{ path('app_confidentialite') }}">Confidentialité</a> ·
+				Thème : <a href="https://htmlcodex.com" target="_blank" rel="noopener">HTML Codex</a>
+			</span>
 		</div>
 	</div>
 </footer>

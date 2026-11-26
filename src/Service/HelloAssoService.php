@@ -80,10 +80,30 @@ class HelloAssoService
                 $adhesion->setMontant($adhesionData['amount'] ?? '');
                 $adhesion->setType($adhesionData['type'] ?? '');
                 $adhesion->setDate(new \DateTime($adhesionData['order']['date'] ?? 'now'));
+                // Colonnes NOT NULL : HelloAsso ne fournit pas toujours ces informations.
+                $adhesion->setTelephone(self::telephone($adhesionData));
+                $adhesion->setAdresse(self::adresse($adhesionData));
 
                 $this->adhesionsRepository->save($adhesion, true);
             }
         }
+    }
+
+    public static function telephone(array $adhesionData): string
+    {
+        return mb_substr((string) ($adhesionData['payer']['phone'] ?? ''), 0, 50);
+    }
+
+    public static function adresse(array $adhesionData): string
+    {
+        $payer = $adhesionData['payer'] ?? [];
+        $adresse = trim(implode(' ', array_filter([
+            $payer['address'] ?? null,
+            $payer['zipCode'] ?? null,
+            $payer['city'] ?? null,
+        ])));
+
+        return mb_substr($adresse, 0, 100);
     }
 
     public function getDon(): array

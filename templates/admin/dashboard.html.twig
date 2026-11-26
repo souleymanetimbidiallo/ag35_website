@@ -1,13 +1,93 @@
-{% extends "@EasyAdmin/page/content.html.twig" %}
+{% extends '@EasyAdmin/page/content.html.twig' %}
 
-{% block content %}
-	<h2>Bienvenue au sein de l'espace Admin du site AG35</h2>
+{% macro crud(controller) %}{{ ea_url().setController('App\\Controller\\Admin\\' ~ controller ~ 'CrudController').setAction('index') }}{% endmacro %}
+{% import _self as m %}
 
-	<h2>Stats</h2>
-	<h2>Stats</h2>
-	<h2>Stats</h2>
-	<h2>Stats</h2>
-	<h2>Stats</h2>
-	<h2>Stats</h2>
-	
+{% block content_title %}Tableau de bord{% endblock %}
+
+{% block main %}
+<div class="ag-dash">
+	<section class="ag-dash-hello">
+		<h2>Bonjour{{ app.user.prenom is defined and app.user.prenom ? ' ' ~ app.user.prenom }} 👋</h2>
+		<p>Bienvenue dans l'espace d'administration du site de l'AG35.</p>
+		<a class="btn btn-light btn-sm" href="{{ path('app_accueil') }}" target="_blank" rel="noopener">
+			<i class="fas fa-external-link-alt me-1"></i> Voir le site
+		</a>
+	</section>
+
+	<section class="ag-stats" aria-label="Chiffres clés">
+		<a class="ag-stat" href="{{ m.crud('Contact') }}">
+			<span class="ag-stat-icon green"><i class="fas fa-envelope-open-text"></i></span>
+			<div><strong>{{ stats.contacts }}</strong><span>Messages de contact</span></div>
+		</a>
+		<a class="ag-stat" href="{{ m.crud('Adhesions') }}">
+			<span class="ag-stat-icon yellow"><i class="fas fa-id-card"></i></span>
+			<div><strong>{{ stats.adhesions }}</strong><span>Adhésions</span></div>
+		</a>
+		<a class="ag-stat" href="{{ m.crud('Evenement') }}">
+			<span class="ag-stat-icon red"><i class="fas fa-calendar-alt"></i></span>
+			<div><strong>{{ stats.evenements }}</strong><span>Événements à venir</span></div>
+		</a>
+		<a class="ag-stat" href="{{ m.crud('Volontaire') }}">
+			<span class="ag-stat-icon green"><i class="fas fa-hands-helping"></i></span>
+			<div><strong>{{ stats.volontaires }}</strong><span>Candidatures bénévoles</span></div>
+		</a>
+		<a class="ag-stat" href="{{ m.crud('Hebergement') }}">
+			<span class="ag-stat-icon yellow"><i class="fas fa-bed"></i></span>
+			<div><strong>{{ stats.hebergements }}</strong><span>Demandes d'hébergement</span></div>
+		</a>
+		<a class="ag-stat" href="{{ path('envoyer_newsletter') }}">
+			<span class="ag-stat-icon red"><i class="fas fa-paper-plane"></i></span>
+			<div><strong>{{ stats.abonnes }}</strong><span>Abonné·es newsletter</span></div>
+		</a>
+	</section>
+
+	<div class="ag-panels">
+		<section class="ag-panel">
+			<h3><i class="fas fa-envelope-open-text me-1"></i> Derniers messages</h3>
+			{% if derniers_contacts is empty %}
+				<p class="empty">Aucun message pour le moment.</p>
+			{% else %}
+				<ul>
+					{% for c in derniers_contacts %}
+						<li>
+							<span><strong>{{ c.prenom }} {{ c.nom }}</strong> — {{ c.titre }}</span>
+							<span class="muted">{{ c.dateMessage ? c.dateMessage|date('d/m/Y') : '' }}</span>
+						</li>
+					{% endfor %}
+				</ul>
+				<p class="mt-3 mb-0"><a href="{{ m.crud('Contact') }}">Tous les messages <i class="fas fa-arrow-right"></i></a></p>
+			{% endif %}
+		</section>
+
+		<section class="ag-panel">
+			<h3><i class="fas fa-calendar-alt me-1"></i> Prochains événements</h3>
+			{% if evenements_a_venir is empty %}
+				<p class="empty">Aucun événement à venir.</p>
+				<p class="mt-3 mb-0"><a href="{{ ea_url().setController('App\\Controller\\Admin\\EvenementCrudController').setAction('new') }}">Créer un événement <i class="fas fa-arrow-right"></i></a></p>
+			{% else %}
+				<ul>
+					{% for e in evenements_a_venir %}
+						<li>
+							<span><strong>{{ e.titre }}</strong></span>
+							<span class="muted">{{ e.dateDebut|date('d/m/Y H\\hi') }}</span>
+						</li>
+					{% endfor %}
+				</ul>
+				<p class="mt-3 mb-0"><a href="{{ m.crud('Evenement') }}">Tous les événements <i class="fas fa-arrow-right"></i></a></p>
+			{% endif %}
+		</section>
+
+		<section class="ag-panel">
+			<h3><i class="fas fa-bolt me-1"></i> Accès rapides</h3>
+			<div class="ag-quick">
+				<a class="btn btn-primary btn-sm" href="{{ ea_url().setController('App\\Controller\\Admin\\ActualiteCrudController').setAction('new') }}"><i class="fas fa-plus me-1"></i> Actualité</a>
+				<a class="btn btn-primary btn-sm" href="{{ ea_url().setController('App\\Controller\\Admin\\EvenementCrudController').setAction('new') }}"><i class="fas fa-plus me-1"></i> Événement</a>
+				<a class="btn btn-secondary btn-sm" href="{{ path('envoyer_newsletter') }}"><i class="fas fa-paper-plane me-1"></i> Newsletter</a>
+				<a class="btn btn-secondary btn-sm" href="{{ m.crud('TexteParam') }}"><i class="fas fa-font me-1"></i> Textes du site</a>
+				<a class="btn btn-secondary btn-sm" href="{{ path('api') }}"><i class="fas fa-hand-holding-heart me-1"></i> Donations</a>
+			</div>
+		</section>
+	</div>
+</div>
 {% endblock %}

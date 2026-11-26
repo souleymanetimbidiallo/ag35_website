@@ -65,6 +65,8 @@ class HelloAssoAPIController extends AbstractController
                 $adhesion->setMontant($adhesionData['amount'] ?? '');
                 $adhesion->setType($adhesionData['type'] ?? '');
                 $adhesion->setDate(new \DateTime($adhesionData['order']['date'] ?? 'now'));
+                $adhesion->setTelephone(HelloAssoService::telephone($adhesionData));
+                $adhesion->setAdresse(HelloAssoService::adresse($adhesionData));
 
                 $adhesionsRepository->save($adhesion, true);
             }

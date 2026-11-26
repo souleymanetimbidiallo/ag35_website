@@ -1,0 +1,21 @@
+{#
+	Page d'erreur générique (500, 403…). Visible en production uniquement ;
+	en dev, prévisualiser via /_error/500.
+#}
+{% extends 'base.html.twig' %}
+
+{% set code = status_code|default(500) %}
+{% set titre = code == 403 ? 'Accès refusé' : 'Une erreur est survenue' %}
+{% set texte = code == 403
+	? 'Vous n\'avez pas les droits nécessaires pour accéder à cette page.'
+	: 'Le serveur a rencontré un problème. Réessayez dans quelques instants ; si le souci persiste, contactez-nous.' %}
+
+{% block title %}{{ titre }} · {{ parent() }}{% endblock %}
+
+{% block meta_tags %}
+	<meta name="robots" content="noindex">
+{% endblock %}
+
+{% block body %}
+	{% include 'bundles/TwigBundle/Exception/_content.html.twig' with {code: code, titre: titre, texte: texte, icone: code == 403 ? 'fa-lock' : 'fa-tools'} %}
+{% endblock %}

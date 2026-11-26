@@ -1,4 +1,4 @@
-{# Carte événement. Variable : evenement #}
+{# Carte événement. Variables : evenement, passe (optionnel : affiche le badge « Passé ») #}
 {% set mois = ['jan', 'fév', 'mars', 'avr', 'mai', 'juin', 'juil', 'août', 'sept', 'oct', 'nov', 'déc'] %}
 <a class="event-card" href="{{ path('app_evenement_details', {id: evenement.id}) }}">
 	<div class="event-media">
@@ -13,6 +13,9 @@
 		{% endif %}
 	</div>
 	<div class="event-body">
+		{% if passe|default(false) %}
+			<span class="badge-ag past align-self-start"><i class="fa fa-history" aria-hidden="true"></i> Passé</span>
+		{% endif %}
 		<h3>{{ evenement.titre }}</h3>
 		{% if evenement.adresse %}
 			<span class="event-info"><i class="fa fa-map-marker-alt" aria-hidden="true"></i>{{ evenement.adresse }}</span>
