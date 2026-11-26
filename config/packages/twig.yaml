@@ -1,5 +1,17 @@
 twig:
     default_path: '%kernel.project_dir%/templates'
+    globals:
+        # Informations légales (pages /mentions-legales et /confidentialite).
+        # ⚠️ À COMPLÉTER : tant qu'une valeur vaut ~ (vide), la page affiche un repère jaune « à compléter ».
+        legal:
+            forme: 'Association loi 1901'
+            rna: ~                 # numéro RNA, ex. 'W353000000' (récépissé de préfecture)
+            siret: ~               # facultatif
+            responsable: ~         # directeur·rice de la publication, ex. 'Prénom Nom, président·e'
+            hebergeur_nom: ~       # ex. 'Render Services, Inc.' si le site est déployé via render.yml
+            hebergeur_adresse: ~   # adresse postale de l'hébergeur
+            hebergeur_site: ~      # ex. 'https://render.com'
+            dpo_email: ~           # e-mail pour les demandes RGPD ; sinon l'e-mail de contact du site est utilisé
 
 when@test:
     twig:

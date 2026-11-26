@@ -1,0 +1,91 @@
+{% extends 'base.html.twig' %}
+{% import 'pages/_legal.html.twig' as l %}
+
+{% block title %}Politique de confidentialité · {{ parent() }}{% endblock %}
+
+{% block body %}
+	{% set nom = parametres.nom_association %}
+	{% set contact_rgpd = legal.dpo_email ?: parametres.email %}
+
+	{% include 'components/page_hero.html.twig' with {
+		title: 'Politique de confidentialité',
+		eyebrow: 'Vos données',
+		lead: 'Quelles informations nous collectons, pourquoi, combien de temps nous les gardons et comment exercer vos droits.'
+	} %}
+
+	<section class="section">
+		<div class="container">
+			<div class="legal-content">
+				<h2>Responsable du traitement</h2>
+				<p>
+					<strong>{{ nom }}</strong>, {{ l.val(parametres.address, 'adresse du siège') }}.<br>
+					Pour toute question sur vos données : {% if contact_rgpd %}<a href="mailto:{{ contact_rgpd }}">{{ contact_rgpd }}</a>{% else %}{{ l.val(null, 'e-mail de contact') }}{% endif %}.
+				</p>
+
+				<h2>Les données que nous collectons</h2>
+				<p>Nous ne collectons que les informations que vous nous transmettez volontairement via les formulaires du site :</p>
+				<div class="table-responsive">
+					<table class="table legal-table">
+						<thead>
+							<tr><th scope="col">Formulaire</th><th scope="col">Données</th><th scope="col">Pourquoi</th><th scope="col">Durée de conservation</th></tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>Contact</td>
+								<td>Nom, prénom, e-mail, téléphone, sujet, message</td>
+								<td>Répondre à votre demande</td>
+								<td>{{ l.val(null, 'ex. 3 ans après le dernier échange') }}</td>
+							</tr>
+							<tr>
+								<td>Demande d'hébergement</td>
+								<td>Nom, prénom, e-mail, université, copie du passeport, attestation</td>
+								<td>Étudier et organiser votre hébergement temporaire</td>
+								<td>{{ l.val(null, 'ex. supprimées 3 mois après la fin de l\'hébergement') }}</td>
+							</tr>
+							<tr>
+								<td>Candidature bénévole</td>
+								<td>Nom, prénom, e-mail, téléphone, motivation, mission choisie</td>
+								<td>Vous recontacter et organiser les missions</td>
+								<td>{{ l.val(null, 'ex. 2 ans') }}</td>
+							</tr>
+							<tr>
+								<td>Newsletter</td>
+								<td>E-mail, prénom, nom</td>
+								<td>Vous envoyer nos actualités et invitations</td>
+								<td>Jusqu'à votre désinscription</td>
+							</tr>
+							<tr>
+								<td>Adhésion et dons (HelloAsso)</td>
+								<td>Nom, prénom, e-mail, montant, type d'adhésion, et selon le cas adresse et téléphone</td>
+								<td>Gérer les adhésions, envoyer les reçus et communiquer avec les membres</td>
+								<td>{{ l.val(null, 'ex. durée de l\'adhésion + 3 ans') }}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<p>Le paiement des adhésions et des dons est réalisé par <a href="https://www.helloasso.com" target="_blank" rel="noopener">HelloAsso</a>, qui traite vos coordonnées bancaires selon sa propre politique de confidentialité. Nous n'avons jamais accès à vos informations de paiement.</p>
+
+				<h2>Base légale</h2>
+				<p>Ces traitements reposent sur votre <strong>consentement</strong> (newsletter, formulaires), sur l'<strong>exécution de votre adhésion</strong> (gestion des membres) et sur l'<strong>intérêt légitime</strong> de l'association à répondre aux demandes qui lui sont adressées.</p>
+
+				<h2>Qui a accès à vos données ?</h2>
+				<p>Seuls les membres du bureau et les bénévoles habilité·es de l'association, via un espace d'administration protégé par mot de passe. Vos données ne sont <strong>jamais vendues ni cédées</strong>. Elles sont hébergées par {{ l.val(legal.hebergeur_nom, 'hébergeur') }} ; les e-mails de la newsletter sont envoyés via un prestataire d'envoi (Mailgun).</p>
+
+				<h2>Cookies et services tiers</h2>
+				<p>Le site n'utilise <strong>aucun cookie publicitaire ni de mesure d'audience</strong>. Seul un cookie technique de session est déposé, nécessaire au fonctionnement des formulaires et de l'espace d'administration.</p>
+				<p>Certaines pages intègrent des services externes qui peuvent recevoir votre adresse IP :</p>
+				<ul>
+					<li><strong>YouTube</strong> (vidéo de l'accueil), en mode « confidentialité renforcée » : aucun cookie avant que vous lanciez la lecture ;</li>
+					<li><strong>Google Maps</strong> (plan de la page Contact) ;</li>
+					<li><strong>Google Fonts</strong> et des bibliothèques d'icônes chargées depuis des serveurs externes (CDN).</li>
+				</ul>
+
+				<h2>Vos droits</h2>
+				<p>Conformément au RGPD, vous pouvez à tout moment <strong>accéder</strong> à vos données, les <strong>rectifier</strong>, les <strong>supprimer</strong>, vous opposer à leur traitement ou en demander la portabilité. Pour vous désinscrire de la newsletter ou exercer ces droits, écrivez-nous {% if contact_rgpd %}à <a href="mailto:{{ contact_rgpd }}">{{ contact_rgpd }}</a>{% else %}via la page <a href="{{ path('app_contact') }}">Contact</a>{% endif %}. Nous vous répondrons sous un mois.</p>
+				<p>Si vous estimez que vos droits ne sont pas respectés, vous pouvez adresser une réclamation à la <a href="https://www.cnil.fr/fr/plaintes" target="_blank" rel="noopener">CNIL</a>.</p>
+
+				<p class="small text-muted-ag mt-5 mb-0">Dernière mise à jour : novembre 2026.</p>
+			</div>
+		</div>
+	</section>
+{% endblock %}

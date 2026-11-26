@@ -1,0 +1,16 @@
+{# Contenu commun des pages d'erreur. Variables : code, titre, texte, icone. #}
+<section class="section">
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-lg-7 text-center">
+				<span class="eyebrow">Erreur {{ code }}</span>
+				<h1 class="section-title"><i class="fa {{ icone }} me-2" aria-hidden="true"></i>{{ titre }}</h1>
+				<p class="section-lead mb-4">{{ texte }}</p>
+				<div class="d-flex flex-wrap justify-content-center gap-3">
+					<a class="btn btn-primary" href="{{ path('app_accueil') }}"><i class="fa fa-home me-1" aria-hidden="true"></i> Retour à l'accueil</a>
+					<a class="btn btn-ag-ghost" href="{{ path('app_contact') }}">Nous contacter</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

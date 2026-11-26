@@ -1,18 +1,48 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Adhésion · {{ parent() }}{% endblock %}
+
+{% set lien = parametres.lien_adhesion|default('https://www.helloasso.com/associations/association-guineenne-d-ile-et-vilaine-ag35') %}
+
 {% block body %}
-	<div
-		class="container">
-		<!-- Page Header Start -->
+	{% include 'components/page_hero.html.twig' with {
+		title: 'Devenez membre de l\'AG35',
+		eyebrow: parametres.menu_adhesion|default('Adhésion'),
+		lead: 'Rejoindre l\'association, c\'est soutenir l\'entraide et faire vivre la culture guinéenne à Rennes.'
+	} %}
 
-		<h1 class="display-2 text-dark mb-4 animated slideInDown">Devenez membre d’AG35</h1>
-		{% set points = parametres.texte_adhesion|split('.') %}
-		{% for point in points %}
-			{% if point|trim is not empty %}
-				<p>{{ point|trim }}</p>
-			{% endif %}
-		{% endfor %}
-		<a class="btn btn-primary" target="_blank" href="{{ parametres.lien_adhesion }}">Adhérer</a>
-
-	</div>
+	<section class="section">
+		<div class="container">
+			<div class="row g-5 align-items-start">
+				<div class="col-lg-7">
+					<span class="eyebrow">Pourquoi adhérer ?</span>
+					<h2 class="section-title">Une communauté qui vous ressemble</h2>
+					{% set texte = parametres.texte_adhesion|default('')|striptags|trim %}
+					{% if texte %}
+						<p class="section-lead mb-4">{{ texte|nl2br }}</p>
+					{% endif %}
+					<ul class="check-list">
+						<li>Participer aux assemblées générales et voter les grandes décisions</li>
+						<li>Profiter de tarifs réduits sur nos événements</li>
+						<li>Accéder au réseau d'entraide : logement, démarches, stages</li>
+						<li>Proposer et porter vos propres projets au sein de l'association</li>
+					</ul>
+				</div>
+				<div class="col-lg-5">
+					<div class="form-card">
+						<h2 class="h4 mb-4">Comment adhérer ?</h2>
+						<ol class="steps mb-4">
+							<li><div><strong>Remplissez le formulaire</strong><span>sur notre page HelloAsso, en quelques minutes.</span></div></li>
+							<li><div><strong>Réglez votre cotisation</strong><span>par carte bancaire, en ligne et de façon sécurisée.</span></div></li>
+							<li><div><strong>Bienvenue !</strong><span>Vous recevez une confirmation et nos prochaines invitations.</span></div></li>
+						</ol>
+						<a class="btn btn-ag-yellow w-100" href="{{ lien }}" target="_blank" rel="noopener">
+							Adhérer sur HelloAsso <i class="fa fa-external-link-alt ms-1" aria-hidden="true"></i>
+						</a>
+						<p class="small text-muted-ag text-center mt-3 mb-0"><i class="fa fa-lock me-1" aria-hidden="true"></i> Paiement sécurisé par HelloAsso</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
 {% endblock %}

@@ -1,0 +1,150 @@
+/*
+ * Thème AG35 pour EasyAdmin 4.
+ * On ne fait que redéfinir les variables CSS prévues par EasyAdmin : aucune
+ * surcharge de ses templates, donc rien ne casse lors des mises à jour.
+ */
+
+:root {
+    --gn-red: #CE1126;
+    --gn-yellow: #FCD116;
+    --gn-green: #009460;
+
+    --ag-green-900: #0B3D2E;
+    --ag-green-700: #0F5C42;
+    --ag-green-600: #007A4F;
+    --ag-green-100: #E3F2EA;
+    --ag-green-50: #F1F8F4;
+    --ag-yellow-100: #FFF6CC;
+    --ag-red-100: #FBE4E7;
+    --ag-cream: #FBF8F1;
+    --ag-line: #E6E1D6;
+
+    --font-family-sans-serif: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    --font-family-base: var(--font-family-sans-serif);
+
+    --color-primary: var(--ag-green-600);
+    --text-on-primary: #FFFFFF;
+    --link-color: var(--ag-green-600);
+    --link-color-rgb: 0, 122, 79;
+    --link-hover-color: var(--ag-green-900);
+    --link-hover-color-rgb: 11, 61, 46;
+    --bs-primary: var(--ag-green-600);
+    --bs-link-color-rgb: 0, 122, 79;
+    --bs-link-hover-color-rgb: 11, 61, 46;
+
+    --body-bg: var(--ag-cream);
+    --border-radius: 8px;
+    --border-radius-lg: 12px;
+
+    --sidebar-bg: var(--ag-green-900);
+    --sidebar-border-color: transparent;
+    --sidebar-logo-color: #FFFFFF;
+    --sidebar-menu-color: rgba(255, 255, 255, .78);
+    --sidebar-menu-submenu-color: rgba(255, 255, 255, .7);
+    --sidebar-menu-header-color: var(--gn-yellow);
+    --sidebar-menu-icon-color: rgba(255, 255, 255, .55);
+    --sidebar-menu-active-item-bg: rgba(255, 255, 255, .12);
+    --sidebar-menu-active-item-color: #FFFFFF;
+    --sidebar-menu-badge-bg: rgba(255, 255, 255, .15);
+    --sidebar-menu-badge-color: #FFFFFF;
+    --sidebar-menu-badge-active-bg: var(--gn-yellow);
+    --sidebar-menu-badge-active-color: var(--ag-green-900);
+
+    --content-top-border-color: var(--ag-line);
+    --table-selected-cell-bg: var(--ag-green-50);
+    --table-thead-sorted-marker-color: var(--ag-green-600);
+    --pagination-active-bg: var(--ag-green-600);
+    --form-switch-checked-bg: var(--ag-green-600);
+    --badge-boolean-true-bg: var(--ag-green-600);
+    --button-primary-bg: var(--ag-green-600);
+    --button-primary-color: #FFFFFF;
+    --dropdown-settings-active-item-color: var(--ag-green-600);
+    --dropdown-settings-active-item-shadow: inset 0 0 0 1px rgba(0, 122, 79, .5);
+    --user-menu-impersonated-link-color: var(--ag-green-600);
+}
+
+/* Mode sombre d'EasyAdmin : on garde ses fonds, on adapte l'accent */
+.ea-dark-scheme {
+    --color-primary: #3DBE8B;
+    --link-color: #3DBE8B;
+    --link-color-rgb: 61, 190, 139;
+    --link-hover-color: #7AD8B2;
+    --link-hover-color-rgb: 122, 216, 178;
+    --button-primary-bg: #1F9E6E;
+    --pagination-active-bg: #1F9E6E;
+    --form-switch-checked-bg: #1F9E6E;
+    --badge-boolean-true-bg: #1F9E6E;
+    --sidebar-menu-header-color: var(--gn-yellow);
+    --sidebar-menu-active-item-color: #FFFFFF;
+}
+
+/* Bande tricolore en haut de la barre latérale */
+/* (pas de "position" ici : EasyAdmin gère le placement de la barre en fixed/static) */
+.ea .sidebar {
+    border-top: 4px solid transparent;
+    border-image: linear-gradient(90deg, var(--gn-red) 0 33.33%, var(--gn-yellow) 33.33% 66.66%, var(--gn-green) 66.66% 100%) 1;
+}
+
+/* Logo et titre */
+.ea .logo { color: #FFFFFF; font-weight: 700; display: flex; align-items: center; gap: 10px; }
+.ea .logo img { width: 36px; height: 36px; border-radius: 50%; background: #FFFFFF; }
+.ea .logo small { font-weight: 500; opacity: .7; font-size: .75rem; display: block; }
+
+/* La barre latérale est foncée : les liens survolés restent lisibles */
+.ea .sidebar .menu-item:not(.active) .menu-item-contents:hover { color: #FFFFFF; background: rgba(255, 255, 255, .06); }
+.ea .sidebar .menu-header .menu-item-label { letter-spacing: .06em; }
+.ea .sidebar .user-menu-wrapper,
+.ea .sidebar .user-details { color: #FFFFFF; }
+
+.btn-primary { --bs-btn-hover-bg: var(--ag-green-700); --bs-btn-hover-border-color: var(--ag-green-700); }
+
+/* ---------- Tableau de bord ---------- */
+.ag-dash { display: grid; gap: 24px; }
+.ag-dash-hello {
+    background: linear-gradient(120deg, var(--ag-green-900), var(--ag-green-700));
+    color: #FFFFFF;
+    border-radius: var(--border-radius-lg);
+    padding: 28px 32px;
+}
+.ag-dash-hello h2 { color: #FFFFFF; font-size: 1.5rem; margin: 0 0 6px; }
+.ag-dash-hello p { margin: 0; opacity: .8; }
+.ag-dash-hello .btn { margin-top: 16px; }
+
+.ag-stats { display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+.ag-stat {
+    display: flex; align-items: center; gap: 14px;
+    background: #FFFFFF;
+    border: 1px solid var(--ag-line);
+    border-radius: var(--border-radius-lg);
+    padding: 18px 20px;
+    color: inherit;
+    transition: border-color .15s, transform .15s;
+}
+.ag-stat:hover { border-color: var(--color-primary); transform: translateY(-2px); color: inherit; }
+.ag-stat-icon {
+    width: 44px; height: 44px; border-radius: 12px; flex: none;
+    display: grid; place-items: center; font-size: 1.1rem;
+}
+.ag-stat-icon.green { background: var(--ag-green-100); color: var(--ag-green-600); }
+.ag-stat-icon.yellow { background: var(--ag-yellow-100); color: #8A6D00; }
+.ag-stat-icon.red { background: var(--ag-red-100); color: var(--gn-red); }
+.ag-stat strong { display: block; font-size: 1.5rem; line-height: 1.1; }
+.ag-stat span { font-size: .85rem; opacity: .75; }
+
+.ag-panels { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+.ag-panel {
+    background: #FFFFFF;
+    border: 1px solid var(--ag-line);
+    border-radius: var(--border-radius-lg);
+    padding: 20px 22px;
+}
+.ea-dark-scheme .ag-stat,
+.ea-dark-scheme .ag-panel { background: var(--sidebar-bg); border-color: var(--border-color); }
+.ag-panel h3 { font-size: 1rem; margin: 0 0 12px; }
+.ag-panel ul { list-style: none; margin: 0; padding: 0; }
+.ag-panel li { display: flex; justify-content: space-between; gap: 12px; padding: 9px 0; border-top: 1px solid var(--ag-line); font-size: .9rem; }
+.ea-dark-scheme .ag-panel li { border-color: var(--border-color); }
+.ag-panel li:first-child { border-top: 0; }
+.ag-panel .muted { opacity: .65; white-space: nowrap; }
+.ag-panel .empty { opacity: .65; font-size: .9rem; margin: 0; }
+.ag-quick { display: flex; flex-wrap: wrap; gap: 8px; }

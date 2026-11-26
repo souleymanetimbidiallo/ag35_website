@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\GuideRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: GuideRepository::class)]
@@ -18,10 +19,14 @@ class Guide
 
     // NOTE: This is not a mapped field of entity metadata, just a simple property.
     #[Vich\UploadableField(mapping: 'pdf_files', fileNameProperty: 'pdfName')]
+    #[Assert\File(maxSize: '15M', mimeTypes: ['application/pdf'], mimeTypesMessage: 'Le guide doit être un fichier PDF.')]
     private ?File $pdfFile = null;
 
     #[ORM\Column(nullable: true)]
     private ?string $pdfName = null;
+
+    // Non persisté : utilisé par setPdfFile() (évite une propriété dynamique, dépréciée en PHP 8.2)
+    private ?\DateTimeImmutable $updatedAt = null;
 
     public function getId(): ?int
     {

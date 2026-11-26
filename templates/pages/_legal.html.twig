@@ -1,0 +1,5 @@
+{#
+	Macro d'affichage des informations légales.
+	Les valeurs elles-mêmes sont dans config/packages/twig.yaml (variable globale « legal »).
+#}
+{% macro val(v, aide) %}{% if v %}{{ v }}{% else %}<mark class="todo" title="À compléter dans config/packages/twig.yaml">[{{ aide }} — à compléter]</mark>{% endif %}{% endmacro %}

@@ -1,43 +1,62 @@
 {% extends 'base.html.twig' %}
+{% form_theme form 'bootstrap_5_layout.html.twig' %}
 
-{% block title %}Formulaire d'hébergement{% endblock %}
+{% block title %}Hébergement · {{ parent() }}{% endblock %}
+
+{% set row = {row_attr: {class: 'mb-3'}, label_attr: {class: 'form-label'}} %}
 
 {% block body %}
- <div id="message" style="display: none;" class="alert alert-success">Nous avons bien reçu votre demande ,nous vous contacterons dans les plus brefs délai!</div>
-    <div class="container">
-        <h1 class="mt-5 mb-4">Formulaire de demande pour une attestation d'hébergement</h1>
-        <div class="row">
-            <div class="col-md-6">
-                {{ form_start(form, {'attr': {'class': 'needs-validation'}}) }}
-                
-                <div class="mb-3">
-                    {{ form_row(form.nom, {'label': 'Nom', 'attr': {'class': 'form-control'}}) }}
-                </div>
-                <div class="mb-3">
-                    {{ form_row(form.prenom, {'label': 'Prénom', 'attr': {'class': 'form-control'}}) }}
-                </div>
-                <div class="mb-3">
-                   {{ form_row(form.email) }}
-                </div>
-                <div class="mb-3">
-                    {{ form_row(form.universite, {'label': 'Université', 'attr': {'class': 'form-select'}}) }}
-                </div>
-                <div class="mb-3">
-                    {{ form_row(form.autre_universite, {'label': 'Autre Université', 'attr': {'class': 'form-control'}}) }}
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="mb-3">
-                    {{ form_row(form.passeport, {'label': 'Passeport (PDF,jpg)', 'attr': {'class': 'form-control'}}) }}
-                </div>
-                <div class="mb-3">
-                    {{ form_row(form.attestation, {'label': 'Attestation de préinscription(PDF,jpg)', 'attr': {'class': 'form-control'}}) }}
-                </div>
-                <div class="mb-3">
-                    <button type="submit" class="btn btn-primary">Enregistrer</button>
-                </div>
-                {{ form_end(form) }}
-            </div>
-        </div>
-    </div>
+	{% include 'components/page_hero.html.twig' with {
+		title: 'Demande d\'attestation d\'hébergement',
+		eyebrow: parametres.menu_hebergement|default('Hébergement'),
+		lead: 'Vous arrivez à Rennes pour vos études ? L\'AG35 peut vous fournir une attestation d\'hébergement temporaire pour votre dossier de visa.'
+	} %}
+
+	<section class="section">
+		<div class="container">
+			<div class="row g-5">
+				<div class="col-lg-4 order-lg-2">
+					<div class="card-ag">
+						<h2 class="h5 mb-4">Comment ça marche ?</h2>
+						<ol class="steps">
+							<li><div><strong>Envoyez votre demande</strong><span>avec votre passeport et votre attestation de préinscription.</span></div></li>
+							<li><div><strong>Étude du dossier</strong><span>Un membre du bureau vérifie les pièces et vous contacte par e-mail.</span></div></li>
+							<li><div><strong>Réception de l'attestation</strong><span>à joindre à votre demande de visa.</span></div></li>
+						</ol>
+						<hr class="my-4">
+						<p class="small text-muted-ag mb-0"><i class="fa fa-shield-alt me-1 text-primary" aria-hidden="true"></i>
+							Vos documents servent uniquement au traitement de votre demande.</p>
+					</div>
+				</div>
+
+				<div class="col-lg-8 order-lg-1">
+					<div class="form-card">
+						<div id="message" style="display: none;" class="alert-ag mb-4" role="status">
+							<i class="fa fa-check-circle mt-1" aria-hidden="true"></i>
+							<span>Merci ! Nous avons bien reçu votre demande et vous contacterons dans les plus brefs délais.</span>
+						</div>
+
+						{{ form_start(form, {attr: {class: 'needs-validation'}}) }}
+							<h2 class="h5 mb-3">Vos informations</h2>
+							<div class="row gx-3">
+								<div class="col-md-6">{{ form_row(form.prenom, row|merge({label: 'Prénom', attr: {class: 'form-control', autocomplete: 'given-name'}})) }}</div>
+								<div class="col-md-6">{{ form_row(form.nom, row|merge({label: 'Nom', attr: {class: 'form-control', autocomplete: 'family-name'}})) }}</div>
+								<div class="col-12">{{ form_row(form.email, row|merge({attr: {class: 'form-control', placeholder: 'vous@exemple.fr', autocomplete: 'email'}})) }}</div>
+								<div class="col-12">{{ form_row(form.universite, row|merge({label: 'Établissement d\'accueil', attr: {class: 'form-select'}})) }}</div>
+								<div class="col-12">{{ form_row(form.autre_universite, {row_attr: {class: 'mb-3 autre-universite'}, attr: {class: 'form-control', placeholder: 'Nom de votre établissement'}}) }}</div>
+							</div>
+
+							<h2 class="h5 mt-3 mb-3">Pièces justificatives</h2>
+							<div class="row gx-3">
+								<div class="col-md-6">{{ form_row(form.passeport, row|merge({label: 'Passeport', help: 'PDF ou JPG', attr: {class: 'form-control'}})) }}</div>
+								<div class="col-md-6">{{ form_row(form.attestation, row|merge({label: 'Attestation de préinscription', help: 'PDF ou JPG', attr: {class: 'form-control'}})) }}</div>
+							</div>
+							{{ form_rest(form) }}
+							<button type="submit" class="btn btn-primary px-4 mt-2">Envoyer ma demande</button>
+						{{ form_end(form) }}
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
 {% endblock %}

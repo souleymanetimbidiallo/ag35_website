@@ -1,77 +1,108 @@
 {% extends 'base.html.twig' %}
 
-{% block head %}
-    {{ parent() }}
-    <meta property="og:title" content="{{ evenement.titre }}" />
-    <meta property="og:description" content="{{ evenement.commentaire }}" />
-    <meta property="og:url" content="{{ url('app_evenement_details', {'id':evenement.id}) }}" />
-	<meta property="og:image" content="http://127.0.0.1:8000/img/carousel-1.jpg" />
-    {% if evenement.imagename is defined %}
-        {% set imagePath = absolute_url(asset('/img/' ~ evenement.imagename)) %}
-        <meta property="og:image" content="{{ imagePath }}" />
-    {% endif %}
-{% endblock %}
+{% set url_event = url('app_evenement_details', {id: evenement.id}) %}
+{% set jours = ['dimanche', 'lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi'] %}
+{% set mois = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'] %}
+
+{% block title %}{{ evenement.titre }} · {{ parametres.site_name|default('AG35') }}{% endblock %}
+{% block meta_description %}{{ evenement.commentaire|default(evenement.titre) }}{% endblock %}
+{% block og_title %}{{ evenement.titre }}{% endblock %}
+{% block og_description %}{{ evenement.commentaire }}{% endblock %}
+{% block og_url %}{{ url_event }}{% endblock %}
+{% block og_image %}{{ evenement.imageName ? absolute_url(asset('img/' ~ evenement.imageName)) : absolute_url(asset('img/logo_ag35.png')) }}{% endblock %}
 
 {% block body %}
-    <!-- Page Header Start -->
-    {% for image in images %}
+	{% include 'components/page_hero.html.twig' with {
+		title: evenement.titre,
+		eyebrow: evenement.dateDebut and evenement.dateDebut|date('U') >= 'now'|date('U') ? 'Événement à venir' : 'Événement passé',
+		crumbs: [{label: parametres.menu_evenement|default('Événements'), url: path('app_evenements')}]
+	} %}
 
-        <div class="container-fluid py-5 mb-5 wow" data-wow-delay="0.1s" style="background-image: url('{{ asset('img/' ~ image.imageName8) }}'); background-size: cover; background-position: center; min-height: 100vh;">
+	<section class="section">
+		<div class="container">
+			<div class="row g-5">
+				<div class="col-lg-7">
+					{% if evenement.imageName %}
+						<div class="event-detail-media mb-4">
+							<img src="{{ asset('img/' ~ evenement.imageName) }}" alt="{{ evenement.titre }}">
+						</div>
+					{% endif %}
+					{% if evenement.commentaire %}
+						<h2 class="h4 mb-3">À propos de l'événement</h2>
+						<p class="fs-5 text-muted-ag">{{ evenement.commentaire|nl2br }}</p>
+					{% endif %}
+				</div>
 
-            <div class="container text-center py-5">
+				<div class="col-lg-5">
+					<aside class="card-ag event-aside position-sticky">
+						<ul class="info-list">
+							{% if evenement.dateDebut %}
+								<li>
+									<span class="ico"><i class="fa fa-calendar-alt" aria-hidden="true"></i></span>
+									<div>
+										<small>Date</small>
+										<strong>{{ jours[evenement.dateDebut|date('w')]|capitalize }} {{ evenement.dateDebut|date('j') }} {{ mois[evenement.dateDebut|date('n') - 1] }} {{ evenement.dateDebut|date('Y') }}</strong>
+									</div>
+								</li>
+								<li>
+									<span class="ico"><i class="fa fa-clock" aria-hidden="true"></i></span>
+									<div>
+										<small>Horaires</small>
+										<strong>{{ evenement.dateDebut|date('H\\hi') }}{% if evenement.dateFin and evenement.dateFin|date('YmdHi') != evenement.dateDebut|date('YmdHi') %} – {{ evenement.dateFin|date('H\\hi') }}{% endif %}</strong>
+									</div>
+								</li>
+							{% endif %}
+							{% if evenement.adresse %}
+								<li>
+									<span class="ico"><i class="fa fa-map-marker-alt" aria-hidden="true"></i></span>
+									<div>
+										<small>Lieu</small>
+										<a href="https://www.google.com/maps/search/?api=1&query={{ evenement.adresse|url_encode }}" target="_blank" rel="noopener"><strong>{{ evenement.adresse }}</strong></a>
+									</div>
+								</li>
+							{% endif %}
+							{% if evenement.prix %}
+								<li>
+									<span class="ico"><i class="fa fa-ticket-alt" aria-hidden="true"></i></span>
+									<div>
+										<small>Tarif</small>
+										<strong>{{ evenement.prix matches '/^\\d+$/' ? evenement.prix ~ ' €' : evenement.prix }}</strong>
+									</div>
+								</li>
+							{% endif %}
+						</ul>
 
-                <h1 class="display-2 text-white mb-4 animated slideInDown">Détails de l'événement</h1>
+						{% if evenement.lienBilleterie %}
+							<a class="btn btn-ag-yellow w-100 mb-4" href="{{ evenement.lienBilleterie }}" target="_blank" rel="noopener">
+								<i class="fa fa-ticket-alt me-1" aria-hidden="true"></i> Réserver ma place
+							</a>
+						{% endif %}
 
-            </div>
+						<p class="fw-bold mb-2">Partager</p>
+						<div class="share-row">
+							<a class="btn-share" href="https://www.facebook.com/sharer/sharer.php?u={{ url_event|url_encode }}" target="_blank" rel="noopener"><i class="fab fa-facebook-f me-1" aria-hidden="true"></i> Facebook</a>
+							<a class="btn-share" href="https://wa.me/?text={{ (evenement.titre ~ ' – ' ~ url_event)|url_encode }}" target="_blank" rel="noopener"><i class="fab fa-whatsapp me-1" aria-hidden="true"></i> WhatsApp</a>
+							<button type="button" class="btn-share" id="copyLink" data-url="{{ url_event }}"><i class="fa fa-link me-1" aria-hidden="true"></i> <span>Copier le lien</span></button>
+						</div>
+					</aside>
+				</div>
+			</div>
 
-        </div>
+			<div class="mt-5">
+				<a href="{{ path('app_evenements') }}" class="link-arrow"><i class="fa fa-arrow-left" aria-hidden="true"></i> Tous les événements</a>
+			</div>
+		</div>
+	</section>
+{% endblock %}
 
-    {% endfor %}
-    <!-- Page Header End -->
-
-    <!-- Project Start -->
-    <div class="container-xxl pt-5">
-        <div class="container">
-            <div class="text-center text-md-start pb-5 pb-md-0 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
-                <p class="fs-5 fw-medium text-primary">Voici les détails de cet événement</p>
-                <div class="project-item mb-5">
-                    {% if evenement.imagename is defined %}
-                        {% set imagePath = '/img/' ~ evenement.imagename %}
-                        <img class="img-fluid" src="{{asset(imagePath)}}" alt="Image">
-                    {% endif %}
-                    <div class="p-4">
-                        <a class="d-block h5" href="">{{evenement.titre}}</a>
-                        <span>
-                            Prix:
-                            {{ evenement.prix }}</span>
-                        <br/>
-                        <span>Adresse:
-                            {{ evenement.adresse }}</span>
-                        <br/>
-                        <span>Description:
-                            {{ evenement.commentaire }}</span>
-                        <br/>
-                        <a class="btn btn-primary" href="{{ evenement.lienBilleterie }}">Acheter le billet</a><br/><br/>
-
-                        <div class="fb-share-button" data-href="{{ url('app_evenement_details', {'id':evenement.id}) }}" data-layout="button" data-size="large">
-                            <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ url('app_evenement_details', {'id':evenement.id}) }}" class="fb-xfbml-parse-ignore">Partager</a>
-                        </div>
-                        
-                        <a href="whatsapp://send?text={{ evenement.titre }} - {{ evenement.commentaire }} - {{ url('app_evenement_details', {'id':evenement.id}) }}" target="_blank" class="btn btn-lg btn-success rounded-0 m-1">
-                            <i class="fab fa-whatsapp"></i> Partager sur WhatsApp
-                        </a>
-                        
-                        <a class="btn btn-lg btn-info rounded-0 m-1" href="https://twitter.com/intent/tweet?url={{ url('app_evenement_details', {'id':evenement.id}) }}&text={{ evenement.titre }}" target="_blank">
-                            <i class="fab fa-twitter"></i> Partager sur Twitter
-                        </a>
-                        
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Project End -->
-    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v11.0&appId=474582391901824&autoLogAppEvents=1" nonce="m9o31FDh"></script>
-
+{% block javascripts %}
+	<script>
+		document.getElementById('copyLink')?.addEventListener('click', function () {
+			var btn = this;
+			navigator.clipboard.writeText(btn.dataset.url).then(function () {
+				btn.querySelector('span').textContent = 'Lien copié !';
+				setTimeout(function () { btn.querySelector('span').textContent = 'Copier le lien'; }, 2000);
+			});
+		});
+	</script>
 {% endblock %}

@@ -1,37 +1,42 @@
 {% extends 'base.html.twig' %}
+{% form_theme form 'bootstrap_5_layout.html.twig' %}
 
-{% block title %}Formulaire de Volontariat{% endblock %}
+{% block title %}Candidature bénévole · {{ parent() }}{% endblock %}
+
+{% set row = {row_attr: {class: 'mb-3'}, label_attr: {class: 'form-label'}} %}
 
 {% block body %}
- <div id="message" style="display: none;" class="alert alert-success">Nous avons bien reçu votre demande ,nous vous contacterons dans les plus brefs délai!</div>
-<div class="container">
-    <h1 class="mt-5 mb-4">Formulaire pour être bénévole</h1>
-    <div class="row">
-        <div class="col-md-6">
-            {{ form_start(form, {'attr': {'class': 'needs-validation'}}) }}
-            
-            <div class="mb-3">
-                {{ form_row(form.nom, {'label': 'Nom', 'attr': {'class': 'form-control'}}) }}
-            </div>
-            <div class="mb-3">
-                {{ form_row(form.prenom, {'label': 'Prénom', 'attr': {'class': 'form-control'}}) }}
-            </div>
-            <div class="mb-3">
-               {{ form_row(form.email) }}
-            </div>
-            <div class="mb-3">
-                {{ form_row(form.telephone, {'label': 'Téléphone', 'attr': {'class': 'form-control'}}) }}
-            </div>
-            <div class="mb-3">
-                {{ form_row(form.motivation, {'label': 'Motivation', 'attr': {'class': 'form-control'}}) }}
-            </div>
-              
-            <div class="mb-3">
-                <button type="submit" class="btn btn-primary">Enregistrer</button>
-            </div>
-            {{ form_end(form) }}
-        </div>
-    </div>
-   
-</div>
+	{% include 'components/page_hero.html.twig' with {
+		title: 'Candidature bénévole',
+		eyebrow: 'Je me propose',
+		lead: 'Laissez-nous vos coordonnées et quelques mots sur vos motivations : un membre du bureau vous recontacte.',
+		crumbs: [{label: 'Bénévolat', url: path('app_volontariat')}]
+	} %}
+
+	<section class="section">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-lg-8">
+					<div class="form-card">
+						<div id="message" style="display: none;" class="alert-ag mb-4" role="status">
+							<i class="fa fa-check-circle mt-1" aria-hidden="true"></i>
+							<span>Merci ! Nous avons bien reçu votre candidature et vous recontacterons rapidement.</span>
+						</div>
+
+						{{ form_start(form) }}
+							<div class="row gx-3">
+								<div class="col-md-6">{{ form_row(form.prenom, row|merge({attr: {class: 'form-control', autocomplete: 'given-name'}})) }}</div>
+								<div class="col-md-6">{{ form_row(form.nom, row|merge({attr: {class: 'form-control', autocomplete: 'family-name'}})) }}</div>
+								<div class="col-md-6">{{ form_row(form.email, row|merge({attr: {class: 'form-control', placeholder: 'vous@exemple.fr', autocomplete: 'email'}})) }}</div>
+								<div class="col-md-6">{{ form_row(form.telephone, row|merge({attr: {class: 'form-control', autocomplete: 'tel'}})) }}</div>
+								<div class="col-12">{{ form_row(form.motivation, row|merge({label: 'Vos motivations', attr: {class: 'form-control', rows: 6, placeholder: 'Pourquoi souhaitez-vous participer ? Vos disponibilités, vos compétences…'}})) }}</div>
+							</div>
+							{{ form_rest(form) }}
+							<button type="submit" class="btn btn-primary px-4 mt-2">Envoyer ma candidature</button>
+						{{ form_end(form) }}
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
 {% endblock %}

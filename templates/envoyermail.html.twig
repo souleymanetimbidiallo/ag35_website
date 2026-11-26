@@ -1,12 +1,23 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Envoyer Newsletter{% endblock %}
+{% block title %}Envoyer la newsletter · {{ parent() }}{% endblock %}
+
+{% block meta_tags %}
+    <meta name="robots" content="noindex">
+{% endblock %}
 
 {% block body %}
-    <div class="container py-5">
+    {% include 'components/page_hero.html.twig' with {
+        title: 'Envoyer la newsletter',
+        eyebrow: 'Administration',
+        lead: 'Rédigez un message et choisissez les listes de diffusion destinataires.'
+    } %}
+
+    <section class="section">
+    <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-8">
-                <h1 class="mb-4">Envoyer Newsletter</h1>
+                <div class="form-card">
                 <form method="post" action="{{ path('envoyer_newsletter') }}" enctype="multipart/form-data">
                     <div class="mb-3">
                         <label for="categorie" class="form-label">Catégorie :</label>
@@ -25,7 +36,7 @@
 
                     <div class="mb-3">
                         <label for="contenu" class="form-label">Contenu du mail :</label>
-                        <textarea id="contenu" name="contenu" class="form-control" required></textarea>
+                        <textarea id="contenu" name="contenu" class="form-control" rows="8" required></textarea>
                     </div>
 
                     <div class="mb-3">
@@ -41,13 +52,18 @@
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" id="adherants" name="liste_diffusion[]" value="adherants">
-                            <label class="form-check-label" for="adherants">Adhérants</label>
+                            <label class="form-check-label" for="adherants">Adhérent·es</label>
                         </div>
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Envoyer</button>
+                    <div class="d-flex flex-wrap gap-3 align-items-center">
+                        <button type="submit" class="btn btn-primary"><i class="fa fa-paper-plane me-1" aria-hidden="true"></i> Envoyer</button>
+                        <a class="link-arrow" href="{{ path('admin') }}"><i class="fa fa-arrow-left" aria-hidden="true"></i> Retour à l'administration</a>
+                    </div>
                 </form>
+                </div>
             </div>
         </div>
     </div>
+    </section>
 {% endblock %}

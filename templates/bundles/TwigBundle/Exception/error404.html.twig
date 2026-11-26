@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Page introuvable · {{ parent() }}{% endblock %}
+
+{% block meta_tags %}
+	<meta name="robots" content="noindex">
+{% endblock %}
+
+{% block body %}
+	{% include 'bundles/TwigBundle/Exception/_content.html.twig' with {
+		code: 404,
+		titre: 'Page introuvable',
+		texte: 'La page que vous cherchez n\'existe pas ou a été déplacée.',
+		icone: 'fa-map-signs'
+	} %}
+{% endblock %}

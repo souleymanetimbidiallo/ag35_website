@@ -1,0 +1,178 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Questions fréquentes · {{ parent() }}{% endblock %}
+{% block meta_description %}Arriver à Rennes comme étudiant·e guinéen·ne : titre de séjour, logement, CAF, sécurité sociale, banque, transports… Les réponses de l'AG35 aux questions les plus fréquentes.{% endblock %}
+
+{#
+	Contenu de la FAQ : un thème = un groupe de questions.
+	Les réponses acceptent du HTML simple (liens, gras). Mettre à jour la date ci-dessous à chaque relecture.
+#}
+{% set maj = '2026-11' %}
+{% set themes = [
+	{
+		id: 'avant',
+		icone: 'fa-plane-arrival',
+		titre: 'Avant et juste après l\'arrivée',
+		questions: [
+			{
+				q: 'Je viens d\'arriver avec un visa étudiant : que dois-je faire en premier ?',
+				r: 'Si vous avez un <strong>visa long séjour valant titre de séjour (VLS-TS)</strong>, vous devez le <strong>valider en ligne dans les 3 mois</strong> suivant votre arrivée, sur le site de l\'<a href="https://administration-etrangers-en-france.interieur.gouv.fr" target="_blank" rel="noopener">ANEF</a> (une taxe est à payer en ligne). Sans cette validation, vous êtes en situation irrégulière et vous ne pourrez pas faire les autres démarches (CAF, renouvellement…).'
+			},
+			{
+				q: 'Quand dois-je renouveler mon titre de séjour ?',
+				r: 'La demande se fait en ligne sur l\'<a href="https://administration-etrangers-en-france.interieur.gouv.fr" target="_blank" rel="noopener">ANEF</a>, <strong>plusieurs mois avant l\'expiration</strong> (comptez au moins 2 à 3 mois). Préparez à l\'avance votre certificat de scolarité, un justificatif de ressources et un justificatif de domicile récent.'
+			},
+			{
+				q: 'Qu\'est-ce que la CVEC et dois-je la payer ?',
+				r: 'La <strong>Contribution de vie étudiante et de campus</strong> est obligatoire pour s\'inscrire dans la plupart des établissements d\'enseignement supérieur. Elle se paie sur <a href="https://cvec.etudiant.gouv.fr" target="_blank" rel="noopener">cvec.etudiant.gouv.fr</a> avant l\'inscription administrative. Certains étudiant·es en sont exonéré·es (boursier·es notamment).'
+			}
+		]
+	},
+	{
+		id: 'logement',
+		icone: 'fa-home',
+		titre: 'Logement',
+		questions: [
+			{
+				q: 'Je n\'ai pas de logement pour mes premiers jours à Rennes. L\'AG35 peut-elle m\'aider ?',
+				r: 'Oui, dans la mesure de nos possibilités : des membres de l\'association proposent un <strong>hébergement temporaire</strong> aux nouveaux arrivant·es. Faites votre demande le plus tôt possible via le <a href="/hebergement">formulaire d\'hébergement</a>. Les places sont limitées, surtout en septembre.'
+			},
+			{
+				q: 'Comment obtenir un logement Crous ?',
+				r: 'Il faut constituer un <strong>Dossier social étudiant (DSE)</strong> sur <a href="https://www.messervices.etudiant.gouv.fr" target="_blank" rel="noopener">messervices.etudiant.gouv.fr</a>, généralement à partir du printemps pour la rentrée suivante. Des logements restent parfois disponibles en cours d\'année : consultez régulièrement la plateforme.'
+			},
+			{
+				q: 'Je n\'ai pas de garant en France. Comment faire ?',
+				r: 'La <strong>garantie Visale</strong> (gratuite) se porte garante pour vous auprès du propriétaire. La demande se fait sur <a href="https://www.visale.fr" target="_blank" rel="noopener">visale.fr</a>. Elle est acceptée par de nombreuses agences et par les résidences étudiantes.'
+			},
+			{
+				q: 'Puis-je toucher une aide au logement (APL) ?',
+				r: 'Oui, la plupart des étudiant·es étranger·es en situation régulière peuvent en bénéficier. La demande se fait sur <a href="https://www.caf.fr" target="_blank" rel="noopener">caf.fr</a> <strong>dès votre entrée dans le logement</strong> (l\'aide n\'est pas rétroactive). Il vous faudra un titre de séjour validé, un bail et un compte bancaire français.'
+			}
+		]
+	},
+	{
+		id: 'sante',
+		icone: 'fa-heartbeat',
+		titre: 'Santé',
+		questions: [
+			{
+				q: 'Comment m\'inscrire à la Sécurité sociale ?',
+				r: 'Les étudiant·es étranger·es s\'inscrivent gratuitement sur <a href="https://etudiant-etranger.ameli.fr" target="_blank" rel="noopener">etudiant-etranger.ameli.fr</a>. Une fois inscrit·e, créez votre compte sur ameli.fr et demandez votre carte Vitale.'
+			},
+			{
+				q: 'Faut-il prendre une mutuelle ?',
+				r: 'La Sécurité sociale ne rembourse qu\'une partie des frais. Une <strong>complémentaire santé (mutuelle)</strong> est fortement conseillée. Selon vos ressources, vous pouvez avoir droit à la <strong>Complémentaire santé solidaire</strong>, gratuite ou à faible coût (renseignements sur ameli.fr).'
+			},
+			{
+				q: 'Où consulter un médecin ou un psychologue ?',
+				r: 'Votre université dispose d\'un <strong>service de santé étudiante</strong> (consultations gratuites ou à faible coût, y compris psychologiques). Pensez aussi à déclarer un <strong>médecin traitant</strong> pour être mieux remboursé·e. En cas d\'urgence : <strong>15</strong> (SAMU) ou <strong>112</strong>.'
+			}
+		]
+	},
+	{
+		id: 'quotidien',
+		icone: 'fa-wallet',
+		titre: 'Vie quotidienne',
+		questions: [
+			{
+				q: 'Comment ouvrir un compte bancaire ?',
+				r: 'Prenez rendez-vous dans une banque avec votre passeport, votre titre de séjour (ou visa), un justificatif de domicile et votre certificat de scolarité. Si une banque refuse, vous pouvez faire valoir votre <strong>droit au compte</strong> auprès de la Banque de France.'
+			},
+			{
+				q: 'Comment me déplacer à Rennes ?',
+				r: 'Le réseau <strong>STAR</strong> (métro, bus) dessert toute la métropole, avec des tarifs réduits pour les jeunes et les étudiant·es. Toutes les infos sur <a href="https://www.star.fr" target="_blank" rel="noopener">star.fr</a>. Le vélo est aussi très pratique à Rennes.'
+			},
+			{
+				q: 'Ai-je le droit de travailler pendant mes études ?',
+				r: 'Oui : avec un titre de séjour étudiant, vous pouvez travailler <strong>jusqu\'à 964 heures par an</strong>, sans autorisation supplémentaire. Vos études doivent rester votre activité principale. Les offres de stage et de jobs partagées par les membres circulent aussi sur notre groupe WhatsApp.'
+			}
+		]
+	},
+	{
+		id: 'asso',
+		icone: 'fa-users',
+		titre: 'L\'AG35',
+		questions: [
+			{
+				q: 'Qui peut adhérer à l\'association ?',
+				r: 'Toute personne qui souhaite soutenir la communauté guinéenne d\'Ille-et-Vilaine : étudiant·es, salarié·es, familles et ami·es de la Guinée. L\'adhésion se fait en ligne en quelques minutes, sur notre <a href="/adhesion">page d\'adhésion</a>.'
+			},
+			{
+				q: 'Je veux donner un coup de main. Comment devenir bénévole ?',
+				r: 'Consultez nos <a href="/volontariat">missions de bénévolat</a> et proposez votre candidature : accueil des nouveaux arrivant·es, organisation des événements, communication… Toute aide compte !'
+			},
+			{
+				q: 'Comment rester informé·e des événements ?',
+				r: 'Inscrivez-vous à la newsletter (en bas de chaque page), suivez-nous sur les réseaux sociaux et rejoignez notre groupe WhatsApp. L\'agenda complet est sur la page <a href="/evenements">Événements</a>.'
+			}
+		]
+	}
+] %}
+
+{% block body %}
+	{% include 'components/page_hero.html.twig' with {
+		title: 'Questions fréquentes',
+		eyebrow: 'Nouveaux arrivants',
+		lead: 'Titre de séjour, logement, santé, vie quotidienne : les réponses aux questions qu\'on nous pose le plus souvent.',
+		crumbs: [{label: parametres.menu_guide|default('Guide'), url: path('app_guide')}]
+	} %}
+
+	<section class="section">
+		<div class="container">
+			<div class="row g-5">
+				<aside class="col-lg-3">
+					<nav class="faq-nav" aria-label="Thèmes de la FAQ">
+						<span class="eyebrow">Thèmes</span>
+						<ul>
+							{% for theme in themes %}
+								<li><a href="#{{ theme.id }}"><i class="fa {{ theme.icone }}" aria-hidden="true"></i>{{ theme.titre }}</a></li>
+							{% endfor %}
+						</ul>
+					</nav>
+				</aside>
+
+				<div class="col-lg-9">
+					{% for theme in themes %}
+						<section class="faq-theme" id="{{ theme.id }}" aria-labelledby="titre-{{ theme.id }}">
+							<h2 id="titre-{{ theme.id }}"><span class="faq-ico"><i class="fa {{ theme.icone }}" aria-hidden="true"></i></span>{{ theme.titre }}</h2>
+							<div class="accordion faq-accordion" id="acc-{{ theme.id }}">
+								{% for item in theme.questions %}
+									{% set uid = theme.id ~ '-' ~ loop.index %}
+									<div class="accordion-item">
+										<h3 class="accordion-header" id="q-{{ uid }}">
+											<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#r-{{ uid }}" aria-expanded="false" aria-controls="r-{{ uid }}">
+												{{ item.q }}
+											</button>
+										</h3>
+										<div id="r-{{ uid }}" class="accordion-collapse collapse" aria-labelledby="q-{{ uid }}">
+											<div class="accordion-body">{{ item.r|raw }}</div>
+										</div>
+									</div>
+								{% endfor %}
+							</div>
+						</section>
+					{% endfor %}
+
+					<p class="small text-muted-ag mt-4 mb-4">
+						<i class="fa fa-info-circle me-1" aria-hidden="true"></i>
+						Ces réponses sont données à titre indicatif et relues par les bénévoles de l'association (dernière mise à jour : {{ ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'][maj|split('-')[1] - 1] }} {{ maj|split('-')[0] }}). Les règles changent : vérifiez toujours sur les sites officiels cités.
+					</p>
+
+					<div class="card-ag d-flex flex-column flex-md-row align-items-md-center gap-3">
+						<div class="flex-grow-1">
+							<h3 class="mb-1">Vous ne trouvez pas votre réponse ?</h3>
+							<p class="text-muted-ag mb-0">Posez-nous votre question, un·e bénévole vous répondra.</p>
+						</div>
+						<div class="d-flex flex-wrap gap-2">
+							<a class="btn btn-primary" href="{{ path('app_contact') }}">Nous écrire</a>
+							{% if parametres.lien_whatsApp %}
+								<a class="btn btn-ag-ghost" href="{{ parametres.lien_whatsApp }}" target="_blank" rel="noopener"><i class="fab fa-whatsapp me-1" aria-hidden="true"></i> WhatsApp</a>
+							{% endif %}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+{% endblock %}
