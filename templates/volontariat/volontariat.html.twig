@@ -1,40 +1,52 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Liste des Activités{% endblock %}
+{% set mois = ['jan', 'fév', 'mars', 'avr', 'mai', 'juin', 'juil', 'août', 'sept', 'oct', 'nov', 'déc'] %}
+
+{% block title %}Bénévolat · {{ parent() }}{% endblock %}
 
 {% block body %}
-<div class="container-xxl pt-5">
-    <div class="container">
-        <h1 class="display-2 text-dark mb-4 animated slideInDown">Devenez Bénévole chez AG35</h1>
-        <h3>Ensemble, Changeons le Monde</h3> 
-        {% set points = parametres.texte_volontaire|split('.') %}
-        {% for point in points %}
-            {% if point|trim is not empty %}
-                <p>{{ point|trim }}</p>
-            {% endif %}
-        {% endfor %}
-        
-        <div class="owl-carousel project-carousel" data-loop="false">
-            {% for volontariat in volontariats %}
-                <div class="project-item mb-5">
-                    <div class="card position-relative">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ volontariat.titre }}</h5>
-                            <p class="card-text">{{ volontariat.description }}</p>
-                            <p class="card-text"><small class="text-muted">Lieu : {{ volontariat.lieu }}</small></p>
-                            {% if volontariat.dateDebut is not null %}
-                                <p class="card-text">Date de début : {{ volontariat.dateDebut|date('d/m/Y H:i') }}</p>
-                            {% endif %}
-                            {% if volontariat.dateFin is not null %}
-                                <p class="card-text">Date de fin : {{ volontariat.dateFin|date('d/m/Y H:i') }}</p>
-                            {% endif %}
-                            <p>{{ "Voulez-vous être volontaire à cette activité ? Si oui " }}</p>
-                            <a href="{{ path('volontaire', {'id': volontariat.id}) }}" class="btn btn-primary">Cliquez ici</a>
-                        </div>
-                    </div>
-                </div>
-            {% endfor %}
-        </div>
-    </div>
-</div>
+	{% include 'components/page_hero.html.twig' with {
+		title: 'Devenez bénévole',
+		eyebrow: parametres.menu_volontariat|default('Volontariat'),
+		lead: parametres.texte_volontaire|default('')|striptags|trim ?: 'Quelques heures suffisent pour faire la différence. Choisissez une mission et rejoignez l\'équipe.'
+	} %}
+
+	<section class="section">
+		<div class="container">
+			<div class="section-head">
+				<span class="eyebrow">Missions ouvertes</span>
+				<h2 class="section-title">Ensemble, on va plus loin</h2>
+			</div>
+
+			{% if volontariats|length > 0 %}
+				<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+					{% for volontariat in volontariats %}
+						<div class="col">
+							<article class="card-ag mission-card">
+								<h3>{{ volontariat.titre }}</h3>
+								<p class="text-muted-ag mb-0">{{ volontariat.description|striptags }}</p>
+								<div class="meta">
+									{% if volontariat.lieu %}<span><i class="fa fa-map-marker-alt" aria-hidden="true"></i>{{ volontariat.lieu }}</span>{% endif %}
+									{% if volontariat.dateDebut %}
+										<span><i class="fa fa-calendar-alt" aria-hidden="true"></i>
+											{{ volontariat.dateDebut|date('j') }} {{ mois[volontariat.dateDebut|date('n') - 1] }}
+											{%- if volontariat.dateFin and volontariat.dateFin|date('Ymd') != volontariat.dateDebut|date('Ymd') %} – {{ volontariat.dateFin|date('j') }} {{ mois[volontariat.dateFin|date('n') - 1] }}{% endif %}
+											{{ (volontariat.dateFin ?: volontariat.dateDebut)|date('Y') }}
+										</span>
+									{% endif %}
+								</div>
+								<a href="{{ path('volontaire', {id: volontariat.id}) }}" class="btn btn-primary">Je me propose</a>
+							</article>
+						</div>
+					{% endfor %}
+				</div>
+			{% else %}
+				<div class="empty-state">
+					<i class="fa fa-hands-helping" aria-hidden="true"></i>
+					<p class="mb-3">Aucune mission n'est ouverte pour le moment.</p>
+					<a href="{{ path('app_contact') }}" class="btn btn-primary">Proposer mon aide</a>
+				</div>
+			{% endif %}
+		</div>
+	</section>
 {% endblock %}

@@ -1,162 +1,223 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
-	<!-- Carousel Start -->
-	<div class="container-fluid px-0 mb-5">
-		<div class="carousel" id="carousel" data-bs-ride="carousel">
-			<div class="carousel-inner">
-				{% for image in images %}
-					<div class="carousel-item active" data-bs-interval="2000" style="background-image: url('{{ asset('img/' ~ image.imageName2) }}'); background-size: cover; background-position: center; height: 100vh;">
+{% set lien_don = parametres.lien_donation|default('https://www.helloasso.com/associations/association-guineenne-d-ile-et-vilaine-ag35/formulaires/1') %}
 
-						<div class="carousel-caption">
-							<div class="container">
-								<div class="row justify-content-start">
-									<div class="col-lg-7 text-start">
-										<p class="fs-4 text-white animated slideInRight">
-											<strong>{{ parametres.site_name }}</strong>
-										</p>
-										<h1 class="display-1 text-white mb-4 animated slideInRight">{{  parametres.nom_association }}</h1>
+{# Images du diaporama : les trois visuels de la première entrée MesImage #}
+{% set slides = [] %}
+{% if images|length > 0 %}
+	{% set img = images|first %}
+	{% for name in [img.imageName2, img.imageName3, img.imageName4] %}
+		{% if name %}{% set slides = slides|merge([name]) %}{% endif %}
+	{% endfor %}
+{% endif %}
+
+{# Vidéo de présentation : paramètre "lien_presentation_youtube" s'il existe #}
+{% set video_url = parametres.lien_presentation_youtube|default('https://www.youtube-nocookie.com/embed/sRYxgz6Zepc') %}
+
+{% block body %}
+
+	<!-- Hero -->
+	<section class="hero">
+		<div class="container">
+			<div class="row align-items-center g-5">
+				<div class="col-lg-6">
+					<span class="eyebrow">{{ parametres.site_name|default('AG35') }} · Rennes</span>
+					<h1 class="hero-title">{{ parametres.nom_association }}</h1>
+					<p class="hero-lead">
+						Accueillir, accompagner et rassembler la communauté guinéenne d'Ille-et-Vilaine :
+						étudiant·es, familles et ami·es de la Guinée.
+					</p>
+					<div class="hero-ctas">
+						<a href="{{ path('app_adhesion') }}" class="btn btn-primary">
+							Adhérer à l'association <i class="fa fa-arrow-right ms-1" aria-hidden="true"></i>
+						</a>
+						<a href="{{ lien_don }}" target="_blank" rel="noopener" class="btn btn-ag-yellow">
+							<i class="fa fa-heart me-1" aria-hidden="true"></i> Faire un don
+						</a>
+					</div>
+					<div class="hero-meta">
+						{% if parametres.address %}
+							<span><i class="fa fa-map-marker-alt" aria-hidden="true"></i>{{ parametres.address }}</span>
+						{% endif %}
+						{% if parametres.lien_whatsApp %}
+							<span><i class="fab fa-whatsapp" aria-hidden="true"></i><a href="{{ parametres.lien_whatsApp }}" target="_blank" rel="noopener">Rejoindre le groupe WhatsApp</a></span>
+						{% endif %}
+					</div>
+				</div>
+
+				<div class="col-lg-6">
+					<div class="hero-media-wrap">
+						<div class="hero-media">
+							{% if slides|length > 1 %}
+								<div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="5000">
+									<div class="carousel-indicators">
+										{% for s in slides %}
+											<button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="{{ loop.index0 }}" {{ loop.first ? 'class="active" aria-current="true"' }} aria-label="Image {{ loop.index }}"></button>
+										{% endfor %}
+									</div>
+									<div class="carousel-inner">
+										{% for s in slides %}
+											<div class="carousel-item {{ loop.first ? 'active' }}">
+												<img src="{{ asset('img/' ~ s) }}" alt="Vie de l'association AG35" {{ loop.first ? 'fetchpriority="high"' : 'loading="lazy"' }}>
+											</div>
+										{% endfor %}
 									</div>
 								</div>
+							{% elseif slides|length == 1 %}
+								<img src="{{ asset('img/' ~ slides|first) }}" alt="Vie de l'association AG35" fetchpriority="high">
+							{% else %}
+								<img src="{{ asset('img/about.jpg') }}" alt="Vie de l'association AG35" fetchpriority="high">
+							{% endif %}
+						</div>
+						<div class="hero-badge">
+							<img src="{{ asset('img/guinea.png') }}" alt="">
+							<div>
+								<strong>Communauté guinéenne</strong>
+								<small>d'Ille-et-Vilaine</small>
 							</div>
 						</div>
 					</div>
-				{% endfor %}
-				{% for image in images %}
-					<div class="carousel-item" data-bs-interval="2000" style="background-image: url('{{ asset('img/' ~ image.imageName3) }}'); background-size: cover; background-position: center; height: 100vh;"></div>
-				{% endfor %}
-				{% for image in images %}
-					<div class="carousel-item" data-bs-interval="2000" style="background-image: url('{{ asset('img/' ~ image.imageName4) }}'); background-size: cover; background-position: center; height: 100vh;"></div>
-				{% endfor %}
+				</div>
 			</div>
 		</div>
-		<button class="carousel-control-prev" type="button" data-bs-target="#carousel" data-bs-slide="prev">
-			<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-			<span class="visually-hidden">Previous</span>
-		</button>
-		<button class="carousel-control-next" type="button" data-bs-target="#carousel" data-bs-slide="next">
-			<span class="carousel-control-next-icon" aria-hidden="true"></span>
-			<span class="visually-hidden">Next</span>
-		</button>
-	</div>
-</div>
+	</section>
 
-<script type="text/javascript" src="slick/slick.min.js"></script>
-<script type="text/javascript">
-	$(document).ready(function () {
-		$('.carousel').slick({
-		slidesToShow: 3,
-		slidesToScroll: 1,
-		autoplay: true,
-		autoplaySpeed: 6000,
-		dots: true,
-		arrows: false
-		});
-		});
-</script>
-
-<!-- Carousel End -->
-
-
-<!-- Features Start -->
-<div class="container-xxl py-5">
-	<div class="container">
-		<div class="row g-0 feature-row">
-			{% for service in services %}
-				<div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.1s">
-					<div class="feature-item border h-100 p-5">
-						<div class="btn-square bg-light rounded-circle mb-4" style="width: 64px; height: 64px;">
-							<img class="img-fluid" src="{{ asset('img/' ~ service.imageName) }}" alt="Icon">
+	<!-- Services -->
+	{% if services|length > 0 %}
+		<section class="section section-white" aria-labelledby="titre-services">
+			<div class="container">
+				<div class="section-head">
+					<span class="eyebrow">Ce que nous faisons</span>
+					<h2 class="section-title" id="titre-services">Nos services</h2>
+					<p class="section-lead">Un accompagnement concret, de l'arrivée en France jusqu'à la vie associative.</p>
+				</div>
+				<div class="row row-cols-1 row-cols-md-2 row-cols-lg-{{ services|length == 4 ? 4 : 3 }} g-4">
+					{% for service in services %}
+						<div class="col">
+							<article class="service-card">
+								<div class="service-icon">
+									{% if service.imageName %}
+										<img src="{{ asset('img/' ~ service.imageName) }}" alt="">
+									{% else %}
+										<i class="fa fa-hands-helping text-primary" aria-hidden="true"></i>
+									{% endif %}
+								</div>
+								<h3>{{ service.titre }}</h3>
+								<p>{{ service.descriptif }}</p>
+							</article>
 						</div>
-						<h5 class="mb-3">{{service.titre}}</h5>
-						<p class="mb-0">{{ service.descriptif }}</p>
+					{% endfor %}
+				</div>
+			</div>
+		</section>
+	{% endif %}
+
+	<!-- Vidéo de présentation -->
+	<section class="section" aria-labelledby="titre-video">
+		<div class="container">
+			<div class="video-block">
+				<div class="row g-0 align-items-stretch">
+					<div class="col-lg-5 d-flex align-items-center">
+						<div class="video-text">
+							<span class="eyebrow">Découvrir l'AG35</span>
+							<h2 id="titre-video" class="mb-3">Qui sommes-nous ?</h2>
+							<p class="mb-4">Regardez la vidéo de présentation de l'association et découvrez nos actions.</p>
+							<a href="{{ path('app_about') }}" class="btn btn-ag-yellow">En savoir plus</a>
+						</div>
+					</div>
+					<div class="col-lg-7">
+						<div class="ratio ratio-16x9">
+							<iframe src="{{ video_url }}" title="Présentation de l'AG35" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+						</div>
 					</div>
 				</div>
-			{% endfor %}
-
-		</div>
-	</div>
-</div>
-<!-- Features End -->
-
-
-<!-- About Start -->
-<div class="container-xxl about my-5">
-	<div class="container">
-		<div class="row g-0">
-			<div class="col-lg-6">
-				<div class="h-100 d-flex align-items-center justify-content-center" style="min-height: 300px;">
-					<button type="button" class="btn-play" data-bs-toggle="modal" data-src="https://www.youtube.com/watch?v=sRYxgz6Zepc&ab_channel=JeunesGuin%C3%A9ensdeFrance" data-bs-target="#videoModal">
-						<span></span>
-					</button>
-				</div>
-			</div>
-			<h1 class="display-6 mb-4">{{ parametres.accueil_video }}</h1>
-
-
-		</div>
-	</div>
-</div></div></div><!-- About End --><!-- Video Modal Start --><div class="modal modal-video fade" id="videoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"><div class="modal-dialog">
-<div class="modal-content rounded-0">
-	<div class="modal-header">
-		<h3 class="modal-title" id="exampleModalLabel">
-			video</h3>
-		<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">></div>
-		<div
-			class="modal-body">
-			<!-- 16:9 aspect ratio -->
-			<div class="ratio ratio-16x9">
-				<iframe class="embed-responsive-item" src="{{parametres.lien_presentation_youtube}}" id="video" allowfullscreen allowscriptaccess="always" allow="autoplay"></iframe>
 			</div>
 		</div>
-	</div>
-</div></div><!-- Video Modal End --><!-- Service Start --><!-- Project Start -->
-<div class="container-xxl pt-5"> <div class="container">
-	<div class="text-center text-md-start pb-5 pb-md-0 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
+	</section>
 
-		<h1 class="display-5 mb-5">{{ parametres.accueil_event }}</h1>
-	</div>
-	<div class="owl-carousel project-carousel wow fadeInUp" data-wow-delay="0.1s">
-		{% for evenement in evenements %}
-			<div class="project-item mb-5">
-				<div class="position-relative">
-					<img class="img-fluid" src="{{ asset('img/' ~ evenement.imageName) }}" alt="Image">
-					<div class="project-overlay">
-						<a class="btn btn-lg-square btn-light rounded-circle m-1" href="/details_event?titre={{ evenement.titre|url_encode }}&commentaire={{ evenement.commentaire|url_encode }}&image={{ evenement.imageName }}&adresse={{ evenement.adresse|url_encode }}&prix={{ evenement.prix|url_encode }}">
-							<i class="fa fa-eye"></i>
-						</a>
+	<!-- Événements -->
+	{% if evenements|length > 0 %}
+		<section class="section section-white" aria-labelledby="titre-events">
+			<div class="container">
+				<div class="section-head-row">
+					<div class="section-head">
+						<span class="eyebrow">Agenda</span>
+						<h2 class="section-title" id="titre-events">{{ parametres.accueil_event|default('Nos derniers événements') }}</h2>
 					</div>
+					<a href="{{ path('app_evenements') }}" class="link-arrow">Tous les événements <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
 				</div>
-				<div class="p-4">
-					<a class="d-block h5" href="">{{ evenement.titre }}</a>
-
+				<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+					{% for evenement in evenements|sort((a, b) => b.dateDebut <=> a.dateDebut)|slice(0, 3) %}
+						<div class="col">
+							{% include 'components/event_card.html.twig' %}
+						</div>
+					{% endfor %}
 				</div>
 			</div>
-		{% endfor %}
-	</div>
+		</section>
+	{% endif %}
 
-
-	<div class="d-flex justify-content-center align-items-center">
-		<a href="/evenements" class="btn btn-primary">Voir plus</a>
-	</div>
-</div></div><!-- Project End --><!-- Quote Start --><!-- Testimonial Start -->
-<div class="container-xxl pt-5"> <div class="container">
-	<div
-		class="text-center text-md-start pb-5 pb-md-0 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
-		<!--	<p class="fs-5 fw-medium text-primary">Testimonial</p> -->
-		<h1 class="display-5 mb-5">{{ parametres.accueil_temoin }}</h1>
-	</div>
-	<div class="owl-carousel testimonial-carousel wow fadeInUp" data-wow-delay="0.1s">
-		{% for temoin in temoins %}
-			<div class="testimonial-item rounded p-4 p-lg-5 mb-5">
-				<img class="mb-4" src="{{ asset('img/' ~ temoin.imageName) }}" alt="Icon">
-				<p class="mb-4">{{ temoin.descriptif }}
-				</p>
-				<h5>{{ temoin.nom }}</h5>
-				<span class="text-primary">{{ temoin.fonction }}
-				</span>
+	<!-- Témoignages -->
+	{% if temoins|length > 0 %}
+		<section class="section" aria-labelledby="titre-temoins">
+			<div class="container">
+				<div class="section-head center">
+					<span class="eyebrow">Témoignages</span>
+					<h2 class="section-title" id="titre-temoins">{{ parametres.accueil_temoin|default('Ils parlent de nous') }}</h2>
+				</div>
+				<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 justify-content-center">
+					{% for temoin in temoins %}
+						<div class="col">
+							<figure class="quote-card m-0">
+								<blockquote>{{ temoin.descriptif }}</blockquote>
+								<figcaption class="quote-author">
+									{% if temoin.imageName %}
+										<img src="{{ asset('img/' ~ temoin.imageName) }}" alt="" loading="lazy">
+									{% else %}
+										<span class="avatar-initials" aria-hidden="true">{% for part in temoin.nom|split(' ')|slice(0, 2) %}{{ part|first|upper }}{% endfor %}</span>
+									{% endif %}
+									<div>
+										<strong>{{ temoin.nom }}</strong>
+										<span>{{ temoin.fonction }}</span>
+									</div>
+								</figcaption>
+							</figure>
+						</div>
+					{% endfor %}
+				</div>
 			</div>
-		{% endfor %}
+		</section>
+	{% endif %}
 
-	</div>
-</div></div><!-- Testimonial End -->{% endblock %}
+	<!-- Rejoindre -->
+	<section class="section section-white" aria-labelledby="titre-rejoindre">
+		<div class="container">
+			<div class="section-head center">
+				<span class="eyebrow">S'engager</span>
+				<h2 class="section-title" id="titre-rejoindre">Rejoignez l'aventure</h2>
+				<p class="section-lead">Il y a mille façons de faire vivre l'association. Choisissez la vôtre.</p>
+			</div>
+			<div class="join-grid">
+				<a class="join-card green" href="{{ path('app_adhesion') }}">
+					<i class="fa fa-id-card big" aria-hidden="true"></i>
+					<h3>Devenir membre</h3>
+					<p>Adhérez pour participer aux décisions et à la vie de l'association.</p>
+					<span class="link-arrow">{{ parametres.menu_adhesion }} <i class="fa fa-arrow-right" aria-hidden="true"></i></span>
+				</a>
+				<a class="join-card yellow" href="{{ path('app_volontariat') }}">
+					<i class="fa fa-hands-helping big" aria-hidden="true"></i>
+					<h3>Être bénévole</h3>
+					<p>Donnez un peu de votre temps lors de nos événements et actions.</p>
+					<span class="link-arrow">{{ parametres.menu_volontariat }} <i class="fa fa-arrow-right" aria-hidden="true"></i></span>
+				</a>
+				<a class="join-card red" href="{{ path('hebergement') }}">
+					<i class="fa fa-home big" aria-hidden="true"></i>
+					<h3>Trouver un logement</h3>
+					<p>Nouvel·le étudiant·e ? Faites une demande d'hébergement temporaire.</p>
+					<span class="link-arrow">{{ parametres.menu_hebergement }} <i class="fa fa-arrow-right" aria-hidden="true"></i></span>
+				</a>
+			</div>
+		</div>
+	</section>
+
+{% endblock %}

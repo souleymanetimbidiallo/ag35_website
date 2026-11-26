@@ -1,49 +1,51 @@
 {% extends 'base.html.twig' %}
 
+{% set mois = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'] %}
+
+{% block title %}Actualités · {{ parent() }}{% endblock %}
+
 {% block body %}
-	<!-- Page Header Start -->
-	{% for image in images %}
-		<div class="container-fluid py-5 mb-5 wow" data-wow-delay="0.1s" style="background-image: url('{{ asset('img/' ~ image.imageName8) }}'); background-size: cover; background-position: center; min-height: 100vh;">
-			<div class="container text-center py-5">
-				<h1 class="display-2 text-white mb-4 animated slideInDown">Actualités</h1>
-			</div>
-		</div>
-	{% endfor %}
-	<!-- Page Header End -->
+	{% include 'components/page_hero.html.twig' with {
+		title: parametres.menu_actualite|default('Actualités'),
+		eyebrow: 'La vie de l\'association',
+		lead: parametres.texte_actu|default('')|striptags|trim ?: 'Projets, temps forts et nouvelles de l\'AG35.'
+	} %}
 
-	<!-- Project Start -->
-	<div class="container-xxl pt-5">
+	<section class="section">
 		<div class="container">
-			<h7>
-				{{ parametres.texte_actu }}
-
-			</h7>
-			<div class="text-center text-md-start pb-5 pb-md-0 wow fadeInUp" style="max-width: 500px;">
-				<p class="fs-5 fw-medium text-primary">Les actualités</p>
-				<h1 class="display-5 mb-5">Actualités et Projets de l'Association AG35</h1>
-			</div>
-			<div class="owl-carousel project-carousel" data-loop="false">
-				{% for actualite in actualites %}
-					<div class="project-item mb-5">
-						<div class="position-relative">
-							<img class="img-fluid" src="{{ asset('img/' ~ actualite.imageName) }}" alt="Image">
-							<div class="project-overlay">
-								<a class="btn btn-lg-square btn-light rounded-circle m-1" href="{{ parametres.lien_actualite }}">
-									<i class="fa fa-eye"></i>
-								</a>
-							</div>
+			{% set liste = actualites|default([])|sort((a, b) => b.datePublication <=> a.datePublication) %}
+			{% if liste|length > 0 %}
+				<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+					{% for actualite in liste %}
+						<div class="col">
+							<article class="news-card">
+								<div class="news-media">
+									{% if actualite.imageName %}
+										<img src="{{ asset('img/' ~ actualite.imageName) }}" alt="" loading="lazy" onerror="this.remove()">
+									{% endif %}
+								</div>
+								<div class="news-body">
+									{% if actualite.datePublication %}
+										<time class="news-date" datetime="{{ actualite.datePublication|date('Y-m-d') }}">
+											{{ actualite.datePublication|date('j') }} {{ mois[actualite.datePublication|date('n') - 1] }} {{ actualite.datePublication|date('Y') }}
+										</time>
+									{% endif %}
+									<h2>{{ actualite.titre }}</h2>
+									<p>{{ actualite.description|striptags }}</p>
+									{% if parametres.lien_actualite %}
+										<a href="{{ parametres.lien_actualite }}" class="link-arrow mt-auto pt-2" target="_blank" rel="noopener">Lire la suite <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+									{% endif %}
+								</div>
+							</article>
 						</div>
-						<div class="p-4">
-							<a class="d-block h5" href="">{{ actualite.titre }}</a>
-
-							<a class="d-block h7" href="">{{ actualite.description }}</a>
-						</div>
-					</div>
-				{% endfor %}
-			</div>
+					{% endfor %}
+				</div>
+			{% else %}
+				<div class="empty-state">
+					<i class="fa fa-newspaper" aria-hidden="true"></i>
+					<p class="mb-0">Aucune actualité pour le moment. Revenez bientôt !</p>
+				</div>
+			{% endif %}
 		</div>
-	</div>
-
-
-	<!-- Project End -->
+	</section>
 {% endblock %}

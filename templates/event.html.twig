@@ -1,80 +1,55 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
-    <!-- Page Header Start -->
-    {% for image in images %}
-        <div class="container-fluid py-5 mb-5 wow" data-wow-delay="0.1s" style="background-image: url('{{ asset('img/' ~ image.imageName8) }}'); background-size: cover; background-position: center; min-height: 60vh;">
-            <div class="container text-center py-5">
-                <h1 class="display-2 text-white mb-4 animated slideInDown">Evenements</h1>
-                <nav aria-label="breadcrumb animated slideInDown">
-                    <ol class="breadcrumb justify-content-center mb-0">
-                    </ol>
-                </nav>
-            </div>
-        </div>
-    {% endfor %}
-    <!-- Page Header End -->
+{% block title %}Événements · {{ parent() }}{% endblock %}
 
-    <!-- Events Section Start -->
-    <div class="container-xxl pt-5">
-        <div class="container">
-            <div class="text-center text-md-start pb-5 pb-md-0 wow fadeInUp" style="max-width: 500px;">
-                <p class="fs-5 fw-medium text-primary">Les événements</p>
-                <h1 class="display-5 mb-5">Nos événements et festivités</h1>
-            </div>
-            
-            <!-- Événements à venir -->
-            <div class="mb-5">
-                <h2>Événements à venir</h2>
-                <div class="owl-carousel project-carousel">
-                    {% if evenements_a_venir %}
-                        {% for evenement in evenements_a_venir %}
-                            <div class="project-item mb-5">
-                                <div class="position-relative">
-                                    <img class="img-fluid" src="{{ asset('img/' ~ evenement.imageName) }}" alt="Image">
-                                    <div class="project-overlay">
-                                        <a class="btn btn-lg-square btn-light rounded-circle m-1" href="{{ path('app_evenement_details', {'id': evenement.id}) }}&content={{ evenement.titre }}">
-                                            <i class="fa fa-eye"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="p-4">
-                                    <a class="d-block h5" href="{{ path('app_evenement_details', {'id': evenement.id}) }}">{{ evenement.titre }}</a>
-                                </div>
-                            </div>
-                        {% endfor %}
-                    {% else %}
-                        <div class="text-center">Aucun événement à venir</div>
-                    {% endif %}
-                </div>
-            </div>
-            
-            <!-- Tous les événements -->
-            <div>
-                <h2>Tous les événements</h2>
-                <div class="owl-carousel project-carousel">
-                    {% if tous_les_evenements %}
-                        {% for evenement in tous_les_evenements %}
-                            <div class="project-item mb-5">
-                                <div class="position-relative">
-                                    <img class="img-fluid" src="{{ asset('img/' ~ evenement.imageName) }}" alt="Image">
-                                    <div class="project-overlay">
-                                        <a class="btn btn-lg-square btn-light rounded-circle m-1" href="{{ path('app_evenement_details', {'id': evenement.id}) }}">
-                                            <i class="fa fa-eye"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="p-4">
-                                    <a class="d-block h5" href="{{ path('app_evenement_details', {'id': evenement.id}) }}">{{ evenement.titre }}</a>
-                                </div>
-                            </div>
-                        {% endfor %}
-                    {% else %}
-                        <div class="text-center">Aucun événement disponible</div>
-                    {% endif %}
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Events Section End -->
+{% block body %}
+	{% include 'components/page_hero.html.twig' with {
+		title: parametres.menu_evenement|default('Événements'),
+		eyebrow: 'Agenda',
+		lead: 'Journées culturelles, soirées solidaires, assemblées générales… Retrouvez tous les rendez-vous de l\'AG35.'
+	} %}
+
+	{% set maintenant = 'now'|date('U') %}
+	{% set a_venir = evenements_a_venir|default([])|sort((a, b) => a.dateDebut <=> b.dateDebut) %}
+	{% set passes = tous_les_evenements|default([])|filter(e => e.dateDebut and e.dateDebut|date('U') < maintenant)|sort((a, b) => b.dateDebut <=> a.dateDebut) %}
+
+	<section class="section" aria-labelledby="titre-a-venir">
+		<div class="container">
+			<div class="section-head">
+				<span class="badge-ag upcoming mb-3"><i class="fa fa-calendar-alt" aria-hidden="true"></i> Prochainement</span>
+				<h2 class="section-title" id="titre-a-venir">Événements à venir</h2>
+			</div>
+			{% if a_venir|length > 0 %}
+				<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+					{% for evenement in a_venir %}
+						<div class="col">{% include 'components/event_card.html.twig' %}</div>
+					{% endfor %}
+				</div>
+			{% else %}
+				<div class="empty-state">
+					<i class="fa fa-calendar" aria-hidden="true"></i>
+					<p class="mb-3">Aucun événement n'est programmé pour le moment.</p>
+					<p class="mb-0">Suivez-nous sur
+						{% if parametres.lien_page_fb %}<a href="{{ parametres.lien_page_fb }}" target="_blank" rel="noopener">Facebook</a>{% else %}Facebook{% endif %}
+						pour être informé·e des prochaines dates.</p>
+				</div>
+			{% endif %}
+		</div>
+	</section>
+
+	{% if passes|length > 0 %}
+		<section class="section section-white" aria-labelledby="titre-passes">
+			<div class="container">
+				<div class="section-head">
+					<span class="badge-ag past mb-3"><i class="fa fa-history" aria-hidden="true"></i> Archives</span>
+					<h2 class="section-title" id="titre-passes">Événements passés</h2>
+				</div>
+				<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+					{% for evenement in passes %}
+						<div class="col">{% include 'components/event_card.html.twig' %}</div>
+					{% endfor %}
+				</div>
+			</div>
+		</section>
+	{% endif %}
 {% endblock %}

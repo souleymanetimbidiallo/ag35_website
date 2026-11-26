@@ -1,107 +1,114 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}À propos · {{ parent() }}{% endblock %}
+
 {% block body %}
-	<!-- Page Header Start -->
+	{% include 'components/page_hero.html.twig' with {
+		title: 'À propos',
+		eyebrow: parametres.nous_sommes|default('Nous sommes'),
+		lead: parametres.nom_association ~ ', une association d\'entraide et de culture au service de la communauté guinéenne de Rennes et d\'Ille-et-Vilaine.'
+	} %}
 
-	{% for image in images  %}
-
-		<div class="container-fluid py-5 mb-5 wow" data-wow-delay="0.1s" style="background-image: url('{{ asset('img/' ~ image.imageName8) }}'); background-size: cover; background-position: center; min-height: 100vh;">
-
-			<div class="container text-center py-5">
-
-				<h1 class="display-2 text-white mb-4 animated slideInDown">A propos</h1>
-
+	{# Qui sommes-nous #}
+	<section class="section">
+		<div class="container">
+			<div class="row g-5 align-items-center">
+				<div class="col-lg-6">
+					<div class="about-media">
+						<img src="{{ asset('img/fond3.jpeg') }}" alt="Membres de l'AG35 réunis" loading="lazy">
+					</div>
+				</div>
+				<div class="col-lg-6">
+					<span class="eyebrow">Notre mission</span>
+					<h2 class="section-title">Accueillir, accompagner, rassembler</h2>
+					{% set points = parametres.texte_about|default('')|split(';')|filter(p => p|trim is not empty) %}
+					{% if points|length > 0 %}
+						<ul class="check-list mt-4">
+							{% for point in points %}
+								<li>{{ point|trim|striptags }}</li>
+							{% endfor %}
+						</ul>
+					{% else %}
+						<p class="section-lead">Le texte de présentation se renseigne dans l'administration (texte « texte_about »).</p>
+					{% endif %}
+					<div class="d-flex flex-wrap gap-2 mt-4">
+						<a href="{{ path('app_adhesion') }}" class="btn btn-primary">Devenir membre</a>
+						<a href="{{ path('app_contact') }}" class="btn btn-ag-ghost">Nous contacter</a>
+					</div>
+				</div>
 			</div>
-
 		</div>
+	</section>
 
-	{% endfor %}
-
-	<!-- Page Header End -->
-
-
-	<!-- About Start -->
-
-	<div class="container">
-		<div class="row g-0">
-			<div class="col-lg-6">
-				<div class="h-100 d-flex align-items-center justify-content-center" style="min-height: 300px;">
-					{% for image in images %}
-						<img src="{{ asset('img/' ~ image.imageName7) }}" class="img-fluid" alt="About Image">
+	{# Valeurs #}
+	{% if valeurs|length > 0 %}
+		<section class="section section-white" aria-labelledby="titre-valeurs">
+			<div class="container">
+				<div class="section-head center">
+					<span class="eyebrow">Ce qui nous guide</span>
+					<h2 class="section-title" id="titre-valeurs">{{ parametres.nos_valeurs|default('Nos valeurs') }}</h2>
+					<p class="section-lead">{{ parametres.texte_nos_valeurs }}</p>
+				</div>
+				<div class="row row-cols-1 row-cols-md-2 row-cols-lg-{{ valeurs|length == 4 ? 4 : 3 }} g-4">
+					{% for valeur in valeurs %}
+						<div class="col">
+							<article class="card-ag value-card">
+								<span class="value-num" aria-hidden="true">{{ '%02d'|format(loop.index) }}</span>
+								<h3>{{ valeur.titre|replace({(loop.index ~ ') '): ''}) }}</h3>
+								<p class="text-muted-ag">{{ valeur.descriptif|striptags }}</p>
+							</article>
+						</div>
 					{% endfor %}
 				</div>
 			</div>
-			<div class="col-lg-6 pt-lg-5 wow fadeIn" data-wow-delay="0.5s">
-				<div class="bg-white rounded-top p-5 mt-lg-5">
-					<p class="fs-5 fw-medium text-primary">{{ parametres.nous_sommes }}</p>
-					<h1 class="display-6 mb-4">{{ parametres.nom_association }}</h1>
-					<ul class="mb-4">
-						{% set points = parametres.texte_about|split(';') %}
-						{% for point in points %}
-							{% if point|trim is not empty %}
-								<li>{{ point|trim }}</li>
-							{% endif %}
-						{% endfor %}
-					</ul>
-				</li>
-			</ul>
-		</div>
-	</div>
-</div></div><!-- About End --><!-- Nos Valeurs --><div class="container bg-light my-5 py-5">
-<div class="row">
-	<div class="col-12 text-center">
-		<h2 class="text-primary">{{parametres.nos_valeurs}}</h2>
-		<p>{{ parametres.texte_nos_valeurs }}</p>
-	</div>
-</div>
-<div class="row mt-5">
-	{% for valeur in valeurs %}
-		<div class="col-lg-4 col-md-6">
-			<div class="card mb-3">
-				<div class="card-body">
-					<h4 class="card-title text-primary">{{ valeur.titre }}</h4>
-					<p class="card-text">{{ valeur.descriptif }}</p>
+		</section>
+	{% endif %}
+
+	{# Bureau #}
+	{% if bureau|length > 0 %}
+		<section class="section" aria-labelledby="titre-bureau">
+			<div class="container">
+				<div class="section-head center">
+					<span class="eyebrow">L'équipe</span>
+					<h2 class="section-title" id="titre-bureau">{{ parametres.nos_gouvernances|default('Gouvernance & Bureau') }}</h2>
+					<p class="section-lead">{{ parametres.texte_nos_gouvernances }}</p>
+				</div>
+				<div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4 justify-content-center">
+					{% for membre in bureau %}
+						<div class="col">
+							<article class="card-ag team-card">
+								{% if membre.imageName %}
+									<img class="team-photo" src="{{ asset('img/' ~ membre.imageName) }}" alt="Photo de {{ membre.prenom }} {{ membre.nom }}" loading="lazy">
+								{% else %}
+									<span class="team-photo avatar-initials" aria-hidden="true">{{ membre.prenom|first|upper }}{{ membre.nom|first|upper }}</span>
+								{% endif %}
+								<h3>{{ membre.prenom }} {{ membre.nom|capitalize }}</h3>
+								{% if membre.fonction %}<span class="team-role">{{ membre.fonction }}</span>{% endif %}
+							</article>
+						</div>
+					{% endfor %}
 				</div>
 			</div>
-		</div>
-	{% endfor %}
-</div></div><!-- Nos Valeurs End --><!-- Team Start --><div class="container bg-light my-5 py-5">
-<div class="row">
-	<div class="col-12 text-center">
-		<h2 class="text-primary">{{parametres.nos_gouvernances}}</h2>
-		<p>{{parametres.texte_nos_gouvernances}}</p>
-	</div>
-</div>
-<div class="container-xxl py-5">
-	<div class="container">
-		<div class="row g-4">
-			{% for mBureau in bureau %}
-				<div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s" style="height: 350px;">
-					<div class="team-item rounded overflow-hidden pb-4" style="height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
-						<img class="img-fluid mb-4" src="{{ asset('img/' ~ mBureau.imageName) }}" alt="Photo" style="object-fit: cover; width: auto; height: 75%; max-width: 100%;">
-						<h5>{{ mBureau.prenom }}
-							{{ mBureau.nom }}</h5>
-						<span class="text-primary">{{ mBureau.fonction }}</span>
-					</div>
+		</section>
+	{% endif %}
+
+	{# Partenaires #}
+	{% if partenaires is not null and partenaires|length > 0 %}
+		<section class="section section-white" aria-labelledby="titre-partenaires">
+			<div class="container">
+				<div class="section-head center">
+					<span class="eyebrow">Ils nous soutiennent</span>
+					<h2 class="section-title" id="titre-partenaires">{{ parametres.nos_partenaires|default('Partenaires') }}</h2>
+					<p class="section-lead">{{ parametres.texte_nos_partenaires }}</p>
 				</div>
-			{% endfor %}
-		</div>
-	</div>
-</div></div><!-- Team End --><!-- Partenaires et Sponsors --><div class="container bg-light my-5 py-5">
-<div class="row">
-	<div class="col-12 text-center">
-		<h2 class="text-primary">{{ parametres.nos_partenaires }}</h2>
-		<p>{{ parametres.texte_nos_partenaires }}</p>
-	</div>
-</div>
-<div class="row justify-content-center">
-	<div class="col-12 partner-logos">
-		<div class="d-flex justify-content-between align-items-center">
-			{% if partenaires is not null %}
-				{% for partenaire in partenaires %}
-					<div class="partner-logo"><img src="{{ asset('img/' ~ partenaire.imageName) }}" alt="logo-partner-1" style="max-width: 150px; max-height: 150px;"></div>
-				{% endfor %}
-			{% endif %}
-		</div>
-	</div>
-</div></div><!-- Partenaires et Sponsors End -->{% endblock %}
+				<div class="partners">
+					{% for partenaire in partenaires %}
+						<div class="partner">
+							<img src="{{ asset('img/' ~ partenaire.imageName) }}" alt="Logo partenaire" loading="lazy">
+						</div>
+					{% endfor %}
+				</div>
+			</div>
+		</section>
+	{% endif %}
+{% endblock %}

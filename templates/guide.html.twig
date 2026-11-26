@@ -1,47 +1,58 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Guide · {{ parent() }}{% endblock %}
 
 {% block body %}
+	{% include 'components/page_hero.html.twig' with {
+		title: parametres.menu_guide|default('Guide'),
+		eyebrow: 'Ressources',
+		lead: 'Nos guides pratiques pour préparer votre arrivée et faciliter votre vie en Ille-et-Vilaine.'
+	} %}
 
-	<!-- Page Header Start -->
-
-	{% for image in images %}
-		<div class="container-fluid py-5 mb-5 wow" data-wow-delay="0.1s" style="background-image: url('{{ asset('img/' ~ image.imageName8) }}'); background-size: cover; background-position: center; min-height: 100vh;">
-
-			<div class="container text-center py-5">
-
-				<h1 class="display-2 text-white mb-4 animated slideInDown">Guide pour le public</h1>
-
-				<nav aria-label="breadcrumb animated slideInDown"></nav>
-
-			</div>
-
-		</div>
-	{% endfor %}
-
-	<!-- Page Header End -->
-	<div class="container bg-light my-5 py-5">
-		<div class="col-12 text-center">
-			<h2 class="text-primary">Guide</h2>
-			<p>
-
-
-				{{ parametres.texte_guide }}
-
-
-			</p>
-		</div>
-
-
-		{% for guide in guides %}
-			{% set pdfPath = 'pdf/' ~ guide.pdfName %}
-			{% if app.request.server.get('DOCUMENT_ROOT') ~ asset(pdfPath)|file_exists %}
-				<div class="text-center">
-					<a href="{{ asset(pdfPath) }}" target="_blank" rel="noopener noreferrer" download>Télécharger le fichier PDF</a>
+	<section class="section">
+		<div class="container">
+			<div class="row g-5">
+				<div class="col-lg-5">
+					<span class="eyebrow">À télécharger</span>
+					<h2 class="section-title">Bien préparer son arrivée</h2>
+					{% set texte = parametres.texte_guide|default('')|striptags|trim %}
+					<p class="section-lead">{{ texte ?: 'Logement, démarches, santé, transports : retrouvez l\'essentiel dans nos documents, mis à jour par les bénévoles de l\'association.' }}</p>
+					<p class="mt-4 mb-0">Une question qui n'y figure pas ?
+						<a href="{{ path('app_contact') }}" class="fw-bold">Écrivez-nous</a>.</p>
 				</div>
-			{% endif %}
-			<br>
-		{% endfor %}
+				<div class="col-lg-7">
+					{% set docs = [] %}
+					{% for guide in guides %}
+						{% set pdfPath = 'pdf/' ~ guide.pdfName %}
+						{% if guide.pdfName and (app.request.server.get('DOCUMENT_ROOT') ~ asset(pdfPath))|file_exists %}
+							{% set docs = docs|merge([guide]) %}
+						{% endif %}
+					{% endfor %}
 
-	</div>
-</br>{% endblock %}
+					{% if docs|length > 0 %}
+						<div class="d-grid gap-3">
+							{% for guide in docs %}
+								{% set nom = guide.pdfName|replace({'.pdf': '', '-': ' ', '_': ' '})|capitalize %}
+								<div class="card-ag doc-card">
+									<span class="doc-icon"><i class="fa fa-file-pdf" aria-hidden="true"></i></span>
+									<div class="flex-grow-1">
+										<h3>{{ nom }}</h3>
+										<span class="text-muted-ag small">Document PDF</span>
+									</div>
+									<a class="btn btn-primary" href="{{ asset('pdf/' ~ guide.pdfName) }}" target="_blank" rel="noopener" download>
+										<i class="fa fa-download me-1" aria-hidden="true"></i> Télécharger
+									</a>
+								</div>
+							{% endfor %}
+						</div>
+					{% else %}
+						<div class="empty-state">
+							<i class="fa fa-book-open" aria-hidden="true"></i>
+							<p class="mb-0">Les guides seront bientôt disponibles.</p>
+						</div>
+					{% endif %}
+				</div>
+			</div>
+		</div>
+	</section>
+{% endblock %}

@@ -18,13 +18,9 @@
     new WOW().init();
 
 
-    // Sticky Navbar
-    $(window).scroll(function () {
-        if ($(this).scrollTop() > 300) {
-            $('.sticky-top').addClass('shadow-sm').css('top', '0px');
-        } else {
-            $('.sticky-top').removeClass('shadow-sm').css('top', '-100px');
-        }
+    // En-tête : ombre au défilement
+    $(window).on('scroll', function () {
+        $('.site-header').toggleClass('is-scrolled', $(this).scrollTop() > 10);
     });
     
     
@@ -47,7 +43,6 @@
     $('.btn-play').click(function () {
         $videoSrc = $(this).data("src");
     });
-    console.log($videoSrc);
     $('#videoModal').on('shown.bs.modal', function (e) {
         $("#video").attr('src', $videoSrc + "?autoplay=1&amp;modestbranding=1&amp;showinfo=0");
     })
@@ -90,6 +85,7 @@
     document.addEventListener("DOMContentLoaded", function() {
         var universiteField = document.querySelector("#hebergement_universite");
         var autreUniversiteField = document.querySelector(".autre-universite");
+        if (!universiteField || !autreUniversiteField) { return; }
     
         function toggleAutreUniversiteField() {
             if (universiteField.value === "autre") {
@@ -106,9 +102,9 @@
         universiteField.addEventListener("change", toggleAutreUniversiteField);
     });
     document.addEventListener("DOMContentLoaded", function() {
-        console.log("Le DOM est chargé.");
         var form = document.querySelector('form');
         var message = document.getElementById('message');
+        if (!form || !message) { return; }
     
         form.addEventListener('submit', function(event) {
             // Afficher le message

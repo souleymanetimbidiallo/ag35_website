@@ -1,0 +1,25 @@
+{# Carte événement. Variable : evenement #}
+{% set mois = ['jan', 'fév', 'mars', 'avr', 'mai', 'juin', 'juil', 'août', 'sept', 'oct', 'nov', 'déc'] %}
+<a class="event-card" href="{{ path('app_evenement_details', {id: evenement.id}) }}">
+	<div class="event-media">
+		{% if evenement.imageName %}
+			<img src="{{ asset('img/' ~ evenement.imageName) }}" alt="" loading="lazy">
+		{% endif %}
+		{% if evenement.dateDebut %}
+			<span class="event-date">
+				<span class="d">{{ evenement.dateDebut|date('d') }}</span>
+				<span class="m">{{ mois[evenement.dateDebut|date('n') - 1] }} {{ evenement.dateDebut|date('Y') }}</span>
+			</span>
+		{% endif %}
+	</div>
+	<div class="event-body">
+		<h3>{{ evenement.titre }}</h3>
+		{% if evenement.adresse %}
+			<span class="event-info"><i class="fa fa-map-marker-alt" aria-hidden="true"></i>{{ evenement.adresse }}</span>
+		{% endif %}
+		{% if evenement.prix %}
+			<span class="event-info"><i class="fa fa-ticket-alt" aria-hidden="true"></i>{{ evenement.prix matches '/^\\d+$/' ? evenement.prix ~ ' €' : evenement.prix }}</span>
+		{% endif %}
+		<span class="event-more">Voir le détail <i class="fa fa-arrow-right ms-1" aria-hidden="true"></i></span>
+	</div>
+</a>

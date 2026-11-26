@@ -1,85 +1,80 @@
 {% extends 'base.html.twig' %}
 {% form_theme form 'bootstrap_5_layout.html.twig' %}
 
+{% block title %}Contact · {{ parent() }}{% endblock %}
+
+{% set row = {row_attr: {class: 'mb-3'}, label_attr: {class: 'form-label'}} %}
+
 {% block body %}
+	{% include 'components/page_hero.html.twig' with {
+		title: parametres.menu_contact|default('Contact'),
+		eyebrow: 'Écrivez-nous',
+		lead: 'Une question, une demande d\'aide ou envie de vous engager ? Notre équipe vous répond au plus vite.'
+	} %}
 
-    <!-- Contact Start -->
-    <div class="container-xxl py-5">
-     
-        <div class="container">
-            <div class="text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
+	<section class="section">
+		<div class="container">
+			<div class="row g-5">
+				<div class="col-lg-7">
+					<div class="form-card">
+						<h2 class="h4 mb-1">Envoyer un message</h2>
+						<p class="text-muted-ag mb-4">Tous les champs sont obligatoires.</p>
 
-                <h1 class="display-5 mb-5">Vous avez des questions, N'hésitez pas à nous contacter</h1>
-            </div>
-            <div class="row g-5">
-                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <div id="message" style="display: none;" class="alert alert-success">Nous avons bien reçu votre demande ,nous vous contacterons dans les plus brefs délai!</div>
+						<div id="message" style="display: none;" class="alert-ag mb-4" role="status">
+							<i class="fa fa-check-circle mt-1" aria-hidden="true"></i>
+							<span>Merci, nous avons bien reçu votre message. Nous vous répondrons dans les plus brefs délais.</span>
+						</div>
 
-                    {{ form_start(form) }}
-                    <div class="row g-3">
-                        <div class="col-12">
-                            {{ form_row(form.prenom, {'attr': {'class': 'form-control', 'placeholder': 'Entrez votre prénom'}}) }}
-                        </div>
-                        <div class="col-12">
-                            {{ form_row(form.nom, {'attr': {'class': 'form-control', 'placeholder': 'Entrez votre nom'}}) }}
-                        </div>
-                        <div class="col-12">
-                            {{ form_row(form.email, {'attr': {'class': 'form-control', 'placeholder': 'Email'}}) }}
-                        </div>
-                        <div class="col-12">
-                            {{ form_row(form.telephone, {'attr': {'class': 'form-control', 'placeholder': 'Téléphone'}}) }}
-                        </div>
-                        <div class="col-12">
-                            {{ form_row(form.titre, {'attr': {'class': 'form-control'}}) }}
-                        </div>
-                        <div class="col-12">
-                            {{ form_row(form.message, {'attr': {'class': 'form-control', 'placeholder': 'Ecrire votre message ici', 'style': 'height: 200px'}}) }}
-                        </div>
-                        <div class="col-12">
-                            {{ form_row(form.submit, {'attr': {'class': 'btn btn-primary rounded-pill py-3 px-5'}}) }}
-                        </div>
-                    </div>
-                    {{ form_end(form) }}
-                </div>
-                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
-                    <h3 class="mb-4">Nos Coordonnées</h3>
-                    <div class="d-flex border-bottom pb-3 mb-3"></div>
-                    <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
-                        <div class="d-flex border-bottom pb-3 mb-3">
-                            <div class="flex-shrink-0 btn-square bg-primary rounded-circle">
-                                <i class="fa fa-map-marker-alt text-white"></i>
-                            </div>
-                            <div class="ms-3">
-                                <h6>Notre bureau</h6>
-                                <span>{{ parametres.address }}</span>
-                            </div>
-                        </div>
-                        <div class="d-flex border-bottom pb-3 mb-3">
-                            <div class="flex-shrink-0 btn-square bg-primary rounded-circle">
-                                <i class="fa fa-phone-alt text-white"></i>
-                            </div>
-                            <div class="ms-3">
-                                <h6>Appelez-nous</h6>
-                                <a href="tel:assoguinee35@gmail.com">{{ parametres.telephone }}</a>
-                            </div>
-                        </div>
-                        <div class="d-flex border-bottom-0 pb-3 mb-3">
-                            <div class="flex-shrink-0 btn-square bg-primary rounded-circle">
-                                <i class="fa fa-envelope text-white"></i>
-                            </div>
-                            <div class="ms-3">
-                                <h6>Envoyez-nous un e-mail</h6>
-                                <a href="mailto:assoguinee35@gmail.com">{{ parametres.email }}</a>
-                            </div>
-                        </div>
-                    </div>
+						{{ form_start(form) }}
+							<div class="row g-0 gx-3">
+								<div class="col-md-6">{{ form_row(form.prenom, row|merge({attr: {class: 'form-control', placeholder: 'Votre prénom', autocomplete: 'given-name'}})) }}</div>
+								<div class="col-md-6">{{ form_row(form.nom, row|merge({attr: {class: 'form-control', placeholder: 'Votre nom', autocomplete: 'family-name'}})) }}</div>
+								<div class="col-md-6">{{ form_row(form.email, row|merge({attr: {class: 'form-control', placeholder: 'vous@exemple.fr', autocomplete: 'email'}})) }}</div>
+								<div class="col-md-6">{{ form_row(form.telephone, row|merge({attr: {class: 'form-control', placeholder: '06 12 34 56 78', autocomplete: 'tel'}})) }}</div>
+								<div class="col-12">{{ form_row(form.titre, row|merge({label: 'Sujet de votre demande', attr: {class: 'form-select'}})) }}</div>
+								<div class="col-12">{{ form_row(form.message, row|merge({attr: {class: 'form-control', placeholder: 'Écrivez votre message ici…', rows: 6}})) }}</div>
+								<div class="col-12 mt-2">{{ form_row(form.submit, {label: 'Envoyer le message', attr: {class: 'btn btn-primary px-4'}}) }}</div>
+							</div>
+						{{ form_end(form) }}
+					</div>
+				</div>
 
-                    <iframe class="w-100 rounded" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2663.932086270552!2d-1.6566053!3d48.1115458!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x480ede544566a8b9%3A0xbd862df6dd010552!2s40%20Bd%20Jeanne%20d&#39;Arc%2C%2035000%20Rennes!5e0!3m2!1sfr!2sfr!4v1686229382401!5m2!1sfr!2sfr" frameborder="0" style="min-height: 300px; border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+				<div class="col-lg-5">
+					<h2 class="h4 mb-2">Nos coordonnées</h2>
+					<p class="text-muted-ag">Vous pouvez aussi nous joindre directement ou passer nous voir.</p>
 
+					{% if parametres.address %}
+						<div class="contact-item">
+							<span class="ico"><i class="fa fa-map-marker-alt" aria-hidden="true"></i></span>
+							<div><small>Adresse</small><span>{{ parametres.address }}</span></div>
+						</div>
+					{% endif %}
+					{% if parametres.telephone %}
+						<div class="contact-item">
+							<span class="ico"><i class="fa fa-phone-alt" aria-hidden="true"></i></span>
+							<div><small>Téléphone</small><a href="tel:{{ parametres.telephone|replace({' ': ''}) }}">{{ parametres.telephone }}</a></div>
+						</div>
+					{% endif %}
+					{% if parametres.email %}
+						<div class="contact-item">
+							<span class="ico"><i class="fa fa-envelope" aria-hidden="true"></i></span>
+							<div><small>E-mail</small><a href="mailto:{{ parametres.email }}">{{ parametres.email }}</a></div>
+						</div>
+					{% endif %}
+					{% if parametres.lien_whatsApp %}
+						<div class="contact-item">
+							<span class="ico"><i class="fab fa-whatsapp" aria-hidden="true"></i></span>
+							<div><small>Communauté</small><a href="{{ parametres.lien_whatsApp }}" target="_blank" rel="noopener">Rejoindre le groupe WhatsApp</a></div>
+						</div>
+					{% endif %}
 
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Contact End -->
+					{% if parametres.address %}
+						<div class="map-frame mt-4">
+							<iframe src="https://maps.google.com/maps?q={{ parametres.address|url_encode }}&output=embed" title="Plan d'accès" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+						</div>
+					{% endif %}
+				</div>
+			</div>
+		</div>
+	</section>
 {% endblock %}

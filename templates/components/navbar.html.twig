@@ -1,43 +1,55 @@
-<!-- Navbar Start -->
-<div class="container-fluid bg-white sticky-top">
+{% set menu = current_menu is defined ? current_menu : '' %}
+{% set activites = ['evenements', 'actualites', 'guide', 'volontariat'] %}
+{% set lien_don = parametres.lien_donation|default('https://www.helloasso.com/associations/association-guineenne-d-ile-et-vilaine-ag35/formulaires/1') %}
+
+<header class="site-header">
+	<div class="tricolor" aria-hidden="true"></div>
 	<div class="container">
-		<nav class="navbar navbar-expand-lg bg-white navbar-light p-lg-0">
-			<a href="index.html" class="navbar-brand d-lg-none">
-				<h1 class="fw-bold m-0">{{ parametres.site_name }}</h1>
+		<nav class="navbar navbar-expand-lg navbar-light" aria-label="Navigation principale">
+			<a href="{{ path('app_accueil') }}" class="brand navbar-brand me-lg-4">
+				<img src="{{ asset('img/logo_ag35.png') }}" alt="" width="48" height="48">
+				<span class="brand-text">
+					<span class="brand-name">{{ parametres.site_name|default('AG35') }}</span>
+					<span class="brand-sub">Guinéen·nes d'Ille-et-Vilaine</span>
+				</span>
 			</a>
 
-			<button type="button" class="navbar-toggler me-0" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+			<button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Ouvrir le menu">
 				<span class="navbar-toggler-icon"></span>
 			</button>
 
 			<div class="collapse navbar-collapse" id="navbarCollapse">
-				<div class="navbar-nav">
-					<a class="nav-item nav-link {% if current_menu is defined and current_menu == 'accueil' %} active {% endif %}" href="{{ path('app_accueil') }}">{{ parametres.menu_accueil }}</a>
+				<ul class="navbar-nav me-auto">
+					<li class="nav-item">
+						<a class="nav-link {{ menu == 'accueil' ? 'active' }}" {{ menu == 'accueil' ? 'aria-current="page"' }} href="{{ path('app_accueil') }}">{{ parametres.menu_accueil }}</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link {{ menu == 'about' ? 'active' }}" {{ menu == 'about' ? 'aria-current="page"' }} href="{{ path('app_about') }}">{{ parametres.menu_apropos }}</a>
+					</li>
+					<li class="nav-item dropdown">
+						<a href="#" class="nav-link dropdown-toggle {{ menu in activites ? 'active' }}" id="menuActivites" role="button" data-bs-toggle="dropdown" aria-expanded="false">{{ parametres.menu_activite }}</a>
+						<ul class="dropdown-menu" aria-labelledby="menuActivites">
+							<li><a class="dropdown-item {{ menu == 'evenements' ? 'active' }}" href="{{ path('app_evenements') }}">{{ parametres.menu_evenement }}</a></li>
+							<li><a class="dropdown-item {{ menu == 'actualites' ? 'active' }}" href="{{ path('app_actualites') }}">{{ parametres.menu_actualite }}</a></li>
+							<li><a class="dropdown-item {{ menu == 'guide' ? 'active' }}" href="{{ path('app_guide') }}">{{ parametres.menu_guide }}</a></li>
+							<li><a class="dropdown-item {{ menu == 'volontariat' ? 'active' }}" href="{{ path('app_volontariat') }}">{{ parametres.menu_volontariat }}</a></li>
+						</ul>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link {{ menu == 'hebergement' ? 'active' }}" {{ menu == 'hebergement' ? 'aria-current="page"' }} href="{{ path('hebergement') }}">{{ parametres.menu_hebergement }}</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link {{ menu == 'contact' ? 'active' }}" {{ menu == 'contact' ? 'aria-current="page"' }} href="{{ path('app_contact') }}">{{ parametres.menu_contact }}</a>
+					</li>
+				</ul>
 
-					<a class="nav-item nav-link {% if current_menu is defined and current_menu == 'about' %} active {% endif %}" href="{{ path('app_about') }}">{{ parametres.menu_apropos }}</a>
-
-					<div class="nav-item dropdown">
-						<a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">{{ parametres.menu_activite }}</a>
-						<div class="dropdown-menu bg-light rounded-0 rounded-bottom m-0">
-							<a class="dropdown-item {% if current_menu is defined and current_menu == 'evenements' %} active {% endif %}" href="{{ path('app_evenements') }}">{{ parametres.menu_evenement }}</a>
-							<a class="dropdown-item {% if current_menu is defined and current_menu == 'actualites' %} active {% endif %}" href="{{ path('app_actualites') }}">{{ parametres.menu_actualite }}</a>
-							<a class="dropdown-item {% if current_menu is defined and current_menu == 'guide' %} active {% endif %}" href="{{ path('app_guide') }}">{{ parametres.menu_guide }}</a>
-							<a class="dropdown-item {% if current_menu is defined and current_menu == 'volontariat' %} active {% endif %}" href="{{ path('app_volontariat') }}">{{ parametres.menu_volontariat }}</a>
-						</div>
-					</div>
-
-					<a class="nav-item nav-link {% if current_menu is defined and current_menu == 'don' %} active {% endif %}" href="https://www.helloasso.com/associations/association-guineenne-d-ile-et-vilaine-ag35/formulaires/1" target="_blank">{{ parametres.menu_donation }}</a>
-
-					
-
-					<a class="nav-item nav-link {% if current_menu is defined and current_menu == 'adhesion' %} active {% endif %}" href="{{ path('app_adhesion') }}">{{ parametres.menu_adhesion }}</a>
-					
-					<a class="nav-item nav-link {% if current_menu is defined and current_menu == 'hebergement' %} active {% endif %}" href="{{ path('hebergement') }}">{{ parametres.menu_hebergement }}</a>
-					<a class="nav-item nav-link {% if current_menu is defined and current_menu == 'contact' %} active {% endif %}" href="{{ path('app_contact') }}">{{ parametres.menu_contact }}</a>
+				<div class="header-actions">
+					<a class="btn btn-ag-ghost {{ menu == 'adhesion' ? 'active' }}" href="{{ path('app_adhesion') }}">{{ parametres.menu_adhesion }}</a>
+					<a class="btn btn-ag-yellow" href="{{ lien_don }}" target="_blank" rel="noopener">
+						<i class="fa fa-heart me-1" aria-hidden="true"></i> {{ parametres.menu_donation }}
+					</a>
 				</div>
 			</div>
 		</nav>
 	</div>
-</div>
-
-<!-- Navbar End -->
+</header>
